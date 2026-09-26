@@ -1,0 +1,24 @@
+{
+  "name": "Döngüm - Regl Takibi & Sağlık Modelleme",
+  "short_name": "Döngüm",
+  "description": "Gizlilik odaklı, kişisel biyolojik modelleme ve regl takibi mobil uygulaması",
+  "id": "com.dongum.app",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#f43f5e",
+  "categories": [
+    "health",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "./assets/logo.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

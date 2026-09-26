@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Döngüm - Regl Takibi & Sağlık Modelleme</title>
+  <meta name="description" content="Kişisel verilerinizle optimize olan, gerçekçi biyolojik modelleme ve tahminleme yapan, %100 gizlilik odaklı modern regl takibi mobil uygulaması.">
+  
+  <!-- PWA & Mobil Uyumluluk -->
+  <meta name="theme-color" content="#f43f5e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Döngüm">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="apple-touch-icon" href="assets/logo.svg">
+
+  <!-- Stiller -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Dinamik App Container -->
+  </div>
+
+  <!-- Ana Modül -->
+  <script type="module" src="js/app.js"></script>
+
+  <!-- PWA Service Worker & Kurulum Olayı -->
+  <script>
+    window.deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      window.deferredInstallPrompt = e;
+      window.dispatchEvent(new CustomEvent('pwa-install-ready'));
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then((reg) => {
+          console.log('Döngüm Çevrimdışı Hizmeti (PWA) Aktif:', reg.scope);
+        }).catch(err => {
+          console.warn('SW kayıt notu:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
