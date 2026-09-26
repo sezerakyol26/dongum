@@ -4,7 +4,7 @@
  * telefonun hafızasından %100 kesintisiz açılmasını sağlar.
  */
 
-const CACHE_NAME = 'dongum-pwa-v17';
+const CACHE_NAME = 'dongum-pwa-v18';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -15,11 +15,31 @@ const ASSETS_TO_CACHE = [
   './assets/logo-192.png'
 ];
 
-// 1. Kurulum (Install): Tüm statik kaynakları telefon önbelleğine al
+// 1. Kurulum (Install): Statik kaynakları telefon önbelleğine al
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      // Temel çekirdek dosyaları önbelleğe al
+      try {
+        await cache.addAll(['./', './index.html', './manifest.webmanifest']);
+      } catch (err) {
+        console.warn('Temel çekirdek önbelleğe alınırken uyarı:', err);
+      }
+      // İsteğe bağlı simgeler (klasör GitHub'da yoksa bile kurulum başarısız olmasın)
+      const optionalAssets = [
+        './apple-touch-icon.png',
+        './favicon.ico',
+        './assets/logo.svg',
+        './assets/logo.png',
+        './assets/logo-192.png'
+      ];
+      for (const asset of optionalAssets) {
+        try {
+          await cache.add(asset);
+        } catch (e) {
+          // İsteğe bağlı dosya yoksa atla
+        }
+      }
     }).then(() => {
       return self.skipWaiting();
     })
@@ -74,10 +94,12 @@ self.addEventListener('fetch', (event) => {
           });
         }
         return networkResponse;
-      }).catch(() => {
+      }).catch(async () => {
         // 3. Sunucu kapalı veya internet yok: Sayfa gezintilerinde index.html'e dön
         if (event.request.mode === 'navigate') {
-          return caches.match('./index.html') || caches.match('./');
+          const fallback = await caches.match('./index.html');
+          if (fallback) return fallback;
+          return await caches.match('./');
         }
       });
     })
