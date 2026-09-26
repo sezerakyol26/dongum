@@ -845,7 +845,30 @@ body.dark-theme .btn-log-symptoms {
   pointer-events: auto;
 }
 
-.day-modal-sheet,
+.day-modal-sheet {
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  background-color: var(--bg-surface);
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  padding: 14px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1001;
+}
+
+.day-modal-content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 20px 16px 20px;
+}
+
 .modal-sheet {
   width: 100%;
   max-width: 480px;
@@ -1170,7 +1193,13 @@ body.dark-theme .chip-item.chip-active {
 }
 
 .modal-actions-bar {
-  margin-top: 14px;
+  flex-shrink: 0;
+  width: 100%;
+  padding: 12px 20px calc(14px + env(safe-area-inset-bottom, 0px)) 20px;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  z-index: 50;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .btn-primary-action {
@@ -2035,6 +2064,192 @@ body.dark-theme .guide-highlight-badge {
   pointer-events: auto;
 }
 
+/* ==========================================================================
+   UYGULAMA AÇILIŞ LOGİN & PROFİL SEÇİM EKRANI
+   ========================================================================== */
+.app-login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-surface);
+  z-index: 250;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.app-login-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.login-card-container {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto 0;
+}
+
+.login-brand-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-logo-wrap {
+  width: 76px;
+  height: 76px;
+  border-radius: 22px;
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.28);
+  margin: 0 auto 12px auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-gradient);
+}
+
+.login-logo-wrap img, .login-logo-wrap svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-brand-header h2 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.login-brand-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.login-profiles-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.login-profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-subtle);
+  background-color: var(--bg-page);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.login-profile-card:hover, .login-profile-card:active {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.12);
+}
+
+body.dark-theme .login-profile-card:hover {
+  background-color: rgba(244, 63, 94, 0.15);
+}
+
+.login-p-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.login-p-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.login-p-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 2px;
+}
+
+.login-p-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.login-p-role {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.login-p-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.login-p-lock-badge {
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.login-btn-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px;
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--border-subtle);
+  background: none;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.login-btn-new:hover {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+.login-pin-view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .pin-container {
   max-width: 320px;
   width: 90%;
@@ -2645,6 +2860,253 @@ body.dark-theme .dr-modal-actions-bar {
   }
 }
 
+/* ==========================================================================
+   GİRİŞ / PROFİL SEÇİMİ VE PIN KİLİT EKRANI (APP LOGIN SCREEN)
+   ========================================================================== */
+.app-login-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: var(--bg-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(12px);
+}
+
+.app-login-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.login-card-container {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-width: 420px;
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 28px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: loginCardSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes loginCardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.login-brand-logo-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.12) 0%, rgba(13, 148, 136, 0.12) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(244, 63, 94, 0.15);
+  margin-bottom: 12px;
+}
+
+.login-brand-logo-img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+}
+
+.login-brand-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+  margin-bottom: 2px;
+}
+
+.login-brand-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 22px;
+}
+
+.login-step-view {
+  width: 100%;
+}
+
+.login-step-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.login-profiles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.login-profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-subtle);
+  background-color: var(--bg-card);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+}
+
+.login-profile-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.login-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.login-profile-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  background-color: var(--bg-surface);
+  border: 2px solid var(--primary);
+  flex-shrink: 0;
+}
+
+.login-profile-names {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.login-profile-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.login-profile-role {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.login-profile-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.login-lock-badge {
+  font-size: 0.8rem;
+  background: #fef3c7;
+  color: #b45309;
+  padding: 3px 6px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.login-btn-new-profile {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--primary-border);
+  background-color: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.login-btn-new-profile:hover {
+  background-color: rgba(244, 63, 94, 0.15);
+  transform: translateY(-1px);
+}
+
+.login-back-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+}
+
+.login-back-btn:hover {
+  color: var(--text-primary);
+}
+
+.login-target-profile-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.login-target-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  border: 3px solid var(--primary);
+  background: var(--bg-surface);
+}
+
+.login-target-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.login-target-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
 
 
 /* ==========================================================================
@@ -2666,9 +3128,12 @@ body.dark-theme .dr-modal-actions-bar {
     padding-bottom: calc(85px + env(safe-area-inset-bottom));
   }
 
-  .day-modal-sheet,
-  .modal-sheet {
-    padding-bottom: calc(25px + env(safe-area-inset-bottom));
+  .day-modal-sheet {
+    padding-bottom: 0 !important;
+  }
+
+  .modal-sheet:not(.day-modal-sheet) {
+    padding-bottom: calc(45px + env(safe-area-inset-bottom));
   }
 }
 
@@ -3547,6 +4012,50 @@ class CycleEngine {
     };
   }
 
+  calculateStatistics() {
+    return this.calculateStats();
+  }
+
+  /**
+   * Takvim üzerinde yapılan işaretlemeler sonrasında ayarlar sekmesindeki
+   * döngü parametrelerini (döngü süresi, regl süresi) hesaplanan gerçek biyolojik verilere göre otomatik revize eder.
+   */
+  syncSettingsFromCalendarData() {
+    const profileData = this.storage.getProfileData();
+    const clusters = this.getPeriodClusters();
+    const stats = this.calculateStats();
+
+    let updated = false;
+    const newSettings = { ...profileData.settings };
+
+    // Eğer en az 1 regl dönemi kaydedilmişse ortalama regl süresini revize et
+    if (clusters.length >= 1 && stats.averagePeriodLength) {
+      if (newSettings.periodLength !== stats.averagePeriodLength) {
+        newSettings.periodLength = stats.averagePeriodLength;
+        updated = true;
+      }
+    }
+
+    // Eğer en az 2 regl dönemi kaydedilmişse döngü aralığını otomatik revize et
+    if (clusters.length >= 2 && stats.averageCycleLength) {
+      if (newSettings.cycleLength !== stats.averageCycleLength) {
+        newSettings.cycleLength = stats.averageCycleLength;
+        updated = true;
+      }
+    }
+
+    if (updated) {
+      this.storage.updateSettings(newSettings);
+      console.log('Döngü parametreleri takvim verilerine göre otomatik revize edildi:', {
+        cycleLength: newSettings.cycleLength,
+        periodLength: newSettings.periodLength,
+        cyclesCount: clusters.length
+      });
+    }
+
+    return { updated, settings: newSettings, stats };
+  }
+
   // --- Akıllı Otomatik Doldurma ve Manuel Müdahale ---
   /**
    * Kullanıcı belirli bir tarihe regl başlangıcı girdiğinde,
@@ -3572,7 +4081,6 @@ class CycleEngine {
 
       // Eğer kullanıcı bizzat kapatmamışsa otomatik tahmini akış doldur
       if (!existing || (!existing.isManual && !existing.isPeriod)) {
-        // Gün ilerledikçe akışı doğal olarak kademelendir
         let autoFlow = 'medium';
         if (i === 1) autoFlow = 'heavy';
         else if (i === periodDays - 1) autoFlow = 'light';
@@ -3587,6 +4095,7 @@ class CycleEngine {
       }
     }
 
+    this.syncSettingsFromCalendarData();
     return this.calculateStats();
   }
 
@@ -3611,7 +4120,8 @@ class CycleEngine {
         isPredicted: false
       });
     }
-
+ 
+    this.syncSettingsFromCalendarData();
     return this.calculateStats();
   }
 
@@ -3956,6 +4466,11 @@ class CalendarComponent {
           <div class="day-modal-content" id="dayModalContent">
             <!-- Dinamik doldurulur -->
           </div>
+          <div class="modal-actions-bar" id="dayModalActionsBar">
+            <button type="button" class="btn-primary-action" id="btnSaveDayDetails">
+              ${Icons.check} Kaydet & Güncelle
+            </button>
+          </div>
         </div>
       </div>
     `;
@@ -4241,13 +4756,6 @@ class CalendarComponent {
         <label class="section-label">📝 Kişisel Not</label>
         <textarea class="notes-textarea" id="dayNotesInput" placeholder="Bugün nasıl hissediyorsunuz? İlaç, uyku veya özel durumlar..." rows="3">${currentNotes}</textarea>
       </div>
-
-      <!-- AKSİYON BUTONLARI -->
-      <div class="modal-actions-bar">
-        <button type="button" class="btn-primary-action" id="btnSaveDayDetails">
-          ${Icons.check} Kaydet & Güncelle
-        </button>
-      </div>
     `;
 
     // Modal içi olay dinleyicileri
@@ -4255,7 +4763,7 @@ class CalendarComponent {
     const togglePeriodBtn = modalContent.querySelector('#btnTogglePeriod');
     const deletePeriodBtn = modalContent.querySelector('#btnDeletePeriod');
     const flowSelector = modalContent.querySelector('#flowSelector');
-    const saveBtn = modalContent.querySelector('#btnSaveDayDetails');
+    const saveBtn = this.container.querySelector('#btnSaveDayDetails');
 
     let activePeriodState = isPeriod;
     let selectedFlow = currentFlow;
@@ -4365,6 +4873,7 @@ class CalendarComponent {
           notes: notes
         });
 
+        this.engine.syncSettingsFromCalendarData();
         this.notifyUpdate();
         this.closeDayModal();
       };
@@ -5036,8 +5545,9 @@ class DongumApp {
     this.reportGen = new DoctorReportGenerator(this.engine, this.storage);
     this.currentTab = 'home'; // 'home' | 'calendar' | 'analytics' | 'settings'
     
-    // Uygulama PIN durumu
+    // Uygulama PIN ve Oturum Durumu
     this.isLocked = this.storage.isPinRequired();
+    this.isLoggedIn = false;
 
     // Seçili yeni profil formu önbelleği
     this.newProfileDraft = {
@@ -5056,9 +5566,9 @@ class DongumApp {
 
   init() {
     this.renderShell();
-    this.checkPinLock();
     this.initNavigation();
     this.renderCurrentTab();
+    this.showLoginScreen();
   }
 
   // Ana Uygulama İskeleti
@@ -5067,6 +5577,50 @@ class DongumApp {
     const activeProfile = this.storage.getActiveProfile();
 
     appEl.innerHTML = `
+      <!-- Uygulama İlk Açılış Login & Profil Seçim Ekranı -->
+      <div class="app-login-overlay active" id="appLoginOverlay">
+        <div class="login-card-container">
+          <div class="login-brand-logo-wrap">
+            <img src="assets/logo.svg" alt="Döngüm" class="login-brand-logo-img">
+          </div>
+          <h1 class="login-brand-title">Döngüm</h1>
+          <p class="login-brand-subtitle">Regl Takibi & Biyolojik Modelleme</p>
+
+          <!-- 1. Adım: Profil Seçim Listesi -->
+          <div class="login-step-view" id="loginStepProfiles">
+            <h3 class="login-step-title">Giriş Yapılacak Profili Seçin</h3>
+            <div class="login-profiles-list" id="loginProfilesContainer">
+              <!-- Dinamik profiller doldurulur -->
+            </div>
+            <button type="button" class="login-btn-new-profile" id="btnLoginCreateProfile">
+              ${Icons.plus} Yeni Profil / Hesap Ekle
+            </button>
+          </div>
+
+          <!-- 2. Adım: Seçilen Profilin PIN Girişi -->
+          <div class="login-step-view" id="loginStepPin" style="display: none;">
+            <button type="button" class="login-back-btn" id="btnLoginBackToProfiles">
+              ← Profil Seçimine Dön
+            </button>
+            <div class="login-target-profile-box" id="loginTargetProfileBox">
+              <!-- Seçilen profil avatar ve adı -->
+            </div>
+            <div class="pin-dots-display" id="loginPinDots">
+              <span class="pin-dot"></span>
+              <span class="pin-dot"></span>
+              <span class="pin-dot"></span>
+              <span class="pin-dot"></span>
+            </div>
+            <div class="pin-keypad" id="loginPinKeypad">
+              ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 'C', 0, '←'].map(k => `
+                <button type="button" class="pin-key-btn" data-key="${k}">${k}</button>
+              `).join('')}
+            </div>
+            <div class="pin-error-msg" id="loginPinErrorMsg"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- PIN Kilit Ekranı (Eğer PIN aktifse gösterilir) -->
       <div class="pin-lock-overlay ${this.isLocked ? 'active' : ''}" id="pinLockOverlay">
         <div class="pin-container">
@@ -5122,7 +5676,9 @@ class DongumApp {
       <!-- Üst Başlık Barı (App Bar) -->
       <header class="app-header">
         <div class="app-brand">
-          <span class="app-logo-badge">${Icons.dropletFill}</span>
+          <span class="app-logo-badge" style="background: none; padding: 0; display: flex; align-items: center;">
+            <img src="assets/logo.svg" alt="Logo" style="width: 28px; height: 28px;">
+          </span>
           <div class="app-titles">
             <h1 class="app-title">Döngüm</h1>
             <span class="app-sub-status" id="headerOfflineBtn" style="font-size: 0.7rem; color: #10b981; font-weight: 600; cursor: pointer;" title="Çevrimdışı & Kurulum Rehberi">
@@ -5136,6 +5692,9 @@ class DongumApp {
             <span class="chip-name" id="headerChipName">${activeProfile.name}</span>
             <span class="chip-arrow">▼</span>
           </div>
+          <button type="button" class="header-action-btn" id="btnHeaderLock" title="Uygulamayı Kilitle / Profil Değiştir">
+            ${Icons.lock}
+          </button>
           <button type="button" class="header-action-btn" id="btnHeaderTheme" title="Tema Değiştir">
             ${Icons.moon}
           </button>
@@ -5415,9 +5974,157 @@ class DongumApp {
       btnSwitch.onclick = () => {
         const overlay = document.getElementById('pinLockOverlay');
         if (overlay) overlay.classList.remove('active');
-        this.openProfileModal('list');
+        this.showLoginScreen();
       };
     }
+  }
+
+  // --- Uygulama Açılış Login & Profil Seçim Ekranı ---
+  showLoginScreen() {
+    const overlay = document.getElementById('appLoginOverlay');
+    if (!overlay) return;
+
+    this.isLoggedIn = false;
+    overlay.classList.add('active');
+
+    // Profil seçim adımını göster, PIN adımını gizle
+    const stepProfiles = document.getElementById('loginStepProfiles');
+    const stepPin = document.getElementById('loginStepPin');
+    if (stepProfiles) stepProfiles.style.display = 'block';
+    if (stepPin) stepPin.style.display = 'none';
+
+    this.renderLoginProfiles();
+  }
+
+  renderLoginProfiles() {
+    const container = document.getElementById('loginProfilesContainer');
+    if (!container) return;
+
+    const profiles = this.storage.getProfiles();
+    container.innerHTML = profiles.map(p => {
+      const roleObj = PROFILE_ROLES.find(r => r.id === p.role) || { name: 'Kişisel' };
+      const hasPin = Boolean(p.pinEnabled && p.pin);
+      return `
+        <div class="login-profile-card" data-id="${p.id}">
+          <div class="login-profile-info">
+            <div class="login-profile-avatar" style="border-color: ${p.avatarColor || '#f43f5e'};">
+              ${p.avatarEmoji || '🌸'}
+            </div>
+            <div class="login-profile-names">
+              <span class="login-profile-name">${p.name}</span>
+              <span class="login-profile-role">${roleObj.name}</span>
+            </div>
+          </div>
+          <div class="login-profile-meta">
+            ${hasPin ? `<span class="login-lock-badge">🔒 PIN</span>` : `<span style="font-size: 0.75rem; color: #10b981; font-weight: 600;">Giriş →</span>`}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    container.querySelectorAll('.login-profile-card').forEach(card => {
+      card.onclick = () => {
+        const id = card.dataset.id;
+        const targetP = this.storage.getProfileById(id);
+        if (!targetP) return;
+
+        if (targetP.pinEnabled && targetP.pin) {
+          this.showLoginPinPrompt(targetP);
+        } else {
+          this.completeLogin(targetP);
+        }
+      };
+    });
+
+    const btnNew = document.getElementById('btnLoginCreateProfile');
+    if (btnNew) {
+      btnNew.onclick = () => {
+        this.openProfileModal('create');
+      };
+    }
+  }
+
+  showLoginPinPrompt(targetProfile) {
+    const stepProfiles = document.getElementById('loginStepProfiles');
+    const stepPin = document.getElementById('loginStepPin');
+    const targetBox = document.getElementById('loginTargetProfileBox');
+    const dots = document.querySelectorAll('#loginPinDots .pin-dot');
+    const keypad = document.getElementById('loginPinKeypad');
+    const errorMsg = document.getElementById('loginPinErrorMsg');
+    const btnBack = document.getElementById('btnLoginBackToProfiles');
+
+    if (!stepPin || !targetBox) return;
+
+    stepProfiles.style.display = 'none';
+    stepPin.style.display = 'block';
+
+    targetBox.innerHTML = `
+      <div class="login-target-avatar" style="border-color: ${targetProfile.avatarColor || '#f43f5e'};">
+        ${targetProfile.avatarEmoji || '🌸'}
+      </div>
+      <div class="login-target-name">${targetProfile.name}</div>
+      <div class="login-target-hint">Giriş yapmak için 4 haneli PIN kodunuzu tuşlayın</div>
+    `;
+
+    if (errorMsg) errorMsg.textContent = '';
+    let entered = '';
+
+    const updateDots = () => {
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('filled', idx < entered.length);
+      });
+    };
+    updateDots();
+
+    if (btnBack) {
+      btnBack.onclick = () => {
+        stepPin.style.display = 'none';
+        stepProfiles.style.display = 'block';
+        entered = '';
+        updateDots();
+      };
+    }
+
+    if (keypad) {
+      keypad.onclick = (e) => {
+        const btn = e.target.closest('.pin-key-btn');
+        if (!btn) return;
+        const key = btn.dataset.key;
+
+        if (key === 'C') {
+          entered = '';
+          updateDots();
+          if (errorMsg) errorMsg.textContent = '';
+        } else if (key === '←') {
+          entered = entered.slice(0, -1);
+          updateDots();
+          if (errorMsg) errorMsg.textContent = '';
+        } else if (entered.length < 4) {
+          entered += key;
+          updateDots();
+
+          if (entered.length === 4) {
+            setTimeout(() => {
+              if (this.storage.checkProfilePin(targetProfile.id, entered)) {
+                this.completeLogin(targetProfile);
+              } else {
+                if (errorMsg) errorMsg.textContent = 'Hatalı PIN kodu! Lütfen tekrar deneyin.';
+                entered = '';
+                updateDots();
+              }
+            }, 100);
+          }
+        }
+      };
+    }
+  }
+
+  completeLogin(targetProfile) {
+    this.storage.setActiveProfileId(targetProfile.id);
+    this.isLoggedIn = true;
+    const overlay = document.getElementById('appLoginOverlay');
+    if (overlay) overlay.classList.remove('active');
+    this.refreshAll();
   }
 
   // --- Korumalı Hesap PIN Doğrulama ---
@@ -5585,6 +6292,14 @@ class DongumApp {
       if (wrap) wrap.style.display = 'block';
     }
 
+    // Uygulamayı Kilitle / Oturumu Kapat Butonu
+    const lockBtn = document.getElementById('btnHeaderLock');
+    if (lockBtn) {
+      lockBtn.onclick = () => {
+        this.showLoginScreen();
+      };
+    }
+
     // Karanlık / Aydınlık Mod Butonu
     const themeBtn = document.getElementById('btnHeaderTheme');
     if (themeBtn) {
@@ -5662,17 +6377,16 @@ class DongumApp {
           periodLength: parseInt(periodInput.value, 10) || 5
         });
 
-        this.storage.setActiveProfileId(newProfile.id);
-
         // Formu temizle
         nameInput.value = '';
         if (pinInput) pinInput.value = '';
         pinToggle.checked = false;
         pinWrap.style.display = 'none';
 
-        document.getElementById('profileModalOverlay').classList.remove('active');
-        this.refreshAll();
-        alert(`🌸 "${newProfile.name}" hesabı oluşturuldu ve aktif edildi!`);
+        const pOverlay = document.getElementById('profileModalOverlay');
+        if (pOverlay) pOverlay.classList.remove('active');
+        this.completeLogin(newProfile);
+        alert(`🌸 "${newProfile.name}" hesabı oluşturuldu ve giriş yapıldı!`);
       };
     }
 
@@ -6435,8 +7149,10 @@ class DongumApp {
 
   // ================= 4. AYARLAR & GİZLİLİK SEKMESİ =================
   renderSettingsTab(container) {
+    this.engine.syncSettingsFromCalendarData();
     const data = this.storage.getProfileData();
     const settings = data.settings;
+    const stats = this.engine.calculateStats();
     const activeProfile = this.storage.getActiveProfile();
     const profiles = this.storage.getProfiles();
 
@@ -6496,9 +7212,23 @@ class DongumApp {
             <span class="box-icon" style="color: #8b5cf6;">${Icons.sparkles}</span>
             <div class="box-text">
               <h3>Döngü Parametreleri (${activeProfile.name})</h3>
-              <p>Bu hesaba özel hesaplama varsayılanları</p>
+              <p>Bu hesaba özel akıllı biyolojik hesaplama değerleri</p>
             </div>
           </div>
+
+          ${stats && stats.totalLoggedCycles > 0 ? `
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 14px; display: flex; align-items: flex-start; gap: 8px;">
+              <span style="font-size: 1.15rem; line-height: 1;">✨</span>
+              <div style="font-size: 0.78rem; color: var(--text-primary); line-height: 1.4;">
+                <strong>Takvim Verilerinize Göre Otomatik Revize Edildi:</strong><br>
+                Takvimdeki ${stats.totalLoggedCycles} adet döngü geçmişinize göre ortalama döngü süreniz <strong>${settings.cycleLength} gün</strong>, regl süreniz <strong>${settings.periodLength} gün</strong> olarak güncellenmiştir.
+              </div>
+            </div>
+          ` : `
+            <div style="background: rgba(99, 102, 241, 0.08); border: 1px dashed rgba(99, 102, 241, 0.3); border-radius: var(--radius-sm); padding: 8px 12px; margin-bottom: 14px; font-size: 0.74rem; color: var(--text-muted); line-height: 1.35;">
+              💡 <strong>Akıllı Otomatik Güncelleme:</strong> Takvimde regl başlangıç ve bitiş günlerinizi işaretledikçe, ortalama döngü ve regl parametreleriniz otomatik olarak revize edilir.
+            </div>
+          `}
 
           <div class="setting-input-row">
             <label>Varsayılan Döngü Uzunluğu (Gün):</label>
