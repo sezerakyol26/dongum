@@ -4,23 +4,13 @@
  * telefonun hafızasından %100 kesintisiz açılmasını sağlar.
  */
 
-const CACHE_NAME = 'dongum-pwa-v4';
+const CACHE_NAME = 'dongum-pwa-v7';
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './css/style.css',
-  './css/mobile.css',
-  './js/app.js',
-  './js/cycle-engine.js',
-  './js/calendar.js',
-  './js/analytics.js',
-  './js/report.js',
-  './js/storage.js',
-  './js/icons.js',
-  './assets/logo.svg',
-  './dongum-offline.html'
+  './assets/logo.svg'
 ];
 
 // 1. Kurulum (Install): Tüm statik kaynakları telefon önbelleğine al
@@ -59,7 +49,7 @@ self.addEventListener('fetch', (event) => {
     caches.match(event.request).then((cachedResponse) => {
       // 1. Kaynak telefonda kayıtlıysa doğrudan sunucusuz aç (0 ms bekleme)
       if (cachedResponse) {
-        // Arka planda sunucu açıksa önbelleği sessizce tazele
+        // Arka planda sunucu açıksa önbelleği sessizce güncelle
         fetch(event.request).then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             caches.open(CACHE_NAME).then((cache) => {
@@ -67,7 +57,7 @@ self.addEventListener('fetch', (event) => {
             });
           }
         }).catch(() => {
-          // Sunucu kapalı veya çevrimdışı - hiçbir hata fırlatma, önbellek zaten çalışıyor
+          // Çevrimdışı / sunucu kapalı
         });
 
         return cachedResponse;
@@ -83,7 +73,7 @@ self.addEventListener('fetch', (event) => {
         }
         return networkResponse;
       }).catch(() => {
-        // 3. Sunucu kapalı veya internet yok: Sayfa gezintilerinde index.html'e düş
+        // 3. Sunucu kapalı veya internet yok: Sayfa gezintilerinde index.html'e dön
         if (event.request.mode === 'navigate') {
           return caches.match('./index.html') || caches.match('./');
         }
