@@ -812,15 +812,18 @@ body.dark-theme .btn-log-symptoms {
 .day-indicators {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 2px;
   margin-top: 2px;
-  height: 6px;
+  min-height: 12px;
 }
 
 .indicator-dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .period-dot { background-color: var(--primary); }
@@ -829,6 +832,33 @@ body.dark-theme .btn-log-symptoms {
 .fertile-dot { background-color: var(--fertile); }
 .pms-dot { background-color: var(--pms); }
 .indicator-badge { font-size: 7px; color: var(--secondary); margin-left: 1px; }
+
+.indicator-sym-badge {
+  font-size: 9px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  background: rgba(244, 63, 94, 0.12);
+  border-radius: 4px;
+  padding: 0 1px;
+}
+
+body.dark-theme .indicator-sym-badge {
+  background: rgba(244, 63, 94, 0.25);
+}
+
+.indicator-sym-badge .sym-plus {
+  font-size: 7px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.indicator-note-badge {
+  font-size: 8px;
+  line-height: 1;
+  opacity: 0.85;
+}
 
 /* ==========================================================================
    GÜN DETAYI & DÜZENLEME MODALI (BOTTOM SHEET)
@@ -4620,15 +4650,26 @@ class CalendarComponent {
     for (let d = 1; d <= totalDays; d++) {
       const dateObj = new Date(this.currentYear, this.currentMonth, d);
       const dateStr = CycleEngine.formatDateStr(dateObj);
+      const dayData = this.storage.getDayData(dateStr) || {};
       const status = this.engine.getDayStatus(dateStr);
       const isToday = (dateStr === todayStr);
       const isSelected = (dateStr === this.selectedDateStr);
 
-      const hasNotesOrSymptoms = status.dayData && (
-        (status.dayData.symptoms && status.dayData.symptoms.length > 0) ||
-        status.dayData.mood ||
-        status.dayData.notes
-      );
+      const symptomsList = Array.isArray(dayData.symptoms) ? dayData.symptoms : [];
+      const hasSymptoms = symptomsList.length > 0;
+      const hasMood = !!dayData.mood;
+      const hasNotes = !!(dayData.notes && dayData.notes.trim());
+
+      let primarySymptomIcon = '';
+      if (hasSymptoms) {
+        const foundSym = this.symptomList.find(s => s.id === symptomsList[0]);
+        primarySymptomIcon = foundSym ? foundSym.icon : '⚡';
+      }
+      let moodIcon = '';
+      if (hasMood) {
+        const foundMood = this.moodList.find(m => m.id === dayData.mood);
+        moodIcon = foundMood ? foundMood.icon : '';
+      }
 
       // CSS Sınıfları
       const classes = ['cal-day-cell'];
@@ -4645,12 +4686,14 @@ class CalendarComponent {
         <div class="${classes.join(' ')}" data-date="${dateStr}">
           <span class="day-number">${d}</span>
           <div class="day-indicators">
-            ${status.phase === 'period' ? `<span class="indicator-dot period-dot"></span>` : ''}
-            ${status.phase === 'predicted_period' ? `<span class="indicator-dot predicted-dot"></span>` : ''}
-            ${status.phase === 'ovulation' ? `<span class="indicator-dot ovulation-dot"></span>` : ''}
-            ${status.phase === 'fertile' ? `<span class="indicator-dot fertile-dot"></span>` : ''}
-            ${status.phase === 'pms' ? `<span class="indicator-dot pms-dot"></span>` : ''}
-            ${hasNotesOrSymptoms ? `<span class="indicator-badge">●</span>` : ''}
+            ${status.phase === 'period' ? `<span class="indicator-dot period-dot" title="Regl"></span>` : ''}
+            ${status.phase === 'predicted_period' ? `<span class="indicator-dot predicted-dot" title="Tahmini Regl"></span>` : ''}
+            ${status.phase === 'ovulation' ? `<span class="indicator-dot ovulation-dot" title="Yumurtlama"></span>` : ''}
+            ${status.phase === 'fertile' ? `<span class="indicator-dot fertile-dot" title="Doğurgan Gün"></span>` : ''}
+            ${status.phase === 'pms' ? `<span class="indicator-dot pms-dot" title="PMS Dönemi"></span>` : ''}
+            ${hasSymptoms ? `<span class="indicator-sym-badge" title="${symptomsList.length} belirti: ${symptomsList.join(', ')}">${primarySymptomIcon}${symptomsList.length > 1 ? `<sup class="sym-plus">+</sup>` : ''}</span>` : ''}
+            ${hasMood && !hasSymptoms ? `<span class="indicator-sym-badge" title="Ruh Hali">${moodIcon}</span>` : ''}
+            ${hasNotes ? `<span class="indicator-note-badge" title="Kişisel Not">📝</span>` : ''}
           </div>
         </div>
       `;
@@ -4670,11 +4713,13 @@ class CalendarComponent {
     const dayName = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'][dateObj.getDay()];
     const formattedDateTitle = `${d} ${this.monthNames[m - 1]} ${y}, ${dayName}`;
 
+    // DOĞRUDAN DEPOLAMADAN OKU (Storage'den birebir veri garantisi)
+    const dayData = this.storage.getDayData(dateStr) || {};
     const status = this.engine.getDayStatus(dateStr);
-    const dayData = status.dayData || {};
+
     const isPeriod = !!dayData.isPeriod;
     const currentFlow = dayData.flow || 'medium';
-    const currentSymptoms = dayData.symptoms || [];
+    const currentSymptoms = Array.isArray(dayData.symptoms) ? [...dayData.symptoms] : [];
     const currentMood = dayData.mood || '';
     const currentDischarge = dayData.discharge || '';
     const currentNotes = dayData.notes || '';
@@ -4805,6 +4850,7 @@ class CalendarComponent {
     const deletePeriodBtn = modalContent.querySelector('#btnDeletePeriod');
     const flowSelector = modalContent.querySelector('#flowSelector');
     const saveBtn = this.container.querySelector('#btnSaveDayDetails');
+    const notesInput = modalContent.querySelector('#dayNotesInput');
 
     let activePeriodState = isPeriod;
     let selectedFlow = currentFlow;
@@ -4812,8 +4858,29 @@ class CalendarComponent {
     let selectedMood = currentMood;
     let selectedDischarge = currentDischarge;
 
+    // Herhangi bir seçim değiştiğinde veriyi anında kaydeden yardımcı fonksiyon
+    const persistDayState = (notifyUI = true) => {
+      const notes = notesInput ? notesInput.value.trim() : '';
+      this.storage.saveDayData(dateStr, {
+        isPeriod: activePeriodState,
+        flow: activePeriodState ? selectedFlow : null,
+        symptoms: [...selectedSymptoms],
+        mood: selectedMood || null,
+        discharge: selectedDischarge || null,
+        notes: notes
+      });
+
+      this.engine.syncSettingsFromCalendarData();
+      if (notifyUI) {
+        this.notifyUpdate();
+      }
+    };
+
     if (closeBtn) {
-      closeBtn.onclick = () => this.closeDayModal();
+      closeBtn.onclick = () => {
+        persistDayState(true);
+        this.closeDayModal();
+      };
     }
 
     // Regl Aç / Kapat
@@ -4830,7 +4897,7 @@ class CalendarComponent {
         } else {
           this.engine.togglePeriodDay(dateStr, false);
         }
-        this.notifyUpdate();
+        persistDayState(true);
       };
     }
 
@@ -4839,7 +4906,7 @@ class CalendarComponent {
       deletePeriodBtn.onclick = () => {
         this.engine.togglePeriodDay(dateStr, false);
         activePeriodState = false;
-        this.notifyUpdate();
+        persistDayState(true);
         this.openDayModal(dateStr); // Modalı tazeleyerek göster
       };
     }
@@ -4852,12 +4919,12 @@ class CalendarComponent {
         selectedFlow = btn.dataset.flow;
         if (activePeriodState) {
           this.engine.togglePeriodDay(dateStr, true, selectedFlow);
-          this.notifyUpdate();
+          persistDayState(true);
         }
       };
     });
 
-    // Semptom Seçimleri
+    // Semptom Seçimleri (Anında Otomatik Kayıt)
     modalContent.querySelectorAll('#symptomsChips .chip-item').forEach(chip => {
       chip.onclick = () => {
         const id = chip.dataset.id;
@@ -4868,10 +4935,11 @@ class CalendarComponent {
           selectedSymptoms.push(id);
           chip.classList.add('chip-active');
         }
+        persistDayState(true);
       };
     });
 
-    // Ruh Hali Seçimi (Tekil)
+    // Ruh Hali Seçimi (Tekil & Anında Otomatik Kayıt)
     modalContent.querySelectorAll('#moodChips .chip-item').forEach(chip => {
       chip.onclick = () => {
         const id = chip.dataset.id;
@@ -4883,10 +4951,11 @@ class CalendarComponent {
           modalContent.querySelectorAll('#moodChips .chip-item').forEach(c => c.classList.remove('chip-active'));
           chip.classList.add('chip-active');
         }
+        persistDayState(true);
       };
     });
 
-    // Akıntı Tipi (Tekil)
+    // Akıntı Tipi (Tekil & Anında Otomatik Kayıt)
     modalContent.querySelectorAll('#dischargeChips .chip-pill').forEach(pill => {
       pill.onclick = () => {
         const id = pill.dataset.id;
@@ -4898,25 +4967,36 @@ class CalendarComponent {
           modalContent.querySelectorAll('#dischargeChips .chip-pill').forEach(p => p.classList.remove('chip-active'));
           pill.classList.add('chip-active');
         }
+        persistDayState(true);
       };
     });
 
-    // Tümünü Kaydet
+    // Not Girişi (Kullanıcı yazdıkça ve odaktan çıkıldığında kaydet)
+    if (notesInput) {
+      notesInput.oninput = () => {
+        persistDayState(false);
+      };
+      notesInput.onblur = () => {
+        persistDayState(true);
+      };
+    }
+
+    // Tümünü Kaydet & Güncelle Butonu
     if (saveBtn) {
       saveBtn.onclick = () => {
-        const notes = modalContent.querySelector('#dayNotesInput').value.trim();
-        this.storage.saveDayData(dateStr, {
-          isPeriod: activePeriodState,
-          flow: activePeriodState ? selectedFlow : null,
-          symptoms: selectedSymptoms,
-          mood: selectedMood || null,
-          discharge: selectedDischarge || null,
-          notes: notes
-        });
+        persistDayState(true);
 
-        this.engine.syncSettingsFromCalendarData();
-        this.notifyUpdate();
-        this.closeDayModal();
+        const originalHtml = saveBtn.innerHTML;
+        saveBtn.innerHTML = `✓ Kaydedildi!`;
+        saveBtn.style.background = '#10b981';
+        saveBtn.style.color = '#ffffff';
+
+        setTimeout(() => {
+          saveBtn.innerHTML = originalHtml;
+          saveBtn.style.background = '';
+          saveBtn.style.color = '';
+          this.closeDayModal();
+        }, 450);
       };
     }
 
