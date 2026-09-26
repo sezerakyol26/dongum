@@ -12,8 +12,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Döngüm">
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/logo.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/logo-192.png">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <link rel="apple-touch-icon" href="assets/logo.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
 
   <style>
 /* ==========================================================================
@@ -3302,7 +3305,35 @@ const Icons = {
 
   copy: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`,
 
-  wifiOff: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>`
+  wifiOff: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>`,
+
+  appLogo: (size = 48) => `<svg viewBox="0 0 512 512" width="${size}" height="${size}" style="display: block; border-radius: ${Math.round(size * 0.28)}px; box-shadow: 0 4px 12px rgba(244, 63, 94, 0.25);">
+    <defs>
+      <radialGradient id="appLogoBg" cx="50%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="#881337" />
+        <stop offset="100%" stop-color="#380410" />
+      </radialGradient>
+      <linearGradient id="appLogoDrop" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" />
+        <stop offset="100%" stop-color="#ffe4e6" />
+      </linearGradient>
+      <filter id="appLogoShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.35" />
+      </filter>
+    </defs>
+    <rect width="512" height="512" rx="128" fill="url(#appLogoBg)" />
+    <g filter="url(#appLogoShadow)" transform="translate(256, 256)">
+      <path d="M 14 -142 A 142 142 0 0 1 142 -14" fill="none" stroke="#f43f5e" stroke-width="40" stroke-linecap="round" />
+      <path d="M 142 14 A 142 142 0 0 1 14 142" fill="none" stroke="#0d9488" stroke-width="40" stroke-linecap="round" />
+      <path d="M -14 142 A 142 142 0 0 1 -142 14" fill="none" stroke="#f59e0b" stroke-width="40" stroke-linecap="round" />
+      <path d="M -142 -14 A 142 142 0 0 1 -14 -142" fill="none" stroke="#a855f7" stroke-width="40" stroke-linecap="round" />
+    </g>
+    <g filter="url(#appLogoShadow)">
+      <circle cx="256" cy="265" r="50" fill="#f43f5e" opacity="0.35" />
+      <path d="M 256 182 C 256 182, 308 248, 308 285 C 308 318, 285 342, 256 342 C 227 342, 204 318, 204 285 C 204 248, 256 182, 256 182 Z" fill="url(#appLogoDrop)" />
+      <ellipse cx="240" cy="275" rx="9" ry="16" transform="rotate(-25 240 275)" fill="#ffffff" opacity="0.85" />
+    </g>
+  </svg>`
 };
 
 
@@ -5546,7 +5577,7 @@ class DongumApp {
     this.currentTab = 'home'; // 'home' | 'calendar' | 'analytics' | 'settings'
     
     // Uygulama PIN ve Oturum Durumu
-    this.isLocked = this.storage.isPinRequired();
+    this.isLocked = false;
     this.isLoggedIn = false;
 
     // Seçili yeni profil formu önbelleği
@@ -5580,8 +5611,8 @@ class DongumApp {
       <!-- Uygulama İlk Açılış Login & Profil Seçim Ekranı -->
       <div class="app-login-overlay active" id="appLoginOverlay">
         <div class="login-card-container">
-          <div class="login-brand-logo-wrap">
-            <img src="assets/logo.svg" alt="Döngüm" class="login-brand-logo-img">
+          <div class="login-brand-logo-wrap" style="background: none; box-shadow: none; width: auto; height: auto; margin-bottom: 8px;">
+            ${Icons.appLogo(72)}
           </div>
           <h1 class="login-brand-title">Döngüm</h1>
           <p class="login-brand-subtitle">Regl Takibi & Biyolojik Modelleme</p>
@@ -5621,34 +5652,6 @@ class DongumApp {
         </div>
       </div>
 
-      <!-- PIN Kilit Ekranı (Eğer PIN aktifse gösterilir) -->
-      <div class="pin-lock-overlay ${this.isLocked ? 'active' : ''}" id="pinLockOverlay">
-        <div class="pin-container">
-          <div class="pin-header">
-            <div class="pin-icon-wrap">${Icons.lock}</div>
-            <h2>Gizlilik Kilidi</h2>
-            <p id="pinLockDesc">Verilerinizi görüntülemek için 4 haneli PIN kodunuzu girin</p>
-          </div>
-          <div class="pin-dots-display" id="pinDots">
-            <span class="pin-dot"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-dot"></span>
-          </div>
-          <div class="pin-keypad" id="pinKeypad">
-            ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 'C', 0, '←'].map(k => `
-              <button type="button" class="pin-key-btn" data-key="${k}">${k}</button>
-            `).join('')}
-          </div>
-          <div class="pin-error-msg" id="pinErrorMsg"></div>
-          <div style="margin-top: 18px;">
-            <button type="button" class="btn-cancel-pin-switch" id="btnPinSwitchProfile" style="background: none; border: none; color: var(--text-muted); font-size: 0.8rem; text-decoration: underline; cursor: pointer;">
-              Başka bir profile geç
-            </button>
-          </div>
-        </div>
-      </div>
-
       <!-- Korumalı Hesap PIN Doğrulama Modalı -->
       <div class="pin-lock-overlay" id="accountPinOverlay">
         <div class="pin-container">
@@ -5676,8 +5679,8 @@ class DongumApp {
       <!-- Üst Başlık Barı (App Bar) -->
       <header class="app-header">
         <div class="app-brand">
-          <span class="app-logo-badge" style="background: none; padding: 0; display: flex; align-items: center;">
-            <img src="assets/logo.svg" alt="Logo" style="width: 28px; height: 28px;">
+          <span class="app-logo-badge" style="background: none; padding: 0; display: flex; align-items: center; box-shadow: none;">
+            ${Icons.appLogo(32)}
           </span>
           <div class="app-titles">
             <h1 class="app-title">Döngüm</h1>
@@ -6122,8 +6125,11 @@ class DongumApp {
   completeLogin(targetProfile) {
     this.storage.setActiveProfileId(targetProfile.id);
     this.isLoggedIn = true;
+    this.isLocked = false;
     const overlay = document.getElementById('appLoginOverlay');
     if (overlay) overlay.classList.remove('active');
+    const oldPin = document.getElementById('pinLockOverlay');
+    if (oldPin) oldPin.classList.remove('active');
     this.refreshAll();
   }
 

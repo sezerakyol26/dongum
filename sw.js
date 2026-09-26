@@ -4,13 +4,15 @@
  * telefonun hafızasından %100 kesintisiz açılmasını sağlar.
  */
 
-const CACHE_NAME = 'dongum-pwa-v11';
+const CACHE_NAME = 'dongum-pwa-v13';
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './assets/logo.svg'
+  './assets/logo.svg',
+  './assets/logo.png',
+  './assets/logo-192.png'
 ];
 
 // 1. Kurulum (Install): Tüm statik kaynakları telefon önbelleğine al
