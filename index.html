@@ -603,6 +603,216 @@ body.dark-theme .daily-insight-card {
   padding-top: 10px;
 }
 
+/* ==========================================================================
+   DÖNGÜ FAZLARI & BEDEN REHBERİ BİLEŞENİ
+   ========================================================================== */
+.phases-guide-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pgh-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pgh-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pgh-main-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.pgh-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.pgh-desc {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+/* Faz Seçim Butonları (Pills) */
+.phases-tab-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  background-color: var(--bg-input);
+  padding: 4px;
+  border-radius: var(--radius-md);
+}
+
+.phase-nav-pill {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.phase-nav-pill:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+body.dark-theme .phase-nav-pill:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.phase-nav-pill.active-pill {
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  border-color: var(--p-col, var(--primary));
+  box-shadow: var(--shadow-sm);
+}
+
+.phase-nav-pill .p-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.phase-nav-pill .p-title {
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.phase-nav-pill .p-current-tag {
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  font-size: 0.58rem;
+  font-weight: 800;
+  background: var(--p-col, var(--primary));
+  color: #ffffff;
+  padding: 1px 4px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Faz Detay Gösterimi */
+.phase-info-display {
+  transition: var(--transition);
+}
+
+.phase-detail-inner {
+  border-left: 4px solid var(--primary);
+  background-color: var(--bg-input);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.pd-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pd-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pd-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.pd-phase-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.pd-days-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pd-days-text {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.pd-today-pill {
+  font-size: 0.68rem;
+  font-weight: 700;
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.pd-sections-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pd-info-block {
+  padding: 8px 10px;
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.pd-block-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pd-b-icon {
+  font-size: 0.85rem;
+}
+
+.pd-block-text {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-main);
+}
+
+.pd-guidance-block {
+  border-style: dashed;
+}
+
 /* Semptom Ekle Butonu */
 .btn-log-symptoms {
   width: 100%;
@@ -1003,6 +1213,22 @@ body.dark-theme .indicator-sym-badge {
 .phase-banner-info p {
   font-size: 0.75rem;
   color: var(--text-secondary);
+}
+
+.phase-banner-guidance {
+  font-size: 0.73rem;
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  padding: 5px 8px;
+  margin-top: 6px;
+  line-height: 1.35;
+  border-left: 3px solid var(--primary);
+  font-weight: 500;
+}
+
+body.dark-theme .phase-banner-guidance {
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .phase-tag {
@@ -4724,6 +4950,25 @@ class CalendarComponent {
     const currentDischarge = dayData.discharge || '';
     const currentNotes = dayData.notes || '';
 
+    const getCalendarPhaseGuidance = (phase) => {
+      switch (phase) {
+        case 'period':
+          return '🩸 Menstrüasyon: Bol ılık su, magnezyum ağırlıklı beslenme ve dinlenmeye öncelik verin.';
+        case 'predicted_period':
+          return '🩸 Tahmini Regl: Kramplar için sıcak su torbası ve sakin aktiviteler hazırlayın.';
+        case 'follicular':
+          return '🌱 Foliküler Faz: Yüksek motivasyon; yeni projelere başlamak ve spor için en verimli evre.';
+        case 'ovulation':
+          return '✨ Ovülasyon: Doğurganlık zirvede. Sosyalleşmek ve enerjik aktiviteler için ideal zaman.';
+        case 'fertile':
+          return '🌸 Doğurgan Pencere: Enerjiniz yüksek; vücut sıcaklığı hafifçe yükselebilir, bol su tüketin.';
+        case 'pms':
+          return '🌙 Luteal / PMS: Kafeini azaltın, papatya çayı ve esneme hareketleriyle kendinizi rahatlatın.';
+        default:
+          return '✨ Dengeli Evre: Düzenli uyku, dengeli beslenme ve yürüyüşlerle ritminizi koruyun.';
+      }
+    };
+
     modalContent.innerHTML = `
       <div class="modal-header-row">
         <div>
@@ -4741,6 +4986,7 @@ class CalendarComponent {
           <span class="phase-tag">${status.phaseBadge}</span>
           <h4>${status.phaseName}</h4>
           <p>${status.description}</p>
+          <div class="phase-banner-guidance">${getCalendarPhaseGuidance(status.phase)}</div>
         </div>
         <div class="pregnancy-badge">
           <span class="preg-label">Hamilelik Olasılığı</span>
@@ -5659,6 +5905,61 @@ class DoctorReportGenerator {
 
 
 
+const CYCLE_PHASES_DATA = {
+  period: {
+    id: 'period',
+    name: 'Menstrüasyon (Regl)',
+    tag: 'Regl Fazı',
+    defaultRange: '1 - 5. Gün',
+    icon: '🩸',
+    color: '#e11d48',
+    bgColor: 'rgba(225, 29, 72, 0.08)',
+    borderColor: 'rgba(225, 29, 72, 0.25)',
+    biology: 'Östrojen ve progesteron hormonları en düşük seviyededir. Rahim içi tabaka kendini temizler ve yenilenme sürecine girer.',
+    energy: 'Enerji doğal olarak içe dönüktür; zihinsel ve fiziksel yavaşlama, derin uyku ve dinlenme ihtiyacı artar.',
+    guidance: 'Sıcak su torbası, magnezyum zengini besinler (muz, kakao, kabak çekirdeği) ve hafif esneme hareketleri krampları yatıştırır. Ağır antrenmanlar yerine dinlenmeyi seçin.'
+  },
+  follicular: {
+    id: 'follicular',
+    name: 'Foliküler Faz',
+    tag: 'Gelişim & Enerji',
+    defaultRange: '6 - 13. Gün',
+    icon: '🌱',
+    color: '#0d9488',
+    bgColor: 'rgba(13, 148, 136, 0.08)',
+    borderColor: 'rgba(13, 148, 136, 0.25)',
+    biology: 'FSH hormonu yeni folikülleri olgunlaştırır; hızla yükselen östrojen cildinizi canlandırır ve metabolizmayı hızlandırır.',
+    energy: 'Zihinsel berraklık, yüksek motivasyon, odaklanma gücü ve sosyalleşme arzusu zirveye tırmanır.',
+    guidance: 'Yeni projelere başlamak, tempolu yürüyüş/kardiyo ve yaratıcı planlar üretmek için en elverişli evredir. Taze yeşillikler ve fermente gıdalarla enerjinizi destekleyin.'
+  },
+  ovulation: {
+    id: 'ovulation',
+    name: 'Ovülasyon (Yumurtlama)',
+    tag: 'Doğurganlık Zirvesi',
+    defaultRange: '14. Gün civarı (12-16. Günler)',
+    icon: '✨',
+    color: '#f59e0b',
+    bgColor: 'rgba(234, 179, 8, 0.08)',
+    borderColor: 'rgba(234, 179, 8, 0.25)',
+    biology: 'LH hormonu tepe noktasına ulaşarak olgun yumurtayı serbest bırakır. Doğurganlık ihtimalinin en yüksek olduğu 24-48 saatlik zirve penceredir.',
+    energy: 'Özgüven, çekicilik, iletişim gücü ve enerjiniz maksimumdadır. Vücut ısınız hafifçe yükselebilir.',
+    guidance: 'Önemli toplantılar, sunumlar ve sosyal etkinlikler için mükemmel zamandır. Antioksidan zengini meyveler (yaban mersini, nar) ve bol su tüketin.'
+  },
+  luteal: {
+    id: 'luteal',
+    name: 'Luteal Faz & PMS',
+    tag: 'Sakinleşme & Hazırlık',
+    defaultRange: '15 - 28. Gün',
+    icon: '🌙',
+    color: '#c084fc',
+    bgColor: 'rgba(192, 132, 252, 0.08)',
+    borderColor: 'rgba(192, 132, 252, 0.25)',
+    biology: 'Progesteron hormonu baskındır. Gebelik olmazsa hormonlar düşüşe geçer ve rahim yeni bir döngü için hazırlanır.',
+    energy: 'Metabolizma sakinleşir; duygusal hassasiyet, tatlı istekleri veya hafif şişkinlik gibi PMS işaretleri görülebilir.',
+    guidance: 'Kafein ve tuzu sınırlayarak ödemi azaltın. Papatya veya melisa çayı, B6 vitamini ve esneme/yoga hareketleriyle kendinize şefkat gösterin.'
+  }
+};
+
 class DongumApp {
   constructor() {
     this.storage = storage;
@@ -5774,9 +6075,6 @@ class DongumApp {
           </span>
           <div class="app-titles">
             <h1 class="app-title">Döngüm</h1>
-            <span class="app-sub-status" id="headerOfflineBtn" style="font-size: 0.7rem; color: #10b981; font-weight: 600; cursor: pointer;" title="Çevrimdışı & Kurulum Rehberi">
-              🟢 Çevrimdışı Hazır ℹ️
-            </span>
           </div>
         </div>
         <div class="app-header-actions">
@@ -6310,7 +6608,6 @@ class DongumApp {
     const btnProfile = document.getElementById('btnHeaderProfile');
     const btnCloseProfile = document.getElementById('btnCloseProfileModal');
     const profileOverlay = document.getElementById('profileModalOverlay');
-    const headerOfflineBtn = document.getElementById('headerOfflineBtn');
 
     if (btnProfile) {
       btnProfile.onclick = () => this.openProfileModal('list');
@@ -6320,10 +6617,6 @@ class DongumApp {
       profileOverlay.onclick = (e) => {
         if (e.target === profileOverlay) profileOverlay.classList.remove('active');
       };
-    }
-
-    if (headerOfflineBtn) {
-      headerOfflineBtn.onclick = () => this.openOfflineGuideModal();
     }
 
     // Modal Sekme Geçişleri
@@ -6953,14 +7246,34 @@ class DongumApp {
       else countdownText = `${Math.abs(summary.daysUntilNext)} gün gecikme`;
     }
 
+    // Güncel aktif faz anahtarı (Faz rehberinde varsayılan açılacak evre)
+    let activePhaseKey = 'follicular';
+    if (currentDay <= periodDays) {
+      activePhaseKey = 'period';
+    } else if (currentDay <= follicularEnd) {
+      activePhaseKey = 'follicular';
+    } else if (currentDay >= fertileStart && currentDay <= fertileEnd) {
+      activePhaseKey = 'ovulation';
+    } else {
+      activePhaseKey = 'luteal';
+    }
+
+    // Kişisel gün aralıkları haritası
+    const dynamicRanges = {
+      period: `1 - ${periodDays}. Gün`,
+      follicular: `${follicularStart} - ${follicularEnd}. Gün`,
+      ovulation: `${fertileStart} - ${fertileEnd}. Gün (${ovulationDay}. Gün Zirve)`,
+      luteal: `${lutealStart} - ${cycleTotal}. Gün`
+    };
+
     container.innerHTML = `
       <div class="home-view-wrapper">
         
         <!-- Çevrimdışı / Çevrimiçi Durum ve Mobil Eşleme Çubuğu -->
         <div class="sync-status-bar">
-          <div class="status-online-badge" id="btnHomeOfflineBar" style="cursor: pointer;" title="Sunucu kapalıyken kullanım detayları">
+          <div class="status-online-badge" id="btnHomeOfflineBar" style="cursor: pointer;" title="Çevrimdışı Kullanım & Kurulum Rehberi">
             <span class="online-pulse-dot"></span>
-            <span>Sunucusuz & Çevrimdışı Hazır ℹ️</span>
+            <span>🟢 Çevrimdışı Hazır ℹ️</span>
           </div>
           <div style="display: flex; gap: 6px;">
             <button type="button" class="btn-quick-sync" id="btnHomeInstallModal" title="Telefona yükle & internetsiz kullan">
@@ -7019,19 +7332,19 @@ class DongumApp {
 
         <!-- Çark Altı Evre Açıklamaları (Legend) -->
         <div class="dial-legend-row">
-          <div class="legend-pill-item">
+          <div class="legend-pill-item" data-phase="period" title="Regl fazı rehberini göster">
             <span class="legend-circle" style="background-color: ${colorRegl};"></span>
             <span>Regl (1-${periodDays})</span>
           </div>
-          <div class="legend-pill-item">
+          <div class="legend-pill-item" data-phase="follicular" title="Foliküler faz rehberini göster">
             <span class="legend-circle" style="background-color: ${colorFolikuler};"></span>
             <span>Foliküler (${follicularStart}-${follicularEnd})</span>
           </div>
-          <div class="legend-pill-item">
+          <div class="legend-pill-item" data-phase="ovulation" title="Ovülasyon faz rehberini göster">
             <span class="legend-circle" style="background-color: ${colorOvulasyon};"></span>
             <span>Ovulasyon (${ovulationDay})</span>
           </div>
-          <div class="legend-pill-item">
+          <div class="legend-pill-item" data-phase="luteal" title="Luteal faz rehberini göster">
             <span class="legend-circle" style="background-color: ${colorLuteal};"></span>
             <span>Luteal (${lutealStart}-${lutealEnd})</span>
           </div>
@@ -7064,6 +7377,38 @@ class DongumApp {
           <p class="insight-advice">
             ${this.getPhaseAdvice(todayStatus.phase)}
           </p>
+        </div>
+
+        <!-- Döngü Fazları & Beden Rehberi Kartı (Bilgilendirici ve Yönlendirici) -->
+        <div class="phases-guide-card" id="homePhasesGuideCard">
+          <div class="pgh-header">
+            <div class="pgh-title-group">
+              <span class="pgh-main-icon">🌸</span>
+              <div>
+                <h4 class="pgh-title">Döngü Fazları & Beden Rehberi</h4>
+                <p class="pgh-desc">Her evrede hormonlar, enerji ve yönlendirici tavsiyeler</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Faz Seçim Sekmeleri -->
+          <div class="phases-tab-nav" id="phasesTabNav">
+            ${Object.values(CYCLE_PHASES_DATA).map(p => {
+              const isCurrent = (p.id === activePhaseKey);
+              return `
+                <button type="button" class="phase-nav-pill ${isCurrent ? 'active-pill' : ''}" data-phase="${p.id}" style="--p-col: ${p.color};">
+                  <span class="p-icon">${p.icon}</span>
+                  <span class="p-title">${p.name.split(' ')[0]}</span>
+                  ${isCurrent ? `<span class="p-current-tag">Bugün</span>` : ''}
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Seçili Faz İçerik Kartı -->
+          <div class="phase-info-display" id="phaseInfoDisplay">
+            ${this.renderPhaseDetailHtml(activePhaseKey, dynamicRanges[activePhaseKey], true)}
+          </div>
         </div>
 
         <!-- Hızlı Gün İnceleme & Semptom Ekleme Butonu -->
@@ -7109,6 +7454,48 @@ class DongumApp {
     const quickPeriodBtn = container.querySelector('#btnHomeQuickPeriod');
     const logTodayBtn = container.querySelector('#btnHomeLogToday');
     const btnOfflineBar = container.querySelector('#btnHomeOfflineBar');
+    const btnHomeInstall = container.querySelector('#btnHomeInstallModal');
+    const btnOpenSync = container.querySelector('#btnOpenSyncModal');
+    const btnCloseSync = container.querySelector('#btnCloseSyncModal');
+    const syncOverlay = container.querySelector('#syncModalOverlay');
+    const syncOutput = container.querySelector('#syncCodeOutput');
+    const btnCopySync = container.querySelector('#btnCopySyncCode');
+    const syncInput = container.querySelector('#syncCodeInput');
+    const btnApplySync = container.querySelector('#btnApplySyncCode');
+
+    // Faz Rehberi Butonları Dinleyicisi
+    const phaseNav = container.querySelector('#phasesTabNav');
+    const phaseDisplay = container.querySelector('#phaseInfoDisplay');
+    if (phaseNav && phaseDisplay) {
+      phaseNav.querySelectorAll('.phase-nav-pill').forEach(pill => {
+        pill.onclick = () => {
+          phaseNav.querySelectorAll('.phase-nav-pill').forEach(p => p.classList.remove('active-pill'));
+          pill.classList.add('active-pill');
+          const targetKey = pill.dataset.phase;
+          const isTodayPhase = (targetKey === activePhaseKey);
+          phaseDisplay.innerHTML = this.renderPhaseDetailHtml(targetKey, dynamicRanges[targetKey], isTodayPhase);
+        };
+      });
+    }
+
+    // Çark altındaki legend etiketlerine tıklandığında da ilgili faza atla
+    const legendRow = container.querySelector('.dial-legend-row');
+    const guideCard = container.querySelector('#homePhasesGuideCard');
+    if (legendRow && phaseNav) {
+      legendRow.querySelectorAll('.legend-pill-item').forEach(lp => {
+        lp.style.cursor = 'pointer';
+        lp.onclick = () => {
+          const targetKey = lp.dataset.phase;
+          const pillBtn = phaseNav.querySelector(`[data-phase="${targetKey}"]`);
+          if (pillBtn) {
+            pillBtn.click();
+            if (guideCard) {
+              guideCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          }
+        };
+      });
+    }
     const btnHomeInstall = container.querySelector('#btnHomeInstallModal');
     const btnOpenSync = container.querySelector('#btnOpenSyncModal');
     const btnCloseSync = container.querySelector('#btnCloseSyncModal');
@@ -7216,6 +7603,58 @@ class DongumApp {
       default:
         return '✨ Hormonal dengeniz sağlıklı seyrinde. Düzenli uyku ve dengeli su tüketimi döngünüzü destekler.';
     }
+  }
+
+  getMappedPhaseKey(phase) {
+    if (phase === 'period' || phase === 'predicted_period') return 'period';
+    if (phase === 'ovulation' || phase === 'fertile') return 'ovulation';
+    if (phase === 'pms' || phase === 'luteal') return 'luteal';
+    return 'follicular';
+  }
+
+  renderPhaseDetailHtml(phaseKey, daysRangeText, isToday = false) {
+    const phaseObj = CYCLE_PHASES_DATA[phaseKey] || CYCLE_PHASES_DATA.period;
+    const rangeDisplay = daysRangeText || phaseObj.defaultRange;
+
+    return `
+      <div class="phase-detail-inner" style="border-left-color: ${phaseObj.color};">
+        <div class="pd-top-row">
+          <div class="pd-title-wrap">
+            <span class="pd-tag" style="background-color: ${phaseObj.bgColor}; color: ${phaseObj.color}; border: 1px solid ${phaseObj.borderColor};">
+              ${phaseObj.icon} ${phaseObj.tag}
+            </span>
+            <h5 class="pd-phase-name">${phaseObj.name}</h5>
+          </div>
+          <div class="pd-days-badge">
+            <span class="pd-days-text">📅 ${rangeDisplay}</span>
+            ${isToday ? `<span class="pd-today-pill">Şu Anki Evreniz</span>` : ''}
+          </div>
+        </div>
+
+        <div class="pd-sections-grid">
+          <div class="pd-info-block">
+            <div class="pd-block-label">
+              <span class="pd-b-icon">🧬</span> Biyoloji & Hormonlar
+            </div>
+            <p class="pd-block-text">${phaseObj.biology}</p>
+          </div>
+
+          <div class="pd-info-block">
+            <div class="pd-block-label">
+              <span class="pd-b-icon">⚡</span> Ruh Hali & Enerji
+            </div>
+            <p class="pd-block-text">${phaseObj.energy}</p>
+          </div>
+
+          <div class="pd-info-block pd-guidance-block" style="background-color: ${phaseObj.bgColor}; border-color: ${phaseObj.borderColor};">
+            <div class="pd-block-label" style="color: ${phaseObj.color}; font-weight: 700;">
+              <span class="pd-b-icon">💡</span> Yönlendirici Tavsiyeler & Beslenme
+            </div>
+            <p class="pd-block-text" style="color: var(--text-main); font-weight: 500;">${phaseObj.guidance}</p>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
   // ================= 2. TAKVİM SEKMESİ =================

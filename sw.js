@@ -4,7 +4,7 @@
  * telefonun hafızasından %100 kesintisiz açılmasını sağlar.
  */
 
-const CACHE_NAME = 'dongum-pwa-v15';
+const CACHE_NAME = 'dongum-pwa-v17';
 
 const ASSETS_TO_CACHE = [
   './',
