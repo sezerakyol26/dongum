@@ -3498,6 +3498,1499 @@ body.dark-theme .dr-modal-actions-bar {
   color: var(--text-muted);
 }
 
+/* ==========================================================================
+   EGZERSİZ & SU TAKİP MODÜLÜ (CYCLE FITNESS & HYDRATION)
+   ========================================================================== */
+
+.fitness-view-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 24px;
+}
+
+/* Üst Başlık & Motivasyon Kartı */
+.fitness-hero-card {
+  background: var(--phase-bg, rgba(244, 63, 94, 0.08));
+  border: 1.5px solid var(--phase-border, rgba(244, 63, 94, 0.25));
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(8px);
+}
+
+.fhero-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.fhero-phase-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-main);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.fhero-streak-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fee2e2 100%);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  color: #b45309;
+}
+
+body.dark-theme .fhero-streak-pill {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+}
+
+.fhero-streak-pill .f-streak-icon {
+  display: flex;
+  align-items: center;
+  color: #f59e0b;
+}
+
+.fhero-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.fhero-quote {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.fhero-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+
+.fhero-stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+}
+
+.fhero-stat-box .fh-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.fhero-stat-box .fh-val {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.fhero-stat-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-subtle);
+}
+
+/* İki Ana Alt Sekme (Egzersiz / Su) */
+.fitness-tabs-nav {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-input);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.ftab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.ftab-btn.active {
+  background: var(--bg-surface);
+  color: var(--text-main);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.ftab-check-dot {
+  background: #10b981;
+  color: #ffffff;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.ftab-water-val {
+  background: rgba(2, 132, 199, 0.12);
+  color: #0284c7;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* Bugünün Egzersiz Durum Kartı */
+.today-workout-status-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.tw-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.tw-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tw-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+body.dark-theme .tw-icon-circle {
+  background: rgba(244, 63, 94, 0.2);
+}
+
+.tw-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.tw-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.btn-delete-workout {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.btn-delete-workout:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.logged-workout-details {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lwd-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lwd-badge {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.badge-intensity {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+body.dark-theme .badge-intensity {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+}
+
+.badge-feel {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+body.dark-theme .badge-feel {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+}
+
+.lwd-time {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-left: auto;
+}
+
+.lwd-note {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.lwd-benefit-box {
+  background: rgba(244, 63, 94, 0.06);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}
+
+.lwd-benefit-title {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.lwd-benefit-text {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.btn-open-workout-form {
+  margin-top: 14px;
+}
+
+/* Egzersiz Kayıt Kartı (Form) */
+.workout-form-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.wfc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 10px;
+}
+
+.wfc-header h4 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wfc-date-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  background: var(--bg-input);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+}
+
+.wfc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wfc-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.wfc-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wfc-val-display {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+/* Egzersiz Türleri Izgara Seçici */
+.exercise-types-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.ex-type-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 12px;
+  background: var(--bg-input);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+}
+
+.ex-type-btn:hover {
+  background: rgba(244, 63, 94, 0.05);
+  border-color: rgba(244, 63, 94, 0.3);
+}
+
+.ex-type-btn.selected {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.15);
+}
+
+body.dark-theme .ex-type-btn.selected {
+  background: rgba(244, 63, 94, 0.2);
+  border-color: var(--primary);
+}
+
+.ex-icon {
+  font-size: 1.35rem;
+  margin-bottom: 4px;
+}
+
+.ex-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.ex-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Süre Çipleri & Kaydırıcı */
+.duration-chips-row {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px 0;
+}
+
+.dur-chip {
+  flex: 1;
+  padding: 7px 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.dur-chip.selected {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+.custom-dur-input-wrap {
+  margin-top: 6px;
+}
+
+.duration-slider {
+  width: 100%;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Yoğunluk Seçici */
+.intensity-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.intensity-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+}
+
+.intensity-btn.selected {
+  background: var(--bg-surface);
+  border-color: var(--primary);
+  box-shadow: 0 2px 10px rgba(244, 63, 94, 0.12);
+}
+
+.int-icon {
+  font-size: 1.1rem;
+}
+
+.int-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.int-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.int-desc {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Anlık Biyolojik Analiz Kutusu */
+.cycle-dynamic-analysis-box {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(13, 148, 136, 0.04) 100%);
+  border: 1.5px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cda-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cda-status-pill {
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.badge-optimal {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+body.dark-theme .badge-optimal {
+  background: rgba(16, 185, 129, 0.25);
+  color: #6ee7b7;
+}
+
+.badge-good {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.badge-caution {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+body.dark-theme .badge-caution {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fde68a;
+}
+
+.cda-calories-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ef4444;
+}
+
+.cda-body {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Hissiyat Seçici */
+.feelings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.feel-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+  background: var(--bg-input);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.feel-btn.selected {
+  background: var(--bg-surface);
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.12);
+}
+
+.feel-icon {
+  font-size: 1.3rem;
+  margin-bottom: 2px;
+}
+
+.feel-name {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Fazlara Göre Hareket Rehberi */
+.fitness-guide-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.fgs-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fgs-icon {
+  font-size: 1.5rem;
+}
+
+.fgs-title {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.fgs-desc {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.phases-fitness-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.phase-fitness-card {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.phase-fitness-card.current-phase-card {
+  border-color: var(--p-color, var(--primary));
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.pfc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+.pfc-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pfc-icon {
+  font-size: 1.4rem;
+}
+
+.pfc-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pfc-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.pfc-current-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  background: var(--p-color, var(--primary));
+  color: #ffffff;
+  border-radius: var(--radius-full);
+}
+
+.pfc-tag {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.pfc-arrow {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+
+.pfc-body {
+  padding: 0 16px 16px 16px;
+  border-top: 1px dashed var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+
+.pfc-info-row {
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.pfc-info-row strong {
+  color: var(--text-main);
+}
+
+.pfc-pill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.rec-pill {
+  background: #ecfdf5;
+  color: #047857;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+body.dark-theme .rec-pill {
+  background: rgba(16, 185, 129, 0.18);
+  color: #6ee7b7;
+}
+
+.avoid-pill {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+body.dark-theme .avoid-pill {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+}
+
+.pfc-benefit-highlight {
+  background: rgba(244, 63, 94, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-top: 4px;
+}
+
+/* Son Yapılan Egzersizler */
+.recent-workouts-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.rws-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.recent-workouts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recent-workout-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.rw-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rw-icon {
+  font-size: 1.4rem;
+}
+
+.rw-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.rw-name {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.rw-meta {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.rw-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rw-feel {
+  font-size: 1.25rem;
+}
+
+.btn-del-history-workout {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.btn-del-history-workout:hover {
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.empty-state-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 16px;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  gap: 8px;
+}
+
+.empty-icon {
+  font-size: 2rem;
+}
+
+/* ================= GÜNLÜK SU İÇME MODÜLÜ STİLLERİ ================= */
+.water-hero-card {
+  background: var(--bg-surface);
+  border: 1.5px solid rgba(2, 132, 199, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 22px 18px;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.water-progress-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.water-cup-container {
+  width: 140px;
+  height: 170px;
+  border: 4px solid #0284c7;
+  border-top: none;
+  border-radius: 0 0 45px 45px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(2, 132, 199, 0.05);
+  box-shadow: inset 0 -6px 16px rgba(2, 132, 199, 0.15);
+}
+
+.water-wave-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+  transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wave {
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 200%;
+  height: 20px;
+  background-repeat: repeat-x;
+  background-size: 50% 20px;
+  opacity: 0.6;
+}
+
+.wave1 {
+  background-image: radial-gradient(circle at 10px 10px, transparent 10px, #38bdf8 11px);
+  animation: waveAnim 3s linear infinite;
+}
+
+.wave2 {
+  top: -8px;
+  background-image: radial-gradient(circle at 10px 10px, transparent 10px, #0284c7 11px);
+  opacity: 0.4;
+  animation: waveAnim 2s linear infinite reverse;
+}
+
+@keyframes waveAnim {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.water-cup-overlay-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+body.dark-theme .water-cup-overlay-text {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.wcup-percent {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+body.dark-theme .wcup-percent {
+  color: #f8fafc;
+}
+
+.wcup-val {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0284c7;
+}
+
+.wcup-target {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.water-hero-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  gap: 12px;
+}
+
+.water-congrats-badge {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #10b981;
+  border-radius: var(--radius-full);
+  padding: 6px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+body.dark-theme .water-congrats-badge {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+}
+
+.water-status-text {
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.water-subtext {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.water-quick-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.btn-water-quick, .btn-water-undo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 4px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-water-quick:hover {
+  background: rgba(2, 132, 199, 0.08);
+  border-color: #0284c7;
+  transform: translateY(-1px);
+}
+
+.btn-water-undo:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: var(--danger);
+}
+
+.bwq-icon {
+  font-size: 1.25rem;
+  margin-bottom: 2px;
+}
+
+.bwq-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.bwq-sub {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+}
+
+.water-target-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.water-target-select {
+  padding: 4px 8px;
+  font-size: 0.76rem;
+  width: auto;
+}
+
+/* Haftalık Su Çubuk Grafiği */
+.weekly-water-chart-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.wwc-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.wwc-bars-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 120px;
+  padding: 0 4px;
+  gap: 8px;
+}
+
+.wwc-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+}
+
+.wwc-bar-track {
+  width: 14px;
+  flex: 1;
+  background: var(--bg-input);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.wwc-bar-fill {
+  width: 100%;
+  background: #38bdf8;
+  border-radius: var(--radius-full);
+  transition: height 0.4s ease;
+}
+
+.wwc-bar-fill.reached {
+  background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+}
+
+.wwc-amount {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.wwc-day {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.wwc-today .wwc-day {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.wwc-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.wwc-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reached-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.pending-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38bdf8;
+}
+
+/* Döngü Fazı Su Kartı */
+.cycle-water-card {
+  background: var(--phase-bg, rgba(2, 132, 199, 0.08));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cwc-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cwc-icon {
+  font-size: 1.3rem;
+}
+
+.cwc-header h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.cwc-desc {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ================= ANA SAYFA (HOME) WIDGET STİLLERİ ================= */
+.home-widget-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: var(--transition);
+}
+
+.home-widget-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.home-water-card {
+  border-left: 4px solid #0284c7;
+}
+
+.home-fitness-card {
+  border-left: 4px solid #10b981;
+}
+
+.hwc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hwc-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hwc-icon {
+  font-size: 1.3rem;
+}
+
+.hwc-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.hwc-sub {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.hwc-more-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.hwc-more-btn:hover {
+  background: var(--primary-light);
+}
+
+.hwc-streak-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+}
+
+body.dark-theme .hwc-streak-badge {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+}
+
+.home-water-bar-wrap {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-input);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.home-water-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8 0%, #0284c7 100%);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.hwc-tip-text {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.home-water-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-home-water-add {
+  flex: 1;
+  padding: 7px 10px;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.25);
+  border-radius: var(--radius-md);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0284c7;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-home-water-add:hover {
+  background: rgba(2, 132, 199, 0.16);
+}
+
+.btn-home-water-undo {
+  padding: 7px 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.hwc-logged-badge {
+  background: rgba(16, 185, 129, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+}
+
+.hwc-quote-box {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ================= TAKVİM GÜN MODALI İÇİ STİLLER ================= */
+.day-fitness-water-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.day-modal-water-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+}
+
+.dmw-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dmw-icon {
+  font-size: 1.25rem;
+}
+
+.dmw-title {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.dmw-amount {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0284c7;
+}
+
+.dmw-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-dm-water {
+  padding: 4px 10px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.btn-dm-water-add {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+.day-modal-exercise-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+}
+
+.dme-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dme-icon {
+  font-size: 1.25rem;
+}
+
+.dme-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: block;
+}
+
+.dme-desc {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.btn-dm-del-exercise {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.btn-dm-add-exercise {
+  padding: 4px 12px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+
 
 /* ==========================================================================
    DÖNGÜM - MOBİL VE DOKUNMATİK CİHAZ OPTİMİZASYONLARI
@@ -3703,6 +5196,18 @@ const Icons = {
 
   wifiOff: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>`,
 
+  activity: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`,
+
+  flame: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"></path></svg>`,
+
+  waterGlass: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l-1.5 17a2 2 0 0 1-2 1.9H9.5a2 2 0 0 1-2-1.9L6 3z"></path><path d="M6.5 8h11"></path><path d="M7 13h10"></path></svg>`,
+
+  dumbbell: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11"></path><path d="M6 20v-2a6 6 0 0 1 12 0v2"></path><circle cx="12" cy="10" r="4"></circle></svg>`,
+
+  award: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>`,
+
+  checkCircle: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`,
+
   appLogo: (size = 48) => `<svg viewBox="0 0 512 512" width="${size}" height="${size}" style="display: block; border-radius: ${Math.round(size * 0.28)}px; box-shadow: 0 4px 12px rgba(244, 63, 94, 0.25);">
     <defs>
       <radialGradient id="appLogoBg" cx="50%" cy="35%" r="65%">
@@ -3755,7 +5260,9 @@ const DEFAULT_SETTINGS = {
   pin: null,
   pinEnabled: false,
   darkMode: false,
-  notificationsEnabled: false
+  notificationsEnabled: false,
+  waterTarget: 2250,
+  exerciseGoalDays: 3
 };
 
 const PROFILE_ROLES = [
@@ -4161,6 +5668,186 @@ class StorageManager {
       return true;
     }
     return false;
+  }
+
+  // --- Su İçme Takip Metotları ---
+  getWaterForDay(dateStr) {
+    const day = this.getDayData(dateStr);
+    return (day && typeof day.waterIntake === 'number') ? day.waterIntake : 0;
+  }
+
+  logWater(dateStr, deltaMl) {
+    const current = this.getWaterForDay(dateStr);
+    const newAmount = Math.max(0, current + deltaMl);
+    return this.setWater(dateStr, newAmount);
+  }
+
+  setWater(dateStr, amountMl) {
+    const sanitized = Math.max(0, Math.round(amountMl));
+    this.saveDayData(dateStr, { waterIntake: sanitized });
+    return sanitized;
+  }
+
+  getWeeklyWaterHistory(numDays = 7) {
+    const profileData = this.getProfileData();
+    const days = profileData.days || {};
+    const target = profileData.settings?.waterTarget || 2250;
+    const result = [];
+    const now = new Date();
+
+    const dayShortNames = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
+
+    for (let i = numDays - 1; i >= 0; i--) {
+      const d = new Date(now);
+      d.setDate(d.getDate() - i);
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const dayNum = String(d.getDate()).padStart(2, '0');
+      const dateKey = `${y}-${m}-${dayNum}`;
+
+      const amount = (days[dateKey] && typeof days[dateKey].waterIntake === 'number') ? days[dateKey].waterIntake : 0;
+      const percent = Math.min(150, Math.round((amount / target) * 100));
+
+      result.push({
+        dateStr: dateKey,
+        dayName: dayShortNames[d.getDay()],
+        dayNumber: d.getDate(),
+        isToday: (i === 0),
+        amount: amount,
+        target: target,
+        percent: percent,
+        reached: amount >= target
+      });
+    }
+
+    return result;
+  }
+
+  // --- Egzersiz & Fitness Takip Metotları ---
+  getExerciseForDay(dateStr) {
+    const day = this.getDayData(dateStr);
+    return (day && day.exercise) ? day.exercise : null;
+  }
+
+  logExercise(dateStr, exerciseData) {
+    const record = {
+      ...exerciseData,
+      loggedAt: new Date().toISOString()
+    };
+    this.saveDayData(dateStr, { exercise: record });
+    return record;
+  }
+
+  deleteExercise(dateStr) {
+    const data = this.getProfileData();
+    if (data.days[dateStr] && data.days[dateStr].exercise) {
+      delete data.days[dateStr].exercise;
+      this.saveProfileData(null, data);
+      return true;
+    }
+    return false;
+  }
+
+  getRecentExercises(limit = 15) {
+    const profileData = this.getProfileData();
+    const days = profileData.days || {};
+    const exercises = [];
+
+    for (const [dateStr, dayData] of Object.entries(days)) {
+      if (dayData && dayData.exercise) {
+        exercises.push({
+          dateStr: dateStr,
+          ...dayData.exercise
+        });
+      }
+    }
+
+    // Tarihe göre yeniden eskiye sırala
+    exercises.sort((a, b) => b.dateStr.localeCompare(a.dateStr));
+    return exercises.slice(0, limit);
+  }
+
+  getExerciseStreak() {
+    const profileData = this.getProfileData();
+    const days = profileData.days || {};
+    const now = new Date();
+
+    const formatDate = (date) => {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      return `${y}-${m}-${dayNum(d)}`;
+      function dayNum(str) { return str; }
+    };
+
+    let streak = 0;
+    let checkDate = new Date(now);
+
+    // Bugün egzersiz var mı?
+    const todayStr = formatDate(checkDate);
+    const hasToday = Boolean(days[todayStr] && days[todayStr].exercise);
+
+    if (hasToday) {
+      streak++;
+      checkDate.setDate(checkDate.getDate() - 1);
+    } else {
+      // Bugün henüz yapılmadıysa dünden itibaren streak kontrol et
+      checkDate.setDate(checkDate.getDate() - 1);
+    }
+
+    // Geriye doğru ardışık günleri say
+    while (true) {
+      const key = formatDate(checkDate);
+      if (days[key] && days[key].exercise) {
+        streak++;
+        checkDate.setDate(checkDate.getDate() - 1);
+      } else {
+        break;
+      }
+    }
+
+    return {
+      currentStreak: streak,
+      hasExerciseToday: hasToday
+    };
+  }
+
+  getMonthlyFitnessStats() {
+    const profileData = this.getProfileData();
+    const days = profileData.days || {};
+    const now = new Date();
+    const currentMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+
+    let totalWorkouts = 0;
+    let totalMinutes = 0;
+    const typeCounts = {};
+
+    for (const [dateStr, dayData] of Object.entries(days)) {
+      if (dateStr.startsWith(currentMonthKey) && dayData && dayData.exercise) {
+        totalWorkouts++;
+        const dur = parseInt(dayData.exercise.duration, 10) || 0;
+        totalMinutes += dur;
+        const t = dayData.exercise.type || 'other';
+        typeCounts[t] = (typeCounts[t] || 0) + 1;
+      }
+    }
+
+    let topType = null;
+    let topCount = 0;
+    for (const [t, c] of Object.entries(typeCounts)) {
+      if (c > topCount) {
+        topCount = c;
+        topType = t;
+      }
+    }
+
+    return {
+      monthKey: currentMonthKey,
+      totalWorkouts,
+      totalMinutes,
+      topType,
+      topCount
+    };
   }
 
   // Genel PIN uyumluluk metotları (app.js ile uyum)
@@ -5050,6 +6737,8 @@ class CalendarComponent {
             ${hasSymptoms ? `<span class="indicator-sym-badge" title="${symptomsList.length} belirti: ${symptomsList.join(', ')}">${primarySymptomIcon}${symptomsList.length > 1 ? `<sup class="sym-plus">+</sup>` : ''}</span>` : ''}
             ${hasMood && !hasSymptoms ? `<span class="indicator-sym-badge" title="Ruh Hali">${moodIcon}</span>` : ''}
             ${hasNotes ? `<span class="indicator-note-badge" title="Kişisel Not">📝</span>` : ''}
+            ${dayData && dayData.exercise ? `<span class="indicator-sym-badge" title="Egzersiz: ${dayData.exercise.typeName || 'Antrenman'}">🏃</span>` : ''}
+            ${dayData && typeof dayData.waterIntake === 'number' && dayData.waterIntake >= 1500 ? `<span class="indicator-sym-badge" title="Su: ${dayData.waterIntake} ml">💧</span>` : ''}
           </div>
         </div>
       `;
@@ -5079,6 +6768,8 @@ class CalendarComponent {
     const currentMood = dayData.mood || '';
     const currentDischarge = dayData.discharge || '';
     const currentNotes = dayData.notes || '';
+    let currentWater = (typeof dayData.waterIntake === 'number') ? dayData.waterIntake : 0;
+    let currentExercise = dayData.exercise || null;
 
     const getCalendarPhaseGuidance = (phase) => {
       switch (phase) {
@@ -5213,6 +6904,44 @@ class CalendarComponent {
         </div>
       </div>
 
+      <!-- GÜNLÜK SU VE EGZERSİZ KAYDI -->
+      <div class="modal-section day-fitness-water-section">
+        <label class="section-label">💧 Su Tüketimi & 🏃‍♀️ Egzersiz</label>
+        
+        <div class="day-modal-water-row">
+          <div class="dmw-info">
+            <span class="dmw-icon">💧</span>
+            <div>
+              <strong class="dmw-title">Günün Su Tüketimi:</strong>
+              <span class="dmw-amount" id="dmWaterDisplay">${currentWater} ml</span>
+            </div>
+          </div>
+          <div class="dmw-controls">
+            <button type="button" class="btn-dm-water" id="btnDmWaterMinus" title="250 ml eksilt">-250</button>
+            <button type="button" class="btn-dm-water btn-dm-water-add" id="btnDmWaterPlus" title="250 ml ekle">+250 ml</button>
+          </div>
+        </div>
+
+        <div class="day-modal-exercise-row">
+          <div class="dme-info">
+            <span class="dme-icon">${currentExercise ? (currentExercise.feelIcon || '🏃‍♀️') : '🧘‍♀️'}</span>
+            <div>
+              <strong class="dme-title">${currentExercise ? currentExercise.typeName : 'Egzersiz Kaydı'}</strong>
+              <span class="dme-desc">${currentExercise ? `${currentExercise.duration} dk • ${currentExercise.intensityName || 'Normal'}` : 'Bu gün için egzersiz kaydedilmedi'}</span>
+            </div>
+          </div>
+          ${currentExercise ? `
+            <button type="button" class="btn-dm-del-exercise" id="btnDmDelExercise" title="Bu egzersizi kaldır">
+              ${Icons.trash}
+            </button>
+          ` : `
+            <button type="button" class="btn-dm-add-exercise" id="btnDmAddExercise">
+              + Ekle
+            </button>
+          `}
+        </div>
+      </div>
+
       <!-- NOTLAR -->
       <div class="modal-section">
         <label class="section-label">📝 Kişisel Not</label>
@@ -5243,7 +6972,9 @@ class CalendarComponent {
         symptoms: [...selectedSymptoms],
         mood: selectedMood || null,
         discharge: selectedDischarge || null,
-        notes: notes
+        notes: notes,
+        waterIntake: currentWater,
+        exercise: currentExercise
       });
 
       this.engine.syncSettingsFromCalendarData();
@@ -5251,6 +6982,58 @@ class CalendarComponent {
         this.notifyUpdate();
       }
     };
+
+    // Su Butonları
+    const btnWaterPlus = modalContent.querySelector('#btnDmWaterPlus');
+    const btnWaterMinus = modalContent.querySelector('#btnDmWaterMinus');
+    const waterDisplay = modalContent.querySelector('#dmWaterDisplay');
+    const btnDelEx = modalContent.querySelector('#btnDmDelExercise');
+    const btnAddEx = modalContent.querySelector('#btnDmAddExercise');
+
+    if (btnWaterPlus) {
+      btnWaterPlus.onclick = () => {
+        currentWater += 250;
+        if (waterDisplay) waterDisplay.textContent = `${currentWater} ml`;
+        persistDayState(true);
+      };
+    }
+    if (btnWaterMinus) {
+      btnWaterMinus.onclick = () => {
+        currentWater = Math.max(0, currentWater - 250);
+        if (waterDisplay) waterDisplay.textContent = `${currentWater} ml`;
+        persistDayState(true);
+      };
+    }
+    if (btnDelEx) {
+      btnDelEx.onclick = () => {
+        if (confirm('Bu günün egzersiz kaydı silinsin mi?')) {
+          currentExercise = null;
+          persistDayState(true);
+          this.openDayModal(dateStr);
+        }
+      };
+    }
+    if (btnAddEx) {
+      btnAddEx.onclick = () => {
+        const dur = prompt('Egzersiz süresi (dakika):', '30');
+        if (dur) {
+          const dNum = parseInt(dur, 10) || 30;
+          currentExercise = {
+            type: 'workout',
+            typeName: 'Egzersiz / Hareket',
+            duration: dNum,
+            intensity: 'moderate',
+            intensityName: 'Orta Seviye',
+            feel: 'energized',
+            feelName: 'Enerjik',
+            feelIcon: '🌟',
+            note: 'Takvimden eklendi'
+          };
+          persistDayState(true);
+          this.openDayModal(dateStr);
+        }
+      };
+    }
 
     if (closeBtn) {
       closeBtn.onclick = () => {
@@ -5430,6 +7213,10 @@ class AnalyticsComponent {
     const projections = this.engine.getProjections(6);
     const profileData = this.storage.getProfileData();
     const symptomStats = this.calculateSymptomFrequencies(profileData.days);
+    const fitStats = this.storage.getMonthlyFitnessStats();
+    const streakInfo = this.storage.getExerciseStreak();
+    const waterHistory = this.storage.getWeeklyWaterHistory(7);
+    const avgWater = Math.round(waterHistory.reduce((acc, curr) => acc + curr.amount, 0) / Math.max(1, waterHistory.length));
 
     this.container.innerHTML = `
       <div class="analytics-wrapper">
@@ -5511,6 +7298,41 @@ class AnalyticsComponent {
               <span class="stat-label">Kayıtlı Döngü</span>
               <span class="stat-number">${stats.totalLoggedCycles}</span>
               <p class="stat-desc">Sisteme işlenen toplam regl dönemi</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aktivite & Hidrasyon Performansı -->
+        <div class="analysis-section-box">
+          <h3 class="box-title">🏃‍♀️ Beden Hareketi & Su Dengesi</h3>
+          <p class="box-subtitle">Döngünüzle senkronize fiziksel aktivite ve hidrasyon istatistikleri</p>
+
+          <div class="stats-overview-grid" style="margin-top: 10px;">
+            <div class="stat-card">
+              <div class="stat-icon-wrap" style="color: #10b981;">${Icons.activity}</div>
+              <div class="stat-info">
+                <span class="stat-label">Bu Ayki Egzersiz</span>
+                <span class="stat-number">${fitStats.totalWorkouts} <small>seans</small></span>
+                <p class="stat-desc">Toplam ${fitStats.totalMinutes} dakika hareket</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrap" style="color: #f59e0b;">${Icons.flame}</div>
+              <div class="stat-info">
+                <span class="stat-label">Hareket Serisi</span>
+                <span class="stat-number">${streakInfo.currentStreak} <small>gün</small></span>
+                <p class="stat-desc">${streakInfo.hasExerciseToday ? 'Bugün antrenman tamamlandı' : 'Bugün henüz seans yapılmadı'}</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrap" style="color: #0284c7;">${Icons.waterGlass}</div>
+              <div class="stat-info">
+                <span class="stat-label">Haftalık Ort. Su</span>
+                <span class="stat-number">${avgWater} <small>ml</small></span>
+                <p class="stat-desc">Son 7 günlük günlük ortalama</p>
+              </div>
             </div>
           </div>
         </div>
@@ -6023,10 +7845,869 @@ class DoctorReportGenerator {
 
 
 /**
+ * Döngüm - Egzersiz & Su Takip Modülü (Cycle Fitness & Hydration)
+ * Döngü fazlarına göre egzersiz senkronizasyonu, motivasyon,
+ * egzersiz niteliği/süresi ve biyolojik fayda yönlendirmesi.
+ */
+
+
+
+
+const CYCLE_FITNESS_GUIDANCE = {
+  period: {
+    phaseId: 'period',
+    name: 'Menstrüasyon (Regl Fazı)',
+    tag: 'Onarım & Dinlenme',
+    icon: '🩸',
+    color: '#e11d48',
+    bgColor: 'rgba(225, 29, 72, 0.08)',
+    borderColor: 'rgba(225, 29, 72, 0.25)',
+    hormones: 'Östrojen ve progesteron en düşük seviyededir. Rahim içi tabaka yenilenir.',
+    energy: 'Enerji doğal olarak içe dönüktür; ağır tükeniş yerine dinlenme ve onarım ihtiyacı ön plandadır.',
+    recommended: ['Yin / Restoratif Yoga', 'Hafif Doğa Yürüyüşü', 'Nazik Esneme', 'Pelvik Taban Rahatlatma', 'Nefes Egzersizleri'],
+    avoid: ['Ters duruşlar (baş aşağı)', 'Ağır karın içi basınçlı deadlift/squat', 'Yüksek tempolu HIIT'],
+    cycleBenefit: 'Pelvik bölgedeki kan dolaşımını canlandırarak prostaglandin birikimini dağıtır. Doğal endorfin hormonu salgılatarak kasık kramplarını ve bel sızılarını %40’a varan oranda dindirir.',
+    motivationQuote: 'Bedenin kendini yenilediği kutsal evredesin. Kendine şefkat göster; hafif bir esneme ve derin bir nefes mucizeler yaratır.'
+  },
+  follicular: {
+    phaseId: 'follicular',
+    name: 'Foliküler Faz',
+    tag: 'Güç & Yenilenme',
+    icon: '🌱',
+    color: '#0d9488',
+    bgColor: 'rgba(13, 148, 136, 0.08)',
+    borderColor: 'rgba(13, 148, 136, 0.25)',
+    hormones: 'FSH ve östrojen hızla yükselir. İnsülin duyarlılığı ve glikojen depolama kapasitesi zirveye doğru tırmanır.',
+    energy: 'Yüksek motivasyon, zihinsel berraklık, artan dayanıklılık ve yüksek hareket isteği.',
+    recommended: ['Tempolu Koşu & Kardiyo', 'Kuvvet / Ağırlık Antrenmanı', 'Dans / Zumba', 'Boks & Kickboks', 'Yeni Spor Dalları'],
+    avoid: ['Hareketsizlik ve monotonluk'],
+    cycleBenefit: 'Yükselen östrojen kas protein sentezini maksimize eder ve toparlanma süresini kısaltır. Kas kütlesi inşa etmek ve metabolizma hızını yükseltmek için ayın en verimli evresidir.',
+    motivationQuote: 'Östrojenin tırmanışta, metabolizman bir alev gibi! Bugün yeni rekorlar kırmak ve sınırlarını genişletmek için harika bir gün.'
+  },
+  ovulation: {
+    phaseId: 'ovulation',
+    name: 'Ovülasyon (Yumurtlama)',
+    tag: 'Zirve Performans & Güç',
+    icon: '✨',
+    color: '#f59e0b',
+    bgColor: 'rgba(245, 158, 11, 0.08)',
+    borderColor: 'rgba(245, 158, 11, 0.25)',
+    hormones: 'Östrojen ve testosteron tepe noktasına ulaşır. LH dalgalanmasıyla olgun yumurta salınır.',
+    energy: 'Maksimum güç, patlayıcı enerji, sosyal özgüven ve yüksek dayanıklılık.',
+    recommended: ['HIIT & Fonksiyonel Antrenman', 'Ağır Kuvvet Çalışmaları', 'Spinning / Bisiklet', 'Sprint Koşuları'],
+    avoid: ['Isınmadan ve formsuz ani sıçramalar (Relaksin hormonuna bağlı bağ dokusu gevşekliği riski)'],
+    cycleBenefit: 'Zirve testosteron seviyesi patlayıcı gücü ve kardiyovasküler kapasiteyi maksimuma çıkarır. Ancak eklem bağlarını gevşeten relaksin hormonu nedeniyle iyi ısınmak bağ doku sağlığını korur.',
+    motivationQuote: 'Hormonal zirvedesin! Özgüvenin ve gücün en üst seviyede. Bedeninin yapabileceklerine hayran kalmaya hazır ol.'
+  },
+  luteal: {
+    phaseId: 'luteal',
+    name: 'Luteal Faz & PMS',
+    tag: 'Denge & Ödem Atımı',
+    icon: '🌙',
+    color: '#c084fc',
+    bgColor: 'rgba(192, 132, 252, 0.08)',
+    borderColor: 'rgba(192, 132, 252, 0.25)',
+    hormones: 'Progesteron hormonu baskındır. Vücut bazal ısısı 0.3 - 0.5°C yükselir, metabolik kalori harcaması artar.',
+    energy: 'Daha sakin, içe dönük enerji; fazla zorlandığında çabuk yorulma veya PMS hassasiyeti.',
+    recommended: ['Mat & Reformer Pilates', 'Direnç Lastiği Çalışmaları', 'Orta Tempo Yürüyüş', 'Hatha Yoga', 'Yüzme'],
+    avoid: ['Tükenişe kadar giden ağır HIIT (yüksek kortizol ve PMS stresini tetikleyebilir)', 'Aşırı sıcak ortamlarda antrenman'],
+    cycleBenefit: 'Progesterona bağlı ödem ve su tutulmasını terleyerek ve lenfatik akışla yok eder. Kortizol (stres) hormonunu düşürerek PMS gerginliğini, tatlı krizlerini ve uyku problemlerini dengeler.',
+    motivationQuote: 'Bedenin sakin ve ritmik bir tempoya ihtiyaç duyuyor. Şiddetli yorgunluk yerine nefesle senkronize hareketleri seç ve gevşe.'
+  }
+};
+
+const EXERCISE_TYPES = [
+  { id: 'yoga', name: 'Yoga & Esneme', icon: '🧘‍♀️', calPerHour: 220, badge: 'Onarıcı' },
+  { id: 'walking', name: 'Tempolu Yürüyüş', icon: '🚶‍♀️', calPerHour: 280, badge: 'Düşük Nabız' },
+  { id: 'running', name: 'Koşu / Jogging', icon: '🏃‍♀️', calPerHour: 550, badge: 'Kardiyo' },
+  { id: 'pilates', name: 'Pilates & Matwork', icon: '🤸‍♀️', calPerHour: 340, badge: 'Merkez Güç' },
+  { id: 'strength', name: 'Ağırlık & Kuvvet', icon: '🏋️‍♀️', calPerHour: 420, badge: 'Kas Gelişimi' },
+  { id: 'swimming', name: 'Yüzme', icon: '🏊‍♀️', calPerHour: 480, badge: 'Tüm Vücut' },
+  { id: 'dance', name: 'Dans / Zumba', icon: '💃', calPerHour: 380, badge: 'Eğlenceli' },
+  { id: 'hiit', name: 'HIIT & Fonksiyonel', icon: '⚡', calPerHour: 620, badge: 'Yüksek Efor' },
+  { id: 'cycling', name: 'Bisiklet / Spin', icon: '🚴‍♀️', calPerHour: 450, badge: 'Dayanıklılık' },
+  { id: 'breath', name: 'Nefes & Mobilite', icon: '🫁', calPerHour: 120, badge: 'Zihinsel Sakinlik' }
+];
+
+const INTENSITY_LEVELS = [
+  { id: 'light', name: 'Hafif & Rahatlatıcı', icon: '🟢', desc: 'Düşük nabız, derin nefes ve esneme odaklı' },
+  { id: 'moderate', name: 'Orta Seviye', icon: '🟡', desc: 'Terleten, ritmik ve dengeli bir tempo' },
+  { id: 'high', name: 'Yüksek Yoğunluk', icon: '🔴', desc: 'Maksimum nabız, zorlayıcı efor ve terleme' }
+];
+
+const FEELING_LEVELS = [
+  { id: 'energized', name: 'Enerjik & Canlı', icon: '🌟' },
+  { id: 'relaxed', name: 'Rahatlamış & Sakin', icon: '🧘‍♀️' },
+  { id: 'strong', name: 'Güçlü & Özgüvenli', icon: '💪' },
+  { id: 'tired_happy', name: 'Tatlı Yorgunluk', icon: '😊' },
+  { id: 'exhausted', name: 'Zorlandım / Yorgun', icon: '🥵' }
+];
+
+const WATER_CYCLE_BENEFITS = {
+  period: {
+    title: 'Regl Döneminde Su Tüketimi',
+    icon: '🩸',
+    desc: 'Yeterli su içmek vücudun kramp ağrısına neden olan prostaglandin hormonlarını seyreltir ve rahim içi kasılmaları yumuşatır. Sanılanın aksine düzenli su tüketimi regl dönemi şişkinliğini (ödem) söker atar.'
+  },
+  follicular: {
+    title: 'Foliküler Fazda Su Tüketimi',
+    icon: '🌱',
+    desc: 'Hızlanan metabolizma ve yükselen östrojen cildinizi yenilerken hücresel hidrasyona daha fazla ihtiyaç duyar. Günde 2-2.5 litre su içmek enerjinizi gün boyu zirvede tutar.'
+  },
+  ovulation: {
+    title: 'Ovülasyonda Su Tüketimi',
+    icon: '✨',
+    desc: 'Yumurtlama evresinde vücut ısısı hafifçe yükselir ve doğurgan servikal sıvı üretimi artar. Bu sıvının sağlıklı akışkanlığı doğrudan hidrasyon düzeyinizle bağlantılıdır.'
+  },
+  luteal: {
+    title: 'Luteal & PMS Döneminde Su Tüketimi',
+    icon: '🌙',
+    desc: 'Progesteron hormonu vücutta sodyum ve su tutulumuna (ödem) yol açabilir. Böbrekleri çalıştırıp bu şişkinliği ve göğüs hassasiyetini hafifletmenin en güçlü doğal yolu bol su içmektir.'
+  }
+};
+
+class FitnessComponent {
+  constructor(containerEl, engine, storage, onDataChanged) {
+    this.container = containerEl;
+    this.engine = engine;
+    this.storage = storage;
+    this.onDataChanged = onDataChanged;
+
+    this.activeSubTab = 'exercise'; // 'exercise' | 'water'
+    this.selectedExerciseType = 'yoga';
+    this.selectedDuration = 30;
+    this.selectedIntensity = 'light';
+    this.selectedFeel = 'relaxed';
+  }
+
+  // Döngü fazına ve egzersiz türüne göre anlık biyolojik analiz üretir
+  static analyzeExerciseCompatibility(phaseKey, exerciseId, intensity) {
+    const isPeriod = (phaseKey === 'period');
+    const isFollicular = (phaseKey === 'follicular');
+    const isOvulation = (phaseKey === 'ovulation');
+    const isLuteal = (phaseKey === 'luteal');
+
+    // Menstrüasyon Fazı Analizi
+    if (isPeriod) {
+      if (['yoga', 'walking', 'breath', 'pilates'].includes(exerciseId)) {
+        return {
+          rating: 'optimal',
+          statusText: '🌸 Biyolojik Uyum: Mükemmel Seçim!',
+          badgeClass: 'badge-optimal',
+          benefit: 'Pelvik bölgeye oksijen akışını artırarak krampları yatıştırır ve doğal endorfin salgılatır.',
+          tip: 'Ters duruşlardan kaçının; belinizi ve karnınızı sıcak tutarak hareket edin.'
+        };
+      } else if (['hiit', 'running', 'strength'].includes(exerciseId) && intensity === 'high') {
+        return {
+          rating: 'caution',
+          statusText: '⚠️ Biyolojik Dikkat: Bedenini Dinle',
+          badgeClass: 'badge-caution',
+          benefit: 'Hafif tempo kardiyo endorfin sağlar ancak yüksek şiddet regl yorgunluğunu ve krampları tetikleyebilir.',
+          tip: 'Ağırlıkları %30-40 düşürmeyi veya süreyi 20-30 dakika ile sınırlamayı düşünebilirsiniz.'
+        };
+      } else {
+        return {
+          rating: 'good',
+          statusText: '✨ Dengeli & İyi Seçim',
+          badgeClass: 'badge-good',
+          benefit: 'Kan dolaşımını canlandırarak halsizliği giderir.',
+          tip: 'Bol su için ve nabzınızı orta düzeyde tutun.'
+        };
+      }
+    }
+
+    // Foliküler Faz Analizi
+    if (isFollicular) {
+      if (['running', 'strength', 'hiit', 'dance', 'cycling'].includes(exerciseId)) {
+        return {
+          rating: 'optimal',
+          statusText: '🚀 Biyolojik Uyum: Zirve Güç Zamanı!',
+          badgeClass: 'badge-optimal',
+          benefit: 'Yükselen östrojen kas onarımını ve glikojen depolanmasını zirveye çıkarır; yağ yakımı en etkilidir.',
+          tip: 'Bugün ağırlıkları artırmak veya yeni hedeflere meydan okumak için harika bir gün!'
+        };
+      } else {
+        return {
+          rating: 'good',
+          statusText: '🌱 Harika Hareket',
+          badgeClass: 'badge-good',
+          benefit: 'Enerjinizi dengeli kullanarak zihinsel odaklanmayı pekiştirir.',
+          tip: 'Vücudunuzun yüksek toparlanma hızından faydalanın.'
+        };
+      }
+    }
+
+    // Ovülasyon Fazı Analizi
+    if (isOvulation) {
+      if (['hiit', 'strength', 'running', 'cycling'].includes(exerciseId)) {
+        return {
+          rating: 'optimal',
+          statusText: '⚡ Maksimum Testosteron & Patlayıcı Kuvvet!',
+          badgeClass: 'badge-optimal',
+          benefit: 'Hormonal zirve sayesinde fiziksel dayanıklılık ve kalori harcaması ayın en yüksek seviyesindedir.',
+          tip: 'Relaksin hormonu eklemleri gevşettiğinden diz ve bilek sakatlanmalarına karşı ısınmayı uzatın.'
+        };
+      } else {
+        return {
+          rating: 'good',
+          statusText: '✨ Canlandırıcı & Güçlü',
+          badgeClass: 'badge-good',
+          benefit: 'Yüksek enerjinizi estetik ve ritmik hareketlerle destekler.',
+          tip: 'Antrenman sonrası bol su ile serinleyin.'
+        };
+      }
+    }
+
+    // Luteal Faz Analizi
+    if (isLuteal) {
+      if (['pilates', 'walking', 'swimming', 'yoga'].includes(exerciseId)) {
+        return {
+          rating: 'optimal',
+          statusText: '🌙 Biyolojik Uyum: PMS ve Ödem Sökücü!',
+          badgeClass: 'badge-optimal',
+          benefit: 'Yükselen progesterona bağlı ödemi lenfatik drenajla atar; kortizolü düşürerek PMS sinirliliğini yatıştırır.',
+          tip: 'Ritmik ve kontrollü nefes alıp vererek merkez bölge kaslarınızı güçlendirin.'
+        };
+      } else if (['hiit', 'strength'].includes(exerciseId) && intensity === 'high') {
+        return {
+          rating: 'caution',
+          statusText: '💡 Nazik Uyarı: Tükenişten Kaçının',
+          badgeClass: 'badge-caution',
+          benefit: 'Efor iyidir ancak vücut bazal ısısı yüksek olduğundan aşırı tükeniş toparlanma süresini uzatabilir.',
+          tip: 'Nabzı aşırı yükseltmek yerine orta tempoda kalmaya özen gösterin.'
+        };
+      } else {
+        return {
+          rating: 'good',
+          statusText: '✨ Dengeleyici Efor',
+          badgeClass: 'badge-good',
+          benefit: 'Duygu durumunu dengeler ve tatlı krizlerini engeller.',
+          tip: 'Antrenmandan sonra magnezyum zengini bir ara öğün harika gelir.'
+        };
+      }
+    }
+
+    return {
+      rating: 'good',
+      statusText: '✨ Sağlıklı Tercih',
+      badgeClass: 'badge-good',
+      benefit: 'Düzenli fiziksel aktivite döngü ritminizi stabilize eder.',
+      tip: 'Bedeninizi dinleyerek hareket edin.'
+    };
+  }
+
+  render() {
+    const todaySummary = this.engine.getTodaySummary();
+    const todayStr = todaySummary.todayStr;
+    const currentPhase = todaySummary.dayStatus.phase || 'follicular';
+    const phaseKey = ['period', 'follicular', 'ovulation', 'luteal'].includes(currentPhase) ? currentPhase : 'follicular';
+    const phaseGuide = CYCLE_FITNESS_GUIDANCE[phaseKey];
+    const streakInfo = this.storage.getExerciseStreak();
+    const todayExercise = this.storage.getExerciseForDay(todayStr);
+    const todayWater = this.storage.getWaterForDay(todayStr);
+    const settings = this.storage.getProfileData().settings || {};
+    const waterTarget = settings.waterTarget || 2250;
+    const waterPercent = Math.min(150, Math.round((todayWater / waterTarget) * 100));
+    const recentExercises = this.storage.getRecentExercises(10);
+    const waterHistory = this.storage.getWeeklyWaterHistory(7);
+    const monthlyStats = this.storage.getMonthlyFitnessStats();
+
+    this.container.innerHTML = `
+      <div class="fitness-view-wrapper">
+        
+        <!-- Üst Başlık & Motivasyon Kahramanı -->
+        <div class="fitness-hero-card" style="--phase-color: ${phaseGuide.color}; --phase-bg: ${phaseGuide.bgColor}; --phase-border: ${phaseGuide.borderColor};">
+          <div class="fhero-badge-row">
+            <span class="fhero-phase-badge">
+              <span class="f-icon">${phaseGuide.icon}</span>
+              <span>${phaseGuide.name}</span>
+            </span>
+            <div class="fhero-streak-pill" title="Arka arkaya hareket edilen gün sayısı">
+              <span class="f-streak-icon">${Icons.flame}</span>
+              <strong>${streakInfo.currentStreak} Günlük Seri</strong>
+            </div>
+          </div>
+
+          <h3 class="fhero-title">Döngü & Fitness Uyumu</h3>
+          <p class="fhero-quote">
+            "${phaseGuide.motivationQuote}"
+          </p>
+
+          <div class="fhero-stats-row">
+            <div class="fhero-stat-box">
+              <span class="fh-label">Bu Ayki Antrenman</span>
+              <strong class="fh-val">${monthlyStats.totalWorkouts} Seans</strong>
+            </div>
+            <div class="fhero-stat-divider"></div>
+            <div class="fhero-stat-box">
+              <span class="fh-label">Toplam Hareket</span>
+              <strong class="fh-val">${monthlyStats.totalMinutes} Dk</strong>
+            </div>
+            <div class="fhero-stat-divider"></div>
+            <div class="fhero-stat-box">
+              <span class="fh-label">Günlük Su</span>
+              <strong class="fh-val" style="color: #0284c7;">${todayWater} / ${waterTarget} ml</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Ana Sekme Seçici: Egzersiz & Hareket / Günlük Su Takibi -->
+        <div class="fitness-tabs-nav">
+          <button type="button" class="ftab-btn ${this.activeSubTab === 'exercise' ? 'active' : ''}" data-subtab="exercise">
+            <span class="ftab-icon">${Icons.activity}</span>
+            <span>Egzersiz & Hareket</span>
+            ${todayExercise ? `<span class="ftab-check-dot">✓</span>` : ''}
+          </button>
+          <button type="button" class="ftab-btn ${this.activeSubTab === 'water' ? 'active' : ''}" data-subtab="water">
+            <span class="ftab-icon">${Icons.waterGlass}</span>
+            <span>Günlük Su Takibi</span>
+            <span class="ftab-water-val">%${waterPercent}</span>
+          </button>
+        </div>
+
+        <!-- ================= SEKME 1: EGZERSİZ & HAREKET MODÜLÜ ================= -->
+        <div class="fitness-pane" id="paneExercise" style="display: ${this.activeSubTab === 'exercise' ? 'block' : 'none'};">
+          
+          <!-- Bugünün Egzersiz Durum Kartı -->
+          <div class="today-workout-status-card">
+            <div class="tw-header">
+              <div class="tw-title-group">
+                <span class="tw-icon-circle">${todayExercise ? '🎉' : '🏃‍♀️'}</span>
+                <div>
+                  <h4 class="tw-title">${todayExercise ? 'Bugünkü Egzersiziniz Kaydedildi' : 'Bugün Bedenini Harekete Geçirdin mi?'}</h4>
+                  <p class="tw-subtitle">${todayExercise ? `${todayExercise.typeName} • ${todayExercise.duration} dakika` : 'Döngü fazına en uygun egzersizi seç ve faydasını incele'}</p>
+                </div>
+              </div>
+              ${todayExercise ? `
+                <button type="button" class="btn-delete-workout" id="btnDeleteTodayWorkout" title="Bugünkü egzersiz kaydını sil">
+                  ${Icons.trash}
+                </button>
+              ` : ''}
+            </div>
+
+            ${todayExercise ? `
+              <div class="logged-workout-details">
+                <div class="lwd-row">
+                  <span class="lwd-badge badge-intensity">${todayExercise.intensityName}</span>
+                  <span class="lwd-badge badge-feel">${todayExercise.feelIcon} ${todayExercise.feelName}</span>
+                  <span class="lwd-time">⏰ ${todayExercise.duration} Dakika</span>
+                </div>
+                ${todayExercise.note ? `<p class="lwd-note">📝 "${todayExercise.note}"</p>` : ''}
+                <div class="lwd-benefit-box">
+                  <span class="lwd-benefit-title">🌸 Döngüye Sağladığı Katkı:</span>
+                  <p class="lwd-benefit-text">${todayExercise.cycleBenefit || 'Biyolojik ritminize uyumlu hareket hormonlarınızı dengeler ve toparlanmayı hızlandırır.'}</p>
+                </div>
+              </div>
+            ` : `
+              <button type="button" class="btn-primary-action btn-open-workout-form" id="btnToggleWorkoutForm">
+                ${Icons.plus} Bugünün Egzersizini Kaydet
+              </button>
+            `}
+          </div>
+
+          <!-- İnteraktif Egzersiz Kayıt Formu (Drawer / Expandable) -->
+          <div class="workout-form-card" id="workoutFormCard" style="display: ${todayExercise ? 'none' : 'block'};">
+            <div class="wfc-header">
+              <h4>${Icons.activity} Egzersiz Kayıt & Döngü Analizi</h4>
+              <span class="wfc-date-badge">${todaySummary.todayStr}</span>
+            </div>
+
+            <!-- 1. Egzersiz Türü Seçici Izgara -->
+            <div class="wfc-section">
+              <label class="wfc-label">1. Egzersiz Türünü Seçin:</label>
+              <div class="exercise-types-grid" id="exerciseTypesGrid">
+                ${EXERCISE_TYPES.map(t => `
+                  <button type="button" class="ex-type-btn ${t.id === this.selectedExerciseType ? 'selected' : ''}" data-type="${t.id}">
+                    <span class="ex-icon">${t.icon}</span>
+                    <span class="ex-name">${t.name}</span>
+                    <span class="ex-badge">${t.badge}</span>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- 2. Süre Seçici -->
+            <div class="wfc-section">
+              <div class="wfc-label-row">
+                <label class="wfc-label">2. Egzersiz Süresi:</label>
+                <span class="wfc-val-display" id="durationDisplay">${this.selectedDuration} Dakika</span>
+              </div>
+              <div class="duration-chips-row" id="durationChipsRow">
+                ${[15, 20, 30, 45, 60, 90].map(dur => `
+                  <button type="button" class="dur-chip ${dur === this.selectedDuration ? 'selected' : ''}" data-dur="${dur}">${dur} dk</button>
+                `).join('')}
+              </div>
+              <div class="custom-dur-input-wrap">
+                <input type="range" min="5" max="120" step="5" value="${this.selectedDuration}" class="duration-slider" id="durationSlider">
+              </div>
+            </div>
+
+            <!-- 3. Egzersiz Niteliği & Yoğunluğu -->
+            <div class="wfc-section">
+              <label class="wfc-label">3. Egzersizin Yoğunluğu & Niteliği:</label>
+              <div class="intensity-grid" id="intensityGrid">
+                ${INTENSITY_LEVELS.map(lvl => `
+                  <button type="button" class="intensity-btn ${lvl.id === this.selectedIntensity ? 'selected' : ''}" data-intensity="${lvl.id}">
+                    <span class="int-icon">${lvl.icon}</span>
+                    <div class="int-info">
+                      <span class="int-name">${lvl.name}</span>
+                      <span class="int-desc">${lvl.desc}</span>
+                    </div>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Anlık Döngüye Katkı & Biyolojik Yönlendirme Paneli -->
+            <div class="cycle-dynamic-analysis-box" id="cycleDynamicAnalysisBox">
+              <!-- Dinamik JavaScript ile render edilir -->
+            </div>
+
+            <!-- 4. Egzersiz Sonrası Hissiyat -->
+            <div class="wfc-section">
+              <label class="wfc-label">4. Egzersiz Sonrası Nasıl Hissettin?</label>
+              <div class="feelings-grid" id="feelingsGrid">
+                ${FEELING_LEVELS.map(f => `
+                  <button type="button" class="feel-btn ${f.id === this.selectedFeel ? 'selected' : ''}" data-feel="${f.id}">
+                    <span class="feel-icon">${f.icon}</span>
+                    <span class="feel-name">${f.name}</span>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- 5. Kişisel Not -->
+            <div class="wfc-section">
+              <label class="wfc-label">5. Not / Antrenman Detayı (İsteğe Bağlı):</label>
+              <input type="text" id="workoutNoteInput" class="form-input" placeholder="Örn: 5 km tempolu, açık havada iyi geldi...">
+            </div>
+
+            <!-- Kaydet Butonu -->
+            <button type="button" class="btn-primary-action btn-save-workout" id="btnSaveWorkout">
+              ${Icons.check} Egzersizi Kaydet & Döngüme Eşle
+            </button>
+          </div>
+
+          <!-- Döngü Fazlarına Göre Egzersiz Rehberi (Bilimsel Akordeon / Kartlar) -->
+          <div class="fitness-guide-section">
+            <div class="fgs-header">
+              <span class="fgs-icon">📚</span>
+              <div>
+                <h4 class="fgs-title">Döngü Fazlarına Göre Hareket Rehberi</h4>
+                <p class="fgs-desc">Hormonlarınızla savaşmayın, onlarla senkronize egzersiz yapın</p>
+              </div>
+            </div>
+
+            <div class="phases-fitness-accordion" id="phasesFitnessAccordion">
+              ${Object.values(CYCLE_FITNESS_GUIDANCE).map(p => {
+                const isCurrent = (p.phaseId === phaseKey);
+                return `
+                  <div class="phase-fitness-card ${isCurrent ? 'current-phase-card' : ''}" style="--p-color: ${p.color};">
+                    <div class="pfc-header">
+                      <div class="pfc-title-group">
+                        <span class="pfc-icon">${p.icon}</span>
+                        <div>
+                          <div class="pfc-title-row">
+                            <h5 class="pfc-name">${p.name}</h5>
+                            ${isCurrent ? `<span class="pfc-current-badge">Şu Anki Evren</span>` : ''}
+                          </div>
+                          <span class="pfc-tag">${p.tag}</span>
+                        </div>
+                      </div>
+                      <span class="pfc-arrow">▼</span>
+                    </div>
+
+                    <div class="pfc-body" style="display: ${isCurrent ? 'block' : 'none'};">
+                      <div class="pfc-info-row">
+                        <strong>Hormonlar:</strong> <span>${p.hormones}</span>
+                      </div>
+                      <div class="pfc-info-row">
+                        <strong>Enerji Durumu:</strong> <span>${p.energy}</span>
+                      </div>
+                      <div class="pfc-info-row">
+                        <strong>Önerilen Egzersizler:</strong>
+                        <div class="pfc-pill-tags">
+                          ${p.recommended.map(r => `<span class="rec-pill">✓ ${r}</span>`).join('')}
+                        </div>
+                      </div>
+                      <div class="pfc-info-row">
+                        <strong>Dikkat Edilmeli:</strong>
+                        <div class="pfc-pill-tags">
+                          ${p.avoid.map(a => `<span class="avoid-pill">✕ ${a}</span>`).join('')}
+                        </div>
+                      </div>
+                      <div class="pfc-benefit-highlight">
+                        <strong>🌸 Döngüye Katkısı:</strong> ${p.cycleBenefit}
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- Son Yapılan Egzersizler Geçmişi -->
+          <div class="recent-workouts-section">
+            <h4 class="rws-title">📋 Egzersiz Geçmişi</h4>
+            ${recentExercises.length > 0 ? `
+              <div class="recent-workouts-list">
+                ${recentExercises.map(ex => {
+                  const typeObj = EXERCISE_TYPES.find(t => t.id === ex.type) || { icon: '🏃‍♀️', name: ex.type };
+                  const intObj = INTENSITY_LEVELS.find(i => i.id === ex.intensity) || { name: 'Normal' };
+                  const feelObj = FEELING_LEVELS.find(f => f.id === ex.feel) || { icon: '✨', name: '' };
+                  return `
+                    <div class="recent-workout-item">
+                      <div class="rw-left">
+                        <span class="rw-icon">${typeObj.icon}</span>
+                        <div class="rw-text">
+                          <strong class="rw-name">${ex.typeName || typeObj.name}</strong>
+                          <span class="rw-meta">${ex.dateStr} • ${ex.duration} dk • ${intObj.name}</span>
+                        </div>
+                      </div>
+                      <div class="rw-right">
+                        <span class="rw-feel" title="${feelObj.name}">${feelObj.icon}</span>
+                        <button type="button" class="btn-del-history-workout" data-date="${ex.dateStr}" title="Bu kaydı sil">
+                          ${Icons.trash}
+                        </button>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            ` : `
+              <div class="empty-state-box">
+                <span class="empty-icon">🧘‍♀️</span>
+                <p>Henüz egzersiz kaydı bulunmuyor. Bugün bir seans kaydederek serinizi başlatın!</p>
+              </div>
+            `}
+          </div>
+
+        </div>
+
+        <!-- ================= SEKME 2: GÜNLÜK SU İÇME MODÜLÜ ================= -->
+        <div class="fitness-pane" id="paneWater" style="display: ${this.activeSubTab === 'water' ? 'block' : 'none'};">
+          
+          <!-- İnteraktif Su Göstergesi & Dalga Kartı -->
+          <div class="water-hero-card">
+            
+            <div class="water-progress-visual">
+              <div class="water-cup-container">
+                <div class="water-wave-fill" style="height: ${Math.min(100, waterPercent)}%;">
+                  <div class="wave wave1"></div>
+                  <div class="wave wave2"></div>
+                </div>
+                <div class="water-cup-overlay-text">
+                  <span class="wcup-percent">%${waterPercent}</span>
+                  <span class="wcup-val">${todayWater} ml</span>
+                  <span class="wcup-target">Hedef: ${waterTarget} ml</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="water-hero-info">
+              ${waterPercent >= 100 ? `
+                <div class="water-congrats-badge">
+                  🎉 Harika! Bugünkü su hedefine ulaştın!
+                </div>
+              ` : `
+                <div class="water-status-text">
+                  Hedefe <strong>${Math.max(0, waterTarget - todayWater)} ml</strong> kaldı.
+                </div>
+              `}
+              <p class="water-subtext">Hücrelerini nemlendir, ödemi at ve krampları yatıştır.</p>
+              
+              <!-- Hızlı Bardak Ekleme Butonları -->
+              <div class="water-quick-buttons-grid">
+                <button type="button" class="btn-water-quick" data-amount="250">
+                  <span class="bwq-icon">🥛</span>
+                  <span class="bwq-title">+250 ml</span>
+                  <span class="bwq-sub">1 Su Bardağı</span>
+                </button>
+                <button type="button" class="btn-water-quick" data-amount="330">
+                  <span class="bwq-icon">☕</span>
+                  <span class="bwq-title">+330 ml</span>
+                  <span class="bwq-sub">Büyük Bardak</span>
+                </button>
+                <button type="button" class="btn-water-quick" data-amount="500">
+                  <span class="bwq-icon">🍶</span>
+                  <span class="bwq-title">+500 ml</span>
+                  <span class="bwq-sub">Yarım Litre</span>
+                </button>
+                <button type="button" class="btn-water-undo" id="btnWaterUndo" title="Son içilen 250 ml'yi geri al">
+                  <span class="bwq-icon">↩️</span>
+                  <span class="bwq-title">-250 ml</span>
+                  <span class="bwq-sub">Geri Al</span>
+                </button>
+              </div>
+
+              <!-- Hedef Değiştirme Satırı -->
+              <div class="water-target-edit-row">
+                <span>Günlük Hedef:</span>
+                <select id="selectWaterTarget" class="form-input water-target-select">
+                  ${[1500, 1750, 2000, 2250, 2500, 3000, 3500].map(val => `
+                    <option value="${val}" ${val === waterTarget ? 'selected' : ''}>${val} ml (${(val/250).toFixed(0)} Bardak)</option>
+                  `).join('')}
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Son 7 Günün Su Tüketim Çubuk Grafiği -->
+          <div class="weekly-water-chart-card">
+            <h4 class="wwc-title">📊 Son 7 Günün Su Dengesi</h4>
+            <div class="wwc-bars-container">
+              ${waterHistory.map(item => `
+                <div class="wwc-bar-col ${item.isToday ? 'wwc-today' : ''}">
+                  <div class="wwc-bar-track">
+                    <div class="wwc-bar-fill ${item.reached ? 'reached' : ''}" style="height: ${Math.min(100, item.percent)}%;"></div>
+                  </div>
+                  <span class="wwc-amount">${item.amount > 0 ? (item.amount >= 1000 ? (item.amount/1000).toFixed(1) + 'L' : item.amount) : '0'}</span>
+                  <span class="wwc-day">${item.dayName}</span>
+                </div>
+              `).join('')}
+            </div>
+            <div class="wwc-legend">
+              <span class="wwc-legend-item"><span class="legend-dot reached-dot"></span> Hedefe Ulaşıldı</span>
+              <span class="wwc-legend-item"><span class="legend-dot pending-dot"></span> Devam Eden</span>
+            </div>
+          </div>
+
+          <!-- Döngü Fazına Özel Su Tavsiyesi Kartı -->
+          <div class="cycle-water-card" style="--phase-color: ${phaseGuide.color}; --phase-bg: ${phaseGuide.bgColor};">
+            <div class="cwc-header">
+              <span class="cwc-icon">${WATER_CYCLE_BENEFITS[phaseKey]?.icon || '💧'}</span>
+              <h4>${WATER_CYCLE_BENEFITS[phaseKey]?.title || 'Döngüde Su Tüketimi'}</h4>
+            </div>
+            <p class="cwc-desc">
+              ${WATER_CYCLE_BENEFITS[phaseKey]?.desc || 'Yeterli su tüketimi hormon salınımı ve pelvik dolaşım için hayati önem taşır.'}
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+    this.attachEvents();
+    this.updateDynamicAnalysis();
+  }
+
+  attachEvents() {
+    // Sekme Geçişi: Egzersiz / Su
+    this.container.querySelectorAll('.fitness-tabs-nav .ftab-btn').forEach(btn => {
+      btn.onclick = () => {
+        this.activeSubTab = btn.dataset.subtab;
+        this.render();
+      };
+    });
+
+    // Egzersiz Türü Seçimi
+    const typeBtns = this.container.querySelectorAll('.exercise-types-grid .ex-type-btn');
+    typeBtns.forEach(btn => {
+      btn.onclick = () => {
+        typeBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        this.selectedExerciseType = btn.dataset.type;
+        this.updateDynamicAnalysis();
+      };
+    });
+
+    // Süre Çipleri
+    const durChips = this.container.querySelectorAll('.duration-chips-row .dur-chip');
+    const durSlider = this.container.querySelector('#durationSlider');
+    const durDisplay = this.container.querySelector('#durationDisplay');
+
+    durChips.forEach(chip => {
+      chip.onclick = () => {
+        durChips.forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        this.selectedDuration = parseInt(chip.dataset.dur, 10);
+        if (durSlider) durSlider.value = this.selectedDuration;
+        if (durDisplay) durDisplay.textContent = `${this.selectedDuration} Dakika`;
+        this.updateDynamicAnalysis();
+      };
+    });
+
+    if (durSlider) {
+      durSlider.oninput = (e) => {
+        this.selectedDuration = parseInt(e.target.value, 10);
+        durChips.forEach(c => c.classList.toggle('selected', parseInt(c.dataset.dur, 10) === this.selectedDuration));
+        if (durDisplay) durDisplay.textContent = `${this.selectedDuration} Dakika`;
+        this.updateDynamicAnalysis();
+      };
+    }
+
+    // Yoğunluk Seçimi
+    const intensityBtns = this.container.querySelectorAll('.intensity-grid .intensity-btn');
+    intensityBtns.forEach(btn => {
+      btn.onclick = () => {
+        intensityBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        this.selectedIntensity = btn.dataset.intensity;
+        this.updateDynamicAnalysis();
+      };
+    });
+
+    // Hissiyat Seçimi
+    const feelBtns = this.container.querySelectorAll('.feelings-grid .feel-btn');
+    feelBtns.forEach(btn => {
+      btn.onclick = () => {
+        feelBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        this.selectedFeel = btn.dataset.feel;
+      };
+    });
+
+    // Egzersiz Kaydet Butonu
+    const btnSaveWorkout = this.container.querySelector('#btnSaveWorkout');
+    if (btnSaveWorkout) {
+      btnSaveWorkout.onclick = () => {
+        const todayStr = this.engine.getTodaySummary().todayStr;
+        const noteInput = this.container.querySelector('#workoutNoteInput');
+        const noteVal = noteInput ? noteInput.value.trim() : '';
+
+        const typeObj = EXERCISE_TYPES.find(t => t.id === this.selectedExerciseType) || { name: 'Egzersiz' };
+        const intObj = INTENSITY_LEVELS.find(i => i.id === this.selectedIntensity) || { name: 'Orta' };
+        const feelObj = FEELING_LEVELS.find(f => f.id === this.selectedFeel) || { name: 'İyi', icon: '✨' };
+
+        const currentPhase = this.engine.getTodaySummary().dayStatus.phase || 'follicular';
+        const phaseKey = ['period', 'follicular', 'ovulation', 'luteal'].includes(currentPhase) ? currentPhase : 'follicular';
+        const analysis = FitnessComponent.analyzeExerciseCompatibility(phaseKey, this.selectedExerciseType, this.selectedIntensity);
+
+        const workoutRecord = {
+          type: this.selectedExerciseType,
+          typeName: typeObj.name,
+          duration: this.selectedDuration,
+          intensity: this.selectedIntensity,
+          intensityName: intObj.name,
+          feel: this.selectedFeel,
+          feelName: feelObj.name,
+          feelIcon: feelObj.icon,
+          note: noteVal,
+          phaseAtTime: phaseKey,
+          cycleBenefit: analysis.benefit
+        };
+
+        this.storage.logExercise(todayStr, workoutRecord);
+        alert(`🎉 Harika! ${this.selectedDuration} dakikalık "${typeObj.name}" egzersiziniz döngünüze işlendi.`);
+        this.render();
+        if (this.onDataChanged) this.onDataChanged();
+      };
+    }
+
+    // Bugünün Egzersizini Silme Butonu
+    const btnDeleteWorkout = this.container.querySelector('#btnDeleteTodayWorkout');
+    if (btnDeleteWorkout) {
+      btnDeleteWorkout.onclick = () => {
+        if (confirm('Bugünkü egzersiz kaydını silmek istediğinize emin misiniz?')) {
+          const todayStr = this.engine.getTodaySummary().todayStr;
+          this.storage.deleteExercise(todayStr);
+          this.render();
+          if (this.onDataChanged) this.onDataChanged();
+        }
+      };
+    }
+
+    // Geçmişteki Egzersizi Silme
+    this.container.querySelectorAll('.btn-del-history-workout').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const dateStr = btn.dataset.date;
+        if (confirm(`${dateStr} tarihli egzersiz kaydı silinsin mi?`)) {
+          this.storage.deleteExercise(dateStr);
+          this.render();
+          if (this.onDataChanged) this.onDataChanged();
+        }
+      };
+    });
+
+    // Formu Aç/Kapat Butonu
+    const btnToggleForm = this.container.querySelector('#btnToggleWorkoutForm');
+    const workoutFormCard = this.container.querySelector('#workoutFormCard');
+    if (btnToggleForm && workoutFormCard) {
+      btnToggleForm.onclick = () => {
+        workoutFormCard.style.display = workoutFormCard.style.display === 'none' ? 'block' : 'none';
+        workoutFormCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      };
+    }
+
+    // Rehber Akordeon Başlıkları
+    this.container.querySelectorAll('.phase-fitness-card .pfc-header').forEach(hdr => {
+      hdr.onclick = () => {
+        const card = hdr.closest('.phase-fitness-card');
+        const body = card.querySelector('.pfc-body');
+        const isShown = (body.style.display === 'block');
+        body.style.display = isShown ? 'none' : 'block';
+        card.querySelector('.pfc-arrow').textContent = isShown ? '▼' : '▲';
+      };
+    });
+
+    // Su Hızlı Ekleme Butonları
+    this.container.querySelectorAll('.btn-water-quick').forEach(btn => {
+      btn.onclick = () => {
+        const amount = parseInt(btn.dataset.amount, 10);
+        const todayStr = this.engine.getTodaySummary().todayStr;
+        this.storage.logWater(todayStr, amount);
+        this.render();
+        if (this.onDataChanged) this.onDataChanged();
+      };
+    });
+
+    // Su Geri Al Butonu
+    const btnWaterUndo = this.container.querySelector('#btnWaterUndo');
+    if (btnWaterUndo) {
+      btnWaterUndo.onclick = () => {
+        const todayStr = this.engine.getTodaySummary().todayStr;
+        this.storage.logWater(todayStr, -250);
+        this.render();
+        if (this.onDataChanged) this.onDataChanged();
+      };
+    }
+
+    // Su Hedefi Değiştirme
+    const selectTarget = this.container.querySelector('#selectWaterTarget');
+    if (selectTarget) {
+      selectTarget.onchange = (e) => {
+        const newTarget = parseInt(e.target.value, 10);
+        this.storage.updateSettings({ waterTarget: newTarget });
+        this.render();
+        if (this.onDataChanged) this.onDataChanged();
+      };
+    }
+  }
+
+  // Dinamik Biyolojik Uyum Paneli Güncelleyici
+  updateDynamicAnalysis() {
+    const analysisBox = this.container.querySelector('#cycleDynamicAnalysisBox');
+    if (!analysisBox) return;
+
+    const currentPhase = this.engine.getTodaySummary().dayStatus.phase || 'follicular';
+    const phaseKey = ['period', 'follicular', 'ovulation', 'luteal'].includes(currentPhase) ? currentPhase : 'follicular';
+    const analysis = FitnessComponent.analyzeExerciseCompatibility(phaseKey, this.selectedExerciseType, this.selectedIntensity);
+    const typeObj = EXERCISE_TYPES.find(t => t.id === this.selectedExerciseType) || { name: 'Egzersiz' };
+    const estCalories = Math.round((typeObj.calPerHour || 300) * (this.selectedDuration / 60));
+
+    analysisBox.innerHTML = `
+      <div class="cda-header-row">
+        <span class="cda-status-pill ${analysis.badgeClass}">${analysis.statusText}</span>
+        <span class="cda-calories-pill">🔥 Yaklaşık ${estCalories} kcal</span>
+      </div>
+      <div class="cda-body">
+        <p class="cda-benefit"><strong>🌸 Döngüye Katkısı:</strong> ${analysis.benefit}</p>
+        <p class="cda-tip"><strong>💡 Beden İpucu:</strong> ${analysis.tip}</p>
+      </div>
+    `;
+  }
+}
+
+
+/**
  * Döngüm - Ana Mobil Uygulama Yöneticisi
  * Sekme navigasyonu, Bugün (Döngü Çarkı), Çoklu Hesap ve Profil Yönetimi,
  * Sunucusuz Çevrimdışı Çalışma (PWA) ve PIN Güvenlik Sistemi
  */
+
 
 
 
@@ -6236,6 +8917,10 @@ class DongumApp {
         <button type="button" class="nav-tab-btn" data-tab="calendar">
           <span class="nav-icon">${Icons.calendar}</span>
           <span class="nav-label">Takvim</span>
+        </button>
+        <button type="button" class="nav-tab-btn" data-tab="fitness">
+          <span class="nav-icon">${Icons.activity}</span>
+          <span class="nav-label">Egzersiz & Su</span>
         </button>
         <button type="button" class="nav-tab-btn" data-tab="analytics">
           <span class="nav-icon">${Icons.chart}</span>
@@ -7268,6 +9953,8 @@ class DongumApp {
       this.renderHomeTab(main);
     } else if (this.currentTab === 'calendar') {
       this.renderCalendarTab(main);
+    } else if (this.currentTab === 'fitness') {
+      this.renderFitnessTab(main);
     } else if (this.currentTab === 'analytics') {
       this.renderAnalyticsTab(main);
     } else if (this.currentTab === 'settings') {
@@ -7395,6 +10082,16 @@ class DongumApp {
       ovulation: `${fertileStart} - ${fertileEnd}. Gün (${ovulationDay}. Gün Zirve)`,
       luteal: `${lutealStart} - ${cycleTotal}. Gün`
     };
+
+    // Günlük su ve egzersiz durumu
+    const todayWater = this.storage.getWaterForDay(summary.todayStr);
+    const userSettings = this.storage.getProfileData().settings || {};
+    const waterTarget = userSettings.waterTarget || 2250;
+    const waterPercent = Math.min(150, Math.round((todayWater / waterTarget) * 100));
+    const todayExercise = this.storage.getExerciseForDay(summary.todayStr);
+    const streakInfo = this.storage.getExerciseStreak();
+    const phaseFitness = (typeof CYCLE_FITNESS_GUIDANCE !== 'undefined' && CYCLE_FITNESS_GUIDANCE[activePhaseKey]) ? CYCLE_FITNESS_GUIDANCE[activePhaseKey] : null;
+    const phaseWater = (typeof WATER_CYCLE_BENEFITS !== 'undefined' && WATER_CYCLE_BENEFITS[activePhaseKey]) ? WATER_CYCLE_BENEFITS[activePhaseKey] : null;
 
     container.innerHTML = `
       <div class="home-view-wrapper">
@@ -7549,6 +10246,77 @@ class DongumApp {
           </div>
         </div>
 
+        <!-- 1. GÜNLÜK SU İÇME TAKİP KARTI (Home Hydration Widget) -->
+        <div class="home-widget-card home-water-card">
+          <div class="hwc-header">
+            <div class="hwc-title-group">
+              <span class="hwc-icon" style="color: #0284c7;">💧</span>
+              <div>
+                <h4 class="hwc-title">Günlük Su Takibi</h4>
+                <p class="hwc-sub">${todayWater} / ${waterTarget} ml (%${waterPercent} tamamlandı)</p>
+              </div>
+            </div>
+            <button type="button" class="hwc-more-btn" id="btnHomeGoWaterCenter" title="Tüm Su Takip Merkezini Aç">
+              Detay →
+            </button>
+          </div>
+
+          <div class="home-water-bar-wrap">
+            <div class="home-water-bar-fill" style="width: ${Math.min(100, waterPercent)}%;"></div>
+          </div>
+
+          ${phaseWater ? `
+            <p class="hwc-tip-text">
+              <strong>${phaseWater.icon} ${phaseWater.title}:</strong> ${phaseWater.desc}
+            </p>
+          ` : ''}
+
+          <div class="home-water-actions">
+            <button type="button" class="btn-home-water-add" data-delta="250" id="btnHomeWaterAdd250">
+              +250 ml (Bardak)
+            </button>
+            <button type="button" class="btn-home-water-add" data-delta="500" id="btnHomeWaterAdd500">
+              +500 ml (Şişe)
+            </button>
+            <button type="button" class="btn-home-water-undo" id="btnHomeWaterUndo" title="Son 250 ml'yi geri al">
+              -250 ml
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. DÖNGÜ & EGZERSİZ TAKİP KARTI (Home Fitness Widget) -->
+        <div class="home-widget-card home-fitness-card">
+          <div class="hwc-header">
+            <div class="hwc-title-group">
+              <span class="hwc-icon" style="color: #10b981;">🏃‍♀️</span>
+              <div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <h4 class="hwc-title">Döngü & Egzersiz</h4>
+                  <span class="hwc-streak-badge">${Icons.flame} ${streakInfo.currentStreak} Gün Seri</span>
+                </div>
+                <p class="hwc-sub">
+                  ${todayExercise 
+                    ? `Bugün: ${todayExercise.typeName} • ${todayExercise.duration} dk (${todayExercise.feelName || 'İyi'})` 
+                    : (phaseFitness ? `Öneri: ${phaseFitness.recommended.slice(0, 2).join(', ')}` : 'Günün hareketini kaydet')}
+                </p>
+              </div>
+            </div>
+            <button type="button" class="hwc-more-btn" id="btnHomeGoFitness" title="Egzersiz & Su Merkezine Git">
+              ${todayExercise ? 'İncele →' : '+ Ekle'}
+            </button>
+          </div>
+
+          ${todayExercise ? `
+            <div class="hwc-logged-badge">
+              <span>🌸 <strong>Döngüye Katkısı:</strong> ${todayExercise.cycleBenefit || 'Kasları rahatlatır ve hormonları dengeler.'}</span>
+            </div>
+          ` : (phaseFitness ? `
+            <div class="hwc-quote-box">
+              <p>"${phaseFitness.motivationQuote}"</p>
+            </div>
+          ` : '')}
+        </div>
+
         <!-- Hızlı Gün İnceleme & Semptom Ekleme Butonu -->
         <div class="home-bottom-actions">
           <button type="button" class="btn-log-symptoms" id="btnHomeLogToday">
@@ -7657,6 +10425,54 @@ class DongumApp {
             this.calendarComp.goToDate(summary.todayStr);
           }
         }, 100);
+      };
+    }
+
+    // Ana Ekran Su Ekleme Butonları
+    const btnWaterAdd250 = container.querySelector('#btnHomeWaterAdd250');
+    const btnWaterAdd500 = container.querySelector('#btnHomeWaterAdd500');
+    const btnWaterUndo = container.querySelector('#btnHomeWaterUndo');
+    const btnGoWaterCenter = container.querySelector('#btnHomeGoWaterCenter');
+    const btnGoFitness = container.querySelector('#btnHomeGoFitness');
+
+    if (btnWaterAdd250) {
+      btnWaterAdd250.onclick = () => {
+        this.storage.logWater(summary.todayStr, 250);
+        this.renderHomeTab(container);
+      };
+    }
+    if (btnWaterAdd500) {
+      btnWaterAdd500.onclick = () => {
+        this.storage.logWater(summary.todayStr, 500);
+        this.renderHomeTab(container);
+      };
+    }
+    if (btnWaterUndo) {
+      btnWaterUndo.onclick = () => {
+        this.storage.logWater(summary.todayStr, -250);
+        this.renderHomeTab(container);
+      };
+    }
+    if (btnGoWaterCenter) {
+      btnGoWaterCenter.onclick = () => {
+        this.switchTab('fitness');
+        setTimeout(() => {
+          if (this.fitnessComp) {
+            this.fitnessComp.activeSubTab = 'water';
+            this.fitnessComp.render();
+          }
+        }, 50);
+      };
+    }
+    if (btnGoFitness) {
+      btnGoFitness.onclick = () => {
+        this.switchTab('fitness');
+        setTimeout(() => {
+          if (this.fitnessComp) {
+            this.fitnessComp.activeSubTab = 'exercise';
+            this.fitnessComp.render();
+          }
+        }, 50);
       };
     }
 
@@ -7795,6 +10611,16 @@ class DongumApp {
       this.refreshAll(false);
     });
     this.calendarComp.render();
+  }
+
+  // ================= 3. EGZERSİZ & SU TAKİP SEKMESİ =================
+  renderFitnessTab(container) {
+    container.innerHTML = `<div id="fitnessMount"></div>`;
+    const mount = container.querySelector('#fitnessMount');
+    this.fitnessComp = new FitnessComponent(mount, this.engine, this.storage, () => {
+      this.refreshAll(false);
+    });
+    this.fitnessComp.render();
   }
 
   // ================= 3. ANALİZ SEKMESİ =================
@@ -7937,6 +10763,31 @@ class DongumApp {
           </div>
         </div>
 
+        <!-- Egzersiz & Günlük Su Hedefleri -->
+        <div class="settings-box">
+          <div class="settings-box-header">
+            <span class="box-icon" style="color: #0284c7;">${Icons.activity}</span>
+            <div class="box-text">
+              <h3>Egzersiz & Su Takip Tercihleri</h3>
+              <p>Günlük hidrasyon ve haftalık hareket hedeflerinizi belirleyin</p>
+            </div>
+          </div>
+
+          <div class="setting-input-row">
+            <label>Günlük Su Tüketim Hedefi (ml):</label>
+            <input type="number" id="settingWaterTarget" value="${settings.waterTarget || 2250}" step="250" min="1000" max="5000" class="form-input">
+          </div>
+
+          <div class="setting-input-row">
+            <label>Haftalık Egzersiz Hedefi (Gün):</label>
+            <input type="number" id="settingExerciseGoal" value="${settings.exerciseGoalDays || 3}" min="1" max="7" class="form-input">
+          </div>
+
+          <button type="button" class="btn-save-settings" id="btnSaveFitnessSettings" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+            ${Icons.check} Egzersiz & Su Tercihlerini Kaydet
+          </button>
+        </div>
+
         <!-- Veri Yedekleme ve Gizlilik (Export / Import) -->
         <div class="settings-box">
           <div class="settings-box-header">
@@ -8018,6 +10869,21 @@ class DongumApp {
         });
 
         alert('Döngü parametreleriniz başarıyla kaydedildi!');
+        this.refreshAll();
+      };
+    }
+
+    // Egzersiz ve Su Ayarlarını Kaydet
+    const btnSaveFit = container.querySelector('#btnSaveFitnessSettings');
+    if (btnSaveFit) {
+      btnSaveFit.onclick = () => {
+        const wTarget = parseInt(container.querySelector('#settingWaterTarget').value, 10) || 2250;
+        const eGoal = parseInt(container.querySelector('#settingExerciseGoal').value, 10) || 3;
+        this.storage.updateSettings({
+          waterTarget: wTarget,
+          exerciseGoalDays: eGoal
+        });
+        alert('Egzersiz ve su hedefleriniz başarıyla kaydedildi!');
         this.refreshAll();
       };
     }
