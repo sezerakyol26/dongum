@@ -4,7 +4,7 @@
  * telefonun hafızasından %100 kesintisiz açılmasını sağlar.
  */
 
-const CACHE_NAME = 'dongum-pwa-v21';
+const CACHE_NAME = 'dongum-pwa-v23';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -104,4 +104,50 @@ self.addEventListener('fetch', (event) => {
       });
     })
   );
+});
+
+// 4. Bildirime Tıklama (Notification Click): Uygulamayı öne getir veya aç
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  const targetUrl = './index.html';
+
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      // Zaten açık bir sekme/pencere varsa onu odakla
+      for (const client of clientList) {
+        if ('focus' in client) {
+          if (event.notification.data && event.notification.data.tab) {
+            client.postMessage({ type: 'NAVIGATE_TAB', tab: event.notification.data.tab });
+          }
+          return client.focus();
+        }
+      }
+      // Açık sekme yoksa yeni pencere aç
+      if (self.clients.openWindow) {
+        return self.clients.openWindow(targetUrl);
+      }
+    })
+  );
+});
+
+// 5. Arka Plan Push Desteği (İleride Harici Sunucu / Web Push için Hazır)
+self.addEventListener('push', (event) => {
+  let data = {};
+  if (event.data) {
+    try {
+      data = event.data.json();
+    } catch (e) {
+      data = { title: 'Döngüm', body: event.data.text() };
+    }
+  }
+  const title = data.title || '🌸 Döngüm Hatırlatması';
+  const options = {
+    body: data.body || 'Döngünüzle ilgili yeni bir hatırlatmanız var.',
+    icon: './apple-touch-icon.png',
+    badge: './assets/logo-192.png',
+    vibrate: [100, 50, 100],
+    data: data.data || { url: './index.html' }
+  };
+  event.waitUntil(self.registration.showNotification(title, options));
 });
