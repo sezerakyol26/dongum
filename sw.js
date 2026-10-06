@@ -5,7 +5,7 @@
  * - Su İçme, Gün Ortası Ruh Hali ve Döngü Faz bildirimleri
  */
 
-const CACHE_NAME = 'dongum-pwa-v27';
+const CACHE_NAME = 'dongum-pwa-v29';
 const NOTIF_CACHE_NAME = 'dongum-notification-store-v1';
 const NOTIF_DATA_URL = 'https://dongum.internal/notification-state.json';
 
@@ -177,18 +177,73 @@ self.addEventListener('sync', (event) => {
   }
 });
 
-// 8. Uygulama ile Service Worker Arası Mesajlaşma (Sync Payload & Tetikleme)
+// 8. Uygulama ile Service Worker Arası Mesajlaşma (Sync Payload, Schedule & Tetikleme)
 self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SYNC_NOTIFICATION_PAYLOAD') {
+  if (!event.data) return;
+
+  if (event.data.type === 'SYNC_NOTIFICATION_PAYLOAD') {
     event.waitUntil(
       saveStoredNotificationPayload(event.data.payload).then(() => {
         return evaluateBackgroundReminders();
       })
     );
-  } else if (event.data && event.data.type === 'PING_EVALUATE') {
+  } else if (event.data.type === 'PING_EVALUATE') {
     event.waitUntil(evaluateBackgroundReminders());
+  } else if (event.data.type === 'SCHEDULE_TEST_NOTIFICATION') {
+    const delayMs = (event.data.delaySeconds || 5) * 1000;
+    event.waitUntil(
+      new Promise((resolve) => {
+        setTimeout(async () => {
+          try {
+            await self.registration.showNotification('🌸 Döngüm - Kilit Ekranı / Arka Plan Testi', {
+              body: 'Tebrikler! Döngüm bildirim sistemi telefonunuz kilitliyken ve uygulama kapalıyken başarıyla çalıştı 🎉',
+              icon: './apple-touch-icon.png',
+              badge: './assets/logo-192.png',
+              tag: 'dongum_bg_test_' + Date.now(),
+              renotify: true,
+              vibrate: [200, 100, 200],
+              data: { tab: 'home' }
+            });
+          } catch (e) {
+            console.warn('[SW] Arka plan test bildirimi gösterilemedi:', e);
+          }
+          resolve();
+        }, delayMs);
+      })
+    );
+  } else if (event.data.type === 'SCHEDULE_NOTIFICATIONS') {
+    event.waitUntil(scheduleUpcomingNotificationsWithTriggers(event.data.notifications));
   }
 });
+
+// Gelecekteki bildirimleri Chromium TimestampTrigger ile işletim sistemi düzeyinde planlama
+async function scheduleUpcomingNotificationsWithTriggers(notifications) {
+  if (!Array.isArray(notifications)) return;
+  const supportsTriggers = ('showTrigger' in Notification.prototype) || (typeof self !== 'undefined' && 'TimestampTrigger' in self);
+
+  for (const notif of notifications) {
+    if (!notif.timestamp || notif.timestamp <= Date.now()) continue;
+
+    const options = {
+      body: notif.body || '',
+      icon: './apple-touch-icon.png',
+      badge: './assets/logo-192.png',
+      tag: notif.tag || ('dongum_trigger_' + notif.timestamp),
+      renotify: true,
+      vibrate: [150, 80, 150],
+      data: notif.data || { tab: 'home' }
+    };
+
+    if (supportsTriggers && typeof TimestampTrigger !== 'undefined') {
+      try {
+        options.showTrigger = new TimestampTrigger(notif.timestamp);
+        await self.registration.showNotification(notif.title, options);
+      } catch (err) {
+        // Cihaz kısıtlaması varsa sessizce devam et
+      }
+    }
+  }
+}
 
 // =========================================================================
 // ARKA PLAN BİLDİRİM DEPOLAMA VE DEĞERLENDİRME MANTIĞI

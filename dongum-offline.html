@@ -4898,114 +4898,611 @@ body.dark-theme .hwc-streak-badge {
   font-style: italic;
 }
 
-/* ================= TAKVİM GÜN MODALI İÇİ STİLLER ================= */
-.day-fitness-water-section {
+/* ================= TAKVİM GÜN MODALI İÇİ ZENGİN SU & EGZERSİZ STİLLERİ ================= */
+.section-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.mood-selection-counter {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--primary-border);
+}
+
+/* 1. Detaylı Su Kartı */
+.cal-water-detail-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.cal-water-percent-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.1);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.cal-water-percent-badge.goal-reached {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.cal-water-card {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.05) 0%, rgba(56, 189, 248, 0.08) 100%);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cal-water-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cal-water-metric {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cal-water-cup-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.cal-water-numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.cal-water-amount {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0284c7;
+}
+
+.cal-water-target-label {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.cal-water-status-note {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.cal-water-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(2, 132, 199, 0.15);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.cal-water-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.cal-water-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.btn-cal-water {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 7px 4px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  background: var(--bg-surface);
+  border: 1px solid rgba(2, 132, 199, 0.25);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-cal-water:active {
+  transform: scale(0.96);
+  background: rgba(2, 132, 199, 0.12);
+}
+
+.btn-cal-water-sub {
+  color: #e11d48;
+  border-color: rgba(225, 29, 72, 0.25);
+}
+
+.btn-cal-water-zero {
+  color: var(--text-muted);
+}
+
+.cal-water-custom-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(2, 132, 199, 0.2);
+  gap: 8px;
+}
+
+.cwcb-label {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.cwcb-input-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cal-water-input {
+  width: 85px;
+  padding: 4px 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-align: right;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--text-main);
+}
+
+.cwcb-unit {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.btn-cal-water-apply {
+  padding: 4px 10px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  background: #0284c7;
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+/* 2. Detaylı Egzersiz Bölümü & Kartı */
+.cal-exercise-detail-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.cal-ex-logged-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.cal-logged-workout-card {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.day-modal-water-row {
+.clw-top {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: 10px 12px;
-  background: var(--bg-input);
-  border-radius: var(--radius-md);
-}
-
-.dmw-info {
-  display: flex;
-  align-items: center;
   gap: 8px;
 }
 
-.dmw-icon {
-  font-size: 1.25rem;
+.clw-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.dmw-title {
-  font-size: 0.78rem;
+.clw-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.clw-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.clw-meta {
+  font-size: 0.72rem;
   color: var(--text-secondary);
   display: block;
 }
 
-.dmw-amount {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: #0284c7;
-}
-
-.dmw-controls {
+.clw-actions {
   display: flex;
+  align-items: center;
   gap: 6px;
 }
 
-.btn-dm-water {
-  padding: 4px 10px;
-  font-size: 0.74rem;
-  font-weight: 700;
+.btn-clw-edit {
   background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.btn-clw-delete {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.clw-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.clw-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.clw-badge.badge-feel {
+  background: rgba(245, 158, 11, 0.1);
+  color: #b45309;
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.clw-badge.badge-intensity {
+  background: rgba(16, 185, 129, 0.1);
+  color: #047857;
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.clw-badge.badge-calories {
+  background: rgba(239, 68, 68, 0.1);
+  color: #b91c1c;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.clw-note {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 4px 8px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+}
+
+.clw-benefit-box {
+  background: rgba(244, 63, 94, 0.05);
+  border: 1px solid rgba(244, 63, 94, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+}
+
+.clw-benefit-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.clw-benefit-text {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* İnteraktif Egzersiz Kayıt Formu */
+.cal-exercise-form-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.cefc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cefc-header h5 {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.btn-cefc-cancel {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.cefc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cefc-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.cefc-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cefc-dur-val {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.cefc-types-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.cefc-type-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.cefc-type-btn.selected {
+  background: rgba(244, 63, 94, 0.08);
+  border-color: var(--primary);
+}
+
+.cet-icon {
+  font-size: 1.2rem;
+}
+
+.cet-name {
+  font-size: 0.74rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.cet-badge {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.cefc-duration-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cefc-dur-chip {
+  padding: 4px 10px;
+  font-size: 0.73rem;
+  font-weight: 600;
+  background: var(--bg-input);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
   cursor: pointer;
 }
 
-.btn-dm-water-add {
-  background: #0284c7;
+.cefc-dur-chip.selected {
+  background: var(--primary);
   color: #ffffff;
-  border-color: #0284c7;
+  border-color: var(--primary);
 }
 
-.day-modal-exercise-row {
+.cefc-slider {
+  width: 100%;
+  accent-color: var(--primary);
+  margin-top: 4px;
+}
+
+.cefc-intensity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.cefc-intensity-btn {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 12px;
+  text-align: center;
+  padding: 8px 6px;
   background: var(--bg-input);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-.dme-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.cefc-intensity-btn.selected {
+  background: rgba(244, 63, 94, 0.08);
+  border-color: var(--primary);
 }
 
-.dme-icon {
-  font-size: 1.25rem;
+.cil-icon {
+  font-size: 0.9rem;
+  margin-bottom: 2px;
 }
 
-.dme-title {
-  font-size: 0.82rem;
+.cil-name {
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--text-main);
   display: block;
 }
 
-.dme-desc {
-  font-size: 0.72rem;
+.cil-desc {
+  font-size: 0.62rem;
   color: var(--text-muted);
+  line-height: 1.2;
 }
 
-.btn-dm-del-exercise {
-  background: none;
-  border: none;
-  color: var(--danger);
-  cursor: pointer;
-  padding: 4px;
+.cefc-feedback-box {
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.btn-dm-add-exercise {
-  padding: 4px 12px;
+.cfb-calorie-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 0.74rem;
+  color: var(--text-secondary);
+}
+
+.cfb-calorie-row strong {
+  color: #e11d48;
+}
+
+.cal-ex-compatibility-box {
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  margin-top: 4px;
+}
+
+.cal-ex-compatibility-box.badge-optimal {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.cal-ex-compatibility-box.badge-good {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.cal-ex-compatibility-box.badge-caution {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.cec-status {
+  font-size: 0.72rem;
   font-weight: 700;
-  background: var(--primary);
-  color: #ffffff;
-  border: none;
+  color: var(--text-main);
+  display: block;
+}
+
+.cec-desc {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  margin: 2px 0 0 0;
+  line-height: 1.35;
+}
+
+.cefc-feelings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.cefc-feel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 4px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   cursor: pointer;
+  transition: var(--transition);
+}
+
+.cefc-feel-btn.selected {
+  background: rgba(244, 63, 94, 0.08);
+  border-color: var(--primary);
+}
+
+.cfl-icon {
+  font-size: 0.85rem;
+}
+
+.cfl-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.btn-save-cefc-workout {
+  margin-top: 6px;
+  width: 100%;
+  justify-content: center;
+  padding: 10px;
+  font-size: 0.8rem;
 }
 
 /* ==========================================================================
@@ -7228,13 +7725,227 @@ class NotificationManager {
         if (document.visibilityState === 'visible') {
           this.syncStateFromServiceWorker();
           this.evaluateSmartReminders();
+        } else if (document.visibilityState === 'hidden') {
+          // Uygulama arka plana geçtiğinde önümüzdeki 24 saatin bildirimlerini işletim sistemi alarmına yaz
+          this.scheduleUpcomingBackgroundNotifications();
         }
       });
       window.addEventListener('focus', () => {
         this.syncStateFromServiceWorker();
         this.evaluateSmartReminders();
       });
+      window.addEventListener('pagehide', () => {
+        this.scheduleUpcomingBackgroundNotifications();
+      });
+      window.addEventListener('beforeunload', () => {
+        this.scheduleUpcomingBackgroundNotifications();
+      });
     }
+  }
+
+  // 5 Saniye Sonra Kilit Ekranı / Arka Plan Test Bildirimi Kur
+  async scheduleDelayedBackgroundTest(delaySeconds = 5) {
+    const perm = NotificationManager.getPermissionStatus();
+    if (perm !== 'granted') {
+      const req = await this.requestPermission();
+      if (!req.success) {
+        return {
+          success: false,
+          message: 'Bildirim izni verilmedi. Lütfen önce tarayıcı bildirim iznini açın.'
+        };
+      }
+    }
+
+    if (!('serviceWorker' in navigator)) {
+      return {
+        success: false,
+        message: 'Tarayıcınız Service Worker desteği sunmuyor.'
+      };
+    }
+
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      if (reg.active) {
+        reg.active.postMessage({
+          type: 'SCHEDULE_TEST_NOTIFICATION',
+          delaySeconds: delaySeconds
+        });
+        return {
+          success: true,
+          message: `Arka plan alarmı kuruldu! Lütfen hemen şimdi uygulamayı kapatın veya telefonunuzu kilitleyin (${delaySeconds} saniye içinde gelecek).`
+        };
+      }
+    } catch (e) {
+      console.warn('Delayed test schedule hatası:', e);
+    }
+
+    return {
+      success: false,
+      message: 'Service Worker aktifleşirken bir sorun oluştu.'
+    };
+  }
+
+  // Önümüzdeki 24 Saat İçin Gelecek Hatırlatıcıları Planla (TimestampTrigger & SW Kuyruğu)
+  async scheduleUpcomingBackgroundNotifications() {
+    if (!NotificationManager.isSupported() || Notification.permission !== 'granted') return;
+    if (!('serviceWorker' in navigator)) return;
+
+    try {
+      const profileData = this.storage.getProfileData();
+      const settings = profileData.settings?.notificationSettings || {};
+      if (settings.enabled === false || profileData.settings?.notificationsEnabled === false) return;
+
+      const summary = this.engine.getTodaySummary();
+      const now = new Date();
+      const nowMs = now.getTime();
+      const todayStr = CycleEngine.formatDateStr(now);
+      const todayDayData = profileData.days?.[todayStr] || {};
+      const scheduledList = [];
+
+      // 1. Su Hatırlatıcıları (Bugünün kalan çalışma saatleri içinde periyodik)
+      if (settings.waterReminder !== false) {
+        const startHour = settings.waterStartHour || 8;
+        const endHour = settings.waterEndHour || 22;
+        const intervalHours = parseFloat(settings.waterIntervalHours) || 2;
+        const intervalMs = Math.round(intervalHours * 3600 * 1000);
+
+        let nextWaterTime = nowMs + intervalMs;
+        const endToday = new Date(now);
+        endToday.setHours(endHour, 0, 0, 0);
+
+        let count = 0;
+        while (nextWaterTime <= endToday.getTime() && count < 6) {
+          scheduledList.push({
+            title: '💧 Döngüm - Su Vakti',
+            body: 'Vücudunu nemlendir, krampları ve ödemi hafiflet. Şimdi bir bardak su içme zamanı!',
+            timestamp: nextWaterTime,
+            tag: `water_sched_${nextWaterTime}`,
+            data: { tab: 'fitness' }
+          });
+          nextWaterTime += intervalMs;
+          count++;
+        }
+      }
+
+      // 2. Gün Ortası Ruh Hali Hatırlatıcısı
+      if (settings.moodReminder !== false && !todayDayData.mood) {
+        const [mHour, mMin] = (settings.moodReminderTime || '15:00').split(':').map(Number);
+        const moodTimeToday = new Date(now);
+        moodTimeToday.setHours(mHour, mMin, 0, 0);
+
+        if (moodTimeToday.getTime() > nowMs) {
+          scheduledList.push({
+            title: '🧘 Döngüm - Ruh Halini Kaydet',
+            body: 'Bugün enerjin nasıl? Günlük ruh halini birkaç dokunuşla kaydet.',
+            timestamp: moodTimeToday.getTime(),
+            tag: `mood_sched_${todayStr}`,
+            data: { tab: 'calendar', openDay: todayStr, focus: 'mood' }
+          });
+        }
+      }
+
+      // 3. Gün Sonu Sağlık & Semptom Kaydı
+      if (settings.dailyLogReminder !== false) {
+        const [dHour, dMin] = (settings.dailyLogTime || '20:30').split(':').map(Number);
+        const dailyTimeToday = new Date(now);
+        dailyTimeToday.setHours(dHour, dMin, 0, 0);
+
+        if (dailyTimeToday.getTime() > nowMs) {
+          scheduledList.push({
+            title: '📝 Döngüm - Günün Sağlık Kaydı',
+            body: 'Bugün bedeninde neler oldu? Günlük belirtilerini kaydetmeyi unutma.',
+            timestamp: dailyTimeToday.getTime(),
+            tag: `daily_sched_${todayStr}`,
+            data: { tab: 'calendar', openDay: todayStr }
+          });
+        }
+      }
+
+      // 4. Yaklaşan Regl Bildirimi
+      if (settings.periodReminder !== false && summary.daysUntilNext > 0 && summary.daysUntilNext <= (settings.periodReminderDays || 2)) {
+        const nextMorning = new Date(now);
+        nextMorning.setDate(nextMorning.getDate() + 1);
+        nextMorning.setHours(9, 0, 0, 0);
+
+        if (nextMorning.getTime() > nowMs) {
+          scheduledList.push({
+            title: '🌸 Döngüm - Regl Dönemi Yaklaşıyor',
+            body: `Tahmini regl gününüze az kaldı (${summary.daysUntilNext} gün). Hazırlıklarınızı tamamlayın!`,
+            timestamp: nextMorning.getTime(),
+            tag: `period_approaching_${summary.nextPeriodDate}`,
+            data: { tab: 'calendar' }
+          });
+        }
+      }
+
+      // Service Worker'a Aktar ve Kaydet
+      const reg = await navigator.serviceWorker.ready;
+      if (reg.active && scheduledList.length > 0) {
+        reg.active.postMessage({
+          type: 'SCHEDULE_NOTIFICATIONS',
+          notifications: scheduledList
+        });
+      }
+
+      // Eğer tarayıcıda Notification Triggers varsa doğrudan client tarafından da dene
+      if (('showTrigger' in Notification.prototype) && typeof window !== 'undefined' && 'TimestampTrigger' in window) {
+        for (const item of scheduledList) {
+          try {
+            await reg.showNotification(item.title, {
+              body: item.body,
+              icon: './apple-touch-icon.png',
+              badge: './assets/logo-192.png',
+              tag: item.tag,
+              renotify: true,
+              data: item.data,
+              showTrigger: new window.TimestampTrigger(item.timestamp)
+            });
+          } catch(e) {}
+        }
+      }
+
+    } catch (err) {
+      console.warn('Gelecek bildirimler planlanırken hata:', err);
+    }
+  }
+
+  // Sistem ve Arka Plan Tanı Kontrolü (Diagnostics)
+  async getDiagnostics() {
+    const isSupp = NotificationManager.isSupported();
+    const perm = NotificationManager.getPermissionStatus();
+    const hasSW = (typeof navigator !== 'undefined' && 'serviceWorker' in navigator);
+    let swActive = false;
+    let hasPeriodicSync = false;
+    const hasTriggers = (typeof Notification !== 'undefined' && 'showTrigger' in Notification.prototype) || (typeof window !== 'undefined' && 'TimestampTrigger' in window);
+
+    if (hasSW) {
+      try {
+        const reg = await navigator.serviceWorker.getRegistration();
+        swActive = !!(reg && reg.active);
+        hasPeriodicSync = !!(reg && 'periodicSync' in reg);
+      } catch (e) {}
+    }
+
+    const isStandalone = (typeof window !== 'undefined') && (
+      (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
+      (window.navigator && window.navigator.standalone === true)
+    );
+
+    const ua = (typeof navigator !== 'undefined' && navigator.userAgent) ? navigator.userAgent : '';
+    const isIOS = /iPad|iPhone|iPod/.test(ua) && !(typeof window !== 'undefined' && window.MSStream);
+    const isAndroid = /Android/.test(ua);
+
+    return {
+      isSupported: isSupp,
+      permission: perm,
+      hasServiceWorker: hasSW,
+      isServiceWorkerActive: swActive,
+      hasNotificationTriggers: hasTriggers,
+      hasPeriodicSync: hasPeriodicSync,
+      isStandalone: isStandalone,
+      isIOS: isIOS,
+      isAndroid: isAndroid
+    };
   }
 
   // Periodic Background Sync & Background Sync Kaydı (Uygulama tamamen kapalıyken Android/Chrome PWA tetikleyicisi)
@@ -7780,1391 +8491,6 @@ class NotificationManager {
   getBadgeCount() {
     const alerts = this.getActiveTodayAlerts();
     return alerts.length;
-  }
-}
-
-
-/**
- * Döngüm - Akıllı Takvim ve Gün Yönetim Bileşeni
- * Ay ve hafta bazlı interaktif takvim, faz göstergeleri,
- * semptom/ruh hali ve hızlı regl başlatma/silme arayüzü
- */
-
-
-
-
-class CalendarComponent {
-  constructor(containerEl, engine, storage, onDataChanged) {
-    this.container = containerEl;
-    this.engine = engine;
-    this.storage = storage;
-    this.onDataChanged = onDataChanged;
-
-    const today = new Date();
-    this.currentYear = today.getFullYear();
-    this.currentMonth = today.getMonth(); // 0-indexed
-    this.selectedDateStr = CycleEngine.formatDateStr(today);
-
-    this.weekDays = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
-    this.monthNames = [
-      'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
-      'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
-    ];
-
-    this.symptomList = [
-      { id: 'cramps', label: 'Kramplar', icon: '⚡' },
-      { id: 'headache', label: 'Baş Ağrısı', icon: '🤕' },
-      { id: 'bloating', label: 'Şişkinlik', icon: '🎈' },
-      { id: 'breast', label: 'Göğüs Hassasiyeti', icon: '🌸' },
-      { id: 'backache', label: 'Bel Ağrısı', icon: '🦴' },
-      { id: 'acne', label: 'Sivilce/Cilt', icon: '✨' },
-      { id: 'fatigue', label: 'Yorgunluk', icon: '😴' },
-      { id: 'nausea', label: 'Mide Bulantısı', icon: '🤢' },
-      { id: 'insomnia', label: 'Uykusuzluk', icon: '🌙' },
-      { id: 'craving', label: 'Tatlı/Aşerme', icon: '🍫' }
-    ];
-
-    this.moodList = [
-      { id: 'happy', label: 'Mutlu', icon: '😊' },
-      { id: 'calm', label: 'Sakin', icon: '😌' },
-      { id: 'energetic', label: 'Enerjik', icon: '⚡' },
-      { id: 'sensitive', label: 'Duygusal', icon: '🥺' },
-      { id: 'irritated', label: 'Gergin', icon: '😤' },
-      { id: 'tired', label: 'Yorgun', icon: '🥱' },
-      { id: 'sad', label: 'Hüzünlü', icon: '😢' },
-      { id: 'anxious', label: 'Endişeli', icon: '😰' }
-    ];
-
-    this.dischargeList = [
-      { id: 'dry', label: 'Kuru' },
-      { id: 'sticky', label: 'Yapışkan' },
-      { id: 'creamy', label: 'Kremamsı' },
-      { id: 'egg_white', label: 'Yumurta Akı (Doğurgan)' },
-      { id: 'watery', label: 'Sulu' }
-    ];
-  }
-
-  render() {
-    this.container.innerHTML = `
-      <div class="calendar-wrapper">
-        <!-- Takvim Başlığı ve Ay Değiştirici -->
-        <div class="calendar-header">
-          <div class="calendar-title-group">
-            <h2 class="calendar-title" id="calMonthTitle">
-              ${this.monthNames[this.currentMonth]} ${this.currentYear}
-            </h2>
-            <button class="cal-today-btn" id="calTodayBtn">Bugün</button>
-          </div>
-          <div class="calendar-nav-buttons">
-            <button class="cal-nav-btn" id="calPrevMonth" aria-label="Önceki Ay">
-              ${Icons.chevronLeft}
-            </button>
-            <button class="cal-nav-btn" id="calNextMonth" aria-label="Sonraki Ay">
-              ${Icons.chevronRight}
-            </button>
-          </div>
-        </div>
-
-        <!-- Faz Açıklama Rozetleri (Legend) -->
-        <div class="calendar-legend">
-          <span class="legend-item"><span class="legend-dot dot-period"></span> Regl</span>
-          <span class="legend-item"><span class="legend-dot dot-predicted"></span> Tahmini Regl</span>
-          <span class="legend-item"><span class="legend-dot dot-ovulation"></span> Yumurtlama</span>
-          <span class="legend-item"><span class="legend-dot dot-fertile"></span> Doğurgan</span>
-          <span class="legend-item"><span class="legend-dot dot-pms"></span> PMS</span>
-        </div>
-
-        <!-- Hafta Günleri -->
-        <div class="calendar-weekdays">
-          ${this.weekDays.map(d => `<div class="cal-weekday">${d}</div>`).join('')}
-        </div>
-
-        <!-- Gün Hücreleri Izgarası -->
-        <div class="calendar-days-grid" id="calDaysGrid">
-          ${this.buildDaysGridHtml()}
-        </div>
-      </div>
-
-      <!-- Gün Detayı ve Düzenleme Modalı (Alt Çekmece / Bottom Sheet) -->
-      <div class="day-modal-overlay" id="dayModalOverlay">
-        <div class="day-modal-sheet" id="dayModalSheet">
-          <div class="modal-drag-handle"></div>
-          <div class="day-modal-content" id="dayModalContent">
-            <!-- Dinamik doldurulur -->
-          </div>
-          <div class="modal-actions-bar" id="dayModalActionsBar">
-            <button type="button" class="btn-primary-action" id="btnSaveDayDetails">
-              ${Icons.check} Kaydet & Güncelle
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    this.attachEvents();
-  }
-
-  attachEvents() {
-    const prevBtn = this.container.querySelector('#calPrevMonth');
-    const nextBtn = this.container.querySelector('#calNextMonth');
-    const todayBtn = this.container.querySelector('#calTodayBtn');
-    const grid = this.container.querySelector('#calDaysGrid');
-    const modalOverlay = this.container.querySelector('#dayModalOverlay');
-
-    if (prevBtn) {
-      prevBtn.onclick = () => {
-        if (this.currentMonth === 0) {
-          this.currentMonth = 11;
-          this.currentYear--;
-        } else {
-          this.currentMonth--;
-        }
-        this.updateMonthView();
-      };
-    }
-
-    if (nextBtn) {
-      nextBtn.onclick = () => {
-        if (this.currentMonth === 11) {
-          this.currentMonth = 0;
-          this.currentYear++;
-        } else {
-          this.currentMonth++;
-        }
-        this.updateMonthView();
-      };
-    }
-
-    if (todayBtn) {
-      todayBtn.onclick = () => {
-        const today = new Date();
-        this.currentYear = today.getFullYear();
-        this.currentMonth = today.getMonth();
-        this.selectedDateStr = CycleEngine.formatDateStr(today);
-        this.updateMonthView();
-        this.openDayModal(this.selectedDateStr);
-      };
-    }
-
-    if (grid) {
-      grid.onclick = (e) => {
-        const dayCell = e.target.closest('.cal-day-cell');
-        if (dayCell && dayCell.dataset.date) {
-          this.selectedDateStr = dayCell.dataset.date;
-          this.highlightSelectedCell();
-          this.openDayModal(this.selectedDateStr);
-        }
-      };
-    }
-
-    if (modalOverlay) {
-      modalOverlay.onclick = (e) => {
-        if (e.target === modalOverlay) {
-          this.closeDayModal();
-        }
-      };
-    }
-  }
-
-  updateMonthView() {
-    const title = this.container.querySelector('#calMonthTitle');
-    const grid = this.container.querySelector('#calDaysGrid');
-    if (title) {
-      title.textContent = `${this.monthNames[this.currentMonth]} ${this.currentYear}`;
-    }
-    if (grid) {
-      grid.innerHTML = this.buildDaysGridHtml();
-    }
-  }
-
-  highlightSelectedCell() {
-    this.container.querySelectorAll('.cal-day-cell').forEach(cell => {
-      cell.classList.toggle('selected-cell', cell.dataset.date === this.selectedDateStr);
-    });
-  }
-
-  // --- Gün Hücreleri Üretimi ---
-  buildDaysGridHtml() {
-    const firstDay = new Date(this.currentYear, this.currentMonth, 1);
-    const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0);
-    const totalDays = lastDay.getDate();
-
-    // Pazartesi ilk gün (0 = Pzt, 6 = Paz)
-    let startDayOfWeek = firstDay.getDay() - 1;
-    if (startDayOfWeek === -1) startDayOfWeek = 6;
-
-    const todayStr = CycleEngine.formatDateStr(new Date());
-    let html = '';
-
-    // Önceki aydan taşan boşluklar
-    for (let i = 0; i < startDayOfWeek; i++) {
-      html += `<div class="cal-day-cell empty-day"></div>`;
-    }
-
-    // Ayın günleri
-    for (let d = 1; d <= totalDays; d++) {
-      const dateObj = new Date(this.currentYear, this.currentMonth, d);
-      const dateStr = CycleEngine.formatDateStr(dateObj);
-      const dayData = this.storage.getDayData(dateStr) || {};
-      const status = this.engine.getDayStatus(dateStr);
-      const isToday = (dateStr === todayStr);
-      const isSelected = (dateStr === this.selectedDateStr);
-
-      const symptomsList = Array.isArray(dayData.symptoms) ? dayData.symptoms : [];
-      const hasSymptoms = symptomsList.length > 0;
-      const hasMood = !!dayData.mood;
-      const hasNotes = !!(dayData.notes && dayData.notes.trim());
-
-      let primarySymptomIcon = '';
-      if (hasSymptoms) {
-        const foundSym = this.symptomList.find(s => s.id === symptomsList[0]);
-        primarySymptomIcon = foundSym ? foundSym.icon : '⚡';
-      }
-      let moodIcon = '';
-      if (hasMood) {
-        const foundMood = this.moodList.find(m => m.id === dayData.mood);
-        moodIcon = foundMood ? foundMood.icon : '';
-      }
-
-      // CSS Sınıfları
-      const classes = ['cal-day-cell'];
-      if (isToday) classes.push('is-today');
-      if (isSelected) classes.push('selected-cell');
-
-      if (status.phase === 'period') classes.push('phase-period');
-      else if (status.phase === 'predicted_period') classes.push('phase-predicted-period');
-      else if (status.phase === 'ovulation') classes.push('phase-ovulation');
-      else if (status.phase === 'fertile') classes.push('phase-fertile');
-      else if (status.phase === 'pms') classes.push('phase-pms');
-
-      html += `
-        <div class="${classes.join(' ')}" data-date="${dateStr}">
-          <span class="day-number">${d}</span>
-          <div class="day-indicators">
-            ${status.phase === 'period' ? `<span class="indicator-dot period-dot" title="Regl"></span>` : ''}
-            ${status.phase === 'predicted_period' ? `<span class="indicator-dot predicted-dot" title="Tahmini Regl"></span>` : ''}
-            ${status.phase === 'ovulation' ? `<span class="indicator-dot ovulation-dot" title="Yumurtlama"></span>` : ''}
-            ${status.phase === 'fertile' ? `<span class="indicator-dot fertile-dot" title="Doğurgan Gün"></span>` : ''}
-            ${status.phase === 'pms' ? `<span class="indicator-dot pms-dot" title="PMS Dönemi"></span>` : ''}
-            ${hasSymptoms ? `<span class="indicator-sym-badge" title="${symptomsList.length} belirti: ${symptomsList.join(', ')}">${primarySymptomIcon}${symptomsList.length > 1 ? `<sup class="sym-plus">+</sup>` : ''}</span>` : ''}
-            ${hasMood && !hasSymptoms ? `<span class="indicator-sym-badge" title="Ruh Hali">${moodIcon}</span>` : ''}
-            ${hasNotes ? `<span class="indicator-note-badge" title="Kişisel Not">📝</span>` : ''}
-            ${dayData && dayData.exercise ? `<span class="indicator-sym-badge" title="Egzersiz: ${dayData.exercise.typeName || 'Antrenman'}">🏃</span>` : ''}
-            ${dayData && typeof dayData.waterIntake === 'number' && dayData.waterIntake >= 1500 ? `<span class="indicator-sym-badge" title="Su: ${dayData.waterIntake} ml">💧</span>` : ''}
-          </div>
-        </div>
-      `;
-    }
-
-    return html;
-  }
-
-  // --- Gün Detayı & Düzenleme Modalı ---
-  openDayModal(dateStr, focusSection = null) {
-    const modalOverlay = this.container.querySelector('#dayModalOverlay');
-    const modalContent = this.container.querySelector('#dayModalContent');
-    if (!modalOverlay || !modalContent) return;
-
-    const [y, m, d] = dateStr.split('-').map(Number);
-    const dateObj = new Date(y, m - 1, d);
-    const dayName = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'][dateObj.getDay()];
-    const formattedDateTitle = `${d} ${this.monthNames[m - 1]} ${y}, ${dayName}`;
-
-    // DOĞRUDAN DEPOLAMADAN OKU (Storage'den birebir veri garantisi)
-    const dayData = this.storage.getDayData(dateStr) || {};
-    const status = this.engine.getDayStatus(dateStr);
-
-    const isPeriod = !!dayData.isPeriod;
-    const currentFlow = dayData.flow || 'medium';
-    const currentSymptoms = Array.isArray(dayData.symptoms) ? [...dayData.symptoms] : [];
-    const currentMood = dayData.mood || '';
-    const currentDischarge = dayData.discharge || '';
-    const currentNotes = dayData.notes || '';
-    let currentWater = (typeof dayData.waterIntake === 'number') ? dayData.waterIntake : 0;
-    let currentExercise = dayData.exercise || null;
-
-    const getCalendarPhaseGuidance = (phase) => {
-      switch (phase) {
-        case 'period':
-          return '🩸 Menstrüasyon: Bol ılık su, magnezyum ağırlıklı beslenme ve dinlenmeye öncelik verin.';
-        case 'predicted_period':
-          return '🩸 Tahmini Regl: Kramplar için sıcak su torbası ve sakin aktiviteler hazırlayın.';
-        case 'follicular':
-          return '🌱 Foliküler Faz: Yüksek motivasyon; yeni projelere başlamak ve spor için en verimli evre.';
-        case 'ovulation':
-          return '✨ Ovülasyon: Doğurganlık zirvede. Sosyalleşmek ve enerjik aktiviteler için ideal zaman.';
-        case 'fertile':
-          return '🌸 Doğurgan Pencere: Enerjiniz yüksek; vücut sıcaklığı hafifçe yükselebilir, bol su tüketin.';
-        case 'pms':
-          return '🌙 Luteal / PMS: Kafeini azaltın, papatya çayı ve esneme hareketleriyle kendinizi rahatlatın.';
-        default:
-          return '✨ Dengeli Evre: Düzenli uyku, dengeli beslenme ve yürüyüşlerle ritminizi koruyun.';
-      }
-    };
-
-    modalContent.innerHTML = `
-      <div class="modal-header-row">
-        <div>
-          <span class="modal-date-subtitle">${dayName}</span>
-          <h3 class="modal-date-title">${d} ${this.monthNames[m - 1]} ${y}</h3>
-        </div>
-        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Kapat">
-          ${Icons.close}
-        </button>
-      </div>
-
-      <!-- Faz ve Tahmin Özeti Kartı -->
-      <div class="modal-phase-banner phase-bg-${status.phase}">
-        <div class="phase-banner-info">
-          <span class="phase-tag">${status.phaseBadge}</span>
-          <h4>${status.phaseName}</h4>
-          <p>${status.description}</p>
-          <div class="phase-banner-guidance">${getCalendarPhaseGuidance(status.phase)}</div>
-        </div>
-        <div class="pregnancy-badge">
-          <span class="preg-label">Hamilelik Olasılığı</span>
-          <strong>${status.pregnancyChance}</strong>
-        </div>
-      </div>
-
-      <!-- REGL GİRİŞ / DÜZELTME / SİLME KONTROLÜ -->
-      <div class="modal-section period-control-section">
-        <label class="section-label">🩸 Regl & Kanama Kaydı</label>
-        
-        <div class="period-toggle-row">
-          <button type="button" class="btn-period-toggle ${isPeriod ? 'active-period' : ''}" id="btnTogglePeriod">
-            ${isPeriod ? '✓ Bugün Regl Olundu' : '+ Regl Olarak İşaretle'}
-          </button>
-          ${isPeriod ? `
-            <button type="button" class="btn-period-delete" id="btnDeletePeriod" title="Bu günün regl kaydını sil / temizle">
-              ${Icons.trash} Kaldır
-            </button>
-          ` : ''}
-        </div>
-
-        <!-- Otomatik Doldurma Bilgilendirmesi -->
-        <p class="period-calc-hint">
-          ${isPeriod 
-            ? 'ℹ️ Bu günün kaydı kayıtlıdır. Süreyi değiştirmek için dilediğiniz günleri tek tek silebilir veya ekleyebilirsiniz.'
-            : '💡 Bu günü işaretlediğinizde, ortalama sürenize göre sonraki günler otomatik hesaplanıp takvime işlenir.'}
-        </p>
-
-        <!-- Akış Yoğunluğu Seçimi -->
-        <div class="flow-selector ${isPeriod ? '' : 'disabled-flow'}" id="flowSelector">
-          <span class="flow-label">Kanama Yoğunluğu:</span>
-          <div class="flow-buttons">
-            <button type="button" class="flow-btn ${currentFlow === 'spotting' ? 'selected' : ''}" data-flow="spotting">
-              <span class="flow-dot f-spotting"></span> Lekelenme
-            </button>
-            <button type="button" class="flow-btn ${currentFlow === 'light' ? 'selected' : ''}" data-flow="light">
-              <span class="flow-dot f-light"></span> Hafif
-            </button>
-            <button type="button" class="flow-btn ${currentFlow === 'medium' ? 'selected' : ''}" data-flow="medium">
-              <span class="flow-dot f-medium"></span> Orta
-            </button>
-            <button type="button" class="flow-btn ${currentFlow === 'heavy' ? 'selected' : ''}" data-flow="heavy">
-              <span class="flow-dot f-heavy"></span> Yoğun
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- SEMPTOMLAR -->
-      <div class="modal-section">
-        <label class="section-label">⚡ Günlük Semptomlar & Belirtiler</label>
-        <div class="chips-grid" id="symptomsChips">
-          ${this.symptomList.map(s => {
-            const active = currentSymptoms.includes(s.id);
-            return `
-              <button type="button" class="chip-item ${active ? 'chip-active' : ''}" data-id="${s.id}">
-                <span class="chip-icon">${s.icon}</span>
-                <span class="chip-text">${s.label}</span>
-              </button>
-            `;
-          }).join('')}
-        </div>
-      </div>
-
-      <!-- RUH HALİ -->
-      <div class="modal-section">
-        <label class="section-label">✨ Ruh Hali</label>
-        <div class="chips-grid" id="moodChips">
-          ${this.moodList.map(m => {
-            const active = currentMood === m.id;
-            return `
-              <button type="button" class="chip-item ${active ? 'chip-active' : ''}" data-id="${m.id}">
-                <span class="chip-icon">${m.icon}</span>
-                <span class="chip-text">${m.label}</span>
-              </button>
-            `;
-          }).join('')}
-        </div>
-      </div>
-
-      <!-- AKINTI TİPİ -->
-      <div class="modal-section">
-        <label class="section-label">💧 Akıntı Durumu</label>
-        <div class="chips-row" id="dischargeChips">
-          ${this.dischargeList.map(d => {
-            const active = currentDischarge === d.id;
-            return `
-              <button type="button" class="chip-pill ${active ? 'chip-active' : ''}" data-id="${d.id}">
-                ${d.label}
-              </button>
-            `;
-          }).join('')}
-        </div>
-      </div>
-
-      <!-- GÜNLÜK SU VE EGZERSİZ KAYDI -->
-      <div class="modal-section day-fitness-water-section">
-        <label class="section-label">💧 Su Tüketimi & 🏃‍♀️ Egzersiz</label>
-        
-        <div class="day-modal-water-row">
-          <div class="dmw-info">
-            <span class="dmw-icon">💧</span>
-            <div>
-              <strong class="dmw-title">Günün Su Tüketimi:</strong>
-              <span class="dmw-amount" id="dmWaterDisplay">${currentWater} ml</span>
-            </div>
-          </div>
-          <div class="dmw-controls">
-            <button type="button" class="btn-dm-water" id="btnDmWaterMinus" title="250 ml eksilt">-250</button>
-            <button type="button" class="btn-dm-water btn-dm-water-add" id="btnDmWaterPlus" title="250 ml ekle">+250 ml</button>
-          </div>
-        </div>
-
-        <div class="day-modal-exercise-row">
-          <div class="dme-info">
-            <span class="dme-icon">${currentExercise ? (currentExercise.feelIcon || '🏃‍♀️') : '🧘‍♀️'}</span>
-            <div>
-              <strong class="dme-title">${currentExercise ? currentExercise.typeName : 'Egzersiz Kaydı'}</strong>
-              <span class="dme-desc">${currentExercise ? `${currentExercise.duration} dk • ${currentExercise.intensityName || 'Normal'}` : 'Bu gün için egzersiz kaydedilmedi'}</span>
-            </div>
-          </div>
-          ${currentExercise ? `
-            <button type="button" class="btn-dm-del-exercise" id="btnDmDelExercise" title="Bu egzersizi kaldır">
-              ${Icons.trash}
-            </button>
-          ` : `
-            <button type="button" class="btn-dm-add-exercise" id="btnDmAddExercise">
-              + Ekle
-            </button>
-          `}
-        </div>
-      </div>
-
-      <!-- NOTLAR -->
-      <div class="modal-section">
-        <label class="section-label">📝 Kişisel Not</label>
-        <textarea class="notes-textarea" id="dayNotesInput" placeholder="Bugün nasıl hissediyorsunuz? İlaç, uyku veya özel durumlar..." rows="3">${currentNotes}</textarea>
-      </div>
-    `;
-
-    // Modal içi olay dinleyicileri
-    const closeBtn = modalContent.querySelector('#modalCloseBtn');
-    const togglePeriodBtn = modalContent.querySelector('#btnTogglePeriod');
-    const deletePeriodBtn = modalContent.querySelector('#btnDeletePeriod');
-    const flowSelector = modalContent.querySelector('#flowSelector');
-    const saveBtn = this.container.querySelector('#btnSaveDayDetails');
-    const notesInput = modalContent.querySelector('#dayNotesInput');
-
-    let activePeriodState = isPeriod;
-    let selectedFlow = currentFlow;
-    let selectedSymptoms = [...currentSymptoms];
-    let selectedMood = currentMood;
-    let selectedDischarge = currentDischarge;
-
-    // Herhangi bir seçim değiştiğinde veriyi anında kaydeden yardımcı fonksiyon
-    const persistDayState = (notifyUI = true) => {
-      const notes = notesInput ? notesInput.value.trim() : '';
-      this.storage.saveDayData(dateStr, {
-        isPeriod: activePeriodState,
-        flow: activePeriodState ? selectedFlow : null,
-        symptoms: [...selectedSymptoms],
-        mood: selectedMood || null,
-        discharge: selectedDischarge || null,
-        notes: notes,
-        waterIntake: currentWater,
-        exercise: currentExercise
-      });
-
-      this.engine.syncSettingsFromCalendarData();
-      if (notifyUI) {
-        this.notifyUpdate();
-      }
-    };
-
-    // Su Butonları
-    const btnWaterPlus = modalContent.querySelector('#btnDmWaterPlus');
-    const btnWaterMinus = modalContent.querySelector('#btnDmWaterMinus');
-    const waterDisplay = modalContent.querySelector('#dmWaterDisplay');
-    const btnDelEx = modalContent.querySelector('#btnDmDelExercise');
-    const btnAddEx = modalContent.querySelector('#btnDmAddExercise');
-
-    if (btnWaterPlus) {
-      btnWaterPlus.onclick = () => {
-        currentWater += 250;
-        if (waterDisplay) waterDisplay.textContent = `${currentWater} ml`;
-        persistDayState(true);
-      };
-    }
-    if (btnWaterMinus) {
-      btnWaterMinus.onclick = () => {
-        currentWater = Math.max(0, currentWater - 250);
-        if (waterDisplay) waterDisplay.textContent = `${currentWater} ml`;
-        persistDayState(true);
-      };
-    }
-    if (btnDelEx) {
-      btnDelEx.onclick = () => {
-        if (confirm('Bu günün egzersiz kaydı silinsin mi?')) {
-          currentExercise = null;
-          persistDayState(true);
-          this.openDayModal(dateStr);
-        }
-      };
-    }
-    if (btnAddEx) {
-      btnAddEx.onclick = () => {
-        const dur = prompt('Egzersiz süresi (dakika):', '30');
-        if (dur) {
-          const dNum = parseInt(dur, 10) || 30;
-          currentExercise = {
-            type: 'workout',
-            typeName: 'Egzersiz / Hareket',
-            duration: dNum,
-            intensity: 'moderate',
-            intensityName: 'Orta Seviye',
-            feel: 'energized',
-            feelName: 'Enerjik',
-            feelIcon: '🌟',
-            note: 'Takvimden eklendi'
-          };
-          persistDayState(true);
-          this.openDayModal(dateStr);
-        }
-      };
-    }
-
-    if (closeBtn) {
-      closeBtn.onclick = () => {
-        persistDayState(true);
-        this.closeDayModal();
-      };
-    }
-
-    // Regl Aç / Kapat
-    if (togglePeriodBtn) {
-      togglePeriodBtn.onclick = () => {
-        activePeriodState = !activePeriodState;
-        togglePeriodBtn.classList.toggle('active-period', activePeriodState);
-        togglePeriodBtn.innerHTML = activePeriodState ? '✓ Bugün Regl Olundu' : '+ Regl Olarak İşaretle';
-        flowSelector.classList.toggle('disabled-flow', !activePeriodState);
-
-        // Eğer ilk defa regl başlangıcı yapılıyorsa modelin ortalama süresine göre doldur
-        if (activePeriodState) {
-          this.engine.logPeriodStart(dateStr, selectedFlow);
-        } else {
-          this.engine.togglePeriodDay(dateStr, false);
-        }
-        persistDayState(true);
-      };
-    }
-
-    // Regl Kaydını Kaldır / Sil
-    if (deletePeriodBtn) {
-      deletePeriodBtn.onclick = () => {
-        this.engine.togglePeriodDay(dateStr, false);
-        activePeriodState = false;
-        persistDayState(true);
-        this.openDayModal(dateStr); // Modalı tazeleyerek göster
-      };
-    }
-
-    // Akış Yoğunluğu Butonları
-    flowSelector.querySelectorAll('.flow-btn').forEach(btn => {
-      btn.onclick = () => {
-        flowSelector.querySelectorAll('.flow-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        selectedFlow = btn.dataset.flow;
-        if (activePeriodState) {
-          this.engine.togglePeriodDay(dateStr, true, selectedFlow);
-          persistDayState(true);
-        }
-      };
-    });
-
-    // Semptom Seçimleri (Anında Otomatik Kayıt)
-    modalContent.querySelectorAll('#symptomsChips .chip-item').forEach(chip => {
-      chip.onclick = () => {
-        const id = chip.dataset.id;
-        if (selectedSymptoms.includes(id)) {
-          selectedSymptoms = selectedSymptoms.filter(item => item !== id);
-          chip.classList.remove('chip-active');
-        } else {
-          selectedSymptoms.push(id);
-          chip.classList.add('chip-active');
-        }
-        persistDayState(true);
-      };
-    });
-
-    // Ruh Hali Seçimi (Tekil & Anında Otomatik Kayıt)
-    modalContent.querySelectorAll('#moodChips .chip-item').forEach(chip => {
-      chip.onclick = () => {
-        const id = chip.dataset.id;
-        if (selectedMood === id) {
-          selectedMood = '';
-          chip.classList.remove('chip-active');
-        } else {
-          selectedMood = id;
-          modalContent.querySelectorAll('#moodChips .chip-item').forEach(c => c.classList.remove('chip-active'));
-          chip.classList.add('chip-active');
-        }
-        persistDayState(true);
-      };
-    });
-
-    // Akıntı Tipi (Tekil & Anında Otomatik Kayıt)
-    modalContent.querySelectorAll('#dischargeChips .chip-pill').forEach(pill => {
-      pill.onclick = () => {
-        const id = pill.dataset.id;
-        if (selectedDischarge === id) {
-          selectedDischarge = '';
-          pill.classList.remove('chip-active');
-        } else {
-          selectedDischarge = id;
-          modalContent.querySelectorAll('#dischargeChips .chip-pill').forEach(p => p.classList.remove('chip-active'));
-          pill.classList.add('chip-active');
-        }
-        persistDayState(true);
-      };
-    });
-
-    // Not Girişi (Kullanıcı yazdıkça ve odaktan çıkıldığında kaydet)
-    if (notesInput) {
-      notesInput.oninput = () => {
-        persistDayState(false);
-      };
-      notesInput.onblur = () => {
-        persistDayState(true);
-      };
-    }
-
-    // Tümünü Kaydet & Güncelle Butonu
-    if (saveBtn) {
-      saveBtn.onclick = () => {
-        persistDayState(true);
-
-        const originalHtml = saveBtn.innerHTML;
-        saveBtn.innerHTML = `✓ Kaydedildi!`;
-        saveBtn.style.background = '#10b981';
-        saveBtn.style.color = '#ffffff';
-
-        setTimeout(() => {
-          saveBtn.innerHTML = originalHtml;
-          saveBtn.style.background = '';
-          saveBtn.style.color = '';
-          this.closeDayModal();
-        }, 450);
-      };
-    }
-
-    modalOverlay.classList.add('active');
-
-    if (focusSection === 'mood') {
-      setTimeout(() => {
-        const moodSection = modalContent.querySelector('#moodChips');
-        if (moodSection) {
-          moodSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          moodSection.style.transition = 'all 0.3s ease';
-          moodSection.style.boxShadow = '0 0 0 2px #ec4899';
-          moodSection.style.borderRadius = '12px';
-          setTimeout(() => { moodSection.style.boxShadow = 'none'; }, 2200);
-        }
-      }, 120);
-    }
-  }
-
-  closeDayModal() {
-    const modalOverlay = this.container.querySelector('#dayModalOverlay');
-    if (modalOverlay) {
-      modalOverlay.classList.remove('active');
-    }
-  }
-
-  notifyUpdate() {
-    this.updateMonthView();
-    if (typeof this.onDataChanged === 'function') {
-      this.onDataChanged();
-    }
-  }
-
-  // Dışarıdan belirli bir güne atlama (Örn: Bugün veya 31 Ağustos)
-  goToDate(dateStr) {
-    const [y, m, d] = dateStr.split('-').map(Number);
-    this.currentYear = y;
-    this.currentMonth = m - 1;
-    this.selectedDateStr = dateStr;
-    this.updateMonthView();
-    this.highlightSelectedCell();
-    this.openDayModal(dateStr);
-  }
-}
-
-
-/**
- * Döngüm - Sağlık Analitiği ve Döngü İstatistikleri
- * Düzenlilik skoru, geçmiş dönemler grafiği, semptom frekansı ve gelecek tahmin çizelgesi
- */
-
-
-
-
-
-class AnalyticsComponent {
-  constructor(containerEl, engine, storage, onGoToDate) {
-    this.container = containerEl;
-    this.engine = engine;
-    this.storage = storage;
-    this.onGoToDate = onGoToDate;
-    this.reportGen = new DoctorReportGenerator(this.engine, this.storage);
-  }
-
-  render() {
-    const stats = this.engine.calculateStats();
-    const clusters = this.engine.getPeriodClusters().reverse(); // En yeniden en eskiye
-    const projections = this.engine.getProjections(6);
-    const profileData = this.storage.getProfileData();
-    const symptomStats = this.calculateSymptomFrequencies(profileData.days);
-    const fitStats = this.storage.getMonthlyFitnessStats();
-    const streakInfo = this.storage.getExerciseStreak();
-    const waterHistory = this.storage.getWeeklyWaterHistory(7);
-    const avgWater = Math.round(waterHistory.reduce((acc, curr) => acc + curr.amount, 0) / Math.max(1, waterHistory.length));
-
-    this.container.innerHTML = `
-      <div class="analytics-wrapper">
-        <!-- Başlık -->
-        <div class="analytics-header">
-          <h2 class="section-heading">Döngü & Sağlık Analizi</h2>
-          <p class="section-subheading">Kişisel verilerinizle modellenmiş gerçekçi sağlık ve döngü raporu</p>
-        </div>
-
-        <!-- Jinekolog PDF Sağlık Raporu Kartı -->
-        <div class="doctor-report-banner">
-          <div class="dr-banner-icon-col">
-            <span class="dr-banner-icon">🩺</span>
-          </div>
-          <div class="dr-banner-content">
-            <h4 class="dr-banner-title">Jinekolog Klinik Sağlık Raporu</h4>
-            <p class="dr-banner-desc">
-              Tüm döngülerinizi, kanama ritminizi ve semptomlarınızı doktorunuza sunabileceğiniz resmi klinik PDF belgesine dönüştürün.
-            </p>
-            <button type="button" class="btn-generate-pdf" id="btnOpenDoctorReport">
-              ${Icons.fileText} Jinekolog Raporunu Aç & PDF İndir
-            </button>
-          </div>
-        </div>
-
-        <!-- Özet İstatistik Kartları -->
-        <div class="stats-overview-grid">
-          <!-- Düzenlilik Skoru -->
-          <div class="stat-card card-regularity">
-            <div class="stat-icon-wrap" style="color: #10b981;">
-              ${Icons.shield}
-            </div>
-            <div class="stat-info">
-              <span class="stat-label">Düzenlilik Skoru</span>
-              <div class="stat-value-group">
-                <span class="stat-number">%${stats.regularityScore}</span>
-                <span class="stat-badge ${stats.regularityScore >= 85 ? 'badge-good' : 'badge-warn'}">
-                  ${stats.regularityScore >= 85 ? 'Yüksek Düzen' : 'Hafif Değişken'}
-                </span>
-              </div>
-              <p class="stat-desc">
-                ${stats.stdDev === 0 
-                  ? 'Standart ritim tespit edildi.' 
-                  : `±${stats.stdDev} gün sapma toleransı.`}
-              </p>
-            </div>
-          </div>
-
-          <!-- Ortalama Döngü Uzunluğu -->
-          <div class="stat-card">
-            <div class="stat-icon-wrap" style="color: #f43f5e;">
-              ${Icons.refresh}
-            </div>
-            <div class="stat-info">
-              <span class="stat-label">Ort. Döngü Uzunluğu</span>
-              <span class="stat-number">${stats.averageCycleLength} <small>gün</small></span>
-              <p class="stat-desc">İki regl başlangıcı arasındaki süre</p>
-            </div>
-          </div>
-
-          <!-- Ortalama Regl Süresi -->
-          <div class="stat-card">
-            <div class="stat-icon-wrap" style="color: #fb7185;">
-              ${Icons.droplet}
-            </div>
-            <div class="stat-info">
-              <span class="stat-label">Ort. Regl Süresi</span>
-              <span class="stat-number">${stats.averagePeriodLength} <small>gün</small></span>
-              <p class="stat-desc">Ortalama kanama ve akış günleri</p>
-            </div>
-          </div>
-
-          <!-- Toplam Kayıtlı Döngü -->
-          <div class="stat-card">
-            <div class="stat-icon-wrap" style="color: #8b5cf6;">
-              ${Icons.chart}
-            </div>
-            <div class="stat-info">
-              <span class="stat-label">Kayıtlı Döngü</span>
-              <span class="stat-number">${stats.totalLoggedCycles}</span>
-              <p class="stat-desc">Sisteme işlenen toplam regl dönemi</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Aktivite & Hidrasyon Performansı -->
-        <div class="analysis-section-box">
-          <h3 class="box-title">🏃‍♀️ Beden Hareketi & Su Dengesi</h3>
-          <p class="box-subtitle">Döngünüzle senkronize fiziksel aktivite ve hidrasyon istatistikleri</p>
-
-          <div class="stats-overview-grid" style="margin-top: 10px;">
-            <div class="stat-card">
-              <div class="stat-icon-wrap" style="color: #10b981;">${Icons.activity}</div>
-              <div class="stat-info">
-                <span class="stat-label">Bu Ayki Egzersiz</span>
-                <span class="stat-number">${fitStats.totalWorkouts} <small>seans</small></span>
-                <p class="stat-desc">Toplam ${fitStats.totalMinutes} dakika hareket</p>
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-icon-wrap" style="color: #f59e0b;">${Icons.flame}</div>
-              <div class="stat-info">
-                <span class="stat-label">Hareket Serisi</span>
-                <span class="stat-number">${streakInfo.currentStreak} <small>gün</small></span>
-                <p class="stat-desc">${streakInfo.hasExerciseToday ? 'Bugün antrenman tamamlandı' : 'Bugün henüz seans yapılmadı'}</p>
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-icon-wrap" style="color: #0284c7;">${Icons.waterGlass}</div>
-              <div class="stat-info">
-                <span class="stat-label">Haftalık Ort. Su</span>
-                <span class="stat-number">${avgWater} <small>ml</small></span>
-                <p class="stat-desc">Son 7 günlük günlük ortalama</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Gelecek 6 Ayın Tahmin Çizelgesi -->
-        <div class="analysis-section-box">
-          <h3 class="box-title">📅 Önümüzdeki Döngü Tahminleri</h3>
-          <p class="box-subtitle">Kişisel ortalamanıza göre hesaplanan gelecek dönemler</p>
-          
-          <div class="projections-timeline">
-            ${projections.length > 0 ? projections.map(p => {
-              const startFormatted = this.formatDateReadable(p.periodStart);
-              const endFormatted = this.formatDateReadable(p.periodEnd);
-              const ovuFormatted = this.formatDateReadable(p.ovulationDate);
-
-              return `
-                <div class="projection-row">
-                  <div class="proj-badge">${p.cycleIndex}. Döngü</div>
-                  <div class="proj-content">
-                    <div class="proj-item">
-                      <span class="p-label">Tahmini Regl:</span>
-                      <strong>${startFormatted} - ${endFormatted}</strong>
-                    </div>
-                    <div class="proj-item">
-                      <span class="p-label">Yumurtlama:</span>
-                      <strong style="color: #d97706;">${ovuFormatted}</strong>
-                    </div>
-                  </div>
-                  <button type="button" class="btn-goto-date" data-date="${p.periodStart}" title="Takvimde Göster">
-                    ${Icons.calendar}
-                  </button>
-                </div>
-              `;
-            }).join('') : `
-              <div class="empty-state-notice">
-                <p>Henüz en az bir regl başlangıcı girilmedi. Takvimden veya Ana sayfadan ilk regl tarihinizi ekleyerek tahminleri başlatabilirsiniz.</p>
-              </div>
-            `}
-          </div>
-        </div>
-
-        <!-- Semptom ve Belirti Analizi -->
-        <div class="analysis-section-box">
-          <h3 class="box-title">⚡ En Sık Görülen Belirtiler & Semptomlar</h3>
-          <p class="box-subtitle">Girdiğiniz verilere göre vücudunuzun döngüsel tepkileri</p>
-
-          <div class="symptom-bars-list">
-            ${symptomStats.length > 0 ? symptomStats.map(s => `
-              <div class="symptom-bar-item">
-                <div class="symptom-bar-info">
-                  <span class="s-name">${s.icon} ${s.label}</span>
-                  <span class="s-count">${s.count} gün (${s.percentage}%)</span>
-                </div>
-                <div class="symptom-progress-track">
-                  <div class="symptom-progress-fill" style="width: ${s.percentage}%;"></div>
-                </div>
-              </div>
-            `).join('') : `
-              <div class="empty-state-notice">
-                <p>Henüz semptom verisi kaydedilmedi. Takvimden günlere dokunarak kramp, baş ağrısı veya ruh halinizi işleyebilirsiniz.</p>
-              </div>
-            `}
-          </div>
-        </div>
-
-        <!-- Geçmiş Döngüler Geçmişi -->
-        <div class="analysis-section-box">
-          <h3 class="box-title">📖 Döngü Geçmişi & Kayıtlar</h3>
-          <p class="box-subtitle">Sisteme işlenmiş geçmiş regl dönemleri</p>
-
-          <div class="history-list">
-            ${clusters.length > 0 ? clusters.map((c, idx) => {
-              const startFormatted = this.formatDateReadable(c.startDate);
-              const endFormatted = this.formatDateReadable(c.endDate);
-
-              return `
-                <div class="history-card">
-                  <div class="history-card-header">
-                    <span class="history-index">${clusters.length - idx}. Dönem</span>
-                    <span class="history-duration">${c.duration} Gün Sürdü</span>
-                  </div>
-                  <div class="history-card-body">
-                    <div class="history-dates">
-                      <span><strong>Başlangıç:</strong> ${startFormatted}</span>
-                      <span><strong>Bitiş:</strong> ${endFormatted}</span>
-                    </div>
-                    <div class="history-actions">
-                      <button type="button" class="btn-history-view" data-date="${c.startDate}">
-                        ${Icons.calendar} Takvimde İncele
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              `;
-            }).join('') : `
-              <div class="empty-state-notice">
-                <p>Henüz geçmiş regl kaydı bulunmuyor.</p>
-              </div>
-            `}
-          </div>
-        </div>
-      </div>
-    `;
-
-    this.attachEvents();
-  }
-
-  attachEvents() {
-    const reportBtn = this.container.querySelector('#btnOpenDoctorReport');
-    if (reportBtn) {
-      reportBtn.onclick = () => {
-        this.reportGen.openReportModal();
-      };
-    }
-
-    this.container.querySelectorAll('.btn-goto-date, .btn-history-view').forEach(btn => {
-      btn.onclick = () => {
-        const dateStr = btn.dataset.date;
-        if (dateStr && typeof this.onGoToDate === 'function') {
-          this.onGoToDate(dateStr);
-        }
-      };
-    });
-  }
-
-  formatDateReadable(dateStr) {
-    if (!dateStr) return '';
-    const [y, m, d] = dateStr.split('-').map(Number);
-    const months = [
-      'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
-      'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
-    ];
-    return `${d} ${months[m - 1]} ${y}`;
-  }
-
-  calculateSymptomFrequencies(days = {}) {
-    const symptomLabels = {
-      cramps: { label: 'Kramplar', icon: '⚡' },
-      headache: { label: 'Baş Ağrısı', icon: '🤕' },
-      bloating: { label: 'Şişkinlik', icon: '🎈' },
-      breast: { label: 'Göğüs Hassasiyeti', icon: '🌸' },
-      backache: { label: 'Bel Ağrısı', icon: '🦴' },
-      acne: { label: 'Sivilce/Cilt', icon: '✨' },
-      fatigue: { label: 'Yorgunluk', icon: '😴' },
-      nausea: { label: 'Mide Bulantısı', icon: '🤢' },
-      insomnia: { label: 'Uykusuzluk', icon: '🌙' },
-      craving: { label: 'Tatlı/Aşerme', icon: '🍫' }
-    };
-
-    const counts = {};
-    let totalDaysWithSymptoms = 0;
-
-    Object.values(days).forEach(day => {
-      if (day.symptoms && day.symptoms.length > 0) {
-        totalDaysWithSymptoms++;
-        day.symptoms.forEach(sym => {
-          counts[sym] = (counts[sym] || 0) + 1;
-        });
-      }
-    });
-
-    if (totalDaysWithSymptoms === 0) return [];
-
-    return Object.keys(counts)
-      .map(k => ({
-        id: k,
-        label: (symptomLabels[k] && symptomLabels[k].label) || k,
-        icon: (symptomLabels[k] && symptomLabels[k].icon) || '•',
-        count: counts[k],
-        percentage: Math.round((counts[k] / totalDaysWithSymptoms) * 100)
-      }))
-      .sort((a, b) => b.count - a.count);
-  }
-}
-
-
-/**
- * Döngüm - Jinekolog Sağlık & Döngü Raporu Üretici (PDF / Yazdırma)
- * Hekim muayenesine yönelik resmi klinik menstrüel döngü raporu oluşturur.
- */
-
-
-
-
-class DoctorReportGenerator {
-  constructor(engine, storage) {
-    this.engine = engine;
-    this.storage = storage;
-  }
-
-  // Tarih biçimlendirme
-  formatDateTR(dateStr) {
-    if (!dateStr) return '-';
-    const [y, m, d] = dateStr.split('-').map(Number);
-    const months = [
-      'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
-      'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
-    ];
-    return `${d} ${months[m - 1]} ${y}`;
-  }
-
-  generateReportHtml() {
-    const profile = this.storage.getActiveProfile();
-    const profileData = this.storage.getProfileData();
-    const stats = this.engine.calculateStats();
-    const clusters = this.engine.getPeriodClusters().reverse();
-    const days = profileData.days || {};
-
-    const todayStr = CycleEngine.formatDateStr(new Date());
-    const reportRefNo = 'RAP-' + todayStr.replace(/-/g, '') + '-' + Math.floor(1000 + Math.random() * 9000);
-
-    // Semptom sıklıkları hesaplama
-    const symptomLabels = {
-      cramps: 'Dismenore (Kramplar / Kasık Ağrısı)',
-      headache: 'Sefalji / Baş Ağrısı',
-      bloating: 'Karında Distansiyon / Şişkinlik',
-      breast: 'Mastodini (Meme Hassasiyeti)',
-      backache: 'Lomber / Bel Ağrısı',
-      acne: 'Akneiform Lezyonlar / Cilt',
-      fatigue: 'Kronik Yorgunluk / Letarji',
-      nausea: 'Gastrointestinal Hassasiyet / Bulantı',
-      insomnia: 'Uykusuzluk / İnsomni',
-      craving: 'İştah Değişikliği / Aşerme'
-    };
-
-    const symptomCounts = {};
-    const flowCounts = { spotting: 0, light: 0, medium: 0, heavy: 0 };
-    let totalLoggedDays = 0;
-
-    Object.values(days).forEach(d => {
-      totalLoggedDays++;
-      if (d.flow && flowCounts[d.flow] !== undefined) {
-        flowCounts[d.flow]++;
-      }
-      if (d.symptoms && Array.isArray(d.symptoms)) {
-        d.symptoms.forEach(s => {
-          symptomCounts[s] = (symptomCounts[s] || 0) + 1;
-        });
-      }
-    });
-
-    const totalFlowEntries = Object.values(flowCounts).reduce((a, b) => a + b, 0);
-
-    return `
-      <div class="doctor-report-document" id="printableDoctorReport">
-        <!-- Rapor Başlığı & Klinik Antet -->
-        <div class="dr-report-header">
-          <div class="dr-header-emblem">
-            <span class="dr-caduceus">⚕</span>
-            <div>
-              <h1 class="dr-clinic-title">KADIN SAĞLIĞI & MENSTRÜEL SİKLUS ANALİZ RAPORU</h1>
-              <p class="dr-clinic-subtitle">Jinekolojik Değerlendirme ve Biyolojik Döngü Takip Belgesi</p>
-            </div>
-          </div>
-          <div class="dr-header-meta">
-            <div><strong>Rapor No:</strong> ${reportRefNo}</div>
-            <div><strong>Düzenleme Tarihi:</strong> ${this.formatDateTR(todayStr)}</div>
-            <div><strong>Sistem:</strong> Döngüm Sağlık Takip Modeli</div>
-          </div>
-        </div>
-
-        <div class="dr-divider-line"></div>
-
-        <!-- Hasta / Profil Bilgileri -->
-        <div class="dr-patient-box">
-          <div class="dr-patient-col">
-            <span class="dr-label">Hasta / Danışan Adı:</span>
-            <strong class="dr-val">${profile.name}</strong>
-          </div>
-          <div class="dr-patient-col">
-            <span class="dr-label">Kayıtlı Döngü Sayısı:</span>
-            <strong class="dr-val">${clusters.length} Döngü</strong>
-          </div>
-          <div class="dr-patient-col">
-            <span class="dr-label">Döngü Düzenlilik İndeksi:</span>
-            <strong class="dr-val" style="color: ${stats.regularityScore >= 85 ? '#059669' : '#d97706'};">
-              %${stats.regularityScore} (${stats.regularityScore >= 85 ? 'Ritmik / Düzenli' : 'Hafif Düzensiz'})
-            </strong>
-          </div>
-        </div>
-
-        <!-- Temel Biyometrik Siklus Parametreleri -->
-        <div class="dr-section-title">1. KLİNİK SİKLUS METRİKLERİ VE İSTATİSTİKLER</div>
-        <table class="dr-metrics-table">
-          <thead>
-            <tr>
-              <th>Parametre</th>
-              <th>Hesaplanan Değer</th>
-              <th>Klinik Referans Aralığı</th>
-              <th>Değerlendirme</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Ortalama Siklus Uzunluğu</strong></td>
-              <td><strong>${stats.averageCycleLength} gün</strong></td>
-              <td>21 - 35 gün</td>
-              <td><span class="dr-badge-ok">${stats.averageCycleLength >= 21 && stats.averageCycleLength <= 35 ? 'Normal Fizyolojik Aralık' : 'Referans Dışı'}</span></td>
-            </tr>
-            <tr>
-              <td><strong>Ortalama Menstrüasyon (Kanama) Süresi</strong></td>
-              <td><strong>${stats.averagePeriodLength} gün</strong></td>
-              <td>3 - 7 gün</td>
-              <td><span class="dr-badge-ok">${stats.averagePeriodLength >= 3 && stats.averagePeriodLength <= 7 ? 'Normal' : 'İnceleme Önerilir'}</span></td>
-            </tr>
-            <tr>
-              <td><strong>Tahmini Luteal Faz Süresi</strong></td>
-              <td><strong>${stats.lutealLength} gün</strong></td>
-              <td>12 - 16 gün</td>
-              <td><span class="dr-badge-ok">Stabil</span></td>
-            </tr>
-            <tr>
-              <td><strong>Siklus Değişkenliği (Standart Sapma)</strong></td>
-              <td><strong>±${stats.stdDev} gün</strong></td>
-              <td>&lt; 3.0 gün</td>
-              <td><span class="dr-badge-ok">${stats.stdDev <= 3 ? 'Yüksek Düzen' : 'Takip Edilmeli'}</span></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Geçmiş Menstrüel Sikluslar Tablosu -->
-        <div class="dr-section-title" style="margin-top: 20px;">2. AYRINTILI SİKLUS GEÇMİŞİ (SON DÖNEMLER)</div>
-        <table class="dr-cycles-table">
-          <thead>
-            <tr>
-              <th>Döngü No</th>
-              <th>Başlangıç Tarihi</th>
-              <th>Bitiş Tarihi</th>
-              <th>Kanama Süresi</th>
-              <th>Siklus Aralığı</th>
-              <th>Klinik Durum</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${clusters.length > 0 ? clusters.map((c, i) => {
-              const prevCluster = clusters[i + 1];
-              const intervalDays = prevCluster 
-                ? CycleEngine.diffDays(c.startDate, prevCluster.startDate) 
-                : stats.averageCycleLength;
-
-              let statusText = 'Normal';
-              if (intervalDays > 35) statusText = 'Oligomenore (Uzun)';
-              else if (intervalDays < 21) statusText = 'Polimenore (Kısa)';
-
-              return `
-                <tr>
-                  <td><strong>${clusters.length - i}. Siklus</strong></td>
-                  <td>${this.formatDateTR(c.startDate)}</td>
-                  <td>${this.formatDateTR(c.endDate)}</td>
-                  <td>${c.duration} Gün</td>
-                  <td>${intervalDays} Gün</td>
-                  <td>${statusText}</td>
-                </tr>
-              `;
-            }).join('') : `
-              <tr>
-                <td colspan="6" style="text-align: center; color: #64748b; padding: 14px;">Henüz geçmiş döngü kaydı bulunmamaktadır.</td>
-              </tr>
-            `}
-          </tbody>
-        </table>
-
-        <!-- Semptom ve Akış Analizi -->
-        <div class="dr-section-title" style="margin-top: 20px;">3. BELİRTİ, SEMPTOM VE KANAMA YOĞUNLUĞU DAĞILIMI</div>
-        <div class="dr-symptoms-layout">
-          <!-- Semptom Sıklıkları -->
-          <div class="dr-subtable-box">
-            <h4 class="dr-subtable-title">Bildirilen Semptomlar & Görülme Sıklığı</h4>
-            <table class="dr-subtable">
-              <thead>
-                <tr>
-                  <th>Semptom / Şikayet</th>
-                  <th>Bildirilen Gün</th>
-                  <th>Oran</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${Object.keys(symptomCounts).length > 0 ? Object.keys(symptomCounts).map(k => {
-                  const label = symptomLabels[k] || k;
-                  const cnt = symptomCounts[k];
-                  const pct = Math.round((cnt / (clusters.length || 1)) * 100);
-                  return `
-                    <tr>
-                      <td>${label}</td>
-                      <td>${cnt} gün</td>
-                      <td>%${pct}</td>
-                    </tr>
-                  `;
-                }).join('') : `
-                  <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Spesifik semptom kaydedilmedi.</td></tr>
-                `}
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Kanama Yoğunluğu -->
-          <div class="dr-subtable-box">
-            <h4 class="dr-subtable-title">Kanama Patern Dağılımı</h4>
-            <div class="dr-flow-summary">
-              <div class="dr-flow-row">
-                <span>🔴 Yoğun Kanama (Menoraji Şüphesi):</span>
-                <strong>${flowCounts.heavy} gün</strong>
-              </div>
-              <div class="dr-flow-row">
-                <span>🩸 Orta Düzey Akış:</span>
-                <strong>${flowCounts.medium} gün</strong>
-              </div>
-              <div class="dr-flow-row">
-                <span>🌸 Hafif Kanama:</span>
-                <strong>${flowCounts.light} gün</strong>
-              </div>
-              <div class="dr-flow-row">
-                <span>✨ Lekelenme (Spotting):</span>
-                <strong>${flowCounts.spotting} gün</strong>
-              </div>
-            </div>
-            <p class="dr-flow-note">
-              * Kanama günlerinde ara lekelenmeler veya aşırı yoğun günler kaydedildiğinde hekiminizle paylaşmanız teşhisi kolaylaştırır.
-            </p>
-          </div>
-        </div>
-
-        <!-- Hekim Notu ve Klinik Değerlendirme Alanı -->
-        <div class="dr-section-title" style="margin-top: 20px;">4. HEKİM KLİNİK DEĞERLENDİRMESİ VE ÖNERİLER</div>
-        <div class="dr-doctor-notes-box">
-          <div class="dr-notes-lines">
-            <div class="note-line"></div>
-            <div class="note-line"></div>
-            <div class="note-line"></div>
-            <div class="note-line"></div>
-          </div>
-          <div class="dr-signature-row">
-            <div class="dr-sig-item">
-              <span>Muayene Tarihi: ____ / ____ / 202__</span>
-            </div>
-            <div class="dr-sig-item dr-stamp-box">
-              <span>Doktor Kaşe & İmza</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Alt Bilgi / Feragatname -->
-        <div class="dr-report-footer">
-          <p>
-            <strong>Bilgilendirme:</strong> Bu belge kullanıcının "Döngüm" sağlık uygulamasına girdiği verilere dayalı olarak hekim muayenesi öncesi istatistiki referans sunmak amacıyla oluşturulmuştur. Tıbbi tanı yerine geçmez, klinik laboratuvar ve ultrason bulgularıyla birlikte uzman hekim tarafından değerlendirilmelidir.
-          </p>
-        </div>
-      </div>
-    `;
-  }
-
-  // Modalı ekrana yerleştirir ve yazdırma/PDF akışını başlatır
-  openReportModal() {
-    let overlay = document.getElementById('doctorReportModalOverlay');
-    if (!overlay) {
-      overlay = document.createElement('div');
-      overlay.id = 'doctorReportModalOverlay';
-      overlay.className = 'doctor-report-overlay';
-      document.body.appendChild(overlay);
-    }
-
-    const reportContent = this.generateReportHtml();
-
-    overlay.innerHTML = `
-      <div class="doctor-modal-window">
-        <!-- Modal Üst Aksiyon Barı (Yazdırırken gizlenir) -->
-        <div class="dr-modal-actions-bar no-print">
-          <div class="dr-actions-left">
-            <span class="dr-badge-icon">🩺</span>
-            <h3>Jinekolog Klinik Sağlık Raporu</h3>
-          </div>
-          <div class="dr-actions-right">
-            <button type="button" class="btn-print-report" id="btnPrintReportPdf">
-              ${Icons.printer} PDF Olarak Kaydet / Yazdır
-            </button>
-            <button type="button" class="btn-close-report" id="btnCloseReportModal">
-              ${Icons.close}
-            </button>
-          </div>
-        </div>
-
-        <!-- Yazdırılabilir A4 Rapor Kağıdı -->
-        <div class="dr-paper-container">
-          ${reportContent}
-        </div>
-      </div>
-    `;
-
-    overlay.classList.add('active');
-
-    // Kapatma butonu
-    const closeBtn = overlay.querySelector('#btnCloseReportModal');
-    if (closeBtn) {
-      closeBtn.onclick = () => overlay.classList.remove('active');
-    }
-
-    overlay.onclick = (e) => {
-      if (e.target === overlay) overlay.classList.remove('active');
-    };
-
-    // PDF / Yazdır butonu
-    const printBtn = overlay.querySelector('#btnPrintReportPdf');
-    if (printBtn) {
-      printBtn.onclick = () => {
-        window.print();
-      };
-    }
   }
 }
 
@@ -10023,6 +9349,1779 @@ class FitnessComponent {
         <p class="cda-tip"><strong>💡 Beden İpucu:</strong> ${analysis.tip}</p>
       </div>
     `;
+  }
+}
+
+
+/**
+ * Döngüm - Akıllı Takvim ve Gün Yönetim Bileşeni
+ * Ay ve hafta bazlı interaktif takvim, faz göstergeleri,
+ * semptom/ruh hali ve hızlı regl başlatma/silme arayüzü
+ */
+
+
+
+
+
+class CalendarComponent {
+  constructor(containerEl, engine, storage, onDataChanged) {
+    this.container = containerEl;
+    this.engine = engine;
+    this.storage = storage;
+    this.onDataChanged = onDataChanged;
+
+    const today = new Date();
+    this.currentYear = today.getFullYear();
+    this.currentMonth = today.getMonth(); // 0-indexed
+    this.selectedDateStr = CycleEngine.formatDateStr(today);
+
+    this.weekDays = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+    this.monthNames = [
+      'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+      'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
+    ];
+
+    this.symptomList = [
+      { id: 'cramps', label: 'Kramplar', icon: '⚡' },
+      { id: 'headache', label: 'Baş Ağrısı', icon: '🤕' },
+      { id: 'bloating', label: 'Şişkinlik', icon: '🎈' },
+      { id: 'breast', label: 'Göğüs Hassasiyeti', icon: '🌸' },
+      { id: 'backache', label: 'Bel Ağrısı', icon: '🦴' },
+      { id: 'acne', label: 'Sivilce/Cilt', icon: '✨' },
+      { id: 'fatigue', label: 'Yorgunluk', icon: '😴' },
+      { id: 'nausea', label: 'Mide Bulantısı', icon: '🤢' },
+      { id: 'insomnia', label: 'Uykusuzluk', icon: '🌙' },
+      { id: 'craving', label: 'Tatlı/Aşerme', icon: '🍫' }
+    ];
+
+    this.moodList = [
+      { id: 'happy', label: 'Mutlu', icon: '😊' },
+      { id: 'calm', label: 'Sakin & Dingin', icon: '😌' },
+      { id: 'energetic', label: 'Enerjik & Canlı', icon: '⚡' },
+      { id: 'peaceful', label: 'Huzurlu', icon: '🕊️' },
+      { id: 'motivated', label: 'Motive & Odaklı', icon: '🎯' },
+      { id: 'confident', label: 'Özgüvenli', icon: '💃' },
+      { id: 'loving', label: 'Sevgi Dolu', icon: '💖' },
+      { id: 'craving', label: 'Aşeren / Tatlı', icon: '🍫' },
+      { id: 'sensitive', label: 'Duygusal', icon: '🥺' },
+      { id: 'irritated', label: 'Gergin / Sinirli', icon: '😤' },
+      { id: 'stressed', label: 'Stresli', icon: '🤯' },
+      { id: 'tired', label: 'Yorgun', icon: '🥱' },
+      { id: 'sad', label: 'Hüzünlü', icon: '😢' },
+      { id: 'anxious', label: 'Endişeli / Kaygılı', icon: '😰' },
+      { id: 'dreamy', label: 'Dalgın / Boşlukta', icon: '🌫️' },
+      { id: 'exhausted', label: 'Bitkin / Halsiz', icon: '🛌' }
+    ];
+
+    this.dischargeList = [
+      { id: 'dry', label: 'Kuru' },
+      { id: 'sticky', label: 'Yapışkan' },
+      { id: 'creamy', label: 'Kremamsı' },
+      { id: 'egg_white', label: 'Yumurta Akı (Doğurgan)' },
+      { id: 'watery', label: 'Sulu' }
+    ];
+  }
+
+  render() {
+    this.container.innerHTML = `
+      <div class="calendar-wrapper">
+        <!-- Takvim Başlığı ve Ay Değiştirici -->
+        <div class="calendar-header">
+          <div class="calendar-title-group">
+            <h2 class="calendar-title" id="calMonthTitle">
+              ${this.monthNames[this.currentMonth]} ${this.currentYear}
+            </h2>
+            <button class="cal-today-btn" id="calTodayBtn">Bugün</button>
+          </div>
+          <div class="calendar-nav-buttons">
+            <button class="cal-nav-btn" id="calPrevMonth" aria-label="Önceki Ay">
+              ${Icons.chevronLeft}
+            </button>
+            <button class="cal-nav-btn" id="calNextMonth" aria-label="Sonraki Ay">
+              ${Icons.chevronRight}
+            </button>
+          </div>
+        </div>
+
+        <!-- Faz Açıklama Rozetleri (Legend) -->
+        <div class="calendar-legend">
+          <span class="legend-item"><span class="legend-dot dot-period"></span> Regl</span>
+          <span class="legend-item"><span class="legend-dot dot-predicted"></span> Tahmini Regl</span>
+          <span class="legend-item"><span class="legend-dot dot-ovulation"></span> Yumurtlama</span>
+          <span class="legend-item"><span class="legend-dot dot-fertile"></span> Doğurgan</span>
+          <span class="legend-item"><span class="legend-dot dot-pms"></span> PMS</span>
+        </div>
+
+        <!-- Hafta Günleri -->
+        <div class="calendar-weekdays">
+          ${this.weekDays.map(d => `<div class="cal-weekday">${d}</div>`).join('')}
+        </div>
+
+        <!-- Gün Hücreleri Izgarası -->
+        <div class="calendar-days-grid" id="calDaysGrid">
+          ${this.buildDaysGridHtml()}
+        </div>
+      </div>
+
+      <!-- Gün Detayı ve Düzenleme Modalı (Alt Çekmece / Bottom Sheet) -->
+      <div class="day-modal-overlay" id="dayModalOverlay">
+        <div class="day-modal-sheet" id="dayModalSheet">
+          <div class="modal-drag-handle"></div>
+          <div class="day-modal-content" id="dayModalContent">
+            <!-- Dinamik doldurulur -->
+          </div>
+          <div class="modal-actions-bar" id="dayModalActionsBar">
+            <button type="button" class="btn-primary-action" id="btnSaveDayDetails">
+              ${Icons.check} Kaydet & Güncelle
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    this.attachEvents();
+  }
+
+  attachEvents() {
+    const prevBtn = this.container.querySelector('#calPrevMonth');
+    const nextBtn = this.container.querySelector('#calNextMonth');
+    const todayBtn = this.container.querySelector('#calTodayBtn');
+    const grid = this.container.querySelector('#calDaysGrid');
+    const modalOverlay = this.container.querySelector('#dayModalOverlay');
+
+    if (prevBtn) {
+      prevBtn.onclick = () => {
+        if (this.currentMonth === 0) {
+          this.currentMonth = 11;
+          this.currentYear--;
+        } else {
+          this.currentMonth--;
+        }
+        this.updateMonthView();
+      };
+    }
+
+    if (nextBtn) {
+      nextBtn.onclick = () => {
+        if (this.currentMonth === 11) {
+          this.currentMonth = 0;
+          this.currentYear++;
+        } else {
+          this.currentMonth++;
+        }
+        this.updateMonthView();
+      };
+    }
+
+    if (todayBtn) {
+      todayBtn.onclick = () => {
+        const today = new Date();
+        this.currentYear = today.getFullYear();
+        this.currentMonth = today.getMonth();
+        this.selectedDateStr = CycleEngine.formatDateStr(today);
+        this.updateMonthView();
+        this.openDayModal(this.selectedDateStr);
+      };
+    }
+
+    if (grid) {
+      grid.onclick = (e) => {
+        const dayCell = e.target.closest('.cal-day-cell');
+        if (dayCell && dayCell.dataset.date) {
+          this.selectedDateStr = dayCell.dataset.date;
+          this.highlightSelectedCell();
+          this.openDayModal(this.selectedDateStr);
+        }
+      };
+    }
+
+    if (modalOverlay) {
+      modalOverlay.onclick = (e) => {
+        if (e.target === modalOverlay) {
+          this.closeDayModal();
+        }
+      };
+    }
+  }
+
+  updateMonthView() {
+    const title = this.container.querySelector('#calMonthTitle');
+    const grid = this.container.querySelector('#calDaysGrid');
+    if (title) {
+      title.textContent = `${this.monthNames[this.currentMonth]} ${this.currentYear}`;
+    }
+    if (grid) {
+      grid.innerHTML = this.buildDaysGridHtml();
+    }
+  }
+
+  highlightSelectedCell() {
+    this.container.querySelectorAll('.cal-day-cell').forEach(cell => {
+      cell.classList.toggle('selected-cell', cell.dataset.date === this.selectedDateStr);
+    });
+  }
+
+  // --- Gün Hücreleri Üretimi ---
+  buildDaysGridHtml() {
+    const firstDay = new Date(this.currentYear, this.currentMonth, 1);
+    const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0);
+    const totalDays = lastDay.getDate();
+
+    // Pazartesi ilk gün (0 = Pzt, 6 = Paz)
+    let startDayOfWeek = firstDay.getDay() - 1;
+    if (startDayOfWeek === -1) startDayOfWeek = 6;
+
+    const todayStr = CycleEngine.formatDateStr(new Date());
+    let html = '';
+
+    // Önceki aydan taşan boşluklar
+    for (let i = 0; i < startDayOfWeek; i++) {
+      html += `<div class="cal-day-cell empty-day"></div>`;
+    }
+
+    // Ayın günleri
+    for (let d = 1; d <= totalDays; d++) {
+      const dateObj = new Date(this.currentYear, this.currentMonth, d);
+      const dateStr = CycleEngine.formatDateStr(dateObj);
+      const dayData = this.storage.getDayData(dateStr) || {};
+      const status = this.engine.getDayStatus(dateStr);
+      const isToday = (dateStr === todayStr);
+      const isSelected = (dateStr === this.selectedDateStr);
+
+      const symptomsList = Array.isArray(dayData.symptoms) ? dayData.symptoms : [];
+      const hasSymptoms = symptomsList.length > 0;
+      const moodsList = Array.isArray(dayData.moods) ? dayData.moods : (dayData.mood ? [dayData.mood] : []);
+      const hasMood = moodsList.length > 0;
+      const hasNotes = !!(dayData.notes && dayData.notes.trim());
+
+      let primarySymptomIcon = '';
+      if (hasSymptoms) {
+        const foundSym = this.symptomList.find(s => s.id === symptomsList[0]);
+        primarySymptomIcon = foundSym ? foundSym.icon : '⚡';
+      }
+      let moodBadgeHtml = '';
+      if (hasMood) {
+        const foundMood = this.moodList.find(m => m.id === moodsList[0]);
+        const primaryMoodIcon = foundMood ? foundMood.icon : '✨';
+        const extraMoodCount = moodsList.length - 1;
+        moodBadgeHtml = `<span class="indicator-sym-badge" title="${moodsList.length} Ruh Hali">${primaryMoodIcon}${extraMoodCount > 0 ? `<sup class="sym-plus">+${extraMoodCount}</sup>` : ''}</span>`;
+      }
+
+      // CSS Sınıfları
+      const classes = ['cal-day-cell'];
+      if (isToday) classes.push('is-today');
+      if (isSelected) classes.push('selected-cell');
+
+      if (status.phase === 'period') classes.push('phase-period');
+      else if (status.phase === 'predicted_period') classes.push('phase-predicted-period');
+      else if (status.phase === 'ovulation') classes.push('phase-ovulation');
+      else if (status.phase === 'fertile') classes.push('phase-fertile');
+      else if (status.phase === 'pms') classes.push('phase-pms');
+
+      html += `
+        <div class="${classes.join(' ')}" data-date="${dateStr}">
+          <span class="day-number">${d}</span>
+          <div class="day-indicators">
+            ${status.phase === 'period' ? `<span class="indicator-dot period-dot" title="Regl"></span>` : ''}
+            ${status.phase === 'predicted_period' ? `<span class="indicator-dot predicted-dot" title="Tahmini Regl"></span>` : ''}
+            ${status.phase === 'ovulation' ? `<span class="indicator-dot ovulation-dot" title="Yumurtlama"></span>` : ''}
+            ${status.phase === 'fertile' ? `<span class="indicator-dot fertile-dot" title="Doğurgan Gün"></span>` : ''}
+            ${status.phase === 'pms' ? `<span class="indicator-dot pms-dot" title="PMS Dönemi"></span>` : ''}
+            ${hasSymptoms ? `<span class="indicator-sym-badge" title="${symptomsList.length} belirti: ${symptomsList.join(', ')}">${primarySymptomIcon}${symptomsList.length > 1 ? `<sup class="sym-plus">+</sup>` : ''}</span>` : ''}
+            ${moodBadgeHtml}
+            ${hasNotes ? `<span class="indicator-note-badge" title="Kişisel Not">📝</span>` : ''}
+            ${dayData && dayData.exercise ? `<span class="indicator-sym-badge" title="Egzersiz: ${dayData.exercise.typeName || 'Antrenman'} (${dayData.exercise.duration} dk)">${dayData.exercise.feelIcon || '🏃'}</span>` : ''}
+            ${dayData && typeof dayData.waterIntake === 'number' && dayData.waterIntake > 0 ? `<span class="indicator-sym-badge" title="Su: ${dayData.waterIntake} ml">💧</span>` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    return html;
+  }
+
+  // --- Gün Detayı & Düzenleme Modalı ---
+  openDayModal(dateStr, focusSection = null) {
+    const modalOverlay = this.container.querySelector('#dayModalOverlay');
+    const modalContent = this.container.querySelector('#dayModalContent');
+    if (!modalOverlay || !modalContent) return;
+
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const dateObj = new Date(y, m - 1, d);
+    const dayName = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'][dateObj.getDay()];
+    const formattedDateTitle = `${d} ${this.monthNames[m - 1]} ${y}, ${dayName}`;
+
+    // DOĞRUDAN DEPOLAMADAN OKU (Storage'den birebir veri garantisi)
+    const dayData = this.storage.getDayData(dateStr) || {};
+    const status = this.engine.getDayStatus(dateStr);
+    const profileSettings = this.storage.getProfileData()?.settings || {};
+    const waterTarget = profileSettings.waterTarget || 2250;
+
+    const isPeriod = !!dayData.isPeriod;
+    const currentFlow = dayData.flow || 'medium';
+    const currentSymptoms = Array.isArray(dayData.symptoms) ? [...dayData.symptoms] : [];
+    
+    // Çoklu Ruh Hali (Multi-Select Mood)
+    let selectedMoods = Array.isArray(dayData.moods) 
+      ? [...dayData.moods] 
+      : (dayData.mood ? [dayData.mood] : []);
+    
+    const currentDischarge = dayData.discharge || '';
+    const currentNotes = dayData.notes || '';
+    let currentWater = (typeof dayData.waterIntake === 'number') ? dayData.waterIntake : 0;
+    let currentExercise = dayData.exercise ? { ...dayData.exercise } : null;
+
+    // Egzersiz Formu Yerel Durumları
+    let isEditingExercise = false;
+    let formExType = currentExercise?.type || 'yoga';
+    let formExDuration = currentExercise?.duration || 30;
+    let formExIntensity = currentExercise?.intensity || 'moderate';
+    let formExFeel = currentExercise?.feel || 'energized';
+    let formExNote = currentExercise?.note || '';
+
+    const exerciseTypesList = EXERCISE_TYPES || [
+      { id: 'yoga', name: 'Yoga & Esneme', icon: '🧘‍♀️', calPerHour: 220, badge: 'Onarıcı' },
+      { id: 'walking', name: 'Tempolu Yürüyüş', icon: '🚶‍♀️', calPerHour: 280, badge: 'Düşük Nabız' },
+      { id: 'running', name: 'Koşu / Jogging', icon: '🏃‍♀️', calPerHour: 550, badge: 'Kardiyo' },
+      { id: 'pilates', name: 'Pilates & Matwork', icon: '🤸‍♀️', calPerHour: 340, badge: 'Merkez Güç' },
+      { id: 'strength', name: 'Ağırlık & Kuvvet', icon: '🏋️‍♀️', calPerHour: 420, badge: 'Kas Gelişimi' },
+      { id: 'swimming', name: 'Yüzme', icon: '🏊‍♀️', calPerHour: 480, badge: 'Tüm Vücut' },
+      { id: 'dance', name: 'Dans / Zumba', icon: '💃', calPerHour: 380, badge: 'Eğlenceli' },
+      { id: 'hiit', name: 'HIIT & Fonksiyonel', icon: '⚡', calPerHour: 620, badge: 'Yüksek Efor' },
+      { id: 'cycling', name: 'Bisiklet / Spin', icon: '🚴‍♀️', calPerHour: 450, badge: 'Dayanıklılık' },
+      { id: 'breath', name: 'Nefes & Mobilite', icon: '🫁', calPerHour: 120, badge: 'Zihinsel Sakinlik' }
+    ];
+
+    const intensityLevelsList = INTENSITY_LEVELS || [
+      { id: 'light', name: 'Hafif & Rahatlatıcı', icon: '🟢', desc: 'Düşük nabız, derin nefes' },
+      { id: 'moderate', name: 'Orta Seviye', icon: '🟡', desc: 'Terleten, dengeli tempo' },
+      { id: 'high', name: 'Yüksek Yoğunluk', icon: '🔴', desc: 'Maksimum nabız ve efor' }
+    ];
+
+    const feelingLevelsList = FEELING_LEVELS || [
+      { id: 'energized', name: 'Enerjik & Canlı', icon: '🌟' },
+      { id: 'relaxed', name: 'Rahatlamış & Sakin', icon: '🧘‍♀️' },
+      { id: 'strong', name: 'Güçlü & Özgüvenli', icon: '💪' },
+      { id: 'tired_happy', name: 'Tatlı Yorgunluk', icon: '😊' },
+      { id: 'exhausted', name: 'Zorlandım / Yorgun', icon: '🥵' }
+    ];
+
+    const getCalendarPhaseGuidance = (phase) => {
+      switch (phase) {
+        case 'period':
+          return '🩸 Menstrüasyon: Bol ılık su, magnezyum ağırlıklı beslenme ve dinlenmeye öncelik verin.';
+        case 'predicted_period':
+          return '🩸 Tahmini Regl: Kramplar için sıcak su torbası ve sakin aktiviteler hazırlayın.';
+        case 'follicular':
+          return '🌱 Foliküler Faz: Yüksek motivasyon; yeni projelere başlamak ve spor için en verimli evre.';
+        case 'ovulation':
+          return '✨ Ovülasyon: Doğurganlık zirvede. Sosyalleşmek ve enerjik aktiviteler için ideal zaman.';
+        case 'fertile':
+          return '🌸 Doğurgan Pencere: Enerjiniz yüksek; vücut sıcaklığı hafifçe yükselebilir, bol su tüketin.';
+        case 'pms':
+          return '🌙 Luteal / PMS: Kafeini azaltın, papatya çayı ve esneme hareketleriyle kendinizi rahatlatın.';
+        default:
+          return '✨ Dengeli Evre: Düzenli uyku, dengeli beslenme ve yürüyüşlerle ritminizi koruyun.';
+      }
+    };
+
+    const calcCalories = (typeId, minutes) => {
+      const t = exerciseTypesList.find(x => x.id === typeId);
+      const cph = t ? t.calPerHour : 300;
+      return Math.round((cph * (minutes || 30)) / 60);
+    };
+
+    const getExerciseCompatibilityHtml = (phaseKey, typeId, intensity) => {
+      if (typeof FitnessComponent !== 'undefined' && FitnessComponent.analyzeExerciseCompatibility) {
+        const comp = FitnessComponent.analyzeExerciseCompatibility(phaseKey, typeId, intensity);
+        return `
+          <div class="cal-ex-compatibility-box ${comp.badgeClass}">
+            <span class="cec-status">${comp.statusText}</span>
+            <p class="cec-desc">${comp.description}</p>
+          </div>
+        `;
+      }
+      return '';
+    };
+
+    // Render Modal İçeriği
+    const renderModalBody = () => {
+      const waterPercent = Math.min(100, Math.round((currentWater / waterTarget) * 100));
+
+      modalContent.innerHTML = `
+        <div class="modal-header-row">
+          <div>
+            <span class="modal-date-subtitle">${dayName}</span>
+            <h3 class="modal-date-title">${d} ${this.monthNames[m - 1]} ${y}</h3>
+          </div>
+          <button class="modal-close-btn" id="modalCloseBtn" aria-label="Kapat">
+            ${Icons.close}
+          </button>
+        </div>
+
+        <!-- Faz ve Tahmin Özeti Kartı -->
+        <div class="modal-phase-banner phase-bg-${status.phase}">
+          <div class="phase-banner-info">
+            <span class="phase-tag">${status.phaseBadge}</span>
+            <h4>${status.phaseName}</h4>
+            <p>${status.description}</p>
+            <div class="phase-banner-guidance">${getCalendarPhaseGuidance(status.phase)}</div>
+          </div>
+          <div class="pregnancy-badge">
+            <span class="preg-label">Hamilelik Olasılığı</span>
+            <strong>${status.pregnancyChance}</strong>
+          </div>
+        </div>
+
+        <!-- REGL GİRİŞ / DÜZELTME / SİLME KONTROLÜ -->
+        <div class="modal-section period-control-section">
+          <label class="section-label">🩸 Regl & Kanama Kaydı</label>
+          
+          <div class="period-toggle-row">
+            <button type="button" class="btn-period-toggle ${isPeriod ? 'active-period' : ''}" id="btnTogglePeriod">
+              ${isPeriod ? '✓ Bugün Regl Olundu' : '+ Regl Olarak İşaretle'}
+            </button>
+            ${isPeriod ? `
+              <button type="button" class="btn-period-delete" id="btnDeletePeriod" title="Bu günün regl kaydını sil / temizle">
+                ${Icons.trash} Kaldır
+              </button>
+            ` : ''}
+          </div>
+
+          <p class="period-calc-hint">
+            ${isPeriod 
+              ? 'ℹ️ Bu günün kaydı kayıtlıdır. Süreyi değiştirmek için dilediğiniz günleri tek tek silebilir veya ekleyebilirsiniz.'
+              : '💡 Bu günü işaretlediğinizde, ortalama sürenize göre sonraki günler otomatik hesaplanıp takvime işlenir.'}
+          </p>
+
+          <div class="flow-selector ${isPeriod ? '' : 'disabled-flow'}" id="flowSelector">
+            <span class="flow-label">Kanama Yoğunluğu:</span>
+            <div class="flow-buttons">
+              <button type="button" class="flow-btn ${currentFlow === 'spotting' ? 'selected' : ''}" data-flow="spotting">
+                <span class="flow-dot f-spotting"></span> Lekelenme
+              </button>
+              <button type="button" class="flow-btn ${currentFlow === 'light' ? 'selected' : ''}" data-flow="light">
+                <span class="flow-dot f-light"></span> Hafif
+              </button>
+              <button type="button" class="flow-btn ${currentFlow === 'medium' ? 'selected' : ''}" data-flow="medium">
+                <span class="flow-dot f-medium"></span> Orta
+              </button>
+              <button type="button" class="flow-btn ${currentFlow === 'heavy' ? 'selected' : ''}" data-flow="heavy">
+                <span class="flow-dot f-heavy"></span> Yoğun
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DETAYLI SU KAYDI BÖLÜMÜ -->
+        <div class="modal-section cal-water-detail-section">
+          <div class="section-label-row">
+            <label class="section-label">💧 Günün Su Tüketimi</label>
+            <span class="cal-water-percent-badge ${waterPercent >= 100 ? 'goal-reached' : ''}">%${waterPercent} Hedef</span>
+          </div>
+
+          <div class="cal-water-card">
+            <div class="cal-water-header">
+              <div class="cal-water-metric">
+                <span class="cal-water-cup-icon">🌊</span>
+                <div>
+                  <div class="cal-water-numbers">
+                    <strong class="cal-water-amount" id="dmWaterDisplay">${currentWater} ml</strong>
+                    <span class="cal-water-target-label">/ ${waterTarget} ml</span>
+                  </div>
+                  <span class="cal-water-status-note">
+                    ${waterPercent >= 100 
+                      ? '🎉 Mükemmel hidrasyon seviyesi! Ödem ve kramplara karşı koruma sağlandı.' 
+                      : `Hedefe ${Math.max(0, waterTarget - currentWater)} ml kaldı.`}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- İlerleme Çubuğu -->
+            <div class="cal-water-track">
+              <div class="cal-water-fill" id="dmWaterFill" style="width: ${waterPercent}%;"></div>
+            </div>
+
+            <!-- Hızlı Ekleme Butonları -->
+            <div class="cal-water-btn-grid">
+              <button type="button" class="btn-cal-water" data-delta="250">
+                <span class="bcw-icon">🥛</span>
+                <span>+250 ml</span>
+              </button>
+              <button type="button" class="btn-cal-water" data-delta="330">
+                <span class="bcw-icon">☕</span>
+                <span>+330 ml</span>
+              </button>
+              <button type="button" class="btn-cal-water" data-delta="500">
+                <span class="bcw-icon">🍶</span>
+                <span>+500 ml</span>
+              </button>
+              <button type="button" class="btn-cal-water" data-delta="200">
+                <span class="bcw-icon">🫖</span>
+                <span>+200 ml</span>
+              </button>
+              <button type="button" class="btn-cal-water btn-cal-water-sub" data-delta="-250">
+                <span class="bcw-icon">↩️</span>
+                <span>-250 ml</span>
+              </button>
+              <button type="button" class="btn-cal-water btn-cal-water-zero" id="btnCalWaterReset" title="Sıfırla">
+                <span class="bcw-icon">🗑️</span>
+                <span>Sıfırla</span>
+              </button>
+            </div>
+
+            <!-- Manuel Giriş Alanı -->
+            <div class="cal-water-custom-box">
+              <span class="cwcb-label">Tam Miktar Gir:</span>
+              <div class="cwcb-input-group">
+                <input type="number" min="0" max="6000" step="50" class="form-input cal-water-input" id="calWaterCustomInput" value="${currentWater}" placeholder="örn. 1750">
+                <span class="cwcb-unit">ml</span>
+                <button type="button" class="btn-cal-water-apply" id="btnCalWaterApply">Kaydet</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DETAYLI EGZERSİZ KAYDI BÖLÜMÜ -->
+        <div class="modal-section cal-exercise-detail-section">
+          <div class="section-label-row">
+            <label class="section-label">🏃‍♀️ Egzersiz & Fiziksel Aktivite</label>
+            ${currentExercise && !isEditingExercise ? `
+              <span class="cal-ex-logged-badge">✓ Kayıtlı</span>
+            ` : ''}
+          </div>
+
+          ${currentExercise && !isEditingExercise ? `
+            <!-- Kayıtlı Egzersiz Kartı -->
+            <div class="cal-logged-workout-card">
+              <div class="clw-top">
+                <div class="clw-title-wrap">
+                  <span class="clw-icon">${currentExercise.feelIcon || '🏃‍♀️'}</span>
+                  <div>
+                    <h5 class="clw-name">${currentExercise.typeName || 'Egzersiz'}</h5>
+                    <span class="clw-meta">⏱️ ${currentExercise.duration} Dakika • ${currentExercise.intensityName || 'Orta Seviye'} • 🔥 ~${calcCalories(currentExercise.type, currentExercise.duration)} kcal</span>
+                  </div>
+                </div>
+                <div class="clw-actions">
+                  <button type="button" class="btn-clw-edit" id="btnEditCalExercise" title="Düzenle">
+                    ✏️ Düzenle
+                  </button>
+                  <button type="button" class="btn-clw-delete" id="btnDeleteCalExercise" title="Sil">
+                    ${Icons.trash}
+                  </button>
+                </div>
+              </div>
+
+              <div class="clw-badges-row">
+                <span class="clw-badge badge-feel">${currentExercise.feelIcon || '🌟'} ${currentExercise.feelName || 'İyi'}</span>
+                <span class="clw-badge badge-intensity">${currentExercise.intensityName || 'Normal'}</span>
+                <span class="clw-badge badge-calories">🔥 ~${calcCalories(currentExercise.type, currentExercise.duration)} kcal</span>
+              </div>
+
+              ${currentExercise.note ? `
+                <p class="clw-note">📝 "${currentExercise.note}"</p>
+              ` : ''}
+
+              <!-- Faz Uyum Analizi -->
+              <div class="clw-benefit-box">
+                <span class="clw-benefit-title">🌸 ${formattedDateTitle} Döngü Katkısı:</span>
+                <p class="clw-benefit-text">${currentExercise.cycleBenefit || 'Biyolojik fazınıza uygun hareket hormonları dengeleyip stresi azaltır.'}</p>
+              </div>
+            </div>
+          ` : (isEditingExercise || !currentExercise ? `
+            <!-- İnteraktif Egzersiz Formu -->
+            <div class="cal-exercise-form-card" id="calExerciseFormCard">
+              <div class="cefc-header">
+                <h5>${isEditingExercise ? '✏️ Egzersiz Kaydını Güncelle' : '+ Detaylı Egzersiz Kaydı Ekle'}</h5>
+                ${isEditingExercise ? `
+                  <button type="button" class="btn-cefc-cancel" id="btnCancelEditExercise">Vazgeç</button>
+                ` : ''}
+              </div>
+
+              <!-- 1. Egzersiz Türü -->
+              <div class="cefc-field">
+                <label class="cefc-label">1. Egzersiz Türü:</label>
+                <div class="cefc-types-grid" id="cefcTypesGrid">
+                  ${exerciseTypesList.map(t => `
+                    <button type="button" class="cefc-type-btn ${t.id === formExType ? 'selected' : ''}" data-type="${t.id}">
+                      <span class="cet-icon">${t.icon}</span>
+                      <span class="cet-name">${t.name}</span>
+                      <span class="cet-badge">${t.badge}</span>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- 2. Süre -->
+              <div class="cefc-field">
+                <div class="cefc-label-row">
+                  <label class="cefc-label">2. Süre (Dakika):</label>
+                  <strong class="cefc-dur-val" id="cefcDurationDisplay">${formExDuration} Dakika</strong>
+                </div>
+                <div class="cefc-duration-chips" id="cefcDurationChips">
+                  ${[15, 20, 30, 45, 60, 90].map(dur => `
+                    <button type="button" class="cefc-dur-chip ${dur === formExDuration ? 'selected' : ''}" data-dur="${dur}">${dur} dk</button>
+                  `).join('')}
+                </div>
+                <input type="range" min="5" max="120" step="5" value="${formExDuration}" class="cefc-slider" id="cefcDurationSlider">
+              </div>
+
+              <!-- 3. Yoğunluk -->
+              <div class="cefc-field">
+                <label class="cefc-label">3. Yoğunluk Seviyesi:</label>
+                <div class="cefc-intensity-grid" id="cefcIntensityGrid">
+                  ${intensityLevelsList.map(lvl => `
+                    <button type="button" class="cefc-intensity-btn ${lvl.id === formExIntensity ? 'selected' : ''}" data-intensity="${lvl.id}">
+                      <span class="cil-icon">${lvl.icon}</span>
+                      <div class="cil-info">
+                        <strong class="cil-name">${lvl.name}</strong>
+                        <span class="cil-desc">${lvl.desc}</span>
+                      </div>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Biyolojik Uyum & Kalori Bilgisi -->
+              <div class="cefc-feedback-box" id="cefcFeedbackBox">
+                <div class="cfb-calorie-row">
+                  <span>🔥 Tahmini Yakılan Kalori:</span>
+                  <strong id="cefcCaloriesVal">~${calcCalories(formExType, formExDuration)} kcal</strong>
+                </div>
+                <div id="cefcCompatibilityWrap">
+                  ${getExerciseCompatibilityHtml(status.phase, formExType, formExIntensity)}
+                </div>
+              </div>
+
+              <!-- 4. Egzersiz Sonrası Hissiyat -->
+              <div class="cefc-field">
+                <label class="cefc-label">4. Egzersiz Sonrası Hissiyat:</label>
+                <div class="cefc-feelings-grid" id="cefcFeelingsGrid">
+                  ${feelingLevelsList.map(f => `
+                    <button type="button" class="cefc-feel-btn ${f.id === formExFeel ? 'selected' : ''}" data-feel="${f.id}">
+                      <span class="cfl-icon">${f.icon}</span>
+                      <span class="cfl-name">${f.name}</span>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- 5. Not -->
+              <div class="cefc-field">
+                <label class="cefc-label">5. Antrenman Notu (İsteğe Bağlı):</label>
+                <input type="text" id="cefcWorkoutNote" class="form-input" placeholder="Örn: Açık havada iyi geldi, nabız dengeliydi..." value="${formExNote}">
+              </div>
+
+              <div class="cefc-actions">
+                <button type="button" class="btn-primary-action btn-save-cefc-workout" id="btnSaveCefcWorkout">
+                  ${Icons.check} Egzersizi Bu Güne Kaydet
+                </button>
+              </div>
+            </div>
+          ` : '')}
+        </div>
+
+        <!-- SEMPTOMLAR -->
+        <div class="modal-section">
+          <label class="section-label">⚡ Günlük Semptomlar & Belirtiler</label>
+          <div class="chips-grid" id="symptomsChips">
+            ${this.symptomList.map(s => {
+              const active = currentSymptoms.includes(s.id);
+              return `
+                <button type="button" class="chip-item ${active ? 'chip-active' : ''}" data-id="${s.id}">
+                  <span class="chip-icon">${s.icon}</span>
+                  <span class="chip-text">${s.label}</span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
+        <!-- ÇOKLU RUH HALİ SEÇİMİ (MULTI-SELECT MOOD) -->
+        <div class="modal-section">
+          <div class="section-label-row">
+            <label class="section-label">✨ Ruh Hali & Duygu Durumu</label>
+            <span class="mood-selection-counter" id="moodCounterBadge">
+              ${selectedMoods.length > 0 ? `${selectedMoods.length} duygu seçildi` : 'Birden fazla seçilebilir'}
+            </span>
+          </div>
+          <div class="chips-grid" id="moodChips">
+            ${this.moodList.map(m => {
+              const active = selectedMoods.includes(m.id);
+              return `
+                <button type="button" class="chip-item ${active ? 'chip-active' : ''}" data-id="${m.id}">
+                  <span class="chip-icon">${m.icon}</span>
+                  <span class="chip-text">${m.label}</span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
+        <!-- AKINTI TİPİ -->
+        <div class="modal-section">
+          <label class="section-label">💧 Akıntı Durumu</label>
+          <div class="chips-row" id="dischargeChips">
+            ${this.dischargeList.map(d => {
+              const active = currentDischarge === d.id;
+              return `
+                <button type="button" class="chip-pill ${active ? 'chip-active' : ''}" data-id="${d.id}">
+                  ${d.label}
+                </button>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
+        <!-- NOTLAR -->
+        <div class="modal-section">
+          <label class="section-label">📝 Kişisel Not</label>
+          <textarea class="notes-textarea" id="dayNotesInput" placeholder="Bugün nasıl hissediyorsunuz? İlaç, uyku veya özel durumlar..." rows="3">${currentNotes}</textarea>
+        </div>
+      `;
+
+      attachModalEvents();
+    };
+
+    // Tüm Gün Verisini Kalıcı Olarak Saklayan Fonksiyon
+    const persistDayState = (notifyUI = true) => {
+      const notesInput = modalContent.querySelector('#dayNotesInput');
+      const notes = notesInput ? notesInput.value.trim() : currentNotes;
+      
+      this.storage.saveDayData(dateStr, {
+        isPeriod: activePeriodState,
+        flow: activePeriodState ? selectedFlow : null,
+        symptoms: [...selectedSymptoms],
+        moods: [...selectedMoods],
+        mood: selectedMoods[0] || null, // Geriye dönük uyumluluk
+        discharge: selectedDischarge || null,
+        notes: notes,
+        waterIntake: currentWater,
+        exercise: currentExercise
+      });
+
+      this.engine.syncSettingsFromCalendarData();
+      if (notifyUI) {
+        this.notifyUpdate();
+      }
+    };
+
+    let activePeriodState = isPeriod;
+    let selectedFlow = currentFlow;
+    let selectedSymptoms = [...currentSymptoms];
+    let selectedDischarge = currentDischarge;
+
+    // Modal İçi Etkinlik Dinleyicileri
+    const attachModalEvents = () => {
+      const closeBtn = modalContent.querySelector('#modalCloseBtn');
+      const togglePeriodBtn = modalContent.querySelector('#btnTogglePeriod');
+      const deletePeriodBtn = modalContent.querySelector('#btnDeletePeriod');
+      const flowSelector = modalContent.querySelector('#flowSelector');
+      const saveBtn = this.container.querySelector('#btnSaveDayDetails');
+      const notesInput = modalContent.querySelector('#dayNotesInput');
+
+      if (closeBtn) {
+        closeBtn.onclick = () => {
+          persistDayState(true);
+          this.closeDayModal();
+        };
+      }
+
+      // Regl Aç / Kapat
+      if (togglePeriodBtn) {
+        togglePeriodBtn.onclick = () => {
+          activePeriodState = !activePeriodState;
+          togglePeriodBtn.classList.toggle('active-period', activePeriodState);
+          togglePeriodBtn.innerHTML = activePeriodState ? '✓ Bugün Regl Olundu' : '+ Regl Olarak İşaretle';
+          if (flowSelector) flowSelector.classList.toggle('disabled-flow', !activePeriodState);
+
+          if (activePeriodState) {
+            this.engine.logPeriodStart(dateStr, selectedFlow);
+          } else {
+            this.engine.togglePeriodDay(dateStr, false);
+          }
+          persistDayState(true);
+        };
+      }
+
+      // Regl Kaydını Kaldır
+      if (deletePeriodBtn) {
+        deletePeriodBtn.onclick = () => {
+          this.engine.togglePeriodDay(dateStr, false);
+          activePeriodState = false;
+          persistDayState(true);
+          renderModalBody();
+        };
+      }
+
+      // Akış Yoğunluğu
+      if (flowSelector) {
+        flowSelector.querySelectorAll('.flow-btn').forEach(btn => {
+          btn.onclick = () => {
+            flowSelector.querySelectorAll('.flow-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedFlow = btn.dataset.flow;
+            if (activePeriodState) {
+              this.engine.togglePeriodDay(dateStr, true, selectedFlow);
+              persistDayState(true);
+            }
+          };
+        });
+      }
+
+      // --- SU KAYDI BUTONLARI & MANUEL GİRİŞ ---
+      const waterDisplay = modalContent.querySelector('#dmWaterDisplay');
+      const waterFill = modalContent.querySelector('#dmWaterFill');
+      const waterCustomInput = modalContent.querySelector('#calWaterCustomInput');
+      const btnWaterApply = modalContent.querySelector('#btnCalWaterApply');
+      const btnWaterReset = modalContent.querySelector('#btnCalWaterReset');
+
+      const updateWaterUi = () => {
+        if (waterDisplay) waterDisplay.textContent = `${currentWater} ml`;
+        const pct = Math.min(100, Math.round((currentWater / waterTarget) * 100));
+        if (waterFill) waterFill.style.width = `${pct}%`;
+        if (waterCustomInput) waterCustomInput.value = currentWater;
+        
+        const badge = modalContent.querySelector('.cal-water-percent-badge');
+        if (badge) {
+          badge.textContent = `%${pct} Hedef`;
+          badge.classList.toggle('goal-reached', pct >= 100);
+        }
+      };
+
+      modalContent.querySelectorAll('.btn-cal-water[data-delta]').forEach(btn => {
+        btn.onclick = () => {
+          const delta = parseInt(btn.dataset.delta, 10) || 0;
+          currentWater = Math.max(0, currentWater + delta);
+          updateWaterUi();
+          persistDayState(true);
+        };
+      });
+
+      if (btnWaterReset) {
+        btnWaterReset.onclick = () => {
+          currentWater = 0;
+          updateWaterUi();
+          persistDayState(true);
+        };
+      }
+
+      if (btnWaterApply && waterCustomInput) {
+        btnWaterApply.onclick = () => {
+          const val = parseInt(waterCustomInput.value, 10);
+          if (!isNaN(val) && val >= 0) {
+            currentWater = val;
+            updateWaterUi();
+            persistDayState(true);
+            btnWaterApply.textContent = '✓';
+            setTimeout(() => { if (btnWaterApply) btnWaterApply.textContent = 'Kaydet'; }, 1000);
+          }
+        };
+      }
+
+      // --- EGZERSİZ ETKİNLİKLERİ & FORM ---
+      const btnEditEx = modalContent.querySelector('#btnEditCalExercise');
+      const btnDeleteEx = modalContent.querySelector('#btnDeleteCalExercise');
+      const btnCancelEdit = modalContent.querySelector('#btnCancelEditExercise');
+      const btnSaveWorkout = modalContent.querySelector('#btnSaveCefcWorkout');
+
+      if (btnEditEx) {
+        btnEditEx.onclick = () => {
+          isEditingExercise = true;
+          renderModalBody();
+        };
+      }
+
+      if (btnDeleteEx) {
+        btnDeleteEx.onclick = () => {
+          if (confirm('Bu günün egzersiz kaydı silinsin mi?')) {
+            currentExercise = null;
+            isEditingExercise = false;
+            persistDayState(true);
+            renderModalBody();
+          }
+        };
+      }
+
+      if (btnCancelEdit) {
+        btnCancelEdit.onclick = () => {
+          isEditingExercise = false;
+          renderModalBody();
+        };
+      }
+
+      // Egzersiz Formu Seçicileri
+      const updateExerciseFormLiveState = () => {
+        const calVal = modalContent.querySelector('#cefcCaloriesVal');
+        if (calVal) calVal.textContent = `~${calcCalories(formExType, formExDuration)} kcal`;
+
+        const compWrap = modalContent.querySelector('#cefcCompatibilityWrap');
+        if (compWrap) compWrap.innerHTML = getExerciseCompatibilityHtml(status.phase, formExType, formExIntensity);
+      };
+
+      modalContent.querySelectorAll('#cefcTypesGrid .cefc-type-btn').forEach(btn => {
+        btn.onclick = () => {
+          modalContent.querySelectorAll('#cefcTypesGrid .cefc-type-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          formExType = btn.dataset.type;
+          updateExerciseFormLiveState();
+        };
+      });
+
+      const durDisplay = modalContent.querySelector('#cefcDurationDisplay');
+      const durSlider = modalContent.querySelector('#cefcDurationSlider');
+
+      modalContent.querySelectorAll('#cefcDurationChips .cefc-dur-chip').forEach(btn => {
+        btn.onclick = () => {
+          modalContent.querySelectorAll('#cefcDurationChips .cefc-dur-chip').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          formExDuration = parseInt(btn.dataset.dur, 10);
+          if (durDisplay) durDisplay.textContent = `${formExDuration} Dakika`;
+          if (durSlider) durSlider.value = formExDuration;
+          updateExerciseFormLiveState();
+        };
+      });
+
+      if (durSlider) {
+        durSlider.oninput = () => {
+          formExDuration = parseInt(durSlider.value, 10);
+          if (durDisplay) durDisplay.textContent = `${formExDuration} Dakika`;
+          modalContent.querySelectorAll('#cefcDurationChips .cefc-dur-chip').forEach(b => {
+            b.classList.toggle('selected', parseInt(b.dataset.dur, 10) === formExDuration);
+          });
+          updateExerciseFormLiveState();
+        };
+      }
+
+      modalContent.querySelectorAll('#cefcIntensityGrid .cefc-intensity-btn').forEach(btn => {
+        btn.onclick = () => {
+          modalContent.querySelectorAll('#cefcIntensityGrid .cefc-intensity-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          formExIntensity = btn.dataset.intensity;
+          updateExerciseFormLiveState();
+        };
+      });
+
+      modalContent.querySelectorAll('#cefcFeelingsGrid .cefc-feel-btn').forEach(btn => {
+        btn.onclick = () => {
+          modalContent.querySelectorAll('#cefcFeelingsGrid .cefc-feel-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          formExFeel = btn.dataset.feel;
+        };
+      });
+
+      if (btnSaveWorkout) {
+        btnSaveWorkout.onclick = () => {
+          const typeObj = exerciseTypesList.find(t => t.id === formExType) || { name: 'Egzersiz', icon: '🏃‍♀️' };
+          const intObj = intensityLevelsList.find(i => i.id === formExIntensity) || { name: 'Normal' };
+          const feelObj = feelingLevelsList.find(f => f.id === formExFeel) || { name: 'Enerjik', icon: '🌟' };
+          const noteInput = modalContent.querySelector('#cefcWorkoutNote');
+          const noteVal = noteInput ? noteInput.value.trim() : '';
+
+          let cycleBenefitText = 'Biyolojik fazınıza uygun hareket hormonlarınızı dengeler.';
+          if (typeof CYCLE_FITNESS_GUIDANCE !== 'undefined' && CYCLE_FITNESS_GUIDANCE[status.phase]) {
+            cycleBenefitText = CYCLE_FITNESS_GUIDANCE[status.phase].cycleBenefit;
+          }
+
+          currentExercise = {
+            type: formExType,
+            typeName: typeObj.name,
+            duration: formExDuration,
+            intensity: formExIntensity,
+            intensityName: intObj.name,
+            feel: formExFeel,
+            feelName: feelObj.name,
+            feelIcon: feelObj.icon,
+            caloriesBurned: calcCalories(formExType, formExDuration),
+            cycleBenefit: cycleBenefitText,
+            note: noteVal,
+            dateStr: dateStr
+          };
+
+          isEditingExercise = false;
+          persistDayState(true);
+          renderModalBody();
+        };
+      }
+
+      // --- SEMPTOMLAR ÇOKLU SEÇİMİ ---
+      modalContent.querySelectorAll('#symptomsChips .chip-item').forEach(chip => {
+        chip.onclick = () => {
+          const id = chip.dataset.id;
+          if (selectedSymptoms.includes(id)) {
+            selectedSymptoms = selectedSymptoms.filter(item => item !== id);
+            chip.classList.remove('chip-active');
+          } else {
+            selectedSymptoms.push(id);
+            chip.classList.add('chip-active');
+          }
+          persistDayState(true);
+        };
+      });
+
+      // --- ÇOKLU RUH HALİ (MULTI-SELECT MOOD) SEÇİMİ ---
+      const moodCounterBadge = modalContent.querySelector('#moodCounterBadge');
+      modalContent.querySelectorAll('#moodChips .chip-item').forEach(chip => {
+        chip.onclick = () => {
+          const id = chip.dataset.id;
+          if (selectedMoods.includes(id)) {
+            selectedMoods = selectedMoods.filter(m => m !== id);
+            chip.classList.remove('chip-active');
+          } else {
+            selectedMoods.push(id);
+            chip.classList.add('chip-active');
+          }
+          if (moodCounterBadge) {
+            moodCounterBadge.textContent = selectedMoods.length > 0 
+              ? `${selectedMoods.length} duygu seçildi` 
+              : 'Birden fazla seçilebilir';
+          }
+          persistDayState(true);
+        };
+      });
+
+      // --- AKINTI TİPİ SEÇİMİ ---
+      modalContent.querySelectorAll('#dischargeChips .chip-pill').forEach(pill => {
+        pill.onclick = () => {
+          const id = pill.dataset.id;
+          if (selectedDischarge === id) {
+            selectedDischarge = '';
+            pill.classList.remove('chip-active');
+          } else {
+            selectedDischarge = id;
+            modalContent.querySelectorAll('#dischargeChips .chip-pill').forEach(p => p.classList.remove('chip-active'));
+            pill.classList.add('chip-active');
+          }
+          persistDayState(true);
+        };
+      });
+
+      // --- NOTLAR ---
+      if (notesInput) {
+        notesInput.oninput = () => {
+          persistDayState(false);
+        };
+        notesInput.onblur = () => {
+          persistDayState(true);
+        };
+      }
+
+      // --- TÜMÜNÜ KAYDET & GÜNCELLE ---
+      if (saveBtn) {
+        saveBtn.onclick = () => {
+          persistDayState(true);
+
+          const originalHtml = saveBtn.innerHTML;
+          saveBtn.innerHTML = `✓ Kaydedildi!`;
+          saveBtn.style.background = '#10b981';
+          saveBtn.style.color = '#ffffff';
+
+          setTimeout(() => {
+            saveBtn.innerHTML = originalHtml;
+            saveBtn.style.background = '';
+            saveBtn.style.color = '';
+            this.closeDayModal();
+          }, 450);
+        };
+      }
+    };
+
+    renderModalBody();
+    modalOverlay.classList.add('active');
+
+    if (focusSection === 'mood') {
+      setTimeout(() => {
+        const moodSection = modalContent.querySelector('#moodChips');
+        if (moodSection) {
+          moodSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          moodSection.style.transition = 'all 0.3s ease';
+          moodSection.style.boxShadow = '0 0 0 2px #ec4899';
+          moodSection.style.borderRadius = '12px';
+          setTimeout(() => { moodSection.style.boxShadow = 'none'; }, 2200);
+        }
+      }, 120);
+    }
+  }
+
+  closeDayModal() {
+    const modalOverlay = this.container.querySelector('#dayModalOverlay');
+    if (modalOverlay) {
+      modalOverlay.classList.remove('active');
+    }
+  }
+
+  notifyUpdate() {
+    this.updateMonthView();
+    if (typeof this.onDataChanged === 'function') {
+      this.onDataChanged();
+    }
+  }
+
+  // Dışarıdan belirli bir güne atlama (Örn: Bugün veya 31 Ağustos)
+  goToDate(dateStr) {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    this.currentYear = y;
+    this.currentMonth = m - 1;
+    this.selectedDateStr = dateStr;
+    this.updateMonthView();
+    this.highlightSelectedCell();
+    this.openDayModal(dateStr);
+  }
+}
+
+
+/**
+ * Döngüm - Sağlık Analitiği ve Döngü İstatistikleri
+ * Düzenlilik skoru, geçmiş dönemler grafiği, semptom frekansı ve gelecek tahmin çizelgesi
+ */
+
+
+
+
+
+class AnalyticsComponent {
+  constructor(containerEl, engine, storage, onGoToDate) {
+    this.container = containerEl;
+    this.engine = engine;
+    this.storage = storage;
+    this.onGoToDate = onGoToDate;
+    this.reportGen = new DoctorReportGenerator(this.engine, this.storage);
+  }
+
+  render() {
+    const stats = this.engine.calculateStats();
+    const clusters = this.engine.getPeriodClusters().reverse(); // En yeniden en eskiye
+    const projections = this.engine.getProjections(6);
+    const profileData = this.storage.getProfileData();
+    const symptomStats = this.calculateSymptomFrequencies(profileData.days);
+    const fitStats = this.storage.getMonthlyFitnessStats();
+    const streakInfo = this.storage.getExerciseStreak();
+    const waterHistory = this.storage.getWeeklyWaterHistory(7);
+    const avgWater = Math.round(waterHistory.reduce((acc, curr) => acc + curr.amount, 0) / Math.max(1, waterHistory.length));
+
+    this.container.innerHTML = `
+      <div class="analytics-wrapper">
+        <!-- Başlık -->
+        <div class="analytics-header">
+          <h2 class="section-heading">Döngü & Sağlık Analizi</h2>
+          <p class="section-subheading">Kişisel verilerinizle modellenmiş gerçekçi sağlık ve döngü raporu</p>
+        </div>
+
+        <!-- Jinekolog PDF Sağlık Raporu Kartı -->
+        <div class="doctor-report-banner">
+          <div class="dr-banner-icon-col">
+            <span class="dr-banner-icon">🩺</span>
+          </div>
+          <div class="dr-banner-content">
+            <h4 class="dr-banner-title">Jinekolog Klinik Sağlık Raporu</h4>
+            <p class="dr-banner-desc">
+              Tüm döngülerinizi, kanama ritminizi ve semptomlarınızı doktorunuza sunabileceğiniz resmi klinik PDF belgesine dönüştürün.
+            </p>
+            <button type="button" class="btn-generate-pdf" id="btnOpenDoctorReport">
+              ${Icons.fileText} Jinekolog Raporunu Aç & PDF İndir
+            </button>
+          </div>
+        </div>
+
+        <!-- Özet İstatistik Kartları -->
+        <div class="stats-overview-grid">
+          <!-- Düzenlilik Skoru -->
+          <div class="stat-card card-regularity">
+            <div class="stat-icon-wrap" style="color: #10b981;">
+              ${Icons.shield}
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Düzenlilik Skoru</span>
+              <div class="stat-value-group">
+                <span class="stat-number">%${stats.regularityScore}</span>
+                <span class="stat-badge ${stats.regularityScore >= 85 ? 'badge-good' : 'badge-warn'}">
+                  ${stats.regularityScore >= 85 ? 'Yüksek Düzen' : 'Hafif Değişken'}
+                </span>
+              </div>
+              <p class="stat-desc">
+                ${stats.stdDev === 0 
+                  ? 'Standart ritim tespit edildi.' 
+                  : `±${stats.stdDev} gün sapma toleransı.`}
+              </p>
+            </div>
+          </div>
+
+          <!-- Ortalama Döngü Uzunluğu -->
+          <div class="stat-card">
+            <div class="stat-icon-wrap" style="color: #f43f5e;">
+              ${Icons.refresh}
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Ort. Döngü Uzunluğu</span>
+              <span class="stat-number">${stats.averageCycleLength} <small>gün</small></span>
+              <p class="stat-desc">İki regl başlangıcı arasındaki süre</p>
+            </div>
+          </div>
+
+          <!-- Ortalama Regl Süresi -->
+          <div class="stat-card">
+            <div class="stat-icon-wrap" style="color: #fb7185;">
+              ${Icons.droplet}
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Ort. Regl Süresi</span>
+              <span class="stat-number">${stats.averagePeriodLength} <small>gün</small></span>
+              <p class="stat-desc">Ortalama kanama ve akış günleri</p>
+            </div>
+          </div>
+
+          <!-- Toplam Kayıtlı Döngü -->
+          <div class="stat-card">
+            <div class="stat-icon-wrap" style="color: #8b5cf6;">
+              ${Icons.chart}
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Kayıtlı Döngü</span>
+              <span class="stat-number">${stats.totalLoggedCycles}</span>
+              <p class="stat-desc">Sisteme işlenen toplam regl dönemi</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aktivite & Hidrasyon Performansı -->
+        <div class="analysis-section-box">
+          <h3 class="box-title">🏃‍♀️ Beden Hareketi & Su Dengesi</h3>
+          <p class="box-subtitle">Döngünüzle senkronize fiziksel aktivite ve hidrasyon istatistikleri</p>
+
+          <div class="stats-overview-grid" style="margin-top: 10px;">
+            <div class="stat-card">
+              <div class="stat-icon-wrap" style="color: #10b981;">${Icons.activity}</div>
+              <div class="stat-info">
+                <span class="stat-label">Bu Ayki Egzersiz</span>
+                <span class="stat-number">${fitStats.totalWorkouts} <small>seans</small></span>
+                <p class="stat-desc">Toplam ${fitStats.totalMinutes} dakika hareket</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrap" style="color: #f59e0b;">${Icons.flame}</div>
+              <div class="stat-info">
+                <span class="stat-label">Hareket Serisi</span>
+                <span class="stat-number">${streakInfo.currentStreak} <small>gün</small></span>
+                <p class="stat-desc">${streakInfo.hasExerciseToday ? 'Bugün antrenman tamamlandı' : 'Bugün henüz seans yapılmadı'}</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrap" style="color: #0284c7;">${Icons.waterGlass}</div>
+              <div class="stat-info">
+                <span class="stat-label">Haftalık Ort. Su</span>
+                <span class="stat-number">${avgWater} <small>ml</small></span>
+                <p class="stat-desc">Son 7 günlük günlük ortalama</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gelecek 6 Ayın Tahmin Çizelgesi -->
+        <div class="analysis-section-box">
+          <h3 class="box-title">📅 Önümüzdeki Döngü Tahminleri</h3>
+          <p class="box-subtitle">Kişisel ortalamanıza göre hesaplanan gelecek dönemler</p>
+          
+          <div class="projections-timeline">
+            ${projections.length > 0 ? projections.map(p => {
+              const startFormatted = this.formatDateReadable(p.periodStart);
+              const endFormatted = this.formatDateReadable(p.periodEnd);
+              const ovuFormatted = this.formatDateReadable(p.ovulationDate);
+
+              return `
+                <div class="projection-row">
+                  <div class="proj-badge">${p.cycleIndex}. Döngü</div>
+                  <div class="proj-content">
+                    <div class="proj-item">
+                      <span class="p-label">Tahmini Regl:</span>
+                      <strong>${startFormatted} - ${endFormatted}</strong>
+                    </div>
+                    <div class="proj-item">
+                      <span class="p-label">Yumurtlama:</span>
+                      <strong style="color: #d97706;">${ovuFormatted}</strong>
+                    </div>
+                  </div>
+                  <button type="button" class="btn-goto-date" data-date="${p.periodStart}" title="Takvimde Göster">
+                    ${Icons.calendar}
+                  </button>
+                </div>
+              `;
+            }).join('') : `
+              <div class="empty-state-notice">
+                <p>Henüz en az bir regl başlangıcı girilmedi. Takvimden veya Ana sayfadan ilk regl tarihinizi ekleyerek tahminleri başlatabilirsiniz.</p>
+              </div>
+            `}
+          </div>
+        </div>
+
+        <!-- Semptom ve Belirti Analizi -->
+        <div class="analysis-section-box">
+          <h3 class="box-title">⚡ En Sık Görülen Belirtiler & Semptomlar</h3>
+          <p class="box-subtitle">Girdiğiniz verilere göre vücudunuzun döngüsel tepkileri</p>
+
+          <div class="symptom-bars-list">
+            ${symptomStats.length > 0 ? symptomStats.map(s => `
+              <div class="symptom-bar-item">
+                <div class="symptom-bar-info">
+                  <span class="s-name">${s.icon} ${s.label}</span>
+                  <span class="s-count">${s.count} gün (${s.percentage}%)</span>
+                </div>
+                <div class="symptom-progress-track">
+                  <div class="symptom-progress-fill" style="width: ${s.percentage}%;"></div>
+                </div>
+              </div>
+            `).join('') : `
+              <div class="empty-state-notice">
+                <p>Henüz semptom verisi kaydedilmedi. Takvimden günlere dokunarak kramp, baş ağrısı veya ruh halinizi işleyebilirsiniz.</p>
+              </div>
+            `}
+          </div>
+        </div>
+
+        <!-- Geçmiş Döngüler Geçmişi -->
+        <div class="analysis-section-box">
+          <h3 class="box-title">📖 Döngü Geçmişi & Kayıtlar</h3>
+          <p class="box-subtitle">Sisteme işlenmiş geçmiş regl dönemleri</p>
+
+          <div class="history-list">
+            ${clusters.length > 0 ? clusters.map((c, idx) => {
+              const startFormatted = this.formatDateReadable(c.startDate);
+              const endFormatted = this.formatDateReadable(c.endDate);
+
+              return `
+                <div class="history-card">
+                  <div class="history-card-header">
+                    <span class="history-index">${clusters.length - idx}. Dönem</span>
+                    <span class="history-duration">${c.duration} Gün Sürdü</span>
+                  </div>
+                  <div class="history-card-body">
+                    <div class="history-dates">
+                      <span><strong>Başlangıç:</strong> ${startFormatted}</span>
+                      <span><strong>Bitiş:</strong> ${endFormatted}</span>
+                    </div>
+                    <div class="history-actions">
+                      <button type="button" class="btn-history-view" data-date="${c.startDate}">
+                        ${Icons.calendar} Takvimde İncele
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('') : `
+              <div class="empty-state-notice">
+                <p>Henüz geçmiş regl kaydı bulunmuyor.</p>
+              </div>
+            `}
+          </div>
+        </div>
+      </div>
+    `;
+
+    this.attachEvents();
+  }
+
+  attachEvents() {
+    const reportBtn = this.container.querySelector('#btnOpenDoctorReport');
+    if (reportBtn) {
+      reportBtn.onclick = () => {
+        this.reportGen.openReportModal();
+      };
+    }
+
+    this.container.querySelectorAll('.btn-goto-date, .btn-history-view').forEach(btn => {
+      btn.onclick = () => {
+        const dateStr = btn.dataset.date;
+        if (dateStr && typeof this.onGoToDate === 'function') {
+          this.onGoToDate(dateStr);
+        }
+      };
+    });
+  }
+
+  formatDateReadable(dateStr) {
+    if (!dateStr) return '';
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const months = [
+      'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+      'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
+    ];
+    return `${d} ${months[m - 1]} ${y}`;
+  }
+
+  calculateSymptomFrequencies(days = {}) {
+    const symptomLabels = {
+      cramps: { label: 'Kramplar', icon: '⚡' },
+      headache: { label: 'Baş Ağrısı', icon: '🤕' },
+      bloating: { label: 'Şişkinlik', icon: '🎈' },
+      breast: { label: 'Göğüs Hassasiyeti', icon: '🌸' },
+      backache: { label: 'Bel Ağrısı', icon: '🦴' },
+      acne: { label: 'Sivilce/Cilt', icon: '✨' },
+      fatigue: { label: 'Yorgunluk', icon: '😴' },
+      nausea: { label: 'Mide Bulantısı', icon: '🤢' },
+      insomnia: { label: 'Uykusuzluk', icon: '🌙' },
+      craving: { label: 'Tatlı/Aşerme', icon: '🍫' }
+    };
+
+    const counts = {};
+    let totalDaysWithSymptoms = 0;
+
+    Object.values(days).forEach(day => {
+      if (day.symptoms && day.symptoms.length > 0) {
+        totalDaysWithSymptoms++;
+        day.symptoms.forEach(sym => {
+          counts[sym] = (counts[sym] || 0) + 1;
+        });
+      }
+    });
+
+    if (totalDaysWithSymptoms === 0) return [];
+
+    return Object.keys(counts)
+      .map(k => ({
+        id: k,
+        label: (symptomLabels[k] && symptomLabels[k].label) || k,
+        icon: (symptomLabels[k] && symptomLabels[k].icon) || '•',
+        count: counts[k],
+        percentage: Math.round((counts[k] / totalDaysWithSymptoms) * 100)
+      }))
+      .sort((a, b) => b.count - a.count);
+  }
+}
+
+
+/**
+ * Döngüm - Jinekolog Sağlık & Döngü Raporu Üretici (PDF / Yazdırma)
+ * Hekim muayenesine yönelik resmi klinik menstrüel döngü raporu oluşturur.
+ */
+
+
+
+
+class DoctorReportGenerator {
+  constructor(engine, storage) {
+    this.engine = engine;
+    this.storage = storage;
+  }
+
+  // Tarih biçimlendirme
+  formatDateTR(dateStr) {
+    if (!dateStr) return '-';
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const months = [
+      'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+      'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
+    ];
+    return `${d} ${months[m - 1]} ${y}`;
+  }
+
+  generateReportHtml() {
+    const profile = this.storage.getActiveProfile();
+    const profileData = this.storage.getProfileData();
+    const stats = this.engine.calculateStats();
+    const clusters = this.engine.getPeriodClusters().reverse();
+    const days = profileData.days || {};
+
+    const todayStr = CycleEngine.formatDateStr(new Date());
+    const reportRefNo = 'RAP-' + todayStr.replace(/-/g, '') + '-' + Math.floor(1000 + Math.random() * 9000);
+
+    // Semptom sıklıkları hesaplama
+    const symptomLabels = {
+      cramps: 'Dismenore (Kramplar / Kasık Ağrısı)',
+      headache: 'Sefalji / Baş Ağrısı',
+      bloating: 'Karında Distansiyon / Şişkinlik',
+      breast: 'Mastodini (Meme Hassasiyeti)',
+      backache: 'Lomber / Bel Ağrısı',
+      acne: 'Akneiform Lezyonlar / Cilt',
+      fatigue: 'Kronik Yorgunluk / Letarji',
+      nausea: 'Gastrointestinal Hassasiyet / Bulantı',
+      insomnia: 'Uykusuzluk / İnsomni',
+      craving: 'İştah Değişikliği / Aşerme'
+    };
+
+    const symptomCounts = {};
+    const flowCounts = { spotting: 0, light: 0, medium: 0, heavy: 0 };
+    let totalLoggedDays = 0;
+
+    Object.values(days).forEach(d => {
+      totalLoggedDays++;
+      if (d.flow && flowCounts[d.flow] !== undefined) {
+        flowCounts[d.flow]++;
+      }
+      if (d.symptoms && Array.isArray(d.symptoms)) {
+        d.symptoms.forEach(s => {
+          symptomCounts[s] = (symptomCounts[s] || 0) + 1;
+        });
+      }
+    });
+
+    const totalFlowEntries = Object.values(flowCounts).reduce((a, b) => a + b, 0);
+
+    return `
+      <div class="doctor-report-document" id="printableDoctorReport">
+        <!-- Rapor Başlığı & Klinik Antet -->
+        <div class="dr-report-header">
+          <div class="dr-header-emblem">
+            <span class="dr-caduceus">⚕</span>
+            <div>
+              <h1 class="dr-clinic-title">KADIN SAĞLIĞI & MENSTRÜEL SİKLUS ANALİZ RAPORU</h1>
+              <p class="dr-clinic-subtitle">Jinekolojik Değerlendirme ve Biyolojik Döngü Takip Belgesi</p>
+            </div>
+          </div>
+          <div class="dr-header-meta">
+            <div><strong>Rapor No:</strong> ${reportRefNo}</div>
+            <div><strong>Düzenleme Tarihi:</strong> ${this.formatDateTR(todayStr)}</div>
+            <div><strong>Sistem:</strong> Döngüm Sağlık Takip Modeli</div>
+          </div>
+        </div>
+
+        <div class="dr-divider-line"></div>
+
+        <!-- Hasta / Profil Bilgileri -->
+        <div class="dr-patient-box">
+          <div class="dr-patient-col">
+            <span class="dr-label">Hasta / Danışan Adı:</span>
+            <strong class="dr-val">${profile.name}</strong>
+          </div>
+          <div class="dr-patient-col">
+            <span class="dr-label">Kayıtlı Döngü Sayısı:</span>
+            <strong class="dr-val">${clusters.length} Döngü</strong>
+          </div>
+          <div class="dr-patient-col">
+            <span class="dr-label">Döngü Düzenlilik İndeksi:</span>
+            <strong class="dr-val" style="color: ${stats.regularityScore >= 85 ? '#059669' : '#d97706'};">
+              %${stats.regularityScore} (${stats.regularityScore >= 85 ? 'Ritmik / Düzenli' : 'Hafif Düzensiz'})
+            </strong>
+          </div>
+        </div>
+
+        <!-- Temel Biyometrik Siklus Parametreleri -->
+        <div class="dr-section-title">1. KLİNİK SİKLUS METRİKLERİ VE İSTATİSTİKLER</div>
+        <table class="dr-metrics-table">
+          <thead>
+            <tr>
+              <th>Parametre</th>
+              <th>Hesaplanan Değer</th>
+              <th>Klinik Referans Aralığı</th>
+              <th>Değerlendirme</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ortalama Siklus Uzunluğu</strong></td>
+              <td><strong>${stats.averageCycleLength} gün</strong></td>
+              <td>21 - 35 gün</td>
+              <td><span class="dr-badge-ok">${stats.averageCycleLength >= 21 && stats.averageCycleLength <= 35 ? 'Normal Fizyolojik Aralık' : 'Referans Dışı'}</span></td>
+            </tr>
+            <tr>
+              <td><strong>Ortalama Menstrüasyon (Kanama) Süresi</strong></td>
+              <td><strong>${stats.averagePeriodLength} gün</strong></td>
+              <td>3 - 7 gün</td>
+              <td><span class="dr-badge-ok">${stats.averagePeriodLength >= 3 && stats.averagePeriodLength <= 7 ? 'Normal' : 'İnceleme Önerilir'}</span></td>
+            </tr>
+            <tr>
+              <td><strong>Tahmini Luteal Faz Süresi</strong></td>
+              <td><strong>${stats.lutealLength} gün</strong></td>
+              <td>12 - 16 gün</td>
+              <td><span class="dr-badge-ok">Stabil</span></td>
+            </tr>
+            <tr>
+              <td><strong>Siklus Değişkenliği (Standart Sapma)</strong></td>
+              <td><strong>±${stats.stdDev} gün</strong></td>
+              <td>&lt; 3.0 gün</td>
+              <td><span class="dr-badge-ok">${stats.stdDev <= 3 ? 'Yüksek Düzen' : 'Takip Edilmeli'}</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Geçmiş Menstrüel Sikluslar Tablosu -->
+        <div class="dr-section-title" style="margin-top: 20px;">2. AYRINTILI SİKLUS GEÇMİŞİ (SON DÖNEMLER)</div>
+        <table class="dr-cycles-table">
+          <thead>
+            <tr>
+              <th>Döngü No</th>
+              <th>Başlangıç Tarihi</th>
+              <th>Bitiş Tarihi</th>
+              <th>Kanama Süresi</th>
+              <th>Siklus Aralığı</th>
+              <th>Klinik Durum</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${clusters.length > 0 ? clusters.map((c, i) => {
+              const prevCluster = clusters[i + 1];
+              const intervalDays = prevCluster 
+                ? CycleEngine.diffDays(c.startDate, prevCluster.startDate) 
+                : stats.averageCycleLength;
+
+              let statusText = 'Normal';
+              if (intervalDays > 35) statusText = 'Oligomenore (Uzun)';
+              else if (intervalDays < 21) statusText = 'Polimenore (Kısa)';
+
+              return `
+                <tr>
+                  <td><strong>${clusters.length - i}. Siklus</strong></td>
+                  <td>${this.formatDateTR(c.startDate)}</td>
+                  <td>${this.formatDateTR(c.endDate)}</td>
+                  <td>${c.duration} Gün</td>
+                  <td>${intervalDays} Gün</td>
+                  <td>${statusText}</td>
+                </tr>
+              `;
+            }).join('') : `
+              <tr>
+                <td colspan="6" style="text-align: center; color: #64748b; padding: 14px;">Henüz geçmiş döngü kaydı bulunmamaktadır.</td>
+              </tr>
+            `}
+          </tbody>
+        </table>
+
+        <!-- Semptom ve Akış Analizi -->
+        <div class="dr-section-title" style="margin-top: 20px;">3. BELİRTİ, SEMPTOM VE KANAMA YOĞUNLUĞU DAĞILIMI</div>
+        <div class="dr-symptoms-layout">
+          <!-- Semptom Sıklıkları -->
+          <div class="dr-subtable-box">
+            <h4 class="dr-subtable-title">Bildirilen Semptomlar & Görülme Sıklığı</h4>
+            <table class="dr-subtable">
+              <thead>
+                <tr>
+                  <th>Semptom / Şikayet</th>
+                  <th>Bildirilen Gün</th>
+                  <th>Oran</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${Object.keys(symptomCounts).length > 0 ? Object.keys(symptomCounts).map(k => {
+                  const label = symptomLabels[k] || k;
+                  const cnt = symptomCounts[k];
+                  const pct = Math.round((cnt / (clusters.length || 1)) * 100);
+                  return `
+                    <tr>
+                      <td>${label}</td>
+                      <td>${cnt} gün</td>
+                      <td>%${pct}</td>
+                    </tr>
+                  `;
+                }).join('') : `
+                  <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Spesifik semptom kaydedilmedi.</td></tr>
+                `}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Kanama Yoğunluğu -->
+          <div class="dr-subtable-box">
+            <h4 class="dr-subtable-title">Kanama Patern Dağılımı</h4>
+            <div class="dr-flow-summary">
+              <div class="dr-flow-row">
+                <span>🔴 Yoğun Kanama (Menoraji Şüphesi):</span>
+                <strong>${flowCounts.heavy} gün</strong>
+              </div>
+              <div class="dr-flow-row">
+                <span>🩸 Orta Düzey Akış:</span>
+                <strong>${flowCounts.medium} gün</strong>
+              </div>
+              <div class="dr-flow-row">
+                <span>🌸 Hafif Kanama:</span>
+                <strong>${flowCounts.light} gün</strong>
+              </div>
+              <div class="dr-flow-row">
+                <span>✨ Lekelenme (Spotting):</span>
+                <strong>${flowCounts.spotting} gün</strong>
+              </div>
+            </div>
+            <p class="dr-flow-note">
+              * Kanama günlerinde ara lekelenmeler veya aşırı yoğun günler kaydedildiğinde hekiminizle paylaşmanız teşhisi kolaylaştırır.
+            </p>
+          </div>
+        </div>
+
+        <!-- Hekim Notu ve Klinik Değerlendirme Alanı -->
+        <div class="dr-section-title" style="margin-top: 20px;">4. HEKİM KLİNİK DEĞERLENDİRMESİ VE ÖNERİLER</div>
+        <div class="dr-doctor-notes-box">
+          <div class="dr-notes-lines">
+            <div class="note-line"></div>
+            <div class="note-line"></div>
+            <div class="note-line"></div>
+            <div class="note-line"></div>
+          </div>
+          <div class="dr-signature-row">
+            <div class="dr-sig-item">
+              <span>Muayene Tarihi: ____ / ____ / 202__</span>
+            </div>
+            <div class="dr-sig-item dr-stamp-box">
+              <span>Doktor Kaşe & İmza</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alt Bilgi / Feragatname -->
+        <div class="dr-report-footer">
+          <p>
+            <strong>Bilgilendirme:</strong> Bu belge kullanıcının "Döngüm" sağlık uygulamasına girdiği verilere dayalı olarak hekim muayenesi öncesi istatistiki referans sunmak amacıyla oluşturulmuştur. Tıbbi tanı yerine geçmez, klinik laboratuvar ve ultrason bulgularıyla birlikte uzman hekim tarafından değerlendirilmelidir.
+          </p>
+        </div>
+      </div>
+    `;
+  }
+
+  // Modalı ekrana yerleştirir ve yazdırma/PDF akışını başlatır
+  openReportModal() {
+    let overlay = document.getElementById('doctorReportModalOverlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'doctorReportModalOverlay';
+      overlay.className = 'doctor-report-overlay';
+      document.body.appendChild(overlay);
+    }
+
+    const reportContent = this.generateReportHtml();
+
+    overlay.innerHTML = `
+      <div class="doctor-modal-window">
+        <!-- Modal Üst Aksiyon Barı (Yazdırırken gizlenir) -->
+        <div class="dr-modal-actions-bar no-print">
+          <div class="dr-actions-left">
+            <span class="dr-badge-icon">🩺</span>
+            <h3>Jinekolog Klinik Sağlık Raporu</h3>
+          </div>
+          <div class="dr-actions-right">
+            <button type="button" class="btn-print-report" id="btnPrintReportPdf">
+              ${Icons.printer} PDF Olarak Kaydet / Yazdır
+            </button>
+            <button type="button" class="btn-close-report" id="btnCloseReportModal">
+              ${Icons.close}
+            </button>
+          </div>
+        </div>
+
+        <!-- Yazdırılabilir A4 Rapor Kağıdı -->
+        <div class="dr-paper-container">
+          ${reportContent}
+        </div>
+      </div>
+    `;
+
+    overlay.classList.add('active');
+
+    // Kapatma butonu
+    const closeBtn = overlay.querySelector('#btnCloseReportModal');
+    if (closeBtn) {
+      closeBtn.onclick = () => overlay.classList.remove('active');
+    }
+
+    overlay.onclick = (e) => {
+      if (e.target === overlay) overlay.classList.remove('active');
+    };
+
+    // PDF / Yazdır butonu
+    const printBtn = overlay.querySelector('#btnPrintReportPdf');
+    if (printBtn) {
+      printBtn.onclick = () => {
+        window.print();
+      };
+    }
   }
 }
 
@@ -10946,6 +12045,161 @@ class DongumApp {
     overlay.classList.add('active');
   }
 
+  async openNotificationDiagnosticsModal() {
+    let diagOverlay = document.getElementById('notifDiagnosticsModalOverlay');
+    if (!diagOverlay) {
+      diagOverlay = document.createElement('div');
+      diagOverlay.className = 'modal-overlay';
+      diagOverlay.id = 'notifDiagnosticsModalOverlay';
+      diagOverlay.innerHTML = `
+        <div class="modal-sheet notif-diag-sheet" style="max-width: 480px; max-height: 90vh; overflow-y: auto;">
+          <div class="modal-header-row">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.3rem;">🛠️</span>
+              <h3 style="margin: 0; font-size: 1.05rem;">Kapalıyken Bildirim Tanı & Çözüm</h3>
+            </div>
+            <button type="button" class="modal-close-btn" id="btnCloseNotifDiagnosticsModal">${Icons.close}</button>
+          </div>
+          <div id="notifDiagnosticsModalBody">
+            <!-- Dinamik doldurulur -->
+          </div>
+        </div>
+      `;
+      document.body.appendChild(diagOverlay);
+
+      const btnClose = diagOverlay.querySelector('#btnCloseNotifDiagnosticsModal');
+      if (btnClose) btnClose.onclick = () => diagOverlay.classList.remove('active');
+      diagOverlay.onclick = (e) => {
+        if (e.target === diagOverlay) diagOverlay.classList.remove('active');
+      };
+    }
+
+    const body = diagOverlay.querySelector('#notifDiagnosticsModalBody');
+    body.innerHTML = `
+      <div style="text-align: center; padding: 24px;">
+        <span style="font-size: 1.8rem; display: block; margin-bottom: 8px;">⏳</span>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">Cihaz ve arka plan bildirim servisleri taranıyor...</p>
+      </div>
+    `;
+    diagOverlay.classList.add('active');
+
+    const diag = await this.notifManager.getDiagnostics();
+    const permGranted = diag.permission === 'granted';
+    const swOk = diag.isServiceWorkerActive;
+    const triggersOk = diag.hasNotificationTriggers;
+
+    body.innerHTML = `
+      <div class="diag-results-box" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
+        <!-- 1. Bildirim İzni -->
+        <div class="diag-item" style="display: flex; gap: 10px; padding: 12px; border-radius: 12px; background: ${permGranted ? 'rgba(16, 185, 129, 0.08)' : 'rgba(239, 68, 68, 0.08)'}; border: 1px solid ${permGranted ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.25)'};">
+          <div style="font-size: 1.3rem;">${permGranted ? '✅' : '❌'}</div>
+          <div style="flex: 1;">
+            <strong style="font-size: 0.82rem; color: var(--text-main); display: block;">Sistem Bildirim İzni: ${permGranted ? 'Açık (İzin Verildi)' : (diag.permission === 'denied' ? 'Engellendi' : 'İzin Bekliyor')}</strong>
+            <p style="font-size: 0.72rem; color: var(--text-secondary); margin: 2px 0 0 0; line-height: 1.4;">${permGranted ? 'Cihazınız ve tarayıcınız bildirim göstermeye onay veriyor.' : 'Bildirim izni kapalıyken uygulama kilit ekranına uyarı gönderemez.'}</p>
+          </div>
+          ${!permGranted ? `
+            <button type="button" class="btn-primary-action" id="btnDiagRequestPerm" style="font-size: 0.72rem; padding: 4px 10px; height: fit-content;">İzin Ver</button>
+          ` : ''}
+        </div>
+
+        <!-- 2. Service Worker & Çevrimdışı Çalışma -->
+        <div class="diag-item" style="display: flex; gap: 10px; padding: 12px; border-radius: 12px; background: ${swOk ? 'rgba(16, 185, 129, 0.08)' : 'rgba(245, 158, 11, 0.08)'}; border: 1px solid ${swOk ? 'rgba(16, 185, 129, 0.25)' : 'rgba(245, 158, 11, 0.25)'};">
+          <div style="font-size: 1.3rem;">${swOk ? '✅' : '⚠️'}</div>
+          <div style="flex: 1;">
+            <strong style="font-size: 0.82rem; color: var(--text-main); display: block;">Arka Plan Hizmeti (Service Worker): ${swOk ? 'Aktif & Hazır' : 'Yükleniyor'}</strong>
+            <p style="font-size: 0.72rem; color: var(--text-secondary); margin: 2px 0 0 0; line-height: 1.4;">${swOk ? 'Uygulama telefon hafızasında çevrimdışı ve arka plan desteğiyle çalışıyor.' : 'Sayfayı yenilediğinizde Service Worker tam devralacaktır.'}</p>
+          </div>
+        </div>
+
+        <!-- 3. Arka Plan Alarm Planlayıcı -->
+        <div class="diag-item" style="display: flex; gap: 10px; padding: 12px; border-radius: 12px; background: ${triggersOk || diag.hasPeriodicSync ? 'rgba(16, 185, 129, 0.08)' : 'rgba(14, 165, 233, 0.08)'}; border: 1px solid ${triggersOk || diag.hasPeriodicSync ? 'rgba(16, 185, 129, 0.25)' : 'rgba(14, 165, 233, 0.25)'};">
+          <div style="font-size: 1.3rem;">${triggersOk || diag.hasPeriodicSync ? '✅' : 'ℹ️'}</div>
+          <div style="flex: 1;">
+            <strong style="font-size: 0.82rem; color: var(--text-main); display: block;">İşletim Sistemi Alarm Planlayıcı: ${triggersOk ? 'Tam Destekleniyor (Notification Triggers)' : (diag.hasPeriodicSync ? 'Periodic Sync Aktif' : 'Standart Arka Plan Modu')}</strong>
+            <p style="font-size: 0.72rem; color: var(--text-secondary); margin: 2px 0 0 0; line-height: 1.4;">${triggersOk ? 'Uygulama kapalı olsa dahi cihazın kendi alarm saati gibi tam vaktinde çalar.' : 'Uygulama arka planda tutulduğunda veya PWA modunda çalışırken uyarılar iletilir.'}</p>
+          </div>
+        </div>
+
+        <!-- 4. PWA Ana Ekran Kurulumu -->
+        <div class="diag-item" style="display: flex; gap: 10px; padding: 12px; border-radius: 12px; background: ${diag.isStandalone ? 'rgba(16, 185, 129, 0.08)' : 'rgba(139, 92, 246, 0.08)'}; border: 1px solid ${diag.isStandalone ? 'rgba(16, 185, 129, 0.25)' : 'rgba(139, 92, 246, 0.25)'};">
+          <div style="font-size: 1.3rem;">${diag.isStandalone ? '✅' : '💡'}</div>
+          <div style="flex: 1;">
+            <strong style="font-size: 0.82rem; color: var(--text-main); display: block;">Uygulama Durumu (PWA): ${diag.isStandalone ? 'Ana Ekrana Ekli (Tam Ekran Uygulama)' : 'Tarayıcı Sekmesinde Açık'}</strong>
+            <p style="font-size: 0.72rem; color: var(--text-secondary); margin: 2px 0 0 0; line-height: 1.4;">${diag.isStandalone ? 'Harika! Döngüm tam ekran bağımsız mobil uygulama olarak çalışıyor.' : 'En iyi kilit ekranı bildirim performansı için "Ana Ekrana Ekle" önerilir.'}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Test Butonları -->
+      <div style="background: var(--bg-input); padding: 12px; border-radius: 12px; margin-bottom: 16px;">
+        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 8px;">🧪 Şimdi Kendiniz Test Edin:</span>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <button type="button" class="btn-primary-action" id="btnDiagInstantTest" style="background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border-subtle); justify-content: center; font-size: 0.76rem; padding: 8px;">
+            🔔 1. Hemen Şimdi Test Bildirimi Gönder
+          </button>
+          <button type="button" class="btn-primary-action" id="btnDiagDelayedTest" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); justify-content: center; font-size: 0.76rem; padding: 8px;">
+            ⏱️ 2. 5 Saniye Sonraya Kur & Ekranı Kapat (Kilit Ekranı Testi)
+          </button>
+        </div>
+      </div>
+
+      <!-- Cihaza Özel Adım Adım Arka Plan Çözüm Rehberi -->
+      <div style="border-top: 1px solid var(--border-subtle); padding-top: 14px;">
+        <h4 style="font-size: 0.85rem; color: var(--primary); margin-bottom: 10px;">📱 Kapalıyken Bildirim Almanın 2 Altın Adımı:</h4>
+        
+        <div style="background: rgba(244, 63, 94, 0.04); border: 1px solid rgba(244, 63, 94, 0.15); border-radius: 12px; padding: 12px; margin-bottom: 10px;">
+          <strong style="font-size: 0.8rem; color: var(--text-main); display: block;">1. Android Telefonlar (Samsung, Xiaomi, Oppo, Huawei vb.):</strong>
+          <ul style="font-size: 0.73rem; color: var(--text-secondary); margin: 6px 0 0 16px; padding: 0; line-height: 1.5;">
+            <li>Telefonunuzun <strong>Ayarlar ➔ Uygulamalar ➔ Chrome (veya Döngüm) ➔ Pil</strong> bölümüne girin.</li>
+            <li>Burada <strong>"Kısıtlanmamış" (Unrestricted)</strong> seçeneğini işaretleyin.</li>
+            <li><em>Neden?</em> Android'in agresif "Pil Tasarrufu" veya "Doze Mode" özelliği ekran kapandığında uygulamaların hatırlatıcılarını dondurur. Bu ayar yapıldığında su ve ruh hali bildirimleri dakikası dakikasına kilit ekranınıza gelir.</li>
+          </ul>
+        </div>
+
+        <div style="background: rgba(139, 92, 246, 0.04); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 12px; padding: 12px;">
+          <strong style="font-size: 0.8rem; color: var(--text-main); display: block;">2. iPhone (iOS Safari):</strong>
+          <ul style="font-size: 0.73rem; color: var(--text-secondary); margin: 6px 0 0 16px; padding: 0; line-height: 1.5;">
+            <li>Safari menüsünden alttaki <strong>Paylaş ➔ "Ana Ekrana Ekle"</strong> butonuna dokunup kurun.</li>
+            <li>Apple kuralı gereği iOS Safari sekmeler açıkken bildirim vermez; sadece <strong>Ana Ekrana eklenen PWA uygulaması</strong> kilit ekranına bildirim gönderebilir (iOS 16.4+).</li>
+            <li>Uygulamayı ana ekrandan açıp bildirim iznine <strong>"İzin Ver"</strong> deyin.</li>
+          </ul>
+        </div>
+      </div>
+    `;
+
+    // Tanı Modalı Buton Olayları
+    const btnPerm = body.querySelector('#btnDiagRequestPerm');
+    if (btnPerm) {
+      btnPerm.onclick = async () => {
+        const res = await this.notifManager.requestPermission();
+        if (res.success) {
+          alert('Bildirim izni verildi!');
+        } else if (res.status === 'denied') {
+          alert('Tarayıcı ayarlarından bildirimlere izin vermeniz gerekiyor.');
+        }
+        this.openNotificationDiagnosticsModal();
+        this.updateHeaderNotificationBadge();
+      };
+    }
+
+    const btnInstant = body.querySelector('#btnDiagInstantTest');
+    if (btnInstant) {
+      btnInstant.onclick = async () => {
+        const res = await this.notifManager.sendTestNotification();
+        alert(res.message);
+        this.updateHeaderNotificationBadge();
+      };
+    }
+
+    const btnDelayed = body.querySelector('#btnDiagDelayedTest');
+    if (btnDelayed) {
+      btnDelayed.onclick = async () => {
+        const res = await this.notifManager.scheduleDelayedBackgroundTest(5);
+        alert(res.message);
+      };
+    }
+  }
+
   renderNotificationCenterContent() {
     const container = document.getElementById('notificationCenterBody');
     if (!container) return;
@@ -10970,7 +12224,7 @@ class DongumApp {
             </p>
           </div>
         </div>
-        <div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
           ${isGranted ? `
             <button type="button" class="notif-perm-btn btn-test" id="btnNotifCenterTest">
               Test Bildirimi
@@ -10980,6 +12234,9 @@ class DongumApp {
               İzin Ver & Aç
             </button>
           `}
+          <button type="button" class="notif-perm-btn" id="btnNotifCenterDiagnostics" style="background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-main);">
+            🛠️ Kapalıyken Çözüm
+          </button>
         </div>
       </div>
 
@@ -11078,6 +12335,13 @@ class DongumApp {
         const res = await this.notifManager.sendTestNotification();
         alert(res.message);
         this.renderNotificationCenterContent();
+      };
+    }
+
+    const btnDiag = container.querySelector('#btnNotifCenterDiagnostics');
+    if (btnDiag) {
+      btnDiag.onclick = () => {
+        this.openNotificationDiagnosticsModal();
       };
     }
 
@@ -12369,19 +13633,31 @@ class DongumApp {
           </div>
 
           <!-- Sistem İzin Rozeti & Test Butonları -->
-          <div style="background: rgba(244, 63, 94, 0.06); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-            <div style="font-size: 0.8rem; color: var(--text-main);">
-              <span>Cihaz / Tarayıcı İzin Durumu: </span>
-              <strong style="color: ${permColor};">${permText}</strong>
-            </div>
-            <div style="display: flex; gap: 8px;">
-              ${permStatus !== 'granted' ? `
-                <button type="button" class="btn-primary-action" id="btnSettingsRequestNotifPerm" style="font-size: 0.74rem; padding: 6px 12px;">
-                  🔔 İzin İste
+          <div style="background: rgba(244, 63, 94, 0.06); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <div style="font-size: 0.8rem; color: var(--text-main);">
+                <span>Cihaz / Tarayıcı İzin Durumu: </span>
+                <strong style="color: ${permColor};">${permText}</strong>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                ${permStatus !== 'granted' ? `
+                  <button type="button" class="btn-primary-action" id="btnSettingsRequestNotifPerm" style="font-size: 0.74rem; padding: 6px 12px;">
+                    🔔 İzin İste
+                  </button>
+                ` : ''}
+                <button type="button" class="btn-primary-action" id="btnSettingsTestNotif" style="font-size: 0.74rem; padding: 6px 12px; background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border-subtle);">
+                  🔔 Anında Test Bildirimi
                 </button>
-              ` : ''}
-              <button type="button" class="btn-primary-action" id="btnSettingsTestNotif" style="font-size: 0.74rem; padding: 6px 12px; background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border-subtle);">
-                🔔 Test Bildirimi Gönder
+              </div>
+            </div>
+
+            <!-- Kapalıyken Test & Çözüm Sihirbazı Hızlı Butonları -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; pt: 4px; border-top: 1px dashed rgba(244, 63, 94, 0.2); padding-top: 8px;">
+              <button type="button" class="btn-primary-action" id="btnSettingsTestDelayedNotif" style="font-size: 0.73rem; padding: 6px 10px; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); flex: 1; min-width: 140px; justify-content: center;">
+                ⏱️ 5 Sn Sonra Kapalıyken Test Et
+              </button>
+              <button type="button" class="btn-primary-action" id="btnSettingsDiagnosticsNotif" style="font-size: 0.73rem; padding: 6px 10px; background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); flex: 1; min-width: 140px; justify-content: center;">
+                🛠️ Kapalıyken Bildirim Çözüm Sihirbazı
               </button>
             </div>
           </div>
@@ -12690,6 +13966,21 @@ class DongumApp {
         const res = await this.notifManager.sendTestNotification();
         alert(res.message);
         this.updateHeaderNotificationBadge();
+      };
+    }
+
+    const btnTestDelayed = container.querySelector('#btnSettingsTestDelayedNotif');
+    if (btnTestDelayed) {
+      btnTestDelayed.onclick = async () => {
+        const res = await this.notifManager.scheduleDelayedBackgroundTest(5);
+        alert(res.message);
+      };
+    }
+
+    const btnDiagNotif = container.querySelector('#btnSettingsDiagnosticsNotif');
+    if (btnDiagNotif) {
+      btnDiagNotif.onclick = () => {
+        this.openNotificationDiagnosticsModal();
       };
     }
 
