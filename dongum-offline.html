@@ -1154,6 +1154,14 @@ body.dark-theme .btn-log-symptoms {
   background-color: rgba(249, 115, 22, 0.12);
 }
 
+.cal-day-cell.phase-follicular {
+  background-color: rgba(13, 148, 136, 0.08);
+}
+
+.cal-day-cell.phase-luteal {
+  background-color: rgba(192, 132, 252, 0.08);
+}
+
 .day-indicators {
   display: flex;
   align-items: center;
@@ -1173,8 +1181,10 @@ body.dark-theme .btn-log-symptoms {
 
 .period-dot { background-color: var(--primary); }
 .predicted-dot { background-color: #fb7185; }
+.follicular-dot { background-color: #0d9488; }
 .ovulation-dot { background-color: var(--ovulation); }
 .fertile-dot { background-color: var(--fertile); }
+.luteal-dot { background-color: #c084fc; }
 .pms-dot { background-color: var(--pms); }
 .indicator-badge { font-size: 7px; color: var(--secondary); margin-left: 1px; }
 
@@ -1335,9 +1345,12 @@ body.dark-theme .indicator-sym-badge {
 
 .phase-bg-period { background-color: var(--primary-light); border-color: var(--primary-border); }
 .phase-bg-predicted_period { background-color: #fff1f2; border-color: #fecdd3; }
+.phase-bg-follicular { background-color: rgba(13, 148, 136, 0.12); border-color: rgba(13, 148, 136, 0.35); }
 .phase-bg-ovulation { background-color: var(--ovulation-light); border-color: #fde68a; }
 .phase-bg-fertile { background-color: var(--fertile-light); border-color: #e9d5ff; }
+.phase-bg-luteal { background-color: rgba(192, 132, 252, 0.14); border-color: rgba(192, 132, 252, 0.35); }
 .phase-bg-pms { background-color: var(--pms-light); border-color: #fed7aa; }
+.phase-bg-normal { background-color: #f8fafc; border-color: #e2e8f0; }
 
 .phase-banner-info h4 {
   font-size: 0.95rem;
@@ -7016,8 +7029,11 @@ class CycleEngine {
       const currDate = periodDates[i];
       const gap = CycleEngine.diffDays(currDate, prevDate);
 
-      // Eğer ardışık ise ya da arada en fazla 1 günlük lekelenme boşluğu varsa aynı döneme dahil et
-      if (gap <= 2) {
+      // Eğer ardışık ise ya da arada açıkça regl olmadığı belirtilmemiş 1 günlük boşluk varsa aynı döneme dahil et
+      const intermediateDate = CycleEngine.addDays(prevDate, 1);
+      const isIntermediateExplicitlyNonPeriod = days[intermediateDate] && days[intermediateDate].isPeriod === false;
+
+      if (gap === 1 || (gap === 2 && !isIntermediateExplicitlyNonPeriod)) {
         currentCluster.push(currDate);
       } else {
         clusters.push({
@@ -7045,7 +7061,7 @@ class CycleEngine {
   // --- İstatistikler ve Uyarlanabilir Süreler ---
   calculateStats() {
     const profileData = this.storage.getProfileData();
-    const baseSettings = profileData.settings;
+    const baseSettings = profileData.settings || {};
     const clusters = this.getPeriodClusters();
 
     let avgPeriodLength = baseSettings.periodLength || 5;
@@ -7054,10 +7070,17 @@ class CycleEngine {
     let periodDurations = clusters.map(c => c.duration).filter(d => d >= 2 && d <= 12);
 
     if (periodDurations.length > 0) {
-      const sumPeriod = periodDurations.reduce((a, b) => a + b, 0);
-      avgPeriodLength = Math.round(sumPeriod / periodDurations.length);
-      // Makul fizyolojik sınırlar
-      avgPeriodLength = Math.max(3, Math.min(10, avgPeriodLength));
+      // En son döngülere daha yüksek ağırlık veren uyarlanabilir biyolojik ağırlıklı ortalama
+      let weightSum = 0;
+      let weightedTotal = 0;
+      periodDurations.forEach((dur, idx) => {
+        const w = idx + 1;
+        weightedTotal += dur * w;
+        weightSum += w;
+      });
+      avgPeriodLength = Math.round(weightedTotal / weightSum);
+      // Makul fizyolojik sınırlar (2 ila 10 gün)
+      avgPeriodLength = Math.max(2, Math.min(10, avgPeriodLength));
     }
 
     // Döngü aralıklarını hesapla (İki başlangıç tarihi arası)
@@ -7127,10 +7150,22 @@ class CycleEngine {
     let updated = false;
     const newSettings = { ...profileData.settings };
 
-    // Eğer en az 1 regl dönemi kaydedilmişse ortalama regl süresini revize et
-    if (clusters.length >= 1 && stats.averagePeriodLength) {
-      if (newSettings.periodLength !== stats.averagePeriodLength) {
-        newSettings.periodLength = stats.averagePeriodLength;
+    // Eğer en az 1 regl dönemi kaydedilmişse
+    if (clusters.length >= 1) {
+      const lastCluster = clusters[clusters.length - 1];
+      // Eğer son dönemin süresi sistemdeki varsayılan süreden farklıysa (örneğin 7 gün yerine 5 veya 6 gün sürdüyse)
+      // veya hesaplanan ağırlıklı ortalama revize edildiyse yeni dönemin verilerine göre güncelle:
+      let targetPeriodLength = stats.averagePeriodLength;
+      if (lastCluster && lastCluster.duration) {
+        // İçinde bulunulan son dönem sistemdeki süreden daha kısa sürdüyse ya da tek dönem varsa
+        // yeni dönemin gerçek süresini doğrudan benimse
+        if (clusters.length === 1 || lastCluster.duration < (newSettings.periodLength || 5)) {
+          targetPeriodLength = Math.max(2, Math.min(10, lastCluster.duration));
+        }
+      }
+
+      if (targetPeriodLength && newSettings.periodLength !== targetPeriodLength) {
+        newSettings.periodLength = targetPeriodLength;
         updated = true;
       }
     }
@@ -7200,9 +7235,14 @@ class CycleEngine {
 
   /**
    * Belirli bir günü manuel olarak regl yap, kaldır veya sil.
-   * Model bu müdahaleden sonra anında kendini günceller.
+   * Eğer kullanıcı regl dönemini erken bitirdiyse (ör. 6. gün silindiyse),
+   * sonraki tahmin edilen günleri otomatik temizler ve model hemen yeni süreye göre güncellenir.
    */
   togglePeriodDay(dateStr, isPeriod, flow = 'medium') {
+    const profileData = this.storage.getProfileData();
+    const days = profileData.days || {};
+    const clusters = this.getPeriodClusters();
+
     if (isPeriod) {
       this.storage.saveDayData(dateStr, {
         isPeriod: true,
@@ -7211,13 +7251,41 @@ class CycleEngine {
         isPredicted: false
       });
     } else {
-      // Manuel olarak silindiğini kaydet
+      // 1. Bu günün regl kaydını manuel kaldır
       this.storage.saveDayData(dateStr, {
         isPeriod: false,
         flow: null,
         isManual: true,
         isPredicted: false
       });
+
+      // 2. Bu günün ait olduğu veya ilişkili olduğu regl kümesini tespit et
+      // Örneğin regl 1. gün başladı ve 7 gün süreceği öngörüldü (1..7).
+      // Kullanıcı 6. günü takvimden kaldırdığında, bu döneme ait sonraki otomatik tahmin edilen
+      // günleri (7. gün vb.) otomatik temizle. Böylece dönem 5 gün olarak sonlanır ve yeni döngüye göre modellenir.
+      const targetCluster = clusters.find(c => {
+        return c.dates.includes(dateStr) || (dateStr >= c.startDate && dateStr <= c.endDate);
+      });
+
+      const clusterRef = targetCluster || [...clusters].reverse().find(c => c.startDate <= dateStr && CycleEngine.diffDays(dateStr, c.startDate) <= 12);
+
+      if (clusterRef) {
+        const clusterStart = clusterRef.startDate;
+        for (let i = 0; i <= 14; i++) {
+          const dStr = CycleEngine.addDays(clusterStart, i);
+          if (dStr >= dateStr) {
+            const dayEntry = days[dStr];
+            if (dayEntry && dayEntry.isPeriod) {
+              this.storage.saveDayData(dStr, {
+                isPeriod: false,
+                flow: null,
+                isManual: false,
+                isPredicted: false
+              });
+            }
+          }
+        }
+      }
     }
  
     this.syncSettingsFromCalendarData();
@@ -7356,6 +7424,34 @@ class CycleEngine {
           dayData
         };
       }
+
+      // Foliküler Faz kontrolü (Regl bittiği günden doğurganlık penceresine kadar)
+      if (dateStr > lastPeriod.endDate && dateStr < currentFertileStart) {
+        return {
+          dateStr,
+          phase: 'follicular',
+          phaseName: 'Foliküler Faz',
+          phaseBadge: 'Foliküler',
+          color: '#0d9488',
+          pregnancyChance: 'Düşük',
+          description: 'Östrojenin yükseldiği, enerjinin ve yenilenmenin arttığı evre.',
+          dayData
+        };
+      }
+
+      // Luteal Faz kontrolü (Doğurgan pencere bittikten PMS başlangıcına kadar)
+      if (dateStr > currentFertileEnd && dateStr < currentPmsStart) {
+        return {
+          dateStr,
+          phase: 'luteal',
+          phaseName: 'Luteal Faz',
+          phaseBadge: 'Luteal',
+          color: '#c084fc',
+          pregnancyChance: 'Düşük',
+          description: 'Progesteron hormonunun devrede olduğu iç denge ve dinlenme evresi.',
+          dayData
+        };
+      }
     }
 
     // İleriye dönük projeksiyonlarda kontrol et
@@ -7412,9 +7508,35 @@ class CycleEngine {
           dayData
         };
       }
+
+      if (dateStr > proj.periodEnd && dateStr < proj.fertileStart) {
+        return {
+          dateStr,
+          phase: 'follicular',
+          phaseName: 'Tahmini Foliküler Faz',
+          phaseBadge: 'Foliküler',
+          color: '#0d9488',
+          pregnancyChance: 'Düşük',
+          description: 'Tahmini östrojen yükseliş ve tazelenme evresi.',
+          dayData
+        };
+      }
+
+      if (dateStr > proj.fertileEnd && dateStr < proj.pmsStart) {
+        return {
+          dateStr,
+          phase: 'luteal',
+          phaseName: 'Tahmini Luteal Faz',
+          phaseBadge: 'Luteal',
+          color: '#c084fc',
+          pregnancyChance: 'Düşük',
+          description: 'Tahmini dinlenme ve progesteron evresi.',
+          dayData
+        };
+      }
     }
 
-    // Normal / Foliküler ya da Luteal
+    // Normal / Genel Döngü Günü
     return {
       dateStr,
       phase: 'normal',
@@ -9617,6 +9739,8 @@ class CalendarComponent {
       else if (status.phase === 'ovulation') classes.push('phase-ovulation');
       else if (status.phase === 'fertile') classes.push('phase-fertile');
       else if (status.phase === 'pms') classes.push('phase-pms');
+      else if (status.phase === 'follicular') classes.push('phase-follicular');
+      else if (status.phase === 'luteal') classes.push('phase-luteal');
 
       html += `
         <div class="${classes.join(' ')}" data-date="${dateStr}">
@@ -9627,6 +9751,7 @@ class CalendarComponent {
             ${status.phase === 'ovulation' ? `<span class="indicator-dot ovulation-dot" title="Yumurtlama"></span>` : ''}
             ${status.phase === 'fertile' ? `<span class="indicator-dot fertile-dot" title="Doğurgan Gün"></span>` : ''}
             ${status.phase === 'pms' ? `<span class="indicator-dot pms-dot" title="PMS Dönemi"></span>` : ''}
+            ${status.phase === 'follicular' ? `<span class="indicator-dot follicular-dot" title="Foliküler Faz"></span>` : ''}
             ${hasSymptoms ? `<span class="indicator-sym-badge" title="${symptomsList.length} belirti: ${symptomsList.join(', ')}">${primarySymptomIcon}${symptomsList.length > 1 ? `<sup class="sym-plus">+</sup>` : ''}</span>` : ''}
             ${moodBadgeHtml}
             ${hasNotes ? `<span class="indicator-note-badge" title="Kişisel Not">📝</span>` : ''}
@@ -10137,11 +10262,23 @@ class CalendarComponent {
           if (flowSelector) flowSelector.classList.toggle('disabled-flow', !activePeriodState);
 
           if (activePeriodState) {
-            this.engine.logPeriodStart(dateStr, selectedFlow);
+            const clusters = this.engine.getPeriodClusters();
+            const isNearCluster = clusters.some(c => {
+              const diffStart = CycleEngine.diffDays(dateStr, c.startDate);
+              const diffEnd = CycleEngine.diffDays(dateStr, c.endDate);
+              return (diffStart >= -1 && diffEnd <= 2);
+            });
+
+            if (isNearCluster) {
+              this.engine.togglePeriodDay(dateStr, true, selectedFlow);
+            } else {
+              this.engine.logPeriodStart(dateStr, selectedFlow);
+            }
           } else {
             this.engine.togglePeriodDay(dateStr, false);
           }
           persistDayState(true);
+          renderModalBody();
         };
       }
 
@@ -12849,15 +12986,18 @@ class DongumApp {
 
     // Döngü parametreleri ve gün aralıkları
     const cycleTotal = Math.max(21, stats.averageCycleLength || 28);
-    const periodDays = Math.max(2, stats.averagePeriodLength || 5);
+    // İçinde bulunulan dönemde regl süresi (Erken bittiyse son dönemin gerçek süresi, yoksa ortalama)
+    const activePeriodLength = (stats.lastPeriod && stats.lastPeriod.duration)
+      ? Math.max(2, stats.lastPeriod.duration)
+      : Math.max(2, stats.averagePeriodLength || 5);
     const lutealDays = stats.lutealLength || 14;
     const currentDay = Math.min(cycleTotal, Math.max(1, summary.cycleDayNumber));
 
-    // Biyolojik faz gün aralıkları
-    const ovulationDay = Math.max(periodDays + 3, cycleTotal - lutealDays + 1);
-    const fertileStart = Math.max(periodDays + 1, ovulationDay - 4);
+    // Biyolojik faz gün aralıkları (Yeni döngü döneminin gerçek regl süresine göre modellenir)
+    const ovulationDay = Math.max(activePeriodLength + 3, cycleTotal - lutealDays + 1);
+    const fertileStart = Math.max(activePeriodLength + 1, ovulationDay - 4);
     const fertileEnd = Math.min(cycleTotal - 1, ovulationDay + 1);
-    const follicularStart = periodDays + 1;
+    const follicularStart = activePeriodLength + 1;
     const follicularEnd = Math.max(follicularStart, fertileStart - 1);
     const lutealStart = fertileEnd + 1;
     const lutealEnd = cycleTotal;
@@ -12889,7 +13029,7 @@ class DongumApp {
     const colorOvulasyon = '#f59e0b';
     const colorLuteal = '#c084fc';
 
-    const pathRegl = makeArcPath(1, periodDays);
+    const pathRegl = makeArcPath(1, activePeriodLength);
     const pathFolikuler = makeArcPath(follicularStart, follicularEnd);
     const pathOvulasyon = makeArcPath(fertileStart, fertileEnd);
     const pathLuteal = makeArcPath(lutealStart, lutealEnd);
@@ -12906,12 +13046,12 @@ class DongumApp {
     let pillClass = 'pill-luteal';
     let beadColor = colorLuteal;
 
-    if (currentDay <= periodDays) {
+    if (isPeriodToday) {
       phaseTitle = 'Regl Dönemi';
       fertilityPillText = 'Çok Düşük İhtimal';
       pillClass = 'pill-regl';
       beadColor = colorRegl;
-    } else if (currentDay <= follicularEnd) {
+    } else if (currentDay >= follicularStart && currentDay <= follicularEnd) {
       phaseTitle = 'Foliküler Faz';
       fertilityPillText = 'Düşük Hamilelik Şansı';
       pillClass = 'pill-folikuler';
@@ -12943,9 +13083,9 @@ class DongumApp {
 
     // Güncel aktif faz anahtarı (Faz rehberinde varsayılan açılacak evre)
     let activePhaseKey = 'follicular';
-    if (currentDay <= periodDays) {
+    if (isPeriodToday) {
       activePhaseKey = 'period';
-    } else if (currentDay <= follicularEnd) {
+    } else if (currentDay >= follicularStart && currentDay <= follicularEnd) {
       activePhaseKey = 'follicular';
     } else if (currentDay >= fertileStart && currentDay <= fertileEnd) {
       activePhaseKey = 'ovulation';
@@ -12955,7 +13095,7 @@ class DongumApp {
 
     // Kişisel gün aralıkları haritası
     const dynamicRanges = {
-      period: `1 - ${periodDays}. Gün`,
+      period: `1 - ${activePeriodLength}. Gün`,
       follicular: `${follicularStart} - ${follicularEnd}. Gün`,
       ovulation: `${fertileStart} - ${fertileEnd}. Gün (${ovulationDay}. Gün Zirve)`,
       luteal: `${lutealStart} - ${cycleTotal}. Gün`
@@ -13047,7 +13187,7 @@ class DongumApp {
         <div class="dial-legend-row">
           <div class="legend-pill-item" data-phase="period" title="Regl fazı rehberini göster">
             <span class="legend-circle" style="background-color: ${colorRegl};"></span>
-            <span>Regl (1-${periodDays})</span>
+            <span>Regl (1-${activePeriodLength})</span>
           </div>
           <div class="legend-pill-item" data-phase="follicular" title="Foliküler faz rehberini göster">
             <span class="legend-circle" style="background-color: ${colorFolikuler};"></span>

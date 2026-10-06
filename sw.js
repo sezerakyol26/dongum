@@ -5,7 +5,7 @@
  * - Su İçme, Gün Ortası Ruh Hali ve Döngü Faz bildirimleri
  */
 
-const CACHE_NAME = 'dongum-pwa-v29';
+const CACHE_NAME = 'dongum-pwa-v31';
 const NOTIF_CACHE_NAME = 'dongum-notification-store-v1';
 const NOTIF_DATA_URL = 'https://dongum.internal/notification-state.json';
 
