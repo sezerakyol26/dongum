@@ -15113,16 +15113,6 @@ class DongumApp {
       luteal: `${lutealStart} - ${cycleTotal}. Gün`
     };
 
-    // Günlük su ve egzersiz durumu
-    const todayWater = this.storage.getWaterForDay(summary.todayStr);
-    const userSettings = this.storage.getProfileData().settings || {};
-    const waterTarget = userSettings.waterTarget || 2250;
-    const waterPercent = Math.min(150, Math.round((todayWater / waterTarget) * 100));
-    const todayExercise = this.storage.getExerciseForDay(summary.todayStr);
-    const streakInfo = this.storage.getExerciseStreak();
-    const phaseFitness = (typeof CYCLE_FITNESS_GUIDANCE !== 'undefined' && CYCLE_FITNESS_GUIDANCE[activePhaseKey]) ? CYCLE_FITNESS_GUIDANCE[activePhaseKey] : null;
-    const phaseWater = (typeof WATER_CYCLE_BENEFITS !== 'undefined' && WATER_CYCLE_BENEFITS[activePhaseKey]) ? WATER_CYCLE_BENEFITS[activePhaseKey] : null;
-
     container.innerHTML = `
       <div class="home-view-wrapper">
         
@@ -15276,77 +15266,6 @@ class DongumApp {
           </div>
         </div>
 
-        <!-- 1. GÜNLÜK SU İÇME TAKİP KARTI (Home Hydration Widget) -->
-        <div class="home-widget-card home-water-card">
-          <div class="hwc-header">
-            <div class="hwc-title-group">
-              <span class="hwc-icon" style="color: #0284c7;">💧</span>
-              <div>
-                <h4 class="hwc-title">Günlük Su Takibi</h4>
-                <p class="hwc-sub">${todayWater} / ${waterTarget} ml (%${waterPercent} tamamlandı)</p>
-              </div>
-            </div>
-            <button type="button" class="hwc-more-btn" id="btnHomeGoWaterCenter" title="Tüm Su Takip Merkezini Aç">
-              Detay →
-            </button>
-          </div>
-
-          <div class="home-water-bar-wrap">
-            <div class="home-water-bar-fill" style="width: ${Math.min(100, waterPercent)}%;"></div>
-          </div>
-
-          ${phaseWater ? `
-            <p class="hwc-tip-text">
-              <strong>${phaseWater.icon} ${phaseWater.title}:</strong> ${phaseWater.desc}
-            </p>
-          ` : ''}
-
-          <div class="home-water-actions">
-            <button type="button" class="btn-home-water-add" data-delta="250" id="btnHomeWaterAdd250">
-              +250 ml (Bardak)
-            </button>
-            <button type="button" class="btn-home-water-add" data-delta="500" id="btnHomeWaterAdd500">
-              +500 ml (Şişe)
-            </button>
-            <button type="button" class="btn-home-water-undo" id="btnHomeWaterUndo" title="Son 250 ml'yi geri al">
-              -250 ml
-            </button>
-          </div>
-        </div>
-
-        <!-- 2. DÖNGÜ & EGZERSİZ TAKİP KARTI (Home Fitness Widget) -->
-        <div class="home-widget-card home-fitness-card">
-          <div class="hwc-header">
-            <div class="hwc-title-group">
-              <span class="hwc-icon" style="color: #10b981;">🏃‍♀️</span>
-              <div>
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <h4 class="hwc-title">Döngü & Egzersiz</h4>
-                  <span class="hwc-streak-badge">${Icons.flame} ${streakInfo.currentStreak} Gün Seri</span>
-                </div>
-                <p class="hwc-sub">
-                  ${todayExercise 
-                    ? `Bugün: ${todayExercise.typeName} • ${todayExercise.duration} dk (${todayExercise.feelName || 'İyi'})` 
-                    : (phaseFitness ? `Öneri: ${phaseFitness.recommended.slice(0, 2).join(', ')}` : 'Günün hareketini kaydet')}
-                </p>
-              </div>
-            </div>
-            <button type="button" class="hwc-more-btn" id="btnHomeGoFitness" title="Egzersiz & Su Merkezine Git">
-              ${todayExercise ? 'İncele →' : '+ Ekle'}
-            </button>
-          </div>
-
-          ${todayExercise ? `
-            <div class="hwc-logged-badge">
-              <span>🌸 <strong>Döngüye Katkısı:</strong> ${todayExercise.cycleBenefit || 'Kasları rahatlatır ve hormonları dengeler.'}</span>
-            </div>
-          ` : (phaseFitness ? `
-            <div class="hwc-quote-box">
-              <p>"${phaseFitness.motivationQuote}"</p>
-            </div>
-          ` : '')}
-        </div>
-
         <!-- Hızlı Gün İnceleme & Semptom Ekleme Butonu -->
         <div class="home-bottom-actions">
           <button type="button" class="btn-log-symptoms" id="btnHomeLogToday">
@@ -15450,54 +15369,6 @@ class DongumApp {
     if (logTodayBtn) {
       logTodayBtn.onclick = () => {
         this.openQuickAddModal('mood', summary.todayStr);
-      };
-    }
-
-    // Ana Ekran Su Ekleme Butonları
-    const btnWaterAdd250 = container.querySelector('#btnHomeWaterAdd250');
-    const btnWaterAdd500 = container.querySelector('#btnHomeWaterAdd500');
-    const btnWaterUndo = container.querySelector('#btnHomeWaterUndo');
-    const btnGoWaterCenter = container.querySelector('#btnHomeGoWaterCenter');
-    const btnGoFitness = container.querySelector('#btnHomeGoFitness');
-
-    if (btnWaterAdd250) {
-      btnWaterAdd250.onclick = () => {
-        this.storage.logWater(summary.todayStr, 250);
-        this.refreshAll();
-      };
-    }
-    if (btnWaterAdd500) {
-      btnWaterAdd500.onclick = () => {
-        this.storage.logWater(summary.todayStr, 500);
-        this.refreshAll();
-      };
-    }
-    if (btnWaterUndo) {
-      btnWaterUndo.onclick = () => {
-        this.storage.logWater(summary.todayStr, -250);
-        this.refreshAll();
-      };
-    }
-    if (btnGoWaterCenter) {
-      btnGoWaterCenter.onclick = () => {
-        this.switchTab('fitness');
-        setTimeout(() => {
-          if (this.fitnessComp) {
-            this.fitnessComp.activeSubTab = 'water';
-            this.fitnessComp.render();
-          }
-        }, 50);
-      };
-    }
-    if (btnGoFitness) {
-      btnGoFitness.onclick = () => {
-        this.switchTab('fitness');
-        setTimeout(() => {
-          if (this.fitnessComp) {
-            this.fitnessComp.activeSubTab = 'exercise';
-            this.fitnessComp.render();
-          }
-        }, 50);
       };
     }
 
