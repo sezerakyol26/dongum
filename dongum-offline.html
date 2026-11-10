@@ -8392,11 +8392,14 @@ class NotificationManager {
   async init() {
     this.setupVisibilityListener();
     this.initBackgroundWorker();
-    // Önce Service Worker'daki arka plan kayıtlarını çek, sonra değerlendir ve senkronize et
+    // 1. Önce Service Worker'daki arka plan kayıtlarını ve tetiklenmiş bildirimleri çek
     await this.syncStateFromServiceWorker();
-    await this.evaluateSmartReminders();
+    // 2. Uygulama ilk açıldığında geçmiş bildirimleri SESSİZCE bildirim merkezine işle (tüm bildirimlerin bir anda patlamasını önle)
+    await this.evaluateSmartReminders({ silentCatchUp: true });
+    // 3. Arka plan senkronizasyonunu ve gelecek 48 saatlik zamanlayıcıları kur
     await this.registerBackgroundSync();
     await this.syncStateToServiceWorker();
+    await this.scheduleUpcomingBackgroundNotifications();
     this.initHeartbeat();
   }
 
@@ -8480,8 +8483,9 @@ class NotificationManager {
   onDataUpdated() {
     if (this.evalDebounceTimer) clearTimeout(this.evalDebounceTimer);
     this.evalDebounceTimer = setTimeout(async () => {
-      await this.evaluateSmartReminders();
+      await this.evaluateSmartReminders({ silentCatchUp: true });
       await this.syncStateToServiceWorker();
+      await this.scheduleUpcomingBackgroundNotifications();
       this.notifyListeners();
     }, 300);
   }
@@ -8531,14 +8535,14 @@ class NotificationManager {
       toast.id = 'dongumLiveToast';
       toast.className = 'dongum-live-toast';
       toast.innerHTML = `
-        <div class="dlt-icon">${icon}</div>
-        <div class="dlt-content">
-          <strong class="dlt-title">${title}</strong>
-          <p class="dlt-body">${body}</p>
+        <div class="toast-icon">${icon}</div>
+        <div class="toast-content">
+          <div class="toast-title">${title}</div>
+          <div class="toast-body">${body}</div>
         </div>
-        <div class="dlt-actions">
-          ${actionText ? `<button type="button" class="dlt-action-btn" id="btnToastQuickAction">${actionText}</button>` : ''}
-          <button type="button" class="dlt-close-btn" id="btnToastClose" aria-label="Kapat">✕</button>
+        <div class="toast-actions">
+          ${actionText ? `<button type="button" class="toast-action-btn" id="btnToastQuickAction">${actionText}</button>` : ''}
+          <button type="button" class="toast-close-btn" id="btnToastClose" aria-label="Kapat">✕</button>
         </div>
       `;
 
@@ -8546,11 +8550,11 @@ class NotificationManager {
       appEl.appendChild(toast);
 
       requestAnimationFrame(() => {
-        toast.classList.add('show');
+        toast.classList.add('visible');
       });
 
       const closeToast = () => {
-        toast.classList.remove('show');
+        toast.classList.remove('visible');
         setTimeout(() => {
           if (toast.parentNode) toast.remove();
         }, 280);
@@ -8755,13 +8759,13 @@ class NotificationManager {
   // Periyodik Hatırlatıcı Döngüsü (Heartbeat)
   initHeartbeat() {
     if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
-    // Her 45 saniyede bir kontrol et
+    // Her 45 saniyede bir canlı kontrol et (Sadece zamanı tam şu an gelen tek bir bildirimi tetikler)
     this.heartbeatTimer = setInterval(() => {
-      this.evaluateSmartReminders();
+      this.evaluateSmartReminders({ silentCatchUp: false });
     }, 45 * 1000);
   }
 
-  // Web Worker Ticker (Sekme arka plandayken timer'ların yavaşlatılmasını önler)
+  // Web Worker Ticker (Sekme arka plandayken timer'ların yavaşlatılmasını önler ve Service Worker'ı uyanık tutar)
   initBackgroundWorker() {
     if (typeof window === 'undefined' || typeof Worker === 'undefined') return;
     try {
@@ -8773,7 +8777,7 @@ class NotificationManager {
             if (timer) clearInterval(timer);
             timer = setInterval(function() {
               self.postMessage('tick');
-            }, 60000);
+            }, 30000);
           } else if (e.data === 'stop') {
             if (timer) clearInterval(timer);
           }
@@ -8783,7 +8787,13 @@ class NotificationManager {
       this.bgWorker = new Worker(workerUrl);
       this.bgWorker.onmessage = (e) => {
         if (e.data === 'tick') {
-          this.evaluateSmartReminders();
+          const isHidden = typeof document !== 'undefined' && document.visibilityState === 'hidden';
+          if (isHidden && 'serviceWorker' in navigator && navigator.serviceWorker.controller) {
+            try {
+              navigator.serviceWorker.controller.postMessage({ type: 'PING_EVALUATE' });
+            } catch (err) {}
+          }
+          this.evaluateSmartReminders({ silentCatchUp: false });
         }
       };
       this.bgWorker.postMessage('start');
@@ -8792,28 +8802,52 @@ class NotificationManager {
     }
   }
 
+  // Uygulama gizlendiğinde veya kapatılırken gecikmesiz (senkron) Service Worker mesajı gönder
+  pushImmediateBackgroundSync() {
+    try {
+      const payload = this.buildSyncPayload();
+      const scheduledList = this.buildScheduledNotificationsList();
+      payload.scheduledNotifications = scheduledList;
+
+      if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+          type: 'SYNC_NOTIFICATION_PAYLOAD',
+          payload: payload,
+          scheduledNotifications: scheduledList,
+          evaluateNow: false
+        });
+        navigator.serviceWorker.controller.postMessage({
+          type: 'SCHEDULE_NOTIFICATIONS',
+          notifications: scheduledList
+        });
+      }
+    } catch (e) {}
+    this.syncStateToServiceWorker(false);
+    this.scheduleUpcomingBackgroundNotifications();
+    this.registerBackgroundSync(true);
+  }
+
   setupVisibilityListener() {
     if (typeof document !== 'undefined') {
       document.addEventListener('visibilitychange', async () => {
         if (document.visibilityState === 'visible') {
           await this.syncStateFromServiceWorker();
-          await this.evaluateSmartReminders();
-        } else if (document.visibilityState === 'hidden') {
-          await this.syncStateToServiceWorker();
+          // Uygulama tekrar açıldığında biriken geçmiş bildirimleri patlatma, sessizce merkeze işle
+          await this.evaluateSmartReminders({ silentCatchUp: true });
           await this.scheduleUpcomingBackgroundNotifications();
+        } else if (document.visibilityState === 'hidden') {
+          this.pushImmediateBackgroundSync();
         }
       });
       window.addEventListener('focus', async () => {
         await this.syncStateFromServiceWorker();
-        await this.evaluateSmartReminders();
+        await this.evaluateSmartReminders({ silentCatchUp: true });
       });
       window.addEventListener('pagehide', () => {
-        this.syncStateToServiceWorker();
-        this.scheduleUpcomingBackgroundNotifications();
+        this.pushImmediateBackgroundSync();
       });
       window.addEventListener('beforeunload', () => {
-        this.syncStateToServiceWorker();
-        this.scheduleUpcomingBackgroundNotifications();
+        this.pushImmediateBackgroundSync();
       });
     }
   }
@@ -8860,115 +8894,182 @@ class NotificationManager {
     };
   }
 
-  // Önümüzdeki 24 Saat İçin Gelecek Hatırlatıcıları Planla (Tekilleştirilmiş TimestampTrigger & SW Kuyruğu)
-  async scheduleUpcomingBackgroundNotifications() {
-    if (!NotificationManager.isSupported() || Notification.permission !== 'granted') return;
-    if (!('serviceWorker' in navigator)) return;
-
+  // Önümüzdeki 48 Saat İçin Gelecek Hatırlatıcılar Listesini Hesapla (Senkron)
+  buildScheduledNotificationsList() {
     try {
       const profileData = this.storage.getProfileData();
       const settings = profileData.settings?.notificationSettings || {};
-      if (settings.enabled === false || profileData.settings?.notificationsEnabled === false) return;
+      if (settings.enabled === false || profileData.settings?.notificationsEnabled === false) return [];
 
       const summary = this.engine.getTodaySummary();
       const now = new Date();
       const nowMs = now.getTime();
       const todayStr = CycleEngine.formatDateStr(now);
+      const tomorrowDate = new Date(now);
+      tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+      const tomorrowStr = CycleEngine.formatDateStr(tomorrowDate);
+
       const todayDayData = profileData.days?.[todayStr] || {};
       const todayWater = this.storage.getWaterForDay(todayStr);
       const targetWater = profileData.settings?.waterTarget || 2250;
+      const notifState = this.storage.getNotificationState();
+      const sentLog = notifState.sentLog || {};
       const scheduledList = [];
 
-      // 1. Su Hatırlatıcıları (Bugünün kalan çalışma saatleri içinde, hedef dolmadıysa)
-      if (settings.waterReminder !== false && todayWater < targetWater) {
+      // 1. Su Hatırlatıcıları (Bugün + Yarın çalışma saatleri içinde)
+      if (settings.waterReminder !== false) {
         const startHour = settings.waterStartHour || 8;
         const endHour = settings.waterEndHour || 22;
         const intervalHours = parseFloat(settings.waterIntervalHours) || 2;
         const intervalMs = Math.round(intervalHours * 3600 * 1000);
 
-        let nextWaterTime = nowMs + intervalMs;
-        const endToday = new Date(now);
-        endToday.setHours(endHour, 0, 0, 0);
+        if (todayWater < targetWater) {
+          let nextWaterTime = nowMs + intervalMs;
+          const endToday = new Date(now);
+          endToday.setHours(endHour, 0, 0, 0);
 
-        let slot = 1;
-        while (nextWaterTime <= endToday.getTime() && slot <= 6) {
-          const slotDate = new Date(nextWaterTime);
-          if (slotDate.getHours() >= startHour && !this.isQuietHoursActive(settings, slotDate)) {
-            scheduledList.push({
-              title: '💧 Döngüm - Su İçme Vakti 🌊',
-              body: `Vücudunu nemlendir, ödemi ve krampları hafiflet! Hedefine ${Math.max(0, targetWater - todayWater)} ml kaldı.`,
-              timestamp: nextWaterTime,
-              tag: `sched_water_slot_${slot}`,
-              data: { tab: 'home', openQuickAdd: true, quickSection: 'water' }
-            });
-            slot++;
+          let slot = 1;
+          while (nextWaterTime <= endToday.getTime() && slot <= 6) {
+            const slotDate = new Date(nextWaterTime);
+            if (slotDate.getHours() >= startHour && !this.isQuietHoursActive(settings, slotDate)) {
+              scheduledList.push({
+                title: '💧 Döngüm - Su İçme Vakti 🌊',
+                body: `Vücudunu nemlendir, ödemi ve krampları hafiflet! Hedefine ${Math.max(0, targetWater - todayWater)} ml kaldı.`,
+                timestamp: nextWaterTime,
+                tag: `sched_water_${todayStr}_${slot}`,
+                logKey: `water_slot_${todayStr}_${slotDate.getHours()}`,
+                notifType: 'water',
+                data: { tab: 'home', openQuickAdd: true, quickSection: 'water' }
+              });
+              slot++;
+            }
+            nextWaterTime += intervalMs;
           }
-          nextWaterTime += intervalMs;
+        }
+
+        // Yarınki su hatırlatıcıları (Sabah 10:00, 12:30, 15:30, 18:30)
+        for (const h of [10, 13, 16, 19]) {
+          if (h >= startHour && h <= endHour) {
+            const tmrSlot = new Date(tomorrowDate);
+            tmrSlot.setHours(h, 0, 0, 0);
+            if (!this.isQuietHoursActive(settings, tmrSlot)) {
+              scheduledList.push({
+                title: '💧 Döngüm - Su İçme Vakti 🌊',
+                body: `Güne enerjik ve nemli devam et! Bir bardak su içip (+) butonundan kaydedebilirsin.`,
+                timestamp: tmrSlot.getTime(),
+                tag: `sched_water_${tomorrowStr}_${h}`,
+                logKey: `water_slot_${tomorrowStr}_${h}`,
+                notifType: 'water',
+                data: { tab: 'home', openQuickAdd: true, quickSection: 'water' }
+              });
+            }
+          }
         }
       }
 
-      // 2. Gün Ortası Ruh Hali Hatırlatıcısı
+      // 2. Gün Ortası Ruh Hali Hatırlatıcısı (Bugün ve Yarın)
       const hasMood = Boolean((Array.isArray(todayDayData.moods) && todayDayData.moods.length > 0) || todayDayData.mood);
-      if (settings.moodReminder !== false && !hasMood) {
+      if (settings.moodReminder !== false) {
         const [mHour, mMin] = (settings.moodReminderTime || '15:00').split(':').map(Number);
         const moodTimeToday = new Date(now);
         moodTimeToday.setHours(mHour, mMin, 0, 0);
 
-        if (moodTimeToday.getTime() > nowMs) {
+        if (!hasMood && !sentLog[`mood_${todayStr}`] && moodTimeToday.getTime() > nowMs) {
           scheduledList.push({
             title: '🧘‍♀️ Döngüm - Ruh Halini Kaydet ✨',
             body: 'Bugün enerjin ve duygu durumun nasıl? Alt menüdeki (+) butonundan 5 saniyede kaydet.',
             timestamp: moodTimeToday.getTime(),
             tag: `sched_mood_${todayStr}`,
+            logKey: `mood_${todayStr}`,
+            notifType: 'mood',
             data: { tab: 'home', openQuickAdd: true, quickSection: 'mood' }
           });
         }
+
+        const moodTimeTomorrow = new Date(tomorrowDate);
+        moodTimeTomorrow.setHours(mHour, mMin, 0, 0);
+        scheduledList.push({
+          title: '🧘‍♀️ Döngüm - Ruh Halini Kaydet ✨',
+          body: 'Bugün enerjin ve duygu durumun nasıl? Alt menüdeki (+) butonundan 5 saniyede kaydet.',
+          timestamp: moodTimeTomorrow.getTime(),
+          tag: `sched_mood_${tomorrowStr}`,
+          logKey: `mood_${tomorrowStr}`,
+          notifType: 'mood',
+          data: { tab: 'home', openQuickAdd: true, quickSection: 'mood' }
+        });
       }
 
-      // 3. Egzersiz & Hareket Hatırlatıcısı
-      if (settings.exerciseReminder !== false && !todayDayData.exercise) {
+      // 3. Egzersiz & Hareket Hatırlatıcısı (Bugün ve Yarın)
+      if (settings.exerciseReminder !== false) {
         const [eHour, eMin] = (settings.exerciseReminderTime || '18:00').split(':').map(Number);
         const exTimeToday = new Date(now);
         exTimeToday.setHours(eHour, eMin, 0, 0);
 
-        if (exTimeToday.getTime() > nowMs) {
+        if (!todayDayData.exercise && !sentLog[`exercise_${todayStr}`] && exTimeToday.getTime() > nowMs) {
           scheduledList.push({
             title: '🏃‍♀️ Döngüm - Hareket & Egzersiz Zamanı 💪',
             body: 'Döngü fazına uygun 20 dakikalık bir hareket veya esneme ile hormonlarını dengele!',
             timestamp: exTimeToday.getTime(),
             tag: `sched_exercise_${todayStr}`,
+            logKey: `exercise_${todayStr}`,
+            notifType: 'exercise',
             data: { tab: 'home', openQuickAdd: true, quickSection: 'exercise' }
           });
         }
+
+        const exTimeTomorrow = new Date(tomorrowDate);
+        exTimeTomorrow.setHours(eHour, eMin, 0, 0);
+        scheduledList.push({
+          title: '🏃‍♀️ Döngüm - Hareket & Egzersiz Zamanı 💪',
+          body: 'Döngü fazına uygun 20 dakikalık bir hareket veya esneme ile hormonlarını dengele!',
+          timestamp: exTimeTomorrow.getTime(),
+          tag: `sched_exercise_${tomorrowStr}`,
+          logKey: `exercise_${tomorrowStr}`,
+          notifType: 'exercise',
+          data: { tab: 'home', openQuickAdd: true, quickSection: 'exercise' }
+        });
       }
 
-      // 4. Gün Sonu Sağlık & Semptom Kaydı
+      // 4. Gün Sonu Sağlık & Semptom Kaydı (Bugün ve Yarın)
       const hasDaily = Boolean(
         todayDayData.isPeriod ||
         (todayDayData.symptoms && todayDayData.symptoms.length > 0) ||
         hasMood ||
         todayDayData.notes
       );
-      if (settings.dailyLogReminder !== false && !hasDaily) {
+      if (settings.dailyLogReminder !== false) {
         const [dHour, dMin] = (settings.dailyLogTime || '20:30').split(':').map(Number);
         const dailyTimeToday = new Date(now);
         dailyTimeToday.setHours(dHour, dMin, 0, 0);
 
-        if (dailyTimeToday.getTime() > nowMs) {
+        if (!hasDaily && !sentLog[`daily_log_${todayStr}`] && dailyTimeToday.getTime() > nowMs) {
           scheduledList.push({
             title: '📝 Döngüm - Günün Sağlık Kaydı 🌸',
             body: 'Bugün bedeninde neler hissettin? Günlük belirtilerini (+) menüsünden kolayca kaydet.',
             timestamp: dailyTimeToday.getTime(),
             tag: `sched_daily_${todayStr}`,
+            logKey: `daily_log_${todayStr}`,
+            notifType: 'daily',
             data: { tab: 'home', openQuickAdd: true, quickSection: 'all' }
           });
         }
+
+        const dailyTimeTomorrow = new Date(tomorrowDate);
+        dailyTimeTomorrow.setHours(dHour, dMin, 0, 0);
+        scheduledList.push({
+          title: '📝 Döngüm - Günün Sağlık Kaydı 🌸',
+          body: 'Bugün bedeninde neler hissettin? Günlük belirtilerini (+) menüsünden kolayca kaydet.',
+          timestamp: dailyTimeTomorrow.getTime(),
+          tag: `sched_daily_${tomorrowStr}`,
+          logKey: `daily_log_${tomorrowStr}`,
+          notifType: 'daily',
+          data: { tab: 'home', openQuickAdd: true, quickSection: 'all' }
+        });
       }
 
       // 5. Yaklaşan Regl Bildirimi (Yarın sabah 09:30 için)
-      if (settings.periodReminder !== false && summary.daysUntilNext > 0 && summary.daysUntilNext <= (settings.periodReminderDays || 2)) {
-        const nextMorning = new Date(now);
-        nextMorning.setDate(nextMorning.getDate() + 1);
+      if (settings.periodReminder !== false && summary.daysUntilNext !== null && summary.daysUntilNext > 0 && summary.daysUntilNext <= (settings.periodReminderDays || 2)) {
+        const nextMorning = new Date(tomorrowDate);
         nextMorning.setHours(9, 30, 0, 0);
 
         if (nextMorning.getTime() > nowMs) {
@@ -8977,12 +9078,27 @@ class NotificationManager {
             body: `Tahmini regl gününüze az kaldı (${summary.daysUntilNext} gün). Hazırlıklarınızı tamamlamayı unutmayın!`,
             timestamp: nextMorning.getTime(),
             tag: `sched_period_${summary.nextPeriodDate}`,
+            logKey: `period_approaching_${tomorrowStr}_${summary.nextPeriodDate}`,
+            notifType: 'period',
             data: { tab: 'home', openQuickAdd: true, quickSection: 'period' }
           });
         }
       }
 
-      // Service Worker'a Aktar (Önceki planlı bildirimleri temizleyip yenilerini yazar)
+      scheduledList.sort((a, b) => a.timestamp - b.timestamp);
+      return scheduledList;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  // Önümüzdeki 48 Saat İçin Gelecek Hatırlatıcıları Planla (Tekilleştirilmiş TimestampTrigger & SW Alarm Kuyruğu)
+  async scheduleUpcomingBackgroundNotifications() {
+    if (!NotificationManager.isSupported() || Notification.permission !== 'granted') return;
+    if (!('serviceWorker' in navigator)) return;
+
+    try {
+      const scheduledList = this.buildScheduledNotificationsList();
       const reg = await navigator.serviceWorker.ready;
       if (reg.active) {
         reg.active.postMessage({
@@ -9035,7 +9151,7 @@ class NotificationManager {
   }
 
   // Periodic Background Sync & Background Sync Kaydı
-  async registerBackgroundSync() {
+  async registerBackgroundSync(isHiddenTrigger = false) {
     if (typeof navigator === 'undefined' || !('serviceWorker' in navigator)) return false;
     try {
       const reg = await navigator.serviceWorker.ready;
@@ -9060,7 +9176,8 @@ class NotificationManager {
         }
       }
 
-      if ('sync' in reg) {
+      // Standart one-shot sync yalnızca uygulama gizlenirken kaydedilir ki uygulama açıkken anında tükenmesin
+      if (isHiddenTrigger && 'sync' in reg) {
         try {
           await reg.sync.register('dongum-reminder-sync');
         } catch (e) {}
@@ -9073,43 +9190,50 @@ class NotificationManager {
     }
   }
 
+  // Senkronizasyon Payload'unu Oluştur (Senkron Yardımcı)
+  buildSyncPayload() {
+    const profileData = this.storage.getProfileData();
+    const settings = profileData.settings?.notificationSettings || {};
+    const notifState = this.storage.getNotificationState();
+    const summary = this.engine.getTodaySummary();
+    const todayStr = CycleEngine.formatDateStr(new Date());
+    const todayDayData = profileData.days?.[todayStr] || {};
+    const todayWater = this.storage.getWaterForDay(todayStr);
+    const targetWater = profileData.settings?.waterTarget || 2250;
+
+    const hasLoggedMood = Boolean((Array.isArray(todayDayData.moods) && todayDayData.moods.length > 0) || todayDayData.mood);
+    const hasLoggedExercise = Boolean(todayDayData.exercise);
+    const hasLoggedDaily = Boolean(
+      todayDayData.isPeriod ||
+      (todayDayData.symptoms && todayDayData.symptoms.length > 0) ||
+      hasLoggedMood ||
+      todayDayData.notes
+    );
+
+    return {
+      updatedAt: Date.now(),
+      todayStr: todayStr,
+      todayWater: todayWater,
+      hasLoggedMood: hasLoggedMood,
+      hasLoggedExercise: hasLoggedExercise,
+      hasLoggedDaily: hasLoggedDaily,
+      daysUntilNext: summary.daysUntilNext,
+      nextPeriodDate: summary.nextPeriodDate,
+      phase: summary.dayStatus?.phase || null,
+      settings: {
+        ...settings,
+        waterTarget: targetWater
+      },
+      sentLog: notifState.sentLog || {}
+    };
+  }
+
   // Hatırlatma Verilerini Service Worker ve CacheStorage ile Senkronize Et
   async syncStateToServiceWorker(evaluateInSw = false) {
     try {
-      const profileData = this.storage.getProfileData();
-      const settings = profileData.settings?.notificationSettings || {};
-      const notifState = this.storage.getNotificationState();
-      const summary = this.engine.getTodaySummary();
-      const todayStr = CycleEngine.formatDateStr(new Date());
-      const todayDayData = profileData.days?.[todayStr] || {};
-      const todayWater = this.storage.getWaterForDay(todayStr);
-      const targetWater = profileData.settings?.waterTarget || 2250;
-
-      const hasLoggedMood = Boolean((Array.isArray(todayDayData.moods) && todayDayData.moods.length > 0) || todayDayData.mood);
-      const hasLoggedExercise = Boolean(todayDayData.exercise);
-      const hasLoggedDaily = Boolean(
-        todayDayData.isPeriod ||
-        (todayDayData.symptoms && todayDayData.symptoms.length > 0) ||
-        hasLoggedMood ||
-        todayDayData.notes
-      );
-
-      const payload = {
-        updatedAt: Date.now(),
-        todayStr: todayStr,
-        todayWater: todayWater,
-        hasLoggedMood: hasLoggedMood,
-        hasLoggedExercise: hasLoggedExercise,
-        hasLoggedDaily: hasLoggedDaily,
-        daysUntilNext: summary.daysUntilNext,
-        nextPeriodDate: summary.nextPeriodDate,
-        phase: summary.dayStatus?.phase || null,
-        settings: {
-          ...settings,
-          waterTarget: targetWater
-        },
-        sentLog: notifState.sentLog || {}
-      };
+      const payload = this.buildSyncPayload();
+      const scheduledList = this.buildScheduledNotificationsList();
+      payload.scheduledNotifications = scheduledList;
 
       // 1. Önce CacheStorage'da mevcut SW sentLog ile birleştirerek kaydet
       if ('caches' in window) {
@@ -9136,11 +9260,12 @@ class NotificationManager {
         );
       }
 
-      // 2. Service Worker'a PostMessage gönder (Sadece senkronizasyon, gereksiz çift tetikleme yapmaz)
+      // 2. Service Worker'a PostMessage gönder
       if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
         navigator.serviceWorker.controller.postMessage({
           type: 'SYNC_NOTIFICATION_PAYLOAD',
           payload: payload,
+          scheduledNotifications: scheduledList,
           evaluateNow: evaluateInSw
         });
       }
@@ -9149,9 +9274,14 @@ class NotificationManager {
     }
   }
 
-  // Service Worker'ın arka planda gönderdiği bildirimleri ve hızlı su aksiyonlarını yerel belleğe çek
+  // Service Worker'ın arka planda gönderdiği bildirimleri ve tetiklenmiş zamanlayıcıları yerel belleğe çek
   async syncStateFromServiceWorker() {
     try {
+      const localState = this.storage.getNotificationState();
+      localState.sentLog = localState.sentLog || {};
+      localState.inAppHistory = localState.inAppHistory || [];
+      let changed = false;
+
       if ('caches' in window) {
         const cache = await caches.open('dongum-notification-store-v1');
         const res = await cache.match('https://dongum.internal/notification-state.json');
@@ -9159,7 +9289,6 @@ class NotificationManager {
           const swPayload = await res.json();
           if (swPayload) {
             const todayStr = CycleEngine.formatDateStr(new Date());
-            // Eğer arka planda bildirim üzerinden su eklendiyse senkronize et
             if (swPayload.todayStr === todayStr && typeof swPayload.todayWater === 'number') {
               const localWater = this.storage.getWaterForDay(todayStr);
               if (swPayload.todayWater > localWater) {
@@ -9168,30 +9297,48 @@ class NotificationManager {
             }
 
             if (swPayload.sentLog) {
-              const localState = this.storage.getNotificationState();
-              let changed = false;
-              localState.sentLog = localState.sentLog || {};
               for (const [k, v] of Object.entries(swPayload.sentLog)) {
                 if (!localState.sentLog[k] || localState.sentLog[k] < v) {
                   localState.sentLog[k] = v;
                   changed = true;
                 }
               }
-              if (changed) {
-                this.storage.saveNotificationState(null, localState);
-                this.notifyListeners();
+            }
+
+            // Arka planda TimestampTrigger veya SW zamanlayıcısı ile vakti gelip tetiklenmiş bildirimleri sentLog'a işle
+            if (Array.isArray(swPayload.scheduledNotifications)) {
+              const nowMs = Date.now();
+              for (const item of swPayload.scheduledNotifications) {
+                if (item.timestamp && item.timestamp <= nowMs && item.logKey) {
+                  if (!localState.sentLog[item.logKey]) {
+                    localState.sentLog[item.logKey] = item.timestamp;
+                    if (item.notifType === 'water') {
+                      localState.sentLog.lastWaterNoticeTime = Math.max(localState.sentLog.lastWaterNoticeTime || 0, item.timestamp);
+                    }
+                    changed = true;
+                  }
+                }
               }
             }
           }
         }
       }
+
+      if (changed) {
+        this.storage.saveNotificationState(null, localState);
+        this.notifyListeners();
+      }
     } catch (e) {}
   }
 
   // =========================================================================
-  // AKILLI HATIRLATMA VE BİYOLOJİK DÖNGÜ DEĞERLENDİRİCİSİ (MUTEX KORUMALI)
+  // AKILLI HATIRLATMA VE BİYOLOJİK DÖNGÜ DEĞERLENDİRİCİSİ
+  // - silentCatchUp: true => Uygulama açılışında/dönüşünde geçmiş bildirimleri SESSİZCE bildirim merkezine ekler,
+  //   asla ekrana toplu bildirim patlatmaz!
+  // - silentCatchUp: false => Canlı zamanlayıcı çalışırken yalnızca vakti ŞU AN gelen en fazla 1 bildirimi gönderir.
   // =========================================================================
-  async evaluateSmartReminders() {
+  async evaluateSmartReminders(options = {}) {
+    const silentCatchUp = Boolean(options && options.silentCatchUp);
     if (this.isEvaluating) return;
     this.isEvaluating = true;
 
@@ -9206,20 +9353,70 @@ class NotificationManager {
       const notifState = this.storage.getNotificationState();
       const sentLog = notifState.sentLog || {};
       const now = new Date();
+      const nowMs = now.getTime();
       const todayStr = CycleEngine.formatDateStr(now);
       const currentHours = now.getHours();
       const currentMinutes = now.getMinutes();
+      const currentTotalMinutes = currentHours * 60 + currentMinutes;
       const isQuietNow = this.isQuietHoursActive(settings, now);
       const isDaytimeForCycleAlerts = currentHours >= 8 && currentHours < 22 && !isQuietNow;
 
       let stateChanged = false;
+      let dispatchedInThisPass = 0;
+      const MIN_COOLDOWN_MS = 10 * 60 * 1000; // İki sistem bildirimi arası en az 10 dakika
+
+      // Yardımcı: Bildirimi kaydet; yalnızca canlı vakti geldiyse ve kota uygunsa sistem bildirimi at
+      const handleReminderCandidate = async ({
+        logKey,
+        title,
+        body,
+        emojiIcon,
+        tag,
+        type,
+        actionTab = 'home',
+        openQuickAdd = false,
+        actionFocus = null,
+        toastActionText = null,
+        onToastAction = null,
+        data = null,
+        isWithinLiveWindow = true
+      }) => {
+        sentLog[logKey] = nowMs;
+        stateChanged = true;
+
+        this.storage.addInAppNotification(null, {
+          title,
+          body,
+          type,
+          actionTab,
+          openQuickAdd,
+          actionFocus
+        });
+
+        // Uygulama yeni açıldıysa (silentCatchUp) veya zaman penceresi geçmişse SADECE uygulama içi merkeze ekle, bildirim patlatma!
+        const lastSysAt = sentLog.lastSystemNotifAt || 0;
+        const cooldownOk = (nowMs - lastSysAt) >= MIN_COOLDOWN_MS;
+        if (!silentCatchUp && isWithinLiveWindow && !isQuietNow && dispatchedInThisPass === 0 && cooldownOk) {
+          dispatchedInThisPass++;
+          sentLog.lastSystemNotifAt = nowMs;
+          await this.dispatchSystemNotification({
+            title,
+            body,
+            emojiIcon,
+            tag,
+            toastActionText,
+            onToastAction,
+            data: data || { tab: actionTab, openQuickAdd, quickSection: actionFocus || 'all' }
+          });
+        }
+      };
 
       // Döngü Özeti
       const summary = this.engine.getTodaySummary();
       const daysUntilNext = summary.daysUntilNext;
       const dayStatus = summary.dayStatus;
 
-      // 1. YAKLAŞAN REGL HATIRLATMASI (Gündüz uygun saatlerde)
+      // 1. YAKLAŞAN REGL HATIRLATMASI
       if (isDaytimeForCycleAlerts && settings.periodReminder !== false && daysUntilNext !== null && daysUntilNext > 0) {
         const targetThreshold = settings.periodReminderDays || 2;
         if (daysUntilNext <= targetThreshold) {
@@ -9229,18 +9426,17 @@ class NotificationManager {
             const dayText = daysUntilNext === 1 ? 'yarın' : `${daysUntilNext} gün içinde`;
             const body = `Tahmini regl başlangıcınız ${dayText} bekleniyor. Ped, sıcak su torbası ve hazırlıklarınızı unutmayın! 🩸`;
 
-            sentLog[logKey] = Date.now();
-            stateChanged = true;
-
-            await this.dispatchSystemNotification({
+            await handleReminderCandidate({
+              logKey,
               title,
               body,
               emojiIcon: '🩸',
               tag: 'period_approaching',
+              type: 'period',
+              actionTab: 'calendar',
               toastActionText: '📅 Takvim',
-              data: { tab: 'calendar' }
+              isWithinLiveWindow: currentHours === 9 || currentHours === 10
             });
-            this.storage.addInAppNotification(null, { title, body, type: 'period', actionTab: 'calendar' });
           }
         }
       }
@@ -9258,22 +9454,23 @@ class NotificationManager {
           const diffDaysSinceDelayed = lastDelayedSent ? CycleEngine.diffDays(todayStr, lastDelayedSent) : 99;
 
           if (!sentLog[logKey] && diffDaysSinceDelayed >= 2) {
+            sentLog.lastDelayedSentDate = todayStr;
             const title = '⚠️ Döngüm - Regl Gecikmesi Bildirimi';
             const body = `Tahmini regl gününüz ${lateDays} gün geçti. Kanamanız başladıysa (+) butonundan tek dokunuşla kaydedebilirsiniz.`;
 
-            sentLog[logKey] = Date.now();
-            sentLog.lastDelayedSentDate = todayStr;
-            stateChanged = true;
-
-            await this.dispatchSystemNotification({
+            await handleReminderCandidate({
+              logKey,
               title,
               body,
               emojiIcon: '🩸',
               tag: 'period_delayed',
+              type: 'period',
+              actionTab: 'home',
+              openQuickAdd: true,
+              actionFocus: 'period',
               toastActionText: '➕ Regl Kaydet',
-              data: { tab: 'home', openQuickAdd: true, quickSection: 'period' }
+              isWithinLiveWindow: currentHours === 10 || currentHours === 11
             });
-            this.storage.addInAppNotification(null, { title, body, type: 'period', actionTab: 'home', openQuickAdd: true, actionFocus: 'period' });
           }
         }
       }
@@ -9286,18 +9483,17 @@ class NotificationManager {
             const title = '✨ Döngüm - Yumurtlama (Ovülasyon) Zirvesi';
             const body = 'Bugün enerjinizin ve doğurganlık ihtimalinin en yüksek olduğu zirve ovülasyon evresindesiniz! 🥚✨';
 
-            sentLog[logKey] = Date.now();
-            stateChanged = true;
-
-            await this.dispatchSystemNotification({
+            await handleReminderCandidate({
+              logKey,
               title,
               body,
               emojiIcon: '✨',
               tag: 'ovulation_day',
+              type: 'ovulation',
+              actionTab: 'home',
               toastActionText: '🌸 İncele',
-              data: { tab: 'home' }
+              isWithinLiveWindow: currentHours === 9 || currentHours === 10
             });
-            this.storage.addInAppNotification(null, { title, body, type: 'ovulation', actionTab: 'home' });
           }
         }
       }
@@ -9310,18 +9506,17 @@ class NotificationManager {
             const title = '🌙 Döngüm - Rahatlama & PMS Dönemi';
             const body = 'Luteal evredesiniz. Duygusal dalgalanmalar normaldir; bol su 💧, magnezyum 🍫 ve dinlenme enerjinizi dengeler.';
 
-            sentLog[logKey] = Date.now();
-            stateChanged = true;
-
-            await this.dispatchSystemNotification({
+            await handleReminderCandidate({
+              logKey,
               title,
               body,
               emojiIcon: '🌙',
               tag: 'pms_phase',
+              type: 'pms',
+              actionTab: 'home',
               toastActionText: '🧘‍♀️ Rehber',
-              data: { tab: 'home' }
+              isWithinLiveWindow: currentHours === 10 || currentHours === 11
             });
-            this.storage.addInAppNotification(null, { title, body, type: 'pms', actionTab: 'home' });
           }
         }
       }
@@ -9330,35 +9525,27 @@ class NotificationManager {
       if (!isQuietNow && settings.moodReminder !== false) {
         const preferredMoodTime = settings.moodReminderTime || '15:00';
         const [mHour, mMin] = preferredMoodTime.split(':').map(Number);
-        const isPastMoodTime = currentHours > mHour || (currentHours === mHour && currentMinutes >= mMin);
+        const targetMoodMinutes = mHour * 60 + mMin;
+        const diffMoodMinutes = currentTotalMinutes - targetMoodMinutes;
 
-        if (isPastMoodTime) {
+        if (diffMoodMinutes >= 0) {
           const todayDayData = profileData.days?.[todayStr];
           const hasLoggedMood = Boolean((Array.isArray(todayDayData?.moods) && todayDayData.moods.length > 0) || todayDayData?.mood);
           const logKey = `mood_${todayStr}`;
 
           if (!hasLoggedMood && !sentLog[logKey]) {
-            const title = '🧘‍♀️ Döngüm - Ruh Halini Kaydet ✨';
-            const body = 'Bugün nasıl hissediyorsun? Günlük ruh halini (+) menüsünden 5 saniyede kaydederek döngü dengeni takip et.';
-
-            sentLog[logKey] = Date.now();
-            stateChanged = true;
-
-            await this.dispatchSystemNotification({
-              title,
-              body,
+            await handleReminderCandidate({
+              logKey,
+              title: '🧘‍♀️ Döngüm - Ruh Halini Kaydet ✨',
+              body: 'Bugün nasıl hissediyorsun? Günlük ruh halini (+) menüsünden 5 saniyede kaydederek döngü dengeni takip et.',
               emojiIcon: '😊',
               tag: 'mood_reminder',
-              toastActionText: '😊 Ruh Hali Seç',
-              data: { tab: 'home', openQuickAdd: true, quickSection: 'mood' }
-            });
-            this.storage.addInAppNotification(null, {
-              title,
-              body,
               type: 'mood',
               actionTab: 'home',
               openQuickAdd: true,
-              actionFocus: 'mood'
+              actionFocus: 'mood',
+              toastActionText: '😊 Ruh Hali Seç',
+              isWithinLiveWindow: diffMoodMinutes <= 30
             });
           }
         }
@@ -9368,35 +9555,27 @@ class NotificationManager {
       if (!isQuietNow && settings.exerciseReminder !== false) {
         const preferredExTime = settings.exerciseReminderTime || '18:00';
         const [eHour, eMin] = preferredExTime.split(':').map(Number);
-        const isPastExTime = currentHours > eHour || (currentHours === eHour && currentMinutes >= eMin);
+        const targetExMinutes = eHour * 60 + eMin;
+        const diffExMinutes = currentTotalMinutes - targetExMinutes;
 
-        if (isPastExTime) {
+        if (diffExMinutes >= 0) {
           const todayDayData = profileData.days?.[todayStr];
           const hasLoggedEx = Boolean(todayDayData?.exercise);
           const logKey = `exercise_${todayStr}`;
 
           if (!hasLoggedEx && !sentLog[logKey]) {
-            const title = '🏃‍♀️ Döngüm - Günün Hareket & Egzersiz Vakti';
-            const body = 'Bedenini döngü fazına uygun bir yürüyüş, yoga veya antrenmanla canlandır! Kaydetmek için (+) butonuna dokun 💪';
-
-            sentLog[logKey] = Date.now();
-            stateChanged = true;
-
-            await this.dispatchSystemNotification({
-              title,
-              body,
+            await handleReminderCandidate({
+              logKey,
+              title: '🏃‍♀️ Döngüm - Günün Hareket & Egzersiz Vakti',
+              body: 'Bedenini döngü fazına uygun bir yürüyüş, yoga veya antrenmanla canlandır! Kaydetmek için (+) butonuna dokun 💪',
               emojiIcon: '🏃‍♀️',
               tag: 'exercise_reminder',
-              toastActionText: '🏃‍♀️ Egzersiz Gir',
-              data: { tab: 'home', openQuickAdd: true, quickSection: 'exercise' }
-            });
-            this.storage.addInAppNotification(null, {
-              title,
-              body,
               type: 'exercise',
               actionTab: 'home',
               openQuickAdd: true,
-              actionFocus: 'exercise'
+              actionFocus: 'exercise',
+              toastActionText: '🏃‍♀️ Egzersiz Gir',
+              isWithinLiveWindow: diffExMinutes <= 30
             });
           }
         }
@@ -9406,9 +9585,10 @@ class NotificationManager {
       if (!isQuietNow && settings.dailyLogReminder !== false) {
         const preferredTime = settings.dailyLogTime || '20:30';
         const [prefHour, prefMin] = preferredTime.split(':').map(Number);
-        const isPastTime = currentHours > prefHour || (currentHours === prefHour && currentMinutes >= prefMin);
+        const targetDailyMinutes = prefHour * 60 + prefMin;
+        const diffDailyMinutes = currentTotalMinutes - targetDailyMinutes;
 
-        if (isPastTime) {
+        if (diffDailyMinutes >= 0) {
           const todayDayData = profileData.days?.[todayStr];
           const hasLoggedToday = Boolean(todayDayData && (
             todayDayData.isPeriod ||
@@ -9420,27 +9600,18 @@ class NotificationManager {
 
           const logKey = `daily_log_${todayStr}`;
           if (!hasLoggedToday && !sentLog[logKey]) {
-            const title = '📝 Döngüm - Günün Sağlık Kaydı 🌸';
-            const body = 'Bugün nasıl hissettin? Günlük semptom, duygu ve su/egzersiz kaydını (+) menüsünden eklemeyi unutma.';
-
-            sentLog[logKey] = Date.now();
-            stateChanged = true;
-
-            await this.dispatchSystemNotification({
-              title,
-              body,
+            await handleReminderCandidate({
+              logKey,
+              title: '📝 Döngüm - Günün Sağlık Kaydı 🌸',
+              body: 'Bugün nasıl hissettin? Günlük semptom, duygu ve su/egzersiz kaydını (+) menüsünden eklemeyi unutma.',
               emojiIcon: '📝',
               tag: 'daily_health_log',
-              toastActionText: '➕ Hızlı Kayıt',
-              data: { tab: 'home', openQuickAdd: true, quickSection: 'all' }
-            });
-            this.storage.addInAppNotification(null, {
-              title,
-              body,
               type: 'daily',
               actionTab: 'home',
               openQuickAdd: true,
-              actionFocus: 'all'
+              actionFocus: 'all',
+              toastActionText: '➕ Hızlı Kayıt',
+              isWithinLiveWindow: diffDailyMinutes <= 30
             });
           }
         }
@@ -9460,72 +9631,39 @@ class NotificationManager {
             const intervalMs = Math.round(intervalHours * 60 * 60 * 1000);
             const lastWaterTime = sentLog.lastWaterNoticeTime || 0;
 
-            if (Date.now() - lastWaterTime >= intervalMs) {
-              const title = '💧 Döngüm - Su İçme Vakti 🌊';
-              const remaining = Math.max(0, targetWater - todayWater);
-              const body = `Vücudunu nemli tut! Hedefine ${remaining} ml kaldı. Bir bardak su içerek tazelen (${todayWater}/${targetWater} ml).`;
+            if (nowMs - lastWaterTime >= intervalMs) {
+              if (silentCatchUp) {
+                // Uygulama yeni açıldığında anında su bildirimi patlatma; sayacı şimdiden başlat ki periyodik çalışsın
+                sentLog.lastWaterNoticeTime = nowMs;
+                stateChanged = true;
+              } else {
+                const title = '💧 Döngüm - Su İçme Vakti 🌊';
+                const remaining = Math.max(0, targetWater - todayWater);
+                const body = `Vücudunu nemli tut! Hedefine ${remaining} ml kaldı. Bir bardak su içerek tazelen (${todayWater}/${targetWater} ml).`;
 
-              sentLog.lastWaterNoticeTime = Date.now();
-              stateChanged = true;
-
-              await this.dispatchSystemNotification({
-                title,
-                body,
-                emojiIcon: '💧',
-                tag: 'water_reminder',
-                toastActionText: '🥛 +250 ml Ekle',
-                onToastAction: () => {
-                  this.storage.logWater(todayStr, 250);
-                  this.playWellnessChime();
-                  this.notifyListeners();
-                  if (this.onQuickActionCallback) {
-                    this.onQuickActionCallback({ type: 'REFRESH_UI' });
-                  }
-                },
-                data: { tab: 'home', openQuickAdd: true, quickSection: 'water' }
-              });
-              this.storage.addInAppNotification(null, {
-                title,
-                body,
-                type: 'water',
-                actionTab: 'home',
-                openQuickAdd: true,
-                actionFocus: 'water'
-              });
-            }
-          }
-        }
-      }
-
-      // 9. UYGULAMAYA GERİ ÇAĞIRMA (4+ GÜN BOYUNCA GİRİŞ YAPILMADIYSA)
-      if (isDaytimeForCycleAlerts) {
-        const allDays = Object.keys(profileData.days || {}).sort();
-        if (allDays.length > 0) {
-          const lastRecordedDay = allDays[allDays.length - 1];
-          const daysSinceLastRecord = CycleEngine.diffDays(todayStr, lastRecordedDay);
-
-          if (daysSinceLastRecord >= 4) {
-            const logKey = `reengagement_${todayStr}`;
-            const lastReengage = sentLog.lastReengagementSentDate;
-            const diffDaysSinceReengage = lastReengage ? CycleEngine.diffDays(todayStr, lastReengage) : 99;
-
-            if (!sentLog[logKey] && diffDaysSinceReengage >= 4) {
-              const title = '🌸 Döngüm Seni Özledi 💖';
-              const body = 'Döngü ve sağlık modelinizin en yüksek doğrulukla çalışması için son günlerinizi (+) butonundan kaydetmeyi unutmayın.';
-
-              sentLog[logKey] = Date.now();
-              sentLog.lastReengagementSentDate = todayStr;
-              stateChanged = true;
-
-              await this.dispatchSystemNotification({
-                title,
-                body,
-                emojiIcon: '🌸',
-                tag: 'app_reengagement',
-                toastActionText: '➕ Kayıt Ekle',
-                data: { tab: 'home', openQuickAdd: true }
-              });
-              this.storage.addInAppNotification(null, { title, body, type: 'system', actionTab: 'home', openQuickAdd: true });
+                sentLog.lastWaterNoticeTime = nowMs;
+                await handleReminderCandidate({
+                  logKey: `water_slot_${todayStr}_${currentHours}`,
+                  title,
+                  body,
+                  emojiIcon: '💧',
+                  tag: 'water_reminder',
+                  type: 'water',
+                  actionTab: 'home',
+                  openQuickAdd: true,
+                  actionFocus: 'water',
+                  toastActionText: '🥛 +250 ml Ekle',
+                  onToastAction: () => {
+                    this.storage.logWater(todayStr, 250);
+                    this.playWellnessChime();
+                    this.notifyListeners();
+                    if (this.onQuickActionCallback) {
+                      this.onQuickActionCallback({ section: 'water', dateStr: todayStr });
+                    }
+                  },
+                  isWithinLiveWindow: true
+                });
+              }
             }
           }
         }
@@ -16074,10 +16212,11 @@ class DongumApp {
         });
 
         this.notifManager.notifyListeners();
+        await this.notifManager.evaluateSmartReminders({ silentCatchUp: true });
         await this.notifManager.registerBackgroundSync();
         await this.notifManager.syncStateToServiceWorker();
-        await this.notifManager.evaluateSmartReminders();
-        alert('Bildirim ve hatırlatıcı ayarlarınız kaydedildi, arka plan senkronizasyonu güncellendi!');
+        await this.notifManager.scheduleUpcomingBackgroundNotifications();
+        alert('Bildirim ve hatırlatıcı ayarlarınız kaydedildi, arka plan zamanlayıcıları güncellendi!');
         this.renderSettingsTab(container);
         this.updateHeaderNotificationBadge();
       };
