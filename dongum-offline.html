@@ -5833,6 +5833,761 @@ input:checked + .switch-slider:before {
   line-height: 1.35;
 }
 
+/* ==========================================================================
+   ALT MENÜ ORTA "+" HIZLI KAYIT BUTONU & MERKEZİ VERİ GİRİŞ MODALI
+   ========================================================================== */
+.nav-center-plus-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  height: 100%;
+  padding-bottom: 5px;
+}
+
+.nav-center-plus-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  color: #ffffff;
+  border: 3.5px solid var(--bg-surface);
+  box-shadow: 0 6px 18px rgba(244, 63, 94, 0.42), 0 0 0 1px rgba(244, 63, 94, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  top: -18px;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+  z-index: 60;
+}
+
+body.dark-theme .nav-center-plus-btn {
+  border-color: #1e293b;
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.52);
+}
+
+.nav-center-plus-btn:hover {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 8px 22px rgba(244, 63, 94, 0.55);
+}
+
+.nav-center-plus-btn:active {
+  transform: scale(0.94);
+}
+
+.plus-icon-glyph {
+  font-size: 1.85rem;
+  font-weight: 400;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+.nav-center-plus-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 34px;
+  letter-spacing: -0.2px;
+}
+
+/* Hızlı Veri Giriş Modalı (Quick Add Sheet) */
+.quick-add-sheet {
+  max-height: 90vh !important;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 14px 16px !important;
+}
+
+.quick-add-header-row {
+  margin-bottom: 10px !important;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.qa-header-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+body.dark-theme .qa-header-badge {
+  background: rgba(244, 63, 94, 0.2);
+}
+
+.quick-add-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.qa-top-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg-page);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.qa-date-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.qa-step-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qa-date-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--text-main);
+  position: relative;
+}
+
+.qa-hidden-date-input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.qa-today-tag {
+  font-size: 0.66rem;
+  font-weight: 700;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.qa-yest-tag {
+  background: rgba(139, 92, 246, 0.14);
+  color: #8b5cf6;
+}
+
+.qa-quick-date-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.qa-date-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.qa-date-pill.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.qa-phase-chip {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+/* Kategori Filtre Sekmeleri */
+.qa-category-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  flex-shrink: 0;
+}
+
+.qa-cat-btn {
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-page);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.qa-cat-btn.active {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(244, 63, 94, 0.25);
+}
+
+.qa-sections-scroll {
+  overflow-y: auto;
+  max-height: calc(88vh - 235px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 2px;
+}
+
+.qa-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 13px;
+  box-shadow: var(--shadow-sm);
+}
+
+.qa-period-card {
+  border-left: 4px solid #e11d48;
+}
+
+.qa-water-card {
+  border-left: 4px solid #0284c7;
+}
+
+.qa-exercise-card {
+  border-left: 4px solid #10b981;
+}
+
+.qa-mood-card {
+  border-left: 4px solid #8b5cf6;
+}
+
+.qa-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.qa-card-title-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.qa-card-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.qa-card-title-wrap h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 2px 0;
+}
+
+.qa-card-title-wrap p {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.qa-status-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.pill-saved {
+  background: rgba(225, 29, 72, 0.12);
+  color: #e11d48;
+}
+
+.pill-water {
+  background: rgba(2, 132, 199, 0.12);
+  color: #0284c7;
+}
+
+.pill-goal {
+  background: rgba(16, 185, 129, 0.14);
+  color: #10b981;
+}
+
+.pill-mood {
+  background: rgba(139, 92, 246, 0.12);
+  color: #8b5cf6;
+}
+
+.qa-sub-label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin: 8px 0 6px 0;
+}
+
+/* Regl Kartı Butonları */
+.btn-qa-period-main {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 12px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  border: 1.5px solid #fda4af;
+  background: rgba(244, 63, 94, 0.08);
+  color: #e11d48;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-qa-period-main.active {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.qa-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.qa-flow-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 4px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-page);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.qa-flow-btn.selected {
+  border-color: #e11d48;
+  background: rgba(225, 29, 72, 0.12);
+  color: #e11d48;
+  font-weight: 700;
+}
+
+.qa-flow-emoji {
+  font-size: 1.15rem;
+}
+
+.qa-flow-text {
+  font-size: 0.69rem;
+}
+
+/* Su Kartı Butonları */
+.qa-water-progress-track {
+  width: 100%;
+  height: 9px;
+  background: rgba(2, 132, 199, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.qa-water-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8 0%, #0284c7 100%);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.qa-water-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.qa-water-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 6px;
+  border-radius: 11px;
+  border: 1px solid rgba(2, 132, 199, 0.22);
+  background: rgba(2, 132, 199, 0.05);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.qa-water-btn.qa-water-featured {
+  background: rgba(2, 132, 199, 0.11);
+  border-color: rgba(2, 132, 199, 0.38);
+}
+
+.qa-water-btn.qa-water-minus {
+  border-color: var(--border-subtle);
+  background: var(--bg-page);
+}
+
+.qwb-emoji {
+  font-size: 1.15rem;
+}
+
+.qwb-val {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #0284c7;
+}
+
+.qa-water-minus .qwb-val {
+  color: var(--text-secondary);
+}
+
+.qwb-sub {
+  font-size: 0.64rem;
+  color: var(--text-muted);
+}
+
+.qa-water-manual-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.qa-water-input {
+  width: 95px !important;
+  padding: 6px 10px !important;
+  font-size: 0.8rem !important;
+}
+
+.btn-qa-water-set {
+  flex: 1;
+  padding: 7px 12px;
+  border-radius: 10px;
+  border: none;
+  background: #0284c7;
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-qa-water-reset {
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-page);
+  cursor: pointer;
+}
+
+/* Egzersiz Kartı */
+.btn-qa-open-fitness {
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 0.69rem;
+  font-weight: 700;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.08);
+  color: #10b981;
+  cursor: pointer;
+}
+
+.btn-qa-ex-del {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.69rem;
+  font-weight: 700;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.08);
+  color: #ef4444;
+  cursor: pointer;
+}
+
+.qa-ex-types-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.qa-ex-type-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px 4px;
+  border-radius: 11px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-page);
+  color: var(--text-main);
+  cursor: pointer;
+  gap: 2px;
+}
+
+.qa-ex-type-btn.selected {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.qet-emoji {
+  font-size: 1.25rem;
+}
+
+.qet-name {
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.qet-badge {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+.qa-dur-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.qa-dur-chip {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.73rem;
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-page);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.qa-dur-chip.selected {
+  background: #10b981;
+  color: #fff;
+  border-color: #10b981;
+}
+
+.qa-intensity-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.qa-int-btn {
+  padding: 7px 6px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-page);
+  color: var(--text-main);
+  font-size: 0.74rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.qa-int-btn.selected {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
+
+.qa-feel-row {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.qa-feel-chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-page);
+  color: var(--text-main);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.qa-feel-chip.selected {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.14);
+  font-weight: 700;
+}
+
+.qa-ex-compat-banner {
+  margin-top: 8px;
+  padding: 9px 11px;
+  border-radius: 11px;
+  border: 1px solid transparent;
+}
+
+.qa-save-ex-btn {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  font-size: 0.8rem !important;
+  padding: 10px 14px !important;
+}
+
+.qa-note-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.btn-qa-save-note {
+  align-self: flex-end;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  background: var(--secondary-gradient);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.qa-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.qa-autosave-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.qa-done-btn {
+  width: auto !important;
+  padding: 8px 20px !important;
+  font-size: 0.82rem !important;
+}
+
+/* ==========================================================================
+   CANLI UYGULAMA İÇİ BİLDİRİM BANNERI (LIVE IN-APP TOAST)
+   ========================================================================== */
+.dongum-live-toast {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-130%);
+  width: calc(100% - 24px);
+  max-width: 440px;
+  background: var(--bg-surface);
+  border: 1.5px solid rgba(244, 63, 94, 0.35);
+  border-radius: 16px;
+  padding: 12px 14px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+  z-index: 9999;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  opacity: 0;
+}
+
+.dongum-live-toast.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.dongum-live-toast .toast-icon {
+  font-size: 1.45rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.dongum-live-toast .toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dongum-live-toast .toast-title {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.dongum-live-toast .toast-body {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.dongum-live-toast .toast-actions {
+  display: flex;
+   flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.dongum-live-toast .toast-action-btn {
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: none;
+  background: var(--primary-gradient);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dongum-live-toast .toast-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+
 
 
 
@@ -5859,7 +6614,11 @@ input:checked + .switch-slider:before {
     padding-bottom: 0 !important;
   }
 
-  .modal-sheet:not(.day-modal-sheet) {
+  .quick-add-sheet {
+    padding-bottom: max(14px, env(safe-area-inset-bottom)) !important;
+  }
+
+  .modal-sheet:not(.day-modal-sheet):not(.quick-add-sheet) {
     padding-bottom: calc(45px + env(safe-area-inset-bottom));
   }
 }
@@ -6162,23 +6921,33 @@ const DEFAULT_SETTINGS = {
     dailyLogTime: '20:30',
     moodReminder: true,
     moodReminderTime: '15:00',
+    exerciseReminder: true,
+    exerciseReminderTime: '18:00',
     waterReminder: true,
     waterIntervalHours: 2,
     waterStartHour: 8,
-    waterEndHour: 22
+    waterEndHour: 22,
+    quietHoursEnabled: true,
+    quietStartHour: 23,
+    quietEndHour: 8
   },
   waterTarget: 2250,
   exerciseGoalDays: 3
 };
 
 const PROFILE_ROLES = [
-  { id: 'personal', name: 'Kişisel Hesap', badge: 'Benim Döngüm' },
-  { id: 'private', name: 'Gizli Kasa', badge: 'Şifreli Profil' },
-  { id: 'family', name: 'Aile / Arkadaş', badge: 'Takip Hesabı' },
-  { id: 'guest', name: 'Misafir / Danışan', badge: 'İkinci Hesap' }
+  { id: 'personal', name: 'Kişisel Hesap', badge: '🌸 Benim Döngüm' },
+  { id: 'private', name: 'Gizli Kasa', badge: '🔒 Şifreli Profil' },
+  { id: 'family', name: 'Aile / Arkadaş', badge: '💞 Takip Hesabı' },
+  { id: 'guest', name: 'Misafir / Danışan', badge: '✨ İkinci Hesap' }
 ];
 
-const PROFILE_EMOJIS = ['🌸', '🌺', '🌙', '⭐', '🌿', '💎', '🦋', '🥑', '👑', '🦄', '🍓', '💜', '🎀', '🐱'];
+const PROFILE_EMOJIS = [
+  '🌸', '🌺', '🌷', '🌹', '🌻', '🌼', '🪷', '🌿',
+  '🍀', '🌙', '⭐', '✨', '☀️', '🌈', '🦋', '🦢',
+  '🕊️', '🐱', '🐰', '🦊', '🦄', '👑', '💎', '🎀',
+  '💜', '💖', '🍓', '🍒', '🍑', '🥑', '🧘‍♀️', '🧚‍♀️'
+];
 const PROFILE_COLORS = ['#f43f5e', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ec4899', '#6366f1', '#14b8a6'];
 
 /**
@@ -6564,6 +7333,14 @@ class StorageManager {
 
   saveNotificationState(profileId = null, state) {
     const data = this.getProfileData(profileId);
+    if (state && state.sentLog) {
+      const cutoffMs = Date.now() - (45 * 24 * 60 * 60 * 1000); // 45 günden eski kayıtları temizle
+      for (const [k, v] of Object.entries(state.sentLog)) {
+        if (typeof v === 'number' && v < cutoffMs && k !== 'lastWaterNoticeTime') {
+          delete state.sentLog[k];
+        }
+      }
+    }
     data.notificationState = state;
     return this.saveProfileData(profileId, data);
   }
@@ -6583,13 +7360,15 @@ class StorageManager {
       body: notif.body,
       type: notif.type || 'info',
       actionTab: notif.actionTab || 'home',
+      actionFocus: notif.actionFocus || null,
+      openQuickAdd: !!notif.openQuickAdd,
       date: notif.date || new Date().toISOString(),
       read: false
     };
 
     data.notificationState.inAppHistory.unshift(item);
-    if (data.notificationState.inAppHistory.length > 30) {
-      data.notificationState.inAppHistory = data.notificationState.inAppHistory.slice(0, 30);
+    if (data.notificationState.inAppHistory.length > 35) {
+      data.notificationState.inAppHistory = data.notificationState.inAppHistory.slice(0, 35);
     }
     this.saveProfileData(profileId, data);
     return item;
@@ -7580,13 +8359,14 @@ class CycleEngine {
 
 
 /**
- * Döngüm - Akıllı Bildirim & Hatırlatıcı Yöneticisi (NotificationManager)
+ * Döngüm - Akıllı Bildirim & Hatırlatıcı Yöneticisi (NotificationManager v2 - Optimize)
  * 
- * - Web Notification API & Service Worker Entegrasyonu
- * - Çevrimdışı ve PWA Kilit Ekranı Hatırlatıcıları
+ * - Web Notification API & Service Worker Çift Yönlü Senkronizasyon (Race-condition korumalı)
+ * - Çevrimdışı ve PWA Kilit Ekranı Hatırlatıcıları + TimestampTrigger Tekilleştirme
  * - Akıllı Biyolojik Döngü Uyarıları (Yaklaşan Regl, Gecikme, Ovülasyon, PMS)
- * - Yaşam Tarzı Hatırlatıcıları (Günlük Semptom/Ruh Hali, Su Hidrasyonu, Uygulama Check-in)
- * - Uygulama İçi Bildirim Merkezi (In-App Notification Center & Canlı Rozet)
+ * - Yaşam Tarzı Hatırlatıcıları (Günlük Semptom/Ruh Hali, Egzersiz, Su Hidrasyonu)
+ * - Gece Sessiz Saatler (Do Not Disturb / Quiet Hours) Koruması
+ * - Uygulama İçi Canlı Bildirim Çubuğu (In-App Toast) & Bildirim Merkezi
  * - Web Audio API ile Hafif Wellness Bildirim Sesi
  */
 
@@ -7599,19 +8379,25 @@ class NotificationManager {
     this.storage = storageInstance || storage;
     this.engine = engineInstance || new CycleEngine(this.storage);
     this.heartbeatTimer = null;
+    this.evalDebounceTimer = null;
+    this.syncDebounceTimer = null;
+    this.isEvaluating = false;
     this.audioCtx = null;
     this.onNotificationChangeCallbacks = [];
+    this.onQuickActionCallback = null;
 
     this.init();
   }
 
-  init() {
-    this.initHeartbeat();
-    this.initBackgroundWorker();
+  async init() {
     this.setupVisibilityListener();
-    this.syncStateFromServiceWorker();
-    this.registerBackgroundSync();
-    this.syncStateToServiceWorker();
+    this.initBackgroundWorker();
+    // Önce Service Worker'daki arka plan kayıtlarını çek, sonra değerlendir ve senkronize et
+    await this.syncStateFromServiceWorker();
+    await this.evaluateSmartReminders();
+    await this.registerBackgroundSync();
+    await this.syncStateToServiceWorker();
+    this.initHeartbeat();
   }
 
   // Tarayıcı Bildirim Desteği Kontrolü
@@ -7625,17 +8411,32 @@ class NotificationManager {
     return Notification.permission; // 'granted' | 'denied' | 'default'
   }
 
+  // Gece Sessiz Saatler (Quiet Hours) Kontrolü
+  isQuietHoursActive(settings = {}, dateObj = new Date()) {
+    if (settings.quietHoursEnabled === false) return false;
+    const startH = typeof settings.quietStartHour === 'number' ? settings.quietStartHour : 23;
+    const endH = typeof settings.quietEndHour === 'number' ? settings.quietEndHour : 8;
+    const hour = dateObj.getHours();
+
+    if (startH > endH) {
+      // Gece yarısını aşan aralık (Örn: 23:00 - 08:00)
+      return hour >= startH || hour < endH;
+    } else if (startH < endH) {
+      return hour >= startH && hour < endH;
+    }
+    return false;
+  }
+
   // İzin İsteme
   async requestPermission() {
     if (!NotificationManager.isSupported()) {
-      return { success: false, status: 'unsupported', message: 'Tarayıcınız bildirim desteği sunmuyor.' };
+      return { success: false, status: 'unsupported', message: 'Tarayıcınız sistem bildirim desteği sunmuyor. Uygulama içi bildirimler devrede.' };
     }
 
     try {
       const permission = await Notification.requestPermission();
       this.notifyListeners();
       if (permission === 'granted') {
-        // İzin verildiğinde ayarları otomatik aktif yap
         const profileData = this.storage.getProfileData();
         const nSettings = profileData.settings?.notificationSettings || {};
         this.storage.updateSettings({
@@ -7647,6 +8448,7 @@ class NotificationManager {
         });
         await this.registerBackgroundSync();
         await this.syncStateToServiceWorker();
+        await this.scheduleUpcomingBackgroundNotifications();
         return { success: true, status: 'granted' };
       } else {
         return { success: false, status: permission };
@@ -7664,10 +8466,24 @@ class NotificationManager {
     }
   }
 
+  setQuickActionHandler(callback) {
+    this.onQuickActionCallback = callback;
+  }
+
   notifyListeners() {
     this.onNotificationChangeCallbacks.forEach(cb => {
       try { cb(); } catch (e) { console.error('Bildirim listener hatası:', e); }
     });
+  }
+
+  // Veri değiştiğinde çağrılan optimize (debounced) tetikleyici
+  onDataUpdated() {
+    if (this.evalDebounceTimer) clearTimeout(this.evalDebounceTimer);
+    this.evalDebounceTimer = setTimeout(async () => {
+      await this.evaluateSmartReminders();
+      await this.syncStateToServiceWorker();
+      this.notifyListeners();
+    }, 300);
   }
 
   // Web Audio API ile Zarif Sağlık Bildirim Tınısı (Harici mp3 gerektirmez)
@@ -7679,7 +8495,7 @@ class NotificationManager {
         this.audioCtx = new AudioContext();
       }
       if (this.audioCtx.state === 'suspended') {
-        this.audioCtx.resume();
+        this.audioCtx.resume().catch(() => {});
       }
 
       const now = this.audioCtx.currentTime;
@@ -7687,12 +8503,11 @@ class NotificationManager {
       const gain = this.audioCtx.createGain();
 
       osc.type = 'sine';
-      // Çift tonlu yumuşak tını (F5 -> A5)
       osc.frequency.setValueAtTime(698.46, now); // F5
-      osc.frequency.exponentialRampToValueAtTime(880.00, now + 0.12); // A5
+      osc.frequency.exponentialRampToValueAtTime(880.00, now + 0.14); // A5
 
       gain.gain.setValueAtTime(0.001, now);
-      gain.gain.exponentialRampToValueAtTime(0.2, now + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.18, now + 0.04);
       gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.55);
 
       osc.connect(gain);
@@ -7705,20 +8520,121 @@ class NotificationManager {
     }
   }
 
-  // Gerçek Sistem Bildirimi Gönderme (Service Worker veya Notification API)
-  async dispatchSystemNotification({ title, body, tag, icon, data, vibrate = [100, 50, 100], playSound = true }) {
+  // Uygulama İçi Canlı Bildirim Çubuğu (In-App Toast Banner)
+  showInAppToast({ title, body, icon = '🌸', actionText = null, onAction = null, duration = 5500 }) {
+    if (typeof document === 'undefined') return;
+    try {
+      let existing = document.getElementById('dongumLiveToast');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'dongumLiveToast';
+      toast.className = 'dongum-live-toast';
+      toast.innerHTML = `
+        <div class="dlt-icon">${icon}</div>
+        <div class="dlt-content">
+          <strong class="dlt-title">${title}</strong>
+          <p class="dlt-body">${body}</p>
+        </div>
+        <div class="dlt-actions">
+          ${actionText ? `<button type="button" class="dlt-action-btn" id="btnToastQuickAction">${actionText}</button>` : ''}
+          <button type="button" class="dlt-close-btn" id="btnToastClose" aria-label="Kapat">✕</button>
+        </div>
+      `;
+
+      const appEl = document.getElementById('app') || document.body;
+      appEl.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.add('show');
+      });
+
+      const closeToast = () => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+          if (toast.parentNode) toast.remove();
+        }, 280);
+      };
+
+      const btnClose = toast.querySelector('#btnToastClose');
+      if (btnClose) btnClose.onclick = (e) => {
+        e.stopPropagation();
+        closeToast();
+      };
+
+      const btnAction = toast.querySelector('#btnToastQuickAction');
+      if (btnAction && typeof onAction === 'function') {
+        btnAction.onclick = (e) => {
+          e.stopPropagation();
+          closeToast();
+          onAction();
+        };
+      }
+
+      toast.onclick = () => {
+        if (typeof onAction === 'function') {
+          closeToast();
+          onAction();
+        }
+      };
+
+      if (duration > 0) {
+        setTimeout(closeToast, duration);
+      }
+    } catch (e) {
+      console.warn('Toast gösterilemedi:', e);
+    }
+  }
+
+  // Gerçek Sistem Bildirimi Gönderme (Service Worker veya Notification API + In-App Toast Fallback)
+  async dispatchSystemNotification({
+    title,
+    body,
+    tag,
+    icon,
+    emojiIcon = '🌸',
+    data,
+    actions = [],
+    vibrate = [120, 60, 120],
+    playSound = true,
+    forceQuietBypass = false,
+    showToastInForeground = true,
+    toastActionText = null,
+    onToastAction = null
+  }) {
+    const profileData = this.storage.getProfileData();
+    const settings = profileData.settings?.notificationSettings || {};
+    if (!forceQuietBypass && (settings.enabled === false || profileData.settings?.notificationsEnabled === false)) {
+      return false;
+    }
+
+    // Gece sessiz saatler kontrolü (Test bildirimleri hariç)
+    if (!forceQuietBypass && this.isQuietHoursActive(settings)) {
+      return false;
+    }
+
     if (playSound) {
       this.playWellnessChime();
     }
 
+    // Uygulama şu an ekranda açıksa canlı uygulama içi bildirim çubuğunu (Toast) da göster
+    const isVisible = typeof document !== 'undefined' && document.visibilityState === 'visible';
+    if (isVisible && showToastInForeground) {
+      this.showInAppToast({
+        title,
+        body,
+        icon: emojiIcon,
+        actionText: toastActionText || 'İncele',
+        onAction: onToastAction || (() => {
+          if (this.onQuickActionCallback && data) {
+            this.onQuickActionCallback(data);
+          }
+        })
+      });
+    }
+
     if (!NotificationManager.isSupported()) return false;
     if (Notification.permission !== 'granted') return false;
-
-    const profileData = this.storage.getProfileData();
-    const settings = profileData.settings?.notificationSettings || {};
-    if (settings.enabled === false || profileData.settings?.notificationsEnabled === false) {
-      return false;
-    }
 
     const notifOptions = {
       body: body || '',
@@ -7730,24 +8646,42 @@ class NotificationManager {
       data: data || { url: './index.html' }
     };
 
+    if (Array.isArray(actions) && actions.length > 0) {
+      notifOptions.actions = actions;
+    }
+
     // 1. Service Worker aktif ise onun üzerinden göster (Mobilde arka plan ve kilit ekranı için en sağlıklısı)
     if ('serviceWorker' in navigator) {
       try {
-        const registration = await navigator.serviceWorker.ready;
-        if (registration && registration.showNotification) {
+        const registration = await navigator.serviceWorker.getRegistration();
+        if (registration && registration.active && registration.showNotification) {
           await registration.showNotification(title, notifOptions);
           return true;
         }
       } catch (swErr) {
-        console.warn('SW üzerinden bildirim gönderilemedi, doğrudan denenecek:', swErr);
+        // SW actions desteklemiyorsa actions olmadan tekrar dene
+        try {
+          const registration = await navigator.serviceWorker.getRegistration();
+          if (registration && registration.showNotification) {
+            delete notifOptions.actions;
+            await registration.showNotification(title, notifOptions);
+            return true;
+          }
+        } catch (e2) {
+          console.warn('SW üzerinden bildirim gönderilemedi, doğrudan denenecek:', e2);
+        }
       }
     }
 
     // 2. Doğrudan Notification API ile göster
     try {
+      delete notifOptions.actions;
       const notification = new Notification(title, notifOptions);
       notification.onclick = () => {
         window.focus();
+        if (this.onQuickActionCallback && data) {
+          this.onQuickActionCallback(data);
+        }
         notification.close();
       };
       return true;
@@ -7763,17 +8697,33 @@ class NotificationManager {
     if (perm !== 'granted') {
       const req = await this.requestPermission();
       if (!req.success) {
+        // İzin verilmese dahi uygulama içi bildirim ve toast ile çalıştığını göster
+        const title = '🌸 Döngüm - Uygulama İçi Bildirim Testi';
+        const body = 'Tarayıcı bildirim izni kapalı olsa bile uygulama içi bildirim merkezi ve canlı uyarılarınız aktif!';
+        this.storage.addInAppNotification(null, {
+          title,
+          body,
+          type: 'system',
+          actionTab: 'home'
+        });
+        this.playWellnessChime();
+        this.showInAppToast({
+          title,
+          body,
+          icon: '🔔',
+          actionText: 'Tamam'
+        });
+        this.notifyListeners();
         return {
           success: false,
-          message: 'Sistem bildirimi için lütfen tarayıcınızdan bildirim iznine "İzin Ver" deyin.'
+          message: 'Uygulama içi canlı bildirim gösterildi! Kilit ekranı bildirimi için lütfen tarayıcıdan bildirim iznine "İzin Ver" deyin.'
         };
       }
     }
 
-    const title = '🌸 Döngüm - Test Hatırlatıcısı';
-    const body = 'Harika! Döngüm bildirim sisteminiz başarıyla aktif edildi. Önemli döngü ve sağlık anlarında yanınızdayız.';
+    const title = '🌸 Döngüm - Test Hatırlatıcısı ✨';
+    const body = 'Harika! Döngüm akıllı bildirim sisteminiz başarıyla çalışıyor. Regl, su ve egzersiz anlarında yanınızdayız 💖';
 
-    // Uygulama içi bildirimlere de kaydet
     this.storage.addInAppNotification(null, {
       title,
       body,
@@ -7784,7 +8734,11 @@ class NotificationManager {
     const sent = await this.dispatchSystemNotification({
       title,
       body,
-      tag: 'test_notification'
+      emojiIcon: '🎉',
+      tag: 'test_notification_' + Date.now(),
+      forceQuietBypass: true,
+      toastActionText: '➕ Hızlı Ekle',
+      data: { tab: 'home', openQuickAdd: true }
     });
 
     this.notifyListeners();
@@ -7793,24 +8747,21 @@ class NotificationManager {
       success: true,
       systemSent: sent,
       message: sent
-        ? 'Test bildirimi telefonunuza / tarayıcınıza başarıyla gönderildi!'
-        : 'Bildirim uygulama içi merkeze kaydedildi.'
+        ? '✅ Test bildirimi cihazınıza ve uygulama içi merkeze başarıyla gönderildi!'
+        : '✅ Bildirim uygulama içi merkeze ve canlı uyarı çubuğuna iletildi.'
     };
   }
 
-  // Periyodik Hatırlatıcı Döngüsü (Heartbeat & Visibility Change)
+  // Periyodik Hatırlatıcı Döngüsü (Heartbeat)
   initHeartbeat() {
     if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
-    // İlk açılışta kontrol et
-    setTimeout(() => this.evaluateSmartReminders(), 1200);
-
-    // Her 60 saniyede bir kontrol et (daha hassas ve gecikmesiz uyarılar için)
+    // Her 45 saniyede bir kontrol et
     this.heartbeatTimer = setInterval(() => {
       this.evaluateSmartReminders();
-    }, 60 * 1000);
+    }, 45 * 1000);
   }
 
-  // Web Worker Ticker (Sekme arka plandayken veya telefon kilitliyken timer'ların donmasını önler)
+  // Web Worker Ticker (Sekme arka plandayken timer'ların yavaşlatılmasını önler)
   initBackgroundWorker() {
     if (typeof window === 'undefined' || typeof Worker === 'undefined') return;
     try {
@@ -7843,23 +8794,25 @@ class NotificationManager {
 
   setupVisibilityListener() {
     if (typeof document !== 'undefined') {
-      document.addEventListener('visibilitychange', () => {
+      document.addEventListener('visibilitychange', async () => {
         if (document.visibilityState === 'visible') {
-          this.syncStateFromServiceWorker();
-          this.evaluateSmartReminders();
+          await this.syncStateFromServiceWorker();
+          await this.evaluateSmartReminders();
         } else if (document.visibilityState === 'hidden') {
-          // Uygulama arka plana geçtiğinde önümüzdeki 24 saatin bildirimlerini işletim sistemi alarmına yaz
-          this.scheduleUpcomingBackgroundNotifications();
+          await this.syncStateToServiceWorker();
+          await this.scheduleUpcomingBackgroundNotifications();
         }
       });
-      window.addEventListener('focus', () => {
-        this.syncStateFromServiceWorker();
-        this.evaluateSmartReminders();
+      window.addEventListener('focus', async () => {
+        await this.syncStateFromServiceWorker();
+        await this.evaluateSmartReminders();
       });
       window.addEventListener('pagehide', () => {
+        this.syncStateToServiceWorker();
         this.scheduleUpcomingBackgroundNotifications();
       });
       window.addEventListener('beforeunload', () => {
+        this.syncStateToServiceWorker();
         this.scheduleUpcomingBackgroundNotifications();
       });
     }
@@ -7894,7 +8847,7 @@ class NotificationManager {
         });
         return {
           success: true,
-          message: `Arka plan alarmı kuruldu! Lütfen hemen şimdi uygulamayı kapatın veya telefonunuzu kilitleyin (${delaySeconds} saniye içinde gelecek).`
+          message: `⏱️ Arka plan alarmı kuruldu! Lütfen hemen şimdi uygulamayı arka plana alın veya ekranı kilitleyin (${delaySeconds} saniye içinde bildirim gelecek).`
         };
       }
     } catch (e) {
@@ -7907,7 +8860,7 @@ class NotificationManager {
     };
   }
 
-  // Önümüzdeki 24 Saat İçin Gelecek Hatırlatıcıları Planla (TimestampTrigger & SW Kuyruğu)
+  // Önümüzdeki 24 Saat İçin Gelecek Hatırlatıcıları Planla (Tekilleştirilmiş TimestampTrigger & SW Kuyruğu)
   async scheduleUpcomingBackgroundNotifications() {
     if (!NotificationManager.isSupported() || Notification.permission !== 'granted') return;
     if (!('serviceWorker' in navigator)) return;
@@ -7922,10 +8875,12 @@ class NotificationManager {
       const nowMs = now.getTime();
       const todayStr = CycleEngine.formatDateStr(now);
       const todayDayData = profileData.days?.[todayStr] || {};
+      const todayWater = this.storage.getWaterForDay(todayStr);
+      const targetWater = profileData.settings?.waterTarget || 2250;
       const scheduledList = [];
 
-      // 1. Su Hatırlatıcıları (Bugünün kalan çalışma saatleri içinde periyodik)
-      if (settings.waterReminder !== false) {
+      // 1. Su Hatırlatıcıları (Bugünün kalan çalışma saatleri içinde, hedef dolmadıysa)
+      if (settings.waterReminder !== false && todayWater < targetWater) {
         const startHour = settings.waterStartHour || 8;
         const endHour = settings.waterEndHour || 22;
         const intervalHours = parseFloat(settings.waterIntervalHours) || 2;
@@ -7935,97 +8890,106 @@ class NotificationManager {
         const endToday = new Date(now);
         endToday.setHours(endHour, 0, 0, 0);
 
-        let count = 0;
-        while (nextWaterTime <= endToday.getTime() && count < 6) {
-          scheduledList.push({
-            title: '💧 Döngüm - Su Vakti',
-            body: 'Vücudunu nemlendir, krampları ve ödemi hafiflet. Şimdi bir bardak su içme zamanı!',
-            timestamp: nextWaterTime,
-            tag: `water_sched_${nextWaterTime}`,
-            data: { tab: 'fitness' }
-          });
+        let slot = 1;
+        while (nextWaterTime <= endToday.getTime() && slot <= 6) {
+          const slotDate = new Date(nextWaterTime);
+          if (slotDate.getHours() >= startHour && !this.isQuietHoursActive(settings, slotDate)) {
+            scheduledList.push({
+              title: '💧 Döngüm - Su İçme Vakti 🌊',
+              body: `Vücudunu nemlendir, ödemi ve krampları hafiflet! Hedefine ${Math.max(0, targetWater - todayWater)} ml kaldı.`,
+              timestamp: nextWaterTime,
+              tag: `sched_water_slot_${slot}`,
+              data: { tab: 'home', openQuickAdd: true, quickSection: 'water' }
+            });
+            slot++;
+          }
           nextWaterTime += intervalMs;
-          count++;
         }
       }
 
       // 2. Gün Ortası Ruh Hali Hatırlatıcısı
-      if (settings.moodReminder !== false && !todayDayData.mood) {
+      const hasMood = Boolean((Array.isArray(todayDayData.moods) && todayDayData.moods.length > 0) || todayDayData.mood);
+      if (settings.moodReminder !== false && !hasMood) {
         const [mHour, mMin] = (settings.moodReminderTime || '15:00').split(':').map(Number);
         const moodTimeToday = new Date(now);
         moodTimeToday.setHours(mHour, mMin, 0, 0);
 
         if (moodTimeToday.getTime() > nowMs) {
           scheduledList.push({
-            title: '🧘 Döngüm - Ruh Halini Kaydet',
-            body: 'Bugün enerjin nasıl? Günlük ruh halini birkaç dokunuşla kaydet.',
+            title: '🧘‍♀️ Döngüm - Ruh Halini Kaydet ✨',
+            body: 'Bugün enerjin ve duygu durumun nasıl? Alt menüdeki (+) butonundan 5 saniyede kaydet.',
             timestamp: moodTimeToday.getTime(),
-            tag: `mood_sched_${todayStr}`,
-            data: { tab: 'calendar', openDay: todayStr, focus: 'mood' }
+            tag: `sched_mood_${todayStr}`,
+            data: { tab: 'home', openQuickAdd: true, quickSection: 'mood' }
           });
         }
       }
 
-      // 3. Gün Sonu Sağlık & Semptom Kaydı
-      if (settings.dailyLogReminder !== false) {
+      // 3. Egzersiz & Hareket Hatırlatıcısı
+      if (settings.exerciseReminder !== false && !todayDayData.exercise) {
+        const [eHour, eMin] = (settings.exerciseReminderTime || '18:00').split(':').map(Number);
+        const exTimeToday = new Date(now);
+        exTimeToday.setHours(eHour, eMin, 0, 0);
+
+        if (exTimeToday.getTime() > nowMs) {
+          scheduledList.push({
+            title: '🏃‍♀️ Döngüm - Hareket & Egzersiz Zamanı 💪',
+            body: 'Döngü fazına uygun 20 dakikalık bir hareket veya esneme ile hormonlarını dengele!',
+            timestamp: exTimeToday.getTime(),
+            tag: `sched_exercise_${todayStr}`,
+            data: { tab: 'home', openQuickAdd: true, quickSection: 'exercise' }
+          });
+        }
+      }
+
+      // 4. Gün Sonu Sağlık & Semptom Kaydı
+      const hasDaily = Boolean(
+        todayDayData.isPeriod ||
+        (todayDayData.symptoms && todayDayData.symptoms.length > 0) ||
+        hasMood ||
+        todayDayData.notes
+      );
+      if (settings.dailyLogReminder !== false && !hasDaily) {
         const [dHour, dMin] = (settings.dailyLogTime || '20:30').split(':').map(Number);
         const dailyTimeToday = new Date(now);
         dailyTimeToday.setHours(dHour, dMin, 0, 0);
 
         if (dailyTimeToday.getTime() > nowMs) {
           scheduledList.push({
-            title: '📝 Döngüm - Günün Sağlık Kaydı',
-            body: 'Bugün bedeninde neler oldu? Günlük belirtilerini kaydetmeyi unutma.',
+            title: '📝 Döngüm - Günün Sağlık Kaydı 🌸',
+            body: 'Bugün bedeninde neler hissettin? Günlük belirtilerini (+) menüsünden kolayca kaydet.',
             timestamp: dailyTimeToday.getTime(),
-            tag: `daily_sched_${todayStr}`,
-            data: { tab: 'calendar', openDay: todayStr }
+            tag: `sched_daily_${todayStr}`,
+            data: { tab: 'home', openQuickAdd: true, quickSection: 'all' }
           });
         }
       }
 
-      // 4. Yaklaşan Regl Bildirimi
+      // 5. Yaklaşan Regl Bildirimi (Yarın sabah 09:30 için)
       if (settings.periodReminder !== false && summary.daysUntilNext > 0 && summary.daysUntilNext <= (settings.periodReminderDays || 2)) {
         const nextMorning = new Date(now);
         nextMorning.setDate(nextMorning.getDate() + 1);
-        nextMorning.setHours(9, 0, 0, 0);
+        nextMorning.setHours(9, 30, 0, 0);
 
         if (nextMorning.getTime() > nowMs) {
           scheduledList.push({
-            title: '🌸 Döngüm - Regl Dönemi Yaklaşıyor',
-            body: `Tahmini regl gününüze az kaldı (${summary.daysUntilNext} gün). Hazırlıklarınızı tamamlayın!`,
+            title: '🩸 Döngüm - Regl Dönemi Yaklaşıyor 🌸',
+            body: `Tahmini regl gününüze az kaldı (${summary.daysUntilNext} gün). Hazırlıklarınızı tamamlamayı unutmayın!`,
             timestamp: nextMorning.getTime(),
-            tag: `period_approaching_${summary.nextPeriodDate}`,
-            data: { tab: 'calendar' }
+            tag: `sched_period_${summary.nextPeriodDate}`,
+            data: { tab: 'home', openQuickAdd: true, quickSection: 'period' }
           });
         }
       }
 
-      // Service Worker'a Aktar ve Kaydet
+      // Service Worker'a Aktar (Önceki planlı bildirimleri temizleyip yenilerini yazar)
       const reg = await navigator.serviceWorker.ready;
-      if (reg.active && scheduledList.length > 0) {
+      if (reg.active) {
         reg.active.postMessage({
           type: 'SCHEDULE_NOTIFICATIONS',
           notifications: scheduledList
         });
       }
-
-      // Eğer tarayıcıda Notification Triggers varsa doğrudan client tarafından da dene
-      if (('showTrigger' in Notification.prototype) && typeof window !== 'undefined' && 'TimestampTrigger' in window) {
-        for (const item of scheduledList) {
-          try {
-            await reg.showNotification(item.title, {
-              body: item.body,
-              icon: './apple-touch-icon.png',
-              badge: './assets/logo-192.png',
-              tag: item.tag,
-              renotify: true,
-              data: item.data,
-              showTrigger: new window.TimestampTrigger(item.timestamp)
-            });
-          } catch(e) {}
-        }
-      }
-
     } catch (err) {
       console.warn('Gelecek bildirimler planlanırken hata:', err);
     }
@@ -8070,20 +9034,19 @@ class NotificationManager {
     };
   }
 
-  // Periodic Background Sync & Background Sync Kaydı (Uygulama tamamen kapalıyken Android/Chrome PWA tetikleyicisi)
+  // Periodic Background Sync & Background Sync Kaydı
   async registerBackgroundSync() {
     if (typeof navigator === 'undefined' || !('serviceWorker' in navigator)) return false;
     try {
       const reg = await navigator.serviceWorker.ready;
       let registered = false;
 
-      // 1. Periodic Background Sync
       if ('periodicSync' in reg) {
         try {
           const status = await navigator.permissions.query({ name: 'periodic-background-sync' });
           if (status.state === 'granted') {
             await reg.periodicSync.register('dongum-reminder-sync', {
-              minInterval: 15 * 60 * 1000 // 15 dakika
+              minInterval: 15 * 60 * 1000
             });
             registered = true;
           }
@@ -8097,7 +9060,6 @@ class NotificationManager {
         }
       }
 
-      // 2. Standart Background Sync
       if ('sync' in reg) {
         try {
           await reg.sync.register('dongum-reminder-sync');
@@ -8112,7 +9074,7 @@ class NotificationManager {
   }
 
   // Hatırlatma Verilerini Service Worker ve CacheStorage ile Senkronize Et
-  async syncStateToServiceWorker() {
+  async syncStateToServiceWorker(evaluateInSw = false) {
     try {
       const profileData = this.storage.getProfileData();
       const settings = profileData.settings?.notificationSettings || {};
@@ -8123,18 +9085,21 @@ class NotificationManager {
       const todayWater = this.storage.getWaterForDay(todayStr);
       const targetWater = profileData.settings?.waterTarget || 2250;
 
-      const hasLoggedMood = !!todayDayData.mood;
-      const hasLoggedDaily = !!(
+      const hasLoggedMood = Boolean((Array.isArray(todayDayData.moods) && todayDayData.moods.length > 0) || todayDayData.mood);
+      const hasLoggedExercise = Boolean(todayDayData.exercise);
+      const hasLoggedDaily = Boolean(
         todayDayData.isPeriod ||
         (todayDayData.symptoms && todayDayData.symptoms.length > 0) ||
-        todayDayData.mood ||
+        hasLoggedMood ||
         todayDayData.notes
       );
 
       const payload = {
+        updatedAt: Date.now(),
         todayStr: todayStr,
         todayWater: todayWater,
         hasLoggedMood: hasLoggedMood,
+        hasLoggedExercise: hasLoggedExercise,
         hasLoggedDaily: hasLoggedDaily,
         daysUntilNext: summary.daysUntilNext,
         nextPeriodDate: summary.nextPeriodDate,
@@ -8146,17 +9111,23 @@ class NotificationManager {
         sentLog: notifState.sentLog || {}
       };
 
-      // 1. PostMessage to Service Worker
-      if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage({
-          type: 'SYNC_NOTIFICATION_PAYLOAD',
-          payload: payload
-        });
-      }
-
-      // 2. Doğrudan CacheStorage'a yaz (SW offline/uykudayken bile erişebilir)
+      // 1. Önce CacheStorage'da mevcut SW sentLog ile birleştirerek kaydet
       if ('caches' in window) {
         const cache = await caches.open('dongum-notification-store-v1');
+        try {
+          const existingRes = await cache.match('https://dongum.internal/notification-state.json');
+          if (existingRes) {
+            const existingPayload = await existingRes.json();
+            if (existingPayload && existingPayload.sentLog) {
+              for (const [k, v] of Object.entries(existingPayload.sentLog)) {
+                if (!payload.sentLog[k] || payload.sentLog[k] < v) {
+                  payload.sentLog[k] = v;
+                }
+              }
+            }
+          }
+        } catch (err) {}
+
         await cache.put(
           new Request('https://dongum.internal/notification-state.json'),
           new Response(JSON.stringify(payload), {
@@ -8164,12 +9135,21 @@ class NotificationManager {
           })
         );
       }
+
+      // 2. Service Worker'a PostMessage gönder (Sadece senkronizasyon, gereksiz çift tetikleme yapmaz)
+      if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+          type: 'SYNC_NOTIFICATION_PAYLOAD',
+          payload: payload,
+          evaluateNow: evaluateInSw
+        });
+      }
     } catch (e) {
       console.warn('SW bildirim senkronizasyon uyarısı:', e);
     }
   }
 
-  // Service Worker'ın arka planda gönderdiği bildirim kayıtlarını yerel belleğe çek
+  // Service Worker'ın arka planda gönderdiği bildirimleri ve hızlı su aksiyonlarını yerel belleğe çek
   async syncStateFromServiceWorker() {
     try {
       if ('caches' in window) {
@@ -8177,19 +9157,30 @@ class NotificationManager {
         const res = await cache.match('https://dongum.internal/notification-state.json');
         if (res) {
           const swPayload = await res.json();
-          if (swPayload && swPayload.sentLog) {
-            const localState = this.storage.getNotificationState();
-            let changed = false;
-            localState.sentLog = localState.sentLog || {};
-            for (const [k, v] of Object.entries(swPayload.sentLog)) {
-              if (!localState.sentLog[k] || localState.sentLog[k] < v) {
-                localState.sentLog[k] = v;
-                changed = true;
+          if (swPayload) {
+            const todayStr = CycleEngine.formatDateStr(new Date());
+            // Eğer arka planda bildirim üzerinden su eklendiyse senkronize et
+            if (swPayload.todayStr === todayStr && typeof swPayload.todayWater === 'number') {
+              const localWater = this.storage.getWaterForDay(todayStr);
+              if (swPayload.todayWater > localWater) {
+                this.storage.setWater(todayStr, swPayload.todayWater);
               }
             }
-            if (changed) {
-              this.storage.saveNotificationState(null, localState);
-              this.notifyListeners();
+
+            if (swPayload.sentLog) {
+              const localState = this.storage.getNotificationState();
+              let changed = false;
+              localState.sentLog = localState.sentLog || {};
+              for (const [k, v] of Object.entries(swPayload.sentLog)) {
+                if (!localState.sentLog[k] || localState.sentLog[k] < v) {
+                  localState.sentLog[k] = v;
+                  changed = true;
+                }
+              }
+              if (changed) {
+                this.storage.saveNotificationState(null, localState);
+                this.notifyListeners();
+              }
             }
           }
         }
@@ -8198,260 +9189,359 @@ class NotificationManager {
   }
 
   // =========================================================================
-  // AKILLI HATIRLATMA VE BİYOLOJİK DÖNGÜ DEĞERLENDİRİCİSİ
+  // AKILLI HATIRLATMA VE BİYOLOJİK DÖNGÜ DEĞERLENDİRİCİSİ (MUTEX KORUMALI)
   // =========================================================================
-  evaluateSmartReminders() {
-    const profileData = this.storage.getProfileData();
-    const settings = profileData.settings?.notificationSettings || {};
-    if (settings.enabled === false) return;
+  async evaluateSmartReminders() {
+    if (this.isEvaluating) return;
+    this.isEvaluating = true;
 
-    const notifState = this.storage.getNotificationState();
-    const sentLog = notifState.sentLog || {};
-    const todayStr = CycleEngine.formatDateStr(new Date());
-    const now = new Date();
-    const currentHours = now.getHours();
-    const currentMinutes = now.getMinutes();
-
-    let stateChanged = false;
-
-    // Döngü Özeti
-    const summary = this.engine.getTodaySummary();
-    const daysUntilNext = summary.daysUntilNext;
-    const dayStatus = summary.dayStatus;
-    const stats = summary.stats;
-
-    // 1. YAKLAŞAN REGL HATIRLATMASI
-    if (settings.periodReminder !== false && daysUntilNext !== null && daysUntilNext > 0) {
-      const targetThreshold = settings.periodReminderDays || 2;
-      if (daysUntilNext <= targetThreshold) {
-        const logKey = `period_approaching_${todayStr}_${summary.nextPeriodDate}`;
-        if (!sentLog[logKey]) {
-          const title = '🌸 Döngüm - Regl Dönemi Yaklaşıyor';
-          const dayText = daysUntilNext === 1 ? 'yarın' : `${daysUntilNext} gün içinde`;
-          const body = `Tahmini regl başlangıcınız ${dayText} bekleniyor. Hazırlıklarınızı yapmayı unutmayın!`;
-
-          this.dispatchSystemNotification({
-            title,
-            body,
-            tag: 'period_approaching',
-            data: { tab: 'calendar' }
-          });
-          this.storage.addInAppNotification(null, { title, body, type: 'period', actionTab: 'calendar' });
-          sentLog[logKey] = Date.now();
-          stateChanged = true;
-        }
+    try {
+      const profileData = this.storage.getProfileData();
+      const settings = profileData.settings?.notificationSettings || {};
+      if (settings.enabled === false || profileData.settings?.notificationsEnabled === false) {
+        this.isEvaluating = false;
+        return;
       }
-    }
 
-    // 2. REGL GECİKMESİ HATIRLATMASI
-    if (settings.latePeriodReminder !== false && daysUntilNext !== null && daysUntilNext < 0) {
-      const lateDays = Math.abs(daysUntilNext);
-      const isPeriodLoggedRecently = Object.keys(profileData.days || {}).some(d => {
-        return d >= CycleEngine.addDays(todayStr, -lateDays) && profileData.days[d]?.isPeriod;
-      });
+      const notifState = this.storage.getNotificationState();
+      const sentLog = notifState.sentLog || {};
+      const now = new Date();
+      const todayStr = CycleEngine.formatDateStr(now);
+      const currentHours = now.getHours();
+      const currentMinutes = now.getMinutes();
+      const isQuietNow = this.isQuietHoursActive(settings, now);
+      const isDaytimeForCycleAlerts = currentHours >= 8 && currentHours < 22 && !isQuietNow;
 
-      if (!isPeriodLoggedRecently && lateDays >= 1) {
-        const logKey = `period_delayed_${todayStr}`;
-        const lastDelayedSent = sentLog.lastDelayedSentDate;
-        const diffDaysSinceDelayed = lastDelayedSent ? CycleEngine.diffDays(todayStr, lastDelayedSent) : 99;
+      let stateChanged = false;
 
-        if (!sentLog[logKey] && diffDaysSinceDelayed >= 2) {
-          const title = '🌸 Döngüm - Regl Gecikmesi';
-          const body = `Tahmini regl gününüz ${lateDays} gün geçti. Yeni başlangıç gününüzü kaydetmek veya not eklemek ister misiniz?`;
+      // Döngü Özeti
+      const summary = this.engine.getTodaySummary();
+      const daysUntilNext = summary.daysUntilNext;
+      const dayStatus = summary.dayStatus;
 
-          this.dispatchSystemNotification({
-            title,
-            body,
-            tag: 'period_delayed',
-            data: { tab: 'calendar' }
-          });
-          this.storage.addInAppNotification(null, { title, body, type: 'period', actionTab: 'calendar' });
-          sentLog[logKey] = Date.now();
-          sentLog.lastDelayedSentDate = todayStr;
-          stateChanged = true;
-        }
-      }
-    }
+      // 1. YAKLAŞAN REGL HATIRLATMASI (Gündüz uygun saatlerde)
+      if (isDaytimeForCycleAlerts && settings.periodReminder !== false && daysUntilNext !== null && daysUntilNext > 0) {
+        const targetThreshold = settings.periodReminderDays || 2;
+        if (daysUntilNext <= targetThreshold) {
+          const logKey = `period_approaching_${todayStr}_${summary.nextPeriodDate}`;
+          if (!sentLog[logKey]) {
+            const title = '🌸 Döngüm - Regl Dönemi Yaklaşıyor';
+            const dayText = daysUntilNext === 1 ? 'yarın' : `${daysUntilNext} gün içinde`;
+            const body = `Tahmini regl başlangıcınız ${dayText} bekleniyor. Ped, sıcak su torbası ve hazırlıklarınızı unutmayın! 🩸`;
 
-    // 3. OVÜLASYON (YUMURTLAMA) HATIRLATMASI
-    if (settings.ovulationReminder !== false) {
-      if (dayStatus && dayStatus.phase === 'ovulation') {
-        const logKey = `ovulation_${todayStr}`;
-        if (!sentLog[logKey]) {
-          const title = '✨ Döngüm - Yumurtlama (Ovülasyon) Günü';
-          const body = 'Bugün gebe kalma ihtimalinin en yüksek olduğu zirve ovülasyon evresindesiniz.';
+            sentLog[logKey] = Date.now();
+            stateChanged = true;
 
-          this.dispatchSystemNotification({
-            title,
-            body,
-            tag: 'ovulation_day',
-            data: { tab: 'home' }
-          });
-          this.storage.addInAppNotification(null, { title, body, type: 'ovulation', actionTab: 'home' });
-          sentLog[logKey] = Date.now();
-          stateChanged = true;
-        }
-      }
-    }
-
-    // 4. PMS & LUTEAL EVRE HATIRLATMASI
-    if (settings.pmsReminder !== false) {
-      if (dayStatus && dayStatus.phase === 'pms') {
-        const logKey = `pms_phase_${summary.nextPeriodDate || todayStr}`;
-        if (!sentLog[logKey]) {
-          const title = '🌙 Döngüm - Rahatlama & PMS Dönemi';
-          const body = 'Luteal evredesiniz. Duygusal dalgalanmalar normaldir; bol su, magnezyum ve dinlenme enerjinizi dengeler.';
-
-          this.dispatchSystemNotification({
-            title,
-            body,
-            tag: 'pms_phase',
-            data: { tab: 'home' }
-          });
-          this.storage.addInAppNotification(null, { title, body, type: 'pms', actionTab: 'home' });
-          sentLog[logKey] = Date.now();
-          stateChanged = true;
-        }
-      }
-    }
-
-    // 5. GÜN ORTASI RUH HALİ & ENERJİ HATIRLATMASI (Örn: 15:00)
-    if (settings.moodReminder !== false) {
-      const preferredMoodTime = settings.moodReminderTime || '15:00';
-      const [mHour, mMin] = preferredMoodTime.split(':').map(Number);
-      const isPastMoodTime = currentHours > mHour || (currentHours === mHour && currentMinutes >= mMin);
-
-      if (isPastMoodTime) {
-        const todayDayData = profileData.days?.[todayStr];
-        const hasLoggedMood = !!todayDayData?.mood;
-        const logKey = `mood_${todayStr}`;
-
-        if (!hasLoggedMood && !sentLog[logKey]) {
-          const title = '🧘 Döngüm - Ruh Halini Kaydet';
-          const body = 'Bugün nasıl hissediyorsun? Günlük ruh halini ve enerjini 5 saniyede kaydederek döngü dengeni takip et.';
-
-          this.dispatchSystemNotification({
-            title,
-            body,
-            tag: 'mood_reminder',
-            data: { tab: 'calendar', openDay: todayStr, focus: 'mood' }
-          });
-          this.storage.addInAppNotification(null, {
-            title,
-            body,
-            type: 'mood',
-            actionTab: 'calendar',
-            actionFocus: 'mood'
-          });
-          sentLog[logKey] = Date.now();
-          stateChanged = true;
-        }
-      }
-    }
-
-    // 6. GÜNLÜK SAĞLIK & SEMPTOM KAYDI HATIRLATMASI (Örn: 20:30)
-    if (settings.dailyLogReminder !== false) {
-      const preferredTime = settings.dailyLogTime || '20:30';
-      const [prefHour, prefMin] = preferredTime.split(':').map(Number);
-      const isPastTime = currentHours > prefHour || (currentHours === prefHour && currentMinutes >= prefMin);
-
-      if (isPastTime) {
-        const todayDayData = profileData.days?.[todayStr];
-        const hasLoggedToday = todayDayData && (
-          todayDayData.isPeriod ||
-          (todayDayData.symptoms && todayDayData.symptoms.length > 0) ||
-          todayDayData.mood ||
-          todayDayData.notes
-        );
-
-        const logKey = `daily_log_${todayStr}`;
-        if (!hasLoggedToday && !sentLog[logKey]) {
-          const title = '📝 Döngüm - Günün Sağlık Kaydı';
-          const body = 'Bugün nasıl hissettin? Günlük semptom, duygu ve akıntı kaydını eklemeyi unutma.';
-
-          this.dispatchSystemNotification({
-            title,
-            body,
-            tag: 'daily_health_log',
-            data: { tab: 'calendar', openDay: todayStr }
-          });
-          this.storage.addInAppNotification(null, { title, body, type: 'daily', actionTab: 'calendar' });
-          sentLog[logKey] = Date.now();
-          stateChanged = true;
-        }
-      }
-    }
-
-    // 7. SU TÜKETİMİ & HİDRASYON HATIRLATMASI
-    if (settings.waterReminder !== false) {
-      const startH = settings.waterStartHour || 8;
-      const endH = settings.waterEndHour || 22;
-
-      if (currentHours >= startH && currentHours <= endH) {
-        const todayWater = this.storage.getWaterForDay(todayStr);
-        const targetWater = profileData.settings?.waterTarget || 2250;
-
-        if (todayWater < targetWater) {
-          const intervalHours = parseFloat(settings.waterIntervalHours) || 2;
-          const intervalMs = Math.round(intervalHours * 60 * 60 * 1000);
-          const lastWaterTime = sentLog.lastWaterNoticeTime || 0;
-
-          if (Date.now() - lastWaterTime >= intervalMs) {
-            const title = '💧 Döngüm - Su İçme Vakti';
-            const remaining = Math.max(0, targetWater - todayWater);
-            const body = `Vücudunu nemli tut! Hedefine ${remaining} ml kaldı. Bir bardak su içerek tazelenin (${todayWater}/${targetWater} ml).`;
-
-            this.dispatchSystemNotification({
+            await this.dispatchSystemNotification({
               title,
               body,
-              tag: 'water_reminder',
-              data: { tab: 'fitness' }
+              emojiIcon: '🩸',
+              tag: 'period_approaching',
+              toastActionText: '📅 Takvim',
+              data: { tab: 'calendar' }
             });
-            this.storage.addInAppNotification(null, { title, body, type: 'water', actionTab: 'fitness' });
-            sentLog.lastWaterNoticeTime = Date.now();
-            stateChanged = true;
+            this.storage.addInAppNotification(null, { title, body, type: 'period', actionTab: 'calendar' });
           }
         }
       }
-    }
 
-    // 8. UYGULAMAYA GERİ ÇAĞIRMA (3+ GÜN BOYUNCA GİRİŞ YAPILMADIYSA)
-    const allDays = Object.keys(profileData.days || {}).sort();
-    if (allDays.length > 0) {
-      const lastRecordedDay = allDays[allDays.length - 1];
-      const daysSinceLastRecord = CycleEngine.diffDays(todayStr, lastRecordedDay);
+      // 2. REGL GECİKMESİ HATIRLATMASI
+      if (isDaytimeForCycleAlerts && settings.latePeriodReminder !== false && daysUntilNext !== null && daysUntilNext < 0) {
+        const lateDays = Math.abs(daysUntilNext);
+        const isPeriodLoggedRecently = Object.keys(profileData.days || {}).some(d => {
+          return d >= CycleEngine.addDays(todayStr, -lateDays) && profileData.days[d]?.isPeriod;
+        });
 
-      if (daysSinceLastRecord >= 4) {
-        const logKey = `reengagement_${todayStr}`;
-        const lastReengage = sentLog.lastReengagementSentDate;
-        const diffDaysSinceReengage = lastReengage ? CycleEngine.diffDays(todayStr, lastReengage) : 99;
+        if (!isPeriodLoggedRecently && lateDays >= 1) {
+          const logKey = `period_delayed_${todayStr}`;
+          const lastDelayedSent = sentLog.lastDelayedSentDate;
+          const diffDaysSinceDelayed = lastDelayedSent ? CycleEngine.diffDays(todayStr, lastDelayedSent) : 99;
 
-        if (!sentLog[logKey] && diffDaysSinceReengage >= 4) {
-          const title = '🌸 Döngüm Seni Özledi';
-          const body = 'Döngü ve sağlık modelinizin en yüksek doğrulukla çalışması için son günlerinizi kaydetmeyi unutmayın.';
+          if (!sentLog[logKey] && diffDaysSinceDelayed >= 2) {
+            const title = '⚠️ Döngüm - Regl Gecikmesi Bildirimi';
+            const body = `Tahmini regl gününüz ${lateDays} gün geçti. Kanamanız başladıysa (+) butonundan tek dokunuşla kaydedebilirsiniz.`;
 
-          this.dispatchSystemNotification({
-            title,
-            body,
-            tag: 'app_reengagement',
-            data: { tab: 'home' }
-          });
-          this.storage.addInAppNotification(null, { title, body, type: 'system', actionTab: 'home' });
-          sentLog[logKey] = Date.now();
-          sentLog.lastReengagementSentDate = todayStr;
-          stateChanged = true;
+            sentLog[logKey] = Date.now();
+            sentLog.lastDelayedSentDate = todayStr;
+            stateChanged = true;
+
+            await this.dispatchSystemNotification({
+              title,
+              body,
+              emojiIcon: '🩸',
+              tag: 'period_delayed',
+              toastActionText: '➕ Regl Kaydet',
+              data: { tab: 'home', openQuickAdd: true, quickSection: 'period' }
+            });
+            this.storage.addInAppNotification(null, { title, body, type: 'period', actionTab: 'home', openQuickAdd: true, actionFocus: 'period' });
+          }
         }
       }
-    }
 
-    if (stateChanged) {
-      notifState.sentLog = sentLog;
-      this.storage.saveNotificationState(null, notifState);
-      this.notifyListeners();
-    }
+      // 3. OVÜLASYON (YUMURTLAMA) HATIRLATMASI
+      if (isDaytimeForCycleAlerts && settings.ovulationReminder !== false) {
+        if (dayStatus && dayStatus.phase === 'ovulation') {
+          const logKey = `ovulation_${todayStr}`;
+          if (!sentLog[logKey]) {
+            const title = '✨ Döngüm - Yumurtlama (Ovülasyon) Zirvesi';
+            const body = 'Bugün enerjinizin ve doğurganlık ihtimalinin en yüksek olduğu zirve ovülasyon evresindesiniz! 🥚✨';
 
-    // Her değerlendirmede SW ve Cache ile senkronizasyonu tazele
-    this.syncStateToServiceWorker();
+            sentLog[logKey] = Date.now();
+            stateChanged = true;
+
+            await this.dispatchSystemNotification({
+              title,
+              body,
+              emojiIcon: '✨',
+              tag: 'ovulation_day',
+              toastActionText: '🌸 İncele',
+              data: { tab: 'home' }
+            });
+            this.storage.addInAppNotification(null, { title, body, type: 'ovulation', actionTab: 'home' });
+          }
+        }
+      }
+
+      // 4. PMS & LUTEAL EVRE HATIRLATMASI
+      if (isDaytimeForCycleAlerts && settings.pmsReminder !== false) {
+        if (dayStatus && dayStatus.phase === 'pms') {
+          const logKey = `pms_phase_${summary.nextPeriodDate || todayStr}`;
+          if (!sentLog[logKey]) {
+            const title = '🌙 Döngüm - Rahatlama & PMS Dönemi';
+            const body = 'Luteal evredesiniz. Duygusal dalgalanmalar normaldir; bol su 💧, magnezyum 🍫 ve dinlenme enerjinizi dengeler.';
+
+            sentLog[logKey] = Date.now();
+            stateChanged = true;
+
+            await this.dispatchSystemNotification({
+              title,
+              body,
+              emojiIcon: '🌙',
+              tag: 'pms_phase',
+              toastActionText: '🧘‍♀️ Rehber',
+              data: { tab: 'home' }
+            });
+            this.storage.addInAppNotification(null, { title, body, type: 'pms', actionTab: 'home' });
+          }
+        }
+      }
+
+      // 5. GÜN ORTASI RUH HALİ & ENERJİ HATIRLATMASI (Örn: 15:00)
+      if (!isQuietNow && settings.moodReminder !== false) {
+        const preferredMoodTime = settings.moodReminderTime || '15:00';
+        const [mHour, mMin] = preferredMoodTime.split(':').map(Number);
+        const isPastMoodTime = currentHours > mHour || (currentHours === mHour && currentMinutes >= mMin);
+
+        if (isPastMoodTime) {
+          const todayDayData = profileData.days?.[todayStr];
+          const hasLoggedMood = Boolean((Array.isArray(todayDayData?.moods) && todayDayData.moods.length > 0) || todayDayData?.mood);
+          const logKey = `mood_${todayStr}`;
+
+          if (!hasLoggedMood && !sentLog[logKey]) {
+            const title = '🧘‍♀️ Döngüm - Ruh Halini Kaydet ✨';
+            const body = 'Bugün nasıl hissediyorsun? Günlük ruh halini (+) menüsünden 5 saniyede kaydederek döngü dengeni takip et.';
+
+            sentLog[logKey] = Date.now();
+            stateChanged = true;
+
+            await this.dispatchSystemNotification({
+              title,
+              body,
+              emojiIcon: '😊',
+              tag: 'mood_reminder',
+              toastActionText: '😊 Ruh Hali Seç',
+              data: { tab: 'home', openQuickAdd: true, quickSection: 'mood' }
+            });
+            this.storage.addInAppNotification(null, {
+              title,
+              body,
+              type: 'mood',
+              actionTab: 'home',
+              openQuickAdd: true,
+              actionFocus: 'mood'
+            });
+          }
+        }
+      }
+
+      // 6. GÜNLÜK EGZERSİZ & HAREKET HATIRLATMASI (Örn: 18:00)
+      if (!isQuietNow && settings.exerciseReminder !== false) {
+        const preferredExTime = settings.exerciseReminderTime || '18:00';
+        const [eHour, eMin] = preferredExTime.split(':').map(Number);
+        const isPastExTime = currentHours > eHour || (currentHours === eHour && currentMinutes >= eMin);
+
+        if (isPastExTime) {
+          const todayDayData = profileData.days?.[todayStr];
+          const hasLoggedEx = Boolean(todayDayData?.exercise);
+          const logKey = `exercise_${todayStr}`;
+
+          if (!hasLoggedEx && !sentLog[logKey]) {
+            const title = '🏃‍♀️ Döngüm - Günün Hareket & Egzersiz Vakti';
+            const body = 'Bedenini döngü fazına uygun bir yürüyüş, yoga veya antrenmanla canlandır! Kaydetmek için (+) butonuna dokun 💪';
+
+            sentLog[logKey] = Date.now();
+            stateChanged = true;
+
+            await this.dispatchSystemNotification({
+              title,
+              body,
+              emojiIcon: '🏃‍♀️',
+              tag: 'exercise_reminder',
+              toastActionText: '🏃‍♀️ Egzersiz Gir',
+              data: { tab: 'home', openQuickAdd: true, quickSection: 'exercise' }
+            });
+            this.storage.addInAppNotification(null, {
+              title,
+              body,
+              type: 'exercise',
+              actionTab: 'home',
+              openQuickAdd: true,
+              actionFocus: 'exercise'
+            });
+          }
+        }
+      }
+
+      // 7. GÜNLÜK SAĞLIK & SEMPTOM KAYDI HATIRLATMASI (Örn: 20:30)
+      if (!isQuietNow && settings.dailyLogReminder !== false) {
+        const preferredTime = settings.dailyLogTime || '20:30';
+        const [prefHour, prefMin] = preferredTime.split(':').map(Number);
+        const isPastTime = currentHours > prefHour || (currentHours === prefHour && currentMinutes >= prefMin);
+
+        if (isPastTime) {
+          const todayDayData = profileData.days?.[todayStr];
+          const hasLoggedToday = Boolean(todayDayData && (
+            todayDayData.isPeriod ||
+            (todayDayData.symptoms && todayDayData.symptoms.length > 0) ||
+            (Array.isArray(todayDayData.moods) && todayDayData.moods.length > 0) ||
+            todayDayData.mood ||
+            todayDayData.notes
+          ));
+
+          const logKey = `daily_log_${todayStr}`;
+          if (!hasLoggedToday && !sentLog[logKey]) {
+            const title = '📝 Döngüm - Günün Sağlık Kaydı 🌸';
+            const body = 'Bugün nasıl hissettin? Günlük semptom, duygu ve su/egzersiz kaydını (+) menüsünden eklemeyi unutma.';
+
+            sentLog[logKey] = Date.now();
+            stateChanged = true;
+
+            await this.dispatchSystemNotification({
+              title,
+              body,
+              emojiIcon: '📝',
+              tag: 'daily_health_log',
+              toastActionText: '➕ Hızlı Kayıt',
+              data: { tab: 'home', openQuickAdd: true, quickSection: 'all' }
+            });
+            this.storage.addInAppNotification(null, {
+              title,
+              body,
+              type: 'daily',
+              actionTab: 'home',
+              openQuickAdd: true,
+              actionFocus: 'all'
+            });
+          }
+        }
+      }
+
+      // 8. SU TÜKETİMİ & HİDRASYON HATIRLATMASI
+      if (!isQuietNow && settings.waterReminder !== false) {
+        const startH = settings.waterStartHour || 8;
+        const endH = settings.waterEndHour || 22;
+
+        if (currentHours >= startH && currentHours <= endH) {
+          const todayWater = this.storage.getWaterForDay(todayStr);
+          const targetWater = profileData.settings?.waterTarget || 2250;
+
+          if (todayWater < targetWater) {
+            const intervalHours = parseFloat(settings.waterIntervalHours) || 2;
+            const intervalMs = Math.round(intervalHours * 60 * 60 * 1000);
+            const lastWaterTime = sentLog.lastWaterNoticeTime || 0;
+
+            if (Date.now() - lastWaterTime >= intervalMs) {
+              const title = '💧 Döngüm - Su İçme Vakti 🌊';
+              const remaining = Math.max(0, targetWater - todayWater);
+              const body = `Vücudunu nemli tut! Hedefine ${remaining} ml kaldı. Bir bardak su içerek tazelen (${todayWater}/${targetWater} ml).`;
+
+              sentLog.lastWaterNoticeTime = Date.now();
+              stateChanged = true;
+
+              await this.dispatchSystemNotification({
+                title,
+                body,
+                emojiIcon: '💧',
+                tag: 'water_reminder',
+                toastActionText: '🥛 +250 ml Ekle',
+                onToastAction: () => {
+                  this.storage.logWater(todayStr, 250);
+                  this.playWellnessChime();
+                  this.notifyListeners();
+                  if (this.onQuickActionCallback) {
+                    this.onQuickActionCallback({ type: 'REFRESH_UI' });
+                  }
+                },
+                data: { tab: 'home', openQuickAdd: true, quickSection: 'water' }
+              });
+              this.storage.addInAppNotification(null, {
+                title,
+                body,
+                type: 'water',
+                actionTab: 'home',
+                openQuickAdd: true,
+                actionFocus: 'water'
+              });
+            }
+          }
+        }
+      }
+
+      // 9. UYGULAMAYA GERİ ÇAĞIRMA (4+ GÜN BOYUNCA GİRİŞ YAPILMADIYSA)
+      if (isDaytimeForCycleAlerts) {
+        const allDays = Object.keys(profileData.days || {}).sort();
+        if (allDays.length > 0) {
+          const lastRecordedDay = allDays[allDays.length - 1];
+          const daysSinceLastRecord = CycleEngine.diffDays(todayStr, lastRecordedDay);
+
+          if (daysSinceLastRecord >= 4) {
+            const logKey = `reengagement_${todayStr}`;
+            const lastReengage = sentLog.lastReengagementSentDate;
+            const diffDaysSinceReengage = lastReengage ? CycleEngine.diffDays(todayStr, lastReengage) : 99;
+
+            if (!sentLog[logKey] && diffDaysSinceReengage >= 4) {
+              const title = '🌸 Döngüm Seni Özledi 💖';
+              const body = 'Döngü ve sağlık modelinizin en yüksek doğrulukla çalışması için son günlerinizi (+) butonundan kaydetmeyi unutmayın.';
+
+              sentLog[logKey] = Date.now();
+              sentLog.lastReengagementSentDate = todayStr;
+              stateChanged = true;
+
+              await this.dispatchSystemNotification({
+                title,
+                body,
+                emojiIcon: '🌸',
+                tag: 'app_reengagement',
+                toastActionText: '➕ Kayıt Ekle',
+                data: { tab: 'home', openQuickAdd: true }
+              });
+              this.storage.addInAppNotification(null, { title, body, type: 'system', actionTab: 'home', openQuickAdd: true });
+            }
+          }
+        }
+      }
+
+      if (stateChanged) {
+        notifState.sentLog = sentLog;
+        this.storage.saveNotificationState(null, notifState);
+        this.notifyListeners();
+        await this.syncStateToServiceWorker(false);
+      }
+    } catch (err) {
+      console.warn('evaluateSmartReminders uyarısı:', err);
+    } finally {
+      this.isEvaluating = false;
+    }
   }
 
   // =========================================================================
@@ -8472,24 +9562,26 @@ class NotificationManager {
         alerts.push({
           id: 'alert_period_soon',
           type: 'period',
-          badge: 'Regl Yaklaşıyor',
+          badge: '🌸 Regl Yaklaşıyor',
           title: `Regl Dönemine ${daysUntilNext} Gün Kaldı`,
           description: `Tahmini başlangıç: ${summary.nextPeriodDate}. Ped veya hijyen ürünlerinizi yanınızda bulundurun.`,
           icon: '🩸',
           color: '#f43f5e',
-          actionText: 'Takvimi Gör',
+          actionText: '📅 Takvimi Gör',
           actionTab: 'calendar'
         });
       } else if (daysUntilNext === 0) {
         alerts.push({
           id: 'alert_period_today',
           type: 'period',
-          badge: 'Bugün Bekleniyor',
+          badge: '🩸 Bugün Bekleniyor',
           title: 'Tahmini Regl Başlangıç Günü',
           description: 'Modelin hesapladığı regl başlangıç günündesiniz. Kanamanız başladıysa tek tıkla kaydedebilirsiniz.',
           icon: '🩸',
           color: '#e11d48',
-          actionText: 'Regli Başlat',
+          actionText: '🩸 Regl Kaydet (+)',
+          actionType: 'open_quick_add',
+          quickSection: 'period',
           actionTab: 'home'
         });
       } else if (daysUntilNext < 0) {
@@ -8497,12 +9589,14 @@ class NotificationManager {
         alerts.push({
           id: 'alert_period_late',
           type: 'period_late',
-          badge: `${late} Gün Gecikme`,
+          badge: `⚠️ ${late} Gün Gecikme`,
           title: 'Regl Döneminiz Gecikti',
-          description: `Tahmini tarihten ${late} gün geçti. Stres, beslenme veya seyahat gecikmeye yol açabilir.`,
+          description: `Tahmini tarihten ${late} gün geçti. Stres, mevsim geçişi veya beslenme gecikmeye yol açabilir.`,
           icon: '⚠️',
           color: '#f59e0b',
-          actionText: 'Kayıt Ekle / İncele',
+          actionText: '➕ Regl / Belirti Ekle',
+          actionType: 'open_quick_add',
+          quickSection: 'period',
           actionTab: 'calendar'
         });
       }
@@ -8514,36 +9608,36 @@ class NotificationManager {
         alerts.push({
           id: 'alert_ovulation',
           type: 'ovulation',
-          badge: 'Ovülasyon Zirvesi',
+          badge: '✨ Ovülasyon Zirvesi',
           title: 'Bugün Yumurtlama (Ovülasyon) Günü',
           description: 'Gebe kalma olasılığının en yüksek olduğu 24 saatlik doğurganlık penceresindesiniz.',
-          icon: '✨',
+          icon: '🥚',
           color: '#eab308',
-          actionText: 'Döngü Detayı',
+          actionText: '🌸 Döngü Detayı',
           actionTab: 'home'
         });
       } else if (dayStatus.phase === 'fertile') {
         alerts.push({
           id: 'alert_fertile',
           type: 'fertile',
-          badge: 'Doğurganlık Penceresi',
+          badge: '💜 Doğurganlık Penceresi',
           title: 'Verimli Doğurganlık Günlerindesiniz',
-          description: 'Yumurtlama öncesi yüksek doğurganlık evresindesiniz.',
-          icon: '💜',
+          description: 'Yumurtlama öncesi yüksek doğurganlık ve yüksek enerji evresindesiniz.',
+          icon: '🦋',
           color: '#a855f7',
-          actionText: 'Evre Tavsiyesi',
+          actionText: '✨ Evre Tavsiyesi',
           actionTab: 'home'
         });
       } else if (dayStatus.phase === 'pms') {
         alerts.push({
           id: 'alert_pms',
           type: 'pms',
-          badge: 'PMS & Luteal',
+          badge: '🌙 PMS & Luteal',
           title: 'PMS / Sakinleşme Evresi',
-          description: 'Hafif ödem, tatlı istekleri veya duygu dalgalanmaları normaldir. Sıcak bitki çayları iyi gelir.',
+          description: 'Hafif ödem, tatlı istekleri veya duygu dalgalanmaları normaldir. Bitki çayları ve esneme iyi gelir.',
           icon: '🌙',
           color: '#fb923c',
-          actionText: 'Faz Rehberi',
+          actionText: '🍵 Faz Rehberi',
           actionTab: 'home'
         });
       }
@@ -8551,43 +9645,65 @@ class NotificationManager {
 
     // 3. Günün Ruh Hali & Duygu Durumu Eksikse
     const todayDayData = profileData.days?.[todayStr] || {};
-    if (!todayDayData.mood && settings.moodReminder !== false) {
+    const hasMood = Boolean((Array.isArray(todayDayData.moods) && todayDayData.moods.length > 0) || todayDayData.mood);
+    if (!hasMood && settings.moodReminder !== false) {
       alerts.push({
         id: 'alert_mood_checkin',
         type: 'mood',
-        badge: 'Ruh Hali Yoklaması',
+        badge: '😊 Ruh Hali Yoklaması',
         title: 'Bugün Nasıl Hissediyorsunuz?',
-        description: 'Enerji ve duygu durumunuzu 5 saniyede kaydederek hormon döngünüzle ruh hali korelasyonunu takip edin.',
-        icon: '🧘',
+        description: 'Enerji ve duygu durumunuzu 5 saniyede kaydederek hormon döngünüzle ruh hali uyumunu takip edin.',
+        icon: '🧘‍♀️',
         color: '#ec4899',
-        actionText: 'Ruh Halini Seç',
+        actionText: '😊 Ruh Halini Seç (+)',
+        actionType: 'open_quick_add',
+        quickSection: 'mood',
         actionTab: 'calendar',
         actionFocus: 'mood'
       });
     }
 
-    // 4. Günün Sağlık Kaydı Eksikse
-    const hasLog = (
+    // 4. Günün Egzersizi Eksikse
+    if (!todayDayData.exercise && settings.exerciseReminder !== false) {
+      alerts.push({
+        id: 'alert_exercise_checkin',
+        type: 'exercise',
+        badge: '🏃‍♀️ Günlük Hareket',
+        title: 'Bugün Bedenini Harekete Geçirdin mi?',
+        description: 'Döngü fazına uygun kısa bir yürüyüş, esneme veya antrenman kaydı ekleyerek serini koru!',
+        icon: '🏃‍♀️',
+        color: '#10b981',
+        actionText: '🏃‍♀️ Egzersiz Ekle (+)',
+        actionType: 'open_quick_add',
+        quickSection: 'exercise',
+        actionTab: 'fitness'
+      });
+    }
+
+    // 5. Günün Sağlık Kaydı Eksikse
+    const hasLog = Boolean(
       todayDayData.isPeriod ||
       (todayDayData.symptoms && todayDayData.symptoms.length > 0) ||
-      todayDayData.mood ||
+      hasMood ||
       todayDayData.notes
     );
     if (!hasLog) {
       alerts.push({
         id: 'alert_daily_log',
         type: 'daily',
-        badge: 'Günün Kaydı',
+        badge: '📝 Günün Kaydı',
         title: 'Bugünkü Belirtilerinizi Girin',
-        description: 'Ruh halinizi, enerjinizi ve semptomlarınızı kaydederek kişiselleştirilmiş analizi güçlendirin.',
+        description: 'Semptom, akıntı ve kişisel notlarınızı (+) menüsünden kolayca kaydederek analizi güçlendirin.',
         icon: '📝',
         color: '#8b5cf6',
-        actionText: 'Bugünü Kaydet',
+        actionText: '➕ Hızlı Kayıt Ekle',
+        actionType: 'open_quick_add',
+        quickSection: 'all',
         actionTab: 'calendar'
       });
     }
 
-    // 5. Su Tüketimi Hedefi
+    // 6. Su Tüketimi Hedefi
     const todayWater = this.storage.getWaterForDay(todayStr);
     const targetWater = profileData.settings?.waterTarget || 2250;
     if (todayWater < targetWater) {
@@ -8595,12 +9711,12 @@ class NotificationManager {
       alerts.push({
         id: 'alert_water',
         type: 'water',
-        badge: `%${pct} Tamamlandı`,
+        badge: `💧 %${pct} Tamamlandı`,
         title: `Su Hedefine ${targetWater - todayWater} ml Kaldı`,
-        description: `Bugün ${todayWater} ml / ${targetWater} ml su tükettiniz. Vücudunuzun hidrasyonunu koruyun.`,
+        description: `Bugün ${todayWater} ml / ${targetWater} ml su tükettiniz. Vücudunuzun hidrasyonunu koruyun 🌊`,
         icon: '💧',
         color: '#0284c7',
-        actionText: '+250 ml Su İçtim',
+        actionText: '🥛 +250 ml Su İçtim',
         actionType: 'add_water_250',
         actionTab: 'fitness'
       });
@@ -8690,29 +9806,33 @@ const CYCLE_FITNESS_GUIDANCE = {
 };
 
 const EXERCISE_TYPES = [
-  { id: 'yoga', name: 'Yoga & Esneme', icon: '🧘‍♀️', calPerHour: 220, badge: 'Onarıcı' },
-  { id: 'walking', name: 'Tempolu Yürüyüş', icon: '🚶‍♀️', calPerHour: 280, badge: 'Düşük Nabız' },
-  { id: 'running', name: 'Koşu / Jogging', icon: '🏃‍♀️', calPerHour: 550, badge: 'Kardiyo' },
-  { id: 'pilates', name: 'Pilates & Matwork', icon: '🤸‍♀️', calPerHour: 340, badge: 'Merkez Güç' },
-  { id: 'strength', name: 'Ağırlık & Kuvvet', icon: '🏋️‍♀️', calPerHour: 420, badge: 'Kas Gelişimi' },
-  { id: 'swimming', name: 'Yüzme', icon: '🏊‍♀️', calPerHour: 480, badge: 'Tüm Vücut' },
-  { id: 'dance', name: 'Dans / Zumba', icon: '💃', calPerHour: 380, badge: 'Eğlenceli' },
-  { id: 'hiit', name: 'HIIT & Fonksiyonel', icon: '⚡', calPerHour: 620, badge: 'Yüksek Efor' },
-  { id: 'cycling', name: 'Bisiklet / Spin', icon: '🚴‍♀️', calPerHour: 450, badge: 'Dayanıklılık' },
-  { id: 'breath', name: 'Nefes & Mobilite', icon: '🫁', calPerHour: 120, badge: 'Zihinsel Sakinlik' }
+  { id: 'yoga', name: 'Yoga & Esneme', icon: '🧘‍♀️', calPerHour: 220, badge: '🌸 Onarıcı' },
+  { id: 'walking', name: 'Tempolu Yürüyüş', icon: '🚶‍♀️', calPerHour: 280, badge: '🌿 Düşük Nabız' },
+  { id: 'running', name: 'Koşu / Jogging', icon: '🏃‍♀️', calPerHour: 550, badge: '🔥 Kardiyo' },
+  { id: 'pilates', name: 'Pilates & Matwork', icon: '🤸‍♀️', calPerHour: 340, badge: '✨ Merkez Güç' },
+  { id: 'strength', name: 'Ağırlık & Kuvvet', icon: '🏋️‍♀️', calPerHour: 420, badge: '💪 Kas Gelişimi' },
+  { id: 'swimming', name: 'Yüzme & Su Sporu', icon: '🏊‍♀️', calPerHour: 480, badge: '🌊 Tüm Vücut' },
+  { id: 'dance', name: 'Dans / Zumba', icon: '💃', calPerHour: 380, badge: '🎶 Eğlenceli' },
+  { id: 'hiit', name: 'HIIT & Fonksiyonel', icon: '⚡', calPerHour: 620, badge: '🚀 Yüksek Efor' },
+  { id: 'cycling', name: 'Bisiklet / Spin', icon: '🚴‍♀️', calPerHour: 450, badge: '🏅 Dayanıklılık' },
+  { id: 'breath', name: 'Nefes & Mobilite', icon: '🫁', calPerHour: 120, badge: '🕊️ Zihinsel Sakinlik' },
+  { id: 'stretching', name: 'Germe & Esneklik', icon: '🩰', calPerHour: 180, badge: '🦋 Rahatlatıcı' },
+  { id: 'hiking', name: 'Doğa Yürüyüşü', icon: '🥾', calPerHour: 390, badge: '🌲 Açık Hava' }
 ];
 
 const INTENSITY_LEVELS = [
-  { id: 'light', name: 'Hafif & Rahatlatıcı', icon: '🟢', desc: 'Düşük nabız, derin nefes ve esneme odaklı' },
-  { id: 'moderate', name: 'Orta Seviye', icon: '🟡', desc: 'Terleten, ritmik ve dengeli bir tempo' },
-  { id: 'high', name: 'Yüksek Yoğunluk', icon: '🔴', desc: 'Maksimum nabız, zorlayıcı efor ve terleme' }
+  { id: 'light', name: 'Hafif & Rahatlatıcı', icon: '🟢', desc: '🍃 Düşük nabız, derin nefes ve esneme odaklı' },
+  { id: 'moderate', name: 'Orta Seviye', icon: '🟡', desc: '✨ Terleten, ritmik ve dengeli bir tempo' },
+  { id: 'high', name: 'Yüksek Yoğunluk', icon: '🔴', desc: '🔥 Maksimum nabız, zorlayıcı efor ve terleme' }
 ];
 
 const FEELING_LEVELS = [
   { id: 'energized', name: 'Enerjik & Canlı', icon: '🌟' },
   { id: 'relaxed', name: 'Rahatlamış & Sakin', icon: '🧘‍♀️' },
   { id: 'strong', name: 'Güçlü & Özgüvenli', icon: '💪' },
+  { id: 'refreshed', name: 'Yenilenmiş & Ferah', icon: '🦋' },
   { id: 'tired_happy', name: 'Tatlı Yorgunluk', icon: '😊' },
+  { id: 'proud', name: 'Başarmış & Motive', icon: '🏆' },
   { id: 'exhausted', name: 'Zorlandım / Yorgun', icon: '🥵' }
 ];
 
@@ -8762,28 +9882,34 @@ class FitnessComponent {
 
     // Menstrüasyon Fazı Analizi
     if (isPeriod) {
-      if (['yoga', 'walking', 'breath', 'pilates'].includes(exerciseId)) {
+      if (['yoga', 'walking', 'breath', 'pilates', 'stretching'].includes(exerciseId)) {
+        const benefit = 'Pelvik bölgeye oksijen akışını artırarak krampları yatıştırır ve doğal endorfin salgılatır.';
         return {
           rating: 'optimal',
           statusText: '🌸 Biyolojik Uyum: Mükemmel Seçim!',
           badgeClass: 'badge-optimal',
-          benefit: 'Pelvik bölgeye oksijen akışını artırarak krampları yatıştırır ve doğal endorfin salgılatır.',
+          benefit,
+          description: benefit,
           tip: 'Ters duruşlardan kaçının; belinizi ve karnınızı sıcak tutarak hareket edin.'
         };
       } else if (['hiit', 'running', 'strength'].includes(exerciseId) && intensity === 'high') {
+        const benefit = 'Hafif tempo kardiyo endorfin sağlar ancak yüksek şiddet regl yorgunluğunu ve krampları tetikleyebilir.';
         return {
           rating: 'caution',
           statusText: '⚠️ Biyolojik Dikkat: Bedenini Dinle',
           badgeClass: 'badge-caution',
-          benefit: 'Hafif tempo kardiyo endorfin sağlar ancak yüksek şiddet regl yorgunluğunu ve krampları tetikleyebilir.',
+          benefit,
+          description: benefit,
           tip: 'Ağırlıkları %30-40 düşürmeyi veya süreyi 20-30 dakika ile sınırlamayı düşünebilirsiniz.'
         };
       } else {
+        const benefit = 'Kan dolaşımını canlandırarak halsizliği giderir.';
         return {
           rating: 'good',
           statusText: '✨ Dengeli & İyi Seçim',
           badgeClass: 'badge-good',
-          benefit: 'Kan dolaşımını canlandırarak halsizliği giderir.',
+          benefit,
+          description: benefit,
           tip: 'Bol su için ve nabzınızı orta düzeyde tutun.'
         };
       }
@@ -8791,20 +9917,24 @@ class FitnessComponent {
 
     // Foliküler Faz Analizi
     if (isFollicular) {
-      if (['running', 'strength', 'hiit', 'dance', 'cycling'].includes(exerciseId)) {
+      if (['running', 'strength', 'hiit', 'dance', 'cycling', 'hiking'].includes(exerciseId)) {
+        const benefit = 'Yükselen östrojen kas onarımını ve glikojen depolanmasını zirveye çıkarır; yağ yakımı en etkilidir.';
         return {
           rating: 'optimal',
           statusText: '🚀 Biyolojik Uyum: Zirve Güç Zamanı!',
           badgeClass: 'badge-optimal',
-          benefit: 'Yükselen östrojen kas onarımını ve glikojen depolanmasını zirveye çıkarır; yağ yakımı en etkilidir.',
+          benefit,
+          description: benefit,
           tip: 'Bugün ağırlıkları artırmak veya yeni hedeflere meydan okumak için harika bir gün!'
         };
       } else {
+        const benefit = 'Enerjinizi dengeli kullanarak zihinsel odaklanmayı pekiştirir.';
         return {
           rating: 'good',
           statusText: '🌱 Harika Hareket',
           badgeClass: 'badge-good',
-          benefit: 'Enerjinizi dengeli kullanarak zihinsel odaklanmayı pekiştirir.',
+          benefit,
+          description: benefit,
           tip: 'Vücudunuzun yüksek toparlanma hızından faydalanın.'
         };
       }
@@ -8812,20 +9942,24 @@ class FitnessComponent {
 
     // Ovülasyon Fazı Analizi
     if (isOvulation) {
-      if (['hiit', 'strength', 'running', 'cycling'].includes(exerciseId)) {
+      if (['hiit', 'strength', 'running', 'cycling', 'dance'].includes(exerciseId)) {
+        const benefit = 'Hormonal zirve sayesinde fiziksel dayanıklılık ve kalori harcaması ayın en yüksek seviyesindedir.';
         return {
           rating: 'optimal',
           statusText: '⚡ Maksimum Testosteron & Patlayıcı Kuvvet!',
           badgeClass: 'badge-optimal',
-          benefit: 'Hormonal zirve sayesinde fiziksel dayanıklılık ve kalori harcaması ayın en yüksek seviyesindedir.',
+          benefit,
+          description: benefit,
           tip: 'Relaksin hormonu eklemleri gevşettiğinden diz ve bilek sakatlanmalarına karşı ısınmayı uzatın.'
         };
       } else {
+        const benefit = 'Yüksek enerjinizi estetik ve ritmik hareketlerle destekler.';
         return {
           rating: 'good',
           statusText: '✨ Canlandırıcı & Güçlü',
           badgeClass: 'badge-good',
-          benefit: 'Yüksek enerjinizi estetik ve ritmik hareketlerle destekler.',
+          benefit,
+          description: benefit,
           tip: 'Antrenman sonrası bol su ile serinleyin.'
         };
       }
@@ -8833,38 +9967,46 @@ class FitnessComponent {
 
     // Luteal Faz Analizi
     if (isLuteal) {
-      if (['pilates', 'walking', 'swimming', 'yoga'].includes(exerciseId)) {
+      if (['pilates', 'walking', 'swimming', 'yoga', 'stretching', 'hiking'].includes(exerciseId)) {
+        const benefit = 'Yükselen progesterona bağlı ödemi lenfatik drenajla atar; kortizolü düşürerek PMS sinirliliğini yatıştırır.';
         return {
           rating: 'optimal',
           statusText: '🌙 Biyolojik Uyum: PMS ve Ödem Sökücü!',
           badgeClass: 'badge-optimal',
-          benefit: 'Yükselen progesterona bağlı ödemi lenfatik drenajla atar; kortizolü düşürerek PMS sinirliliğini yatıştırır.',
+          benefit,
+          description: benefit,
           tip: 'Ritmik ve kontrollü nefes alıp vererek merkez bölge kaslarınızı güçlendirin.'
         };
       } else if (['hiit', 'strength'].includes(exerciseId) && intensity === 'high') {
+        const benefit = 'Efor iyidir ancak vücut bazal ısısı yüksek olduğundan aşırı tükeniş toparlanma süresini uzatabilir.';
         return {
           rating: 'caution',
           statusText: '💡 Nazik Uyarı: Tükenişten Kaçının',
           badgeClass: 'badge-caution',
-          benefit: 'Efor iyidir ancak vücut bazal ısısı yüksek olduğundan aşırı tükeniş toparlanma süresini uzatabilir.',
+          benefit,
+          description: benefit,
           tip: 'Nabzı aşırı yükseltmek yerine orta tempoda kalmaya özen gösterin.'
         };
       } else {
+        const benefit = 'Duygu durumunu dengeler ve tatlı krizlerini engeller.';
         return {
           rating: 'good',
           statusText: '✨ Dengeleyici Efor',
           badgeClass: 'badge-good',
-          benefit: 'Duygu durumunu dengeler ve tatlı krizlerini engeller.',
+          benefit,
+          description: benefit,
           tip: 'Antrenmandan sonra magnezyum zengini bir ara öğün harika gelir.'
         };
       }
     }
 
+    const benefit = 'Düzenli fiziksel aktivite döngü ritminizi stabilize eder.';
     return {
       rating: 'good',
       statusText: '✨ Sağlıklı Tercih',
       badgeClass: 'badge-good',
-      benefit: 'Düzenli fiziksel aktivite döngü ritminizi stabilize eder.',
+      benefit,
+      description: benefit,
       tip: 'Bedeninizi dinleyerek hareket edin.'
     };
   }
@@ -9485,6 +10627,67 @@ class FitnessComponent {
 
 
 
+const SYMPTOM_LIST = [
+  { id: 'cramps', label: 'Kasık Krampları', icon: '⚡' },
+  { id: 'headache', label: 'Baş Ağrısı / Migren', icon: '🤕' },
+  { id: 'bloating', label: 'Şişkinlik & Ödem', icon: '🎈' },
+  { id: 'breast', label: 'Göğüs Hassasiyeti', icon: '🌸' },
+  { id: 'backache', label: 'Bel & Sırt Ağrısı', icon: '🦴' },
+  { id: 'acne', label: 'Sivilce / Cilt', icon: '✨' },
+  { id: 'fatigue', label: 'Yorgunluk & Halsizlik', icon: '😴' },
+  { id: 'nausea', label: 'Mide Bulantısı', icon: '🤢' },
+  { id: 'insomnia', label: 'Uykusuzluk', icon: '🌙' },
+  { id: 'craving', label: 'Tatlı / Aşerme', icon: '🍫' },
+  { id: 'hotflash', label: 'Sıcak Basması', icon: '🥵' },
+  { id: 'chills', label: 'Üşüme & Titreme', icon: '🥶' },
+  { id: 'dizziness', label: 'Baş Dönmesi', icon: '💫' },
+  { id: 'jointpain', label: 'Eklem & Kas Ağrısı', icon: '🦵' },
+  { id: 'digestion', label: 'Sindirim Hassasiyeti', icon: '🍵' },
+  { id: 'highlibido', label: 'Artan İstek (Libido)', icon: '🔥' },
+  { id: 'brainfog', label: 'Odaklanma Güçlüğü', icon: '☁️' },
+  { id: 'pelvic', label: 'Pelvik Baskı Hissi', icon: '🌺' }
+];
+
+const MOOD_LIST = [
+  { id: 'happy', label: 'Mutlu & Neşeli', icon: '😊' },
+  { id: 'calm', label: 'Sakin & Dingin', icon: '😌' },
+  { id: 'energetic', label: 'Enerjik & Canlı', icon: '⚡' },
+  { id: 'peaceful', label: 'Huzurlu & Dengeli', icon: '🕊️' },
+  { id: 'motivated', label: 'Motive & Odaklı', icon: '🎯' },
+  { id: 'confident', label: 'Özgüvenli & Çekici', icon: '💃' },
+  { id: 'loving', label: 'Sevgi & Şefkat Dolu', icon: '💖' },
+  { id: 'grateful', label: 'Şükran Dolu', icon: '🙏' },
+  { id: 'social', label: 'Sosyal & Keyifli', icon: '🦋' },
+  { id: 'creative', label: 'Yaratıcı & İlhamlı', icon: '🎨' },
+  { id: 'cuddly', label: 'İlgi & Sarılma İsteği', icon: '🧸' },
+  { id: 'craving', label: 'Aşeren / Tatlı', icon: '🍫' },
+  { id: 'sensitive', label: 'Duygusal & Alıngan', icon: '🥺' },
+  { id: 'moodswings', label: 'Dalgalı Ruh Hali', icon: '🎭' },
+  { id: 'irritated', label: 'Gergin / Sinirli', icon: '😤' },
+  { id: 'stressed', label: 'Stresli & Bunalmış', icon: '🤯' },
+  { id: 'tired', label: 'Yorgun & Uykulu', icon: '🥱' },
+  { id: 'sad', label: 'Hüzünlü & Melankolik', icon: '😢' },
+  { id: 'anxious', label: 'Endişeli / Kaygılı', icon: '😰' },
+  { id: 'dreamy', label: 'Dalgın / Boşlukta', icon: '🌫️' },
+  { id: 'exhausted', label: 'Bitkin / Halsiz', icon: '🛌' }
+];
+
+const DISCHARGE_LIST = [
+  { id: 'dry', label: 'Kuru / Yok', icon: '🏜️' },
+  { id: 'sticky', label: 'Yapışkan', icon: '🍯' },
+  { id: 'creamy', label: 'Kremamsı', icon: '🥛' },
+  { id: 'egg_white', label: 'Yumurta Akı (Doğurgan)', icon: '🥚✨' },
+  { id: 'watery', label: 'Sulu & Berrak', icon: '💧' },
+  { id: 'spotting_dis', label: 'Pembe / Lekelenme', icon: '🌸' }
+];
+
+const FLOW_LEVELS = [
+  { id: 'spotting', label: 'Lekelenme', icon: '🌸', dotClass: 'f-spotting' },
+  { id: 'light', label: 'Hafif', icon: '💧', dotClass: 'f-light' },
+  { id: 'medium', label: 'Orta', icon: '🩸', dotClass: 'f-medium' },
+  { id: 'heavy', label: 'Yoğun', icon: '🌊', dotClass: 'f-heavy' }
+];
+
 class CalendarComponent {
   constructor(containerEl, engine, storage, onDataChanged) {
     this.container = containerEl;
@@ -9503,45 +10706,9 @@ class CalendarComponent {
       'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
     ];
 
-    this.symptomList = [
-      { id: 'cramps', label: 'Kramplar', icon: '⚡' },
-      { id: 'headache', label: 'Baş Ağrısı', icon: '🤕' },
-      { id: 'bloating', label: 'Şişkinlik', icon: '🎈' },
-      { id: 'breast', label: 'Göğüs Hassasiyeti', icon: '🌸' },
-      { id: 'backache', label: 'Bel Ağrısı', icon: '🦴' },
-      { id: 'acne', label: 'Sivilce/Cilt', icon: '✨' },
-      { id: 'fatigue', label: 'Yorgunluk', icon: '😴' },
-      { id: 'nausea', label: 'Mide Bulantısı', icon: '🤢' },
-      { id: 'insomnia', label: 'Uykusuzluk', icon: '🌙' },
-      { id: 'craving', label: 'Tatlı/Aşerme', icon: '🍫' }
-    ];
-
-    this.moodList = [
-      { id: 'happy', label: 'Mutlu', icon: '😊' },
-      { id: 'calm', label: 'Sakin & Dingin', icon: '😌' },
-      { id: 'energetic', label: 'Enerjik & Canlı', icon: '⚡' },
-      { id: 'peaceful', label: 'Huzurlu', icon: '🕊️' },
-      { id: 'motivated', label: 'Motive & Odaklı', icon: '🎯' },
-      { id: 'confident', label: 'Özgüvenli', icon: '💃' },
-      { id: 'loving', label: 'Sevgi Dolu', icon: '💖' },
-      { id: 'craving', label: 'Aşeren / Tatlı', icon: '🍫' },
-      { id: 'sensitive', label: 'Duygusal', icon: '🥺' },
-      { id: 'irritated', label: 'Gergin / Sinirli', icon: '😤' },
-      { id: 'stressed', label: 'Stresli', icon: '🤯' },
-      { id: 'tired', label: 'Yorgun', icon: '🥱' },
-      { id: 'sad', label: 'Hüzünlü', icon: '😢' },
-      { id: 'anxious', label: 'Endişeli / Kaygılı', icon: '😰' },
-      { id: 'dreamy', label: 'Dalgın / Boşlukta', icon: '🌫️' },
-      { id: 'exhausted', label: 'Bitkin / Halsiz', icon: '🛌' }
-    ];
-
-    this.dischargeList = [
-      { id: 'dry', label: 'Kuru' },
-      { id: 'sticky', label: 'Yapışkan' },
-      { id: 'creamy', label: 'Kremamsı' },
-      { id: 'egg_white', label: 'Yumurta Akı (Doğurgan)' },
-      { id: 'watery', label: 'Sulu' }
-    ];
+    this.symptomList = SYMPTOM_LIST;
+    this.moodList = MOOD_LIST;
+    this.dischargeList = DISCHARGE_LIST;
   }
 
   render() {
@@ -9923,16 +11090,16 @@ class CalendarComponent {
             <span class="flow-label">Kanama Yoğunluğu:</span>
             <div class="flow-buttons">
               <button type="button" class="flow-btn ${currentFlow === 'spotting' ? 'selected' : ''}" data-flow="spotting">
-                <span class="flow-dot f-spotting"></span> Lekelenme
+                <span class="flow-dot f-spotting"></span> 🌸 Lekelenme
               </button>
               <button type="button" class="flow-btn ${currentFlow === 'light' ? 'selected' : ''}" data-flow="light">
-                <span class="flow-dot f-light"></span> Hafif
+                <span class="flow-dot f-light"></span> 💧 Hafif
               </button>
               <button type="button" class="flow-btn ${currentFlow === 'medium' ? 'selected' : ''}" data-flow="medium">
-                <span class="flow-dot f-medium"></span> Orta
+                <span class="flow-dot f-medium"></span> 🩸 Orta
               </button>
               <button type="button" class="flow-btn ${currentFlow === 'heavy' ? 'selected' : ''}" data-flow="heavy">
-                <span class="flow-dot f-heavy"></span> Yoğun
+                <span class="flow-dot f-heavy"></span> 🌊 Yoğun
               </button>
             </div>
           </div>
@@ -10192,7 +11359,7 @@ class CalendarComponent {
               const active = currentDischarge === d.id;
               return `
                 <button type="button" class="chip-pill ${active ? 'chip-active' : ''}" data-id="${d.id}">
-                  ${d.label}
+                  ${d.icon ? `<span class="chip-pill-emoji">${d.icon}</span> ` : ''}${d.label}
                 </button>
               `;
             }).join('')}
@@ -10889,16 +12056,24 @@ class AnalyticsComponent {
 
   calculateSymptomFrequencies(days = {}) {
     const symptomLabels = {
-      cramps: { label: 'Kramplar', icon: '⚡' },
-      headache: { label: 'Baş Ağrısı', icon: '🤕' },
-      bloating: { label: 'Şişkinlik', icon: '🎈' },
+      cramps: { label: 'Kasık Krampları', icon: '⚡' },
+      headache: { label: 'Baş Ağrısı / Migren', icon: '🤕' },
+      bloating: { label: 'Şişkinlik & Ödem', icon: '🎈' },
       breast: { label: 'Göğüs Hassasiyeti', icon: '🌸' },
-      backache: { label: 'Bel Ağrısı', icon: '🦴' },
-      acne: { label: 'Sivilce/Cilt', icon: '✨' },
-      fatigue: { label: 'Yorgunluk', icon: '😴' },
+      backache: { label: 'Bel & Sırt Ağrısı', icon: '🦴' },
+      acne: { label: 'Sivilce / Cilt', icon: '✨' },
+      fatigue: { label: 'Yorgunluk & Halsizlik', icon: '😴' },
       nausea: { label: 'Mide Bulantısı', icon: '🤢' },
       insomnia: { label: 'Uykusuzluk', icon: '🌙' },
-      craving: { label: 'Tatlı/Aşerme', icon: '🍫' }
+      craving: { label: 'Tatlı / Aşerme', icon: '🍫' },
+      hotflash: { label: 'Sıcak Basması', icon: '🥵' },
+      chills: { label: 'Üşüme & Titreme', icon: '🥶' },
+      dizziness: { label: 'Baş Dönmesi', icon: '💫' },
+      jointpain: { label: 'Eklem & Kas Ağrısı', icon: '🦵' },
+      digestion: { label: 'Sindirim Hassasiyeti', icon: '🍵' },
+      highlibido: { label: 'Artan İstek (Libido)', icon: '🔥' },
+      brainfog: { label: 'Odaklanma Güçlüğü', icon: '☁️' },
+      pelvic: { label: 'Pelvik Baskı Hissi', icon: '🌺' }
     };
 
     const counts = {};
@@ -10966,15 +12141,23 @@ class DoctorReportGenerator {
     // Semptom sıklıkları hesaplama
     const symptomLabels = {
       cramps: 'Dismenore (Kramplar / Kasık Ağrısı)',
-      headache: 'Sefalji / Baş Ağrısı',
-      bloating: 'Karında Distansiyon / Şişkinlik',
+      headache: 'Sefalji / Baş Ağrısı & Migren',
+      bloating: 'Karında Distansiyon / Şişkinlik & Ödem',
       breast: 'Mastodini (Meme Hassasiyeti)',
-      backache: 'Lomber / Bel Ağrısı',
-      acne: 'Akneiform Lezyonlar / Cilt',
+      backache: 'Lomber / Bel & Sırt Ağrısı',
+      acne: 'Akneiform Lezyonlar / Cilt Değişimi',
       fatigue: 'Kronik Yorgunluk / Letarji',
       nausea: 'Gastrointestinal Hassasiyet / Bulantı',
       insomnia: 'Uykusuzluk / İnsomni',
-      craving: 'İştah Değişikliği / Aşerme'
+      craving: 'İştah Değişikliği / Aşerme',
+      hotflash: 'Vazomotor Semptom / Sıcak Basması',
+      chills: 'Termoregülasyon / Üşüme & Titreme',
+      dizziness: 'Vertigo / Baş Dönmesi',
+      jointpain: 'Artralji / Eklem & Kas Ağrısı',
+      digestion: 'Dispepsi / Sindirim Değişikliği',
+      highlibido: 'Fizyolojik Libido Artışı',
+      brainfog: 'Bilişsel Yorgunluk / Odaklanma Güçlüğü',
+      pelvic: 'Pelvik Konjesyon / Baskı Hissi'
     };
 
     const symptomCounts = {};
@@ -11340,7 +12523,12 @@ class DongumApp {
     this.reportGen = new DoctorReportGenerator(this.engine, this.storage);
     this.notifManager = new NotificationManager(this.storage, this.engine);
     this.notifManager.onNotificationChange(() => this.updateHeaderNotificationBadge());
-    this.currentTab = 'home'; // 'home' | 'calendar' | 'analytics' | 'settings'
+    this.notifManager.setQuickActionHandler(({ section, dateStr }) => {
+      this.openQuickAddModal(section || 'all', dateStr || null);
+    });
+    this.currentTab = 'home'; // 'home' | 'calendar' | 'fitness' | 'analytics' | 'settings'
+    this.quickAddSection = 'all';
+    this.quickAddDate = CycleEngine.formatDateStr(new Date());
     
     // Uygulama PIN ve Oturum Durumu
     this.isLocked = false;
@@ -11479,7 +12667,7 @@ class DongumApp {
         <!-- Aktif sekmeye göre render edilir -->
       </main>
 
-      <!-- Mobil Alt Navigasyon Barı -->
+      <!-- Mobil Alt Navigasyon Barı (Tam Ortada + Hızlı Kayıt Butonu) -->
       <nav class="bottom-nav-bar">
         <button type="button" class="nav-tab-btn active" data-tab="home">
           <span class="nav-icon">${Icons.heart}</span>
@@ -11489,10 +12677,12 @@ class DongumApp {
           <span class="nav-icon">${Icons.calendar}</span>
           <span class="nav-label">Takvim</span>
         </button>
-        <button type="button" class="nav-tab-btn" data-tab="fitness">
-          <span class="nav-icon">${Icons.activity}</span>
-          <span class="nav-label">Egzersiz & Su</span>
-        </button>
+        <div class="nav-center-plus-wrap">
+          <button type="button" class="nav-center-plus-btn" id="btnNavQuickAdd" title="Hızlı Kayıt Ekle (Regl, Su, Egzersiz, Semptom & Ruh Hali)" aria-label="Hızlı Veri Giriş Merkezi">
+            <span class="plus-icon-glyph">+</span>
+          </button>
+          <span class="nav-center-plus-label">Kayıt Ekle</span>
+        </div>
         <button type="button" class="nav-tab-btn" data-tab="analytics">
           <span class="nav-icon">${Icons.chart}</span>
           <span class="nav-label">Analiz</span>
@@ -11697,6 +12887,25 @@ class DongumApp {
             <button type="button" class="modal-close-btn" id="btnCloseNotificationModal">${Icons.close}</button>
           </div>
           <div id="notificationCenterBody" style="overflow-y: auto; max-height: calc(85vh - 70px); padding-right: 2px;">
+            <!-- Dinamik doldurulur -->
+          </div>
+        </div>
+      </div>
+
+      <!-- MERKEZİ HIZLI VERİ GİRİŞ MERKEZİ (+) MODALI -->
+      <div class="modal-overlay" id="quickAddModalOverlay">
+        <div class="modal-sheet quick-add-sheet">
+          <div class="modal-header-row quick-add-header-row">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="qa-header-badge">➕</span>
+              <div>
+                <h3 style="font-size: 1.05rem; margin: 0;">Hızlı Veri Giriş Merkezi</h3>
+                <p style="font-size: 0.72rem; color: var(--text-muted); margin: 2px 0 0 0;">Regl, su, egzersiz, semptom ve ruh halini anında kaydedin</p>
+              </div>
+            </div>
+            <button type="button" class="modal-close-btn" id="btnCloseQuickAddModal">${Icons.close}</button>
+          </div>
+          <div id="quickAddModalBody" class="quick-add-body">
             <!-- Dinamik doldurulur -->
           </div>
         </div>
@@ -12117,6 +13326,655 @@ class DongumApp {
         if (e.target === notifOverlay) notifOverlay.classList.remove('active');
       };
     }
+
+    // Alt Menü Ortadaki "+" Hızlı Kayıt Butonu & Modalı
+    const btnQuickAdd = document.getElementById('btnNavQuickAdd');
+    const quickAddOverlay = document.getElementById('quickAddModalOverlay');
+    const btnCloseQuickAdd = document.getElementById('btnCloseQuickAddModal');
+
+    if (btnQuickAdd) {
+      btnQuickAdd.onclick = () => this.openQuickAddModal('all');
+    }
+    if (btnCloseQuickAdd && quickAddOverlay) {
+      btnCloseQuickAdd.onclick = () => quickAddOverlay.classList.remove('active');
+      quickAddOverlay.onclick = (e) => {
+        if (e.target === quickAddOverlay) quickAddOverlay.classList.remove('active');
+      };
+    }
+  }
+
+  // --- MERKEZİ HIZLI VERİ GİRİŞ MERKEZİ (+) MODALI ---
+  openQuickAddModal(initialSection = 'all', targetDateStr = null) {
+    const overlay = document.getElementById('quickAddModalOverlay');
+    if (!overlay) return;
+    this.quickAddSection = initialSection || 'all';
+    this.quickAddDate = targetDateStr || CycleEngine.formatDateStr(new Date());
+    this.renderQuickAddModalContent();
+    overlay.classList.add('active');
+
+    if (initialSection && initialSection !== 'all') {
+      setTimeout(() => {
+        const secEl = overlay.querySelector(`[data-qa-section="${initialSection}"]`);
+        if (secEl) secEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 120);
+    }
+  }
+
+  renderQuickAddModalContent() {
+    const container = document.getElementById('quickAddModalBody');
+    if (!container) return;
+
+    const dateStr = this.quickAddDate || CycleEngine.formatDateStr(new Date());
+    const todayStr = CycleEngine.formatDateStr(new Date());
+    const yestObj = new Date();
+    yestObj.setDate(yestObj.getDate() - 1);
+    const yesterdayStr = CycleEngine.formatDateStr(yestObj);
+
+    const status = this.engine.getDayStatus(dateStr);
+    const dayData = this.storage.getDayData(dateStr) || {};
+    const settings = this.storage.getProfileData().settings || {};
+    const waterTarget = settings.waterTarget || 2250;
+
+    const isPeriod = Boolean(dayData.isPeriod);
+    const currentFlow = dayData.flow || 'medium';
+    const currentWater = typeof dayData.waterIntake === 'number' ? dayData.waterIntake : 0;
+    const waterPercent = Math.min(150, Math.round((currentWater / waterTarget) * 100));
+    const currentExercise = dayData.exercise || null;
+    const currentSymptoms = Array.isArray(dayData.symptoms) ? [...dayData.symptoms] : [];
+    const currentMoods = Array.isArray(dayData.moods) ? [...dayData.moods] : (dayData.mood ? [dayData.mood] : []);
+    const currentDischarge = dayData.discharge || null;
+    const currentNotes = dayData.notes || '';
+
+    // Seçili egzersiz form durumu
+    const defaultExType = currentExercise?.type || (status.phase === 'period' ? 'yoga' : (status.phase === 'pms' ? 'pilates' : 'walking'));
+    let formExType = this._qaDraftExType || defaultExType;
+    let formExDuration = this._qaDraftExDuration || currentExercise?.duration || 30;
+    let formExIntensity = this._qaDraftExIntensity || currentExercise?.intensity || 'moderate';
+    let formExFeel = this._qaDraftExFeel || currentExercise?.feel || 'great';
+    let formExNote = this._qaDraftExNote !== undefined ? this._qaDraftExNote : (currentExercise?.note || '');
+
+    const dParts = dateStr.split('-').map(Number);
+    const dateObj = new Date(dParts[0], dParts[1] - 1, dParts[2]);
+    const formattedDateLabel = dateObj.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', weekday: 'short' });
+    const activeCat = this.quickAddSection || 'all';
+    const showSec = (sec) => (activeCat === 'all' || activeCat === sec) ? '' : 'display: none;';
+
+    const phaseMeta = CYCLE_PHASES_DATA[this.getMappedPhaseKey(status.phase)] || CYCLE_PHASES_DATA.follicular;
+    const exComp = FitnessComponent.analyzeExerciseCompatibility(status.phase, formExType, formExIntensity);
+    const selTypeObj = EXERCISE_TYPES.find(t => t.id === formExType) || EXERCISE_TYPES[0];
+    const estCalories = Math.round((selTypeObj.calPerMin || 4.5) * formExDuration);
+
+    container.innerHTML = `
+      <!-- Tarih Seçici & Faz Özeti Çubuğu -->
+      <div class="qa-top-bar">
+        <div class="qa-date-stepper">
+          <button type="button" class="qa-step-btn" id="btnQaPrevDay" title="Önceki Gün">◀</button>
+          <label class="qa-date-display" for="qaDatePickerInput">
+            <span class="qa-date-emoji">📅</span>
+            <strong id="qaFormattedDateText">${formattedDateLabel}</strong>
+            ${dateStr === todayStr ? `<span class="qa-today-tag">Bugün</span>` : (dateStr === yesterdayStr ? `<span class="qa-today-tag qa-yest-tag">Dün</span>` : '')}
+            <input type="date" id="qaDatePickerInput" value="${dateStr}" max="${todayStr}" class="qa-hidden-date-input">
+          </label>
+          <button type="button" class="qa-step-btn" id="btnQaNextDay" title="Sonraki Gün">▶</button>
+        </div>
+        <div class="qa-quick-date-pills">
+          <button type="button" class="qa-date-pill ${dateStr === todayStr ? 'active' : ''}" id="btnQaSetToday">✨ Bugün</button>
+          <button type="button" class="qa-date-pill ${dateStr === yesterdayStr ? 'active' : ''}" id="btnQaSetYesterday">⏪ Dün</button>
+          <span class="qa-phase-chip" style="background: ${phaseMeta.bgColor}; color: ${phaseMeta.color}; border-color: ${phaseMeta.borderColor};">
+            ${phaseMeta.icon} ${status.phaseBadge || phaseMeta.tag}
+          </span>
+        </div>
+      </div>
+
+      <!-- Kategori Filtre Sekmeleri -->
+      <div class="qa-category-tabs" id="qaCategoryTabs">
+        <button type="button" class="qa-cat-btn ${activeCat === 'all' ? 'active' : ''}" data-cat="all">⚡ Tümü</button>
+        <button type="button" class="qa-cat-btn ${activeCat === 'period' ? 'active' : ''}" data-cat="period">🩸 Regl ${isPeriod ? '✓' : ''}</button>
+        <button type="button" class="qa-cat-btn ${activeCat === 'water' ? 'active' : ''}" data-cat="water">💧 Su (${currentWater}ml)</button>
+        <button type="button" class="qa-cat-btn ${activeCat === 'exercise' ? 'active' : ''}" data-cat="exercise">🏃‍♀️ Egzersiz ${currentExercise ? '✓' : ''}</button>
+        <button type="button" class="qa-cat-btn ${activeCat === 'mood' ? 'active' : ''}" data-cat="mood">😊 Semptom & Ruh</button>
+      </div>
+
+      <div class="qa-sections-scroll">
+        <!-- 1. REGL & KANAMA KAYDI KARTI -->
+        <div class="qa-card qa-period-card" data-qa-section="period" style="${showSec('period')}">
+          <div class="qa-card-header">
+            <div class="qa-card-title-wrap">
+              <span class="qa-card-icon">🩸</span>
+              <div>
+                <h4>Regl & Kanama Kaydı</h4>
+                <p>${isPeriod ? 'Bu gün için regl kaydı aktif. Yoğunluğu seçebilir veya kaldırabilirsiniz.' : 'Tek dokunuşla regl başlangıcını veya kanama yoğunluğunu kaydedin.'}</p>
+              </div>
+            </div>
+            ${isPeriod ? `<span class="qa-status-pill pill-saved">🩸 Kayıtlı</span>` : ''}
+          </div>
+
+          <div class="qa-period-actions-row">
+            <button type="button" class="btn-qa-period-main ${isPeriod ? 'active' : ''}" id="btnQaTogglePeriod">
+              ${isPeriod ? '✅ Regl Kayıtlı (Kaldırmak İçin Dokun)' : '🩸 Regl Başladı / Bu Günü İşaretle'}
+            </button>
+          </div>
+
+          <div class="qa-flow-row">
+            <span class="qa-sub-label">Kanama Yoğunluğu (Seçtiğinizde otomatik kaydedilir):</span>
+            <div class="qa-flow-grid">
+              ${FLOW_LEVELS.map(fl => `
+                <button type="button" class="qa-flow-btn ${isPeriod && currentFlow === fl.id ? 'selected' : ''}" data-flow="${fl.id}">
+                  <span class="qa-flow-emoji">${fl.icon}</span>
+                  <span class="qa-flow-text">${fl.label}</span>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. SU TÜKETİMİ & HİDRASYON KARTI -->
+        <div class="qa-card qa-water-card" data-qa-section="water" style="${showSec('water')}">
+          <div class="qa-card-header">
+            <div class="qa-card-title-wrap">
+              <span class="qa-card-icon">💧</span>
+              <div>
+                <h4>Su Tüketimi & Hidrasyon</h4>
+                <p>Hedef: <strong>${waterTarget} ml</strong> • Yaklaşık <strong>🥤 ${Math.round(currentWater / 250)} bardak</strong> içildi</p>
+              </div>
+            </div>
+            <span class="qa-status-pill ${waterPercent >= 100 ? 'pill-goal' : 'pill-water'}">
+              ${currentWater} ml (%${waterPercent})
+            </span>
+          </div>
+
+          <div class="qa-water-progress-track">
+            <div class="qa-water-progress-fill" style="width: ${Math.min(100, waterPercent)}%;"></div>
+          </div>
+
+          <div class="qa-water-presets-grid">
+            <button type="button" class="qa-water-btn" data-delta="200">
+              <span class="qwb-emoji">🫖</span>
+              <span class="qwb-val">+200 ml</span>
+              <span class="qwb-sub">Fincan</span>
+            </button>
+            <button type="button" class="qa-water-btn qa-water-featured" data-delta="250">
+              <span class="qwb-emoji">🥛</span>
+              <span class="qwb-val">+250 ml</span>
+              <span class="qwb-sub">Su Bardağı</span>
+            </button>
+            <button type="button" class="qa-water-btn" data-delta="330">
+              <span class="qwb-emoji">☕</span>
+              <span class="qwb-val">+330 ml</span>
+              <span class="qwb-sub">Kupa</span>
+            </button>
+            <button type="button" class="qa-water-btn qa-water-featured" data-delta="500">
+              <span class="qwb-emoji">🍶</span>
+              <span class="qwb-val">+500 ml</span>
+              <span class="qwb-sub">Küçük Şişe</span>
+            </button>
+            <button type="button" class="qa-water-btn" data-delta="750">
+              <span class="qwb-emoji">🫗</span>
+              <span class="qwb-val">+750 ml</span>
+              <span class="qwb-sub">Spor Matara</span>
+            </button>
+            <button type="button" class="qa-water-btn qa-water-minus" data-delta="-250">
+              <span class="qwb-emoji">↩️</span>
+              <span class="qwb-val">-250 ml</span>
+              <span class="qwb-sub">Geri Al</span>
+            </button>
+          </div>
+
+          <div class="qa-water-manual-row">
+            <input type="number" id="qaCustomWaterInput" min="0" max="6000" step="50" value="${currentWater}" class="form-input qa-water-input" placeholder="Özel ml girin...">
+            <button type="button" class="btn-qa-water-set" id="btnQaSetExactWater">💧 Miktarı Kaydet</button>
+            ${currentWater > 0 ? `<button type="button" class="btn-qa-water-reset" id="btnQaResetWater" title="Sıfırla">🗑️</button>` : ''}
+          </div>
+        </div>
+
+        <!-- 3. EGZERSİZ & FİZİKSEL AKTİVİTE KARTI -->
+        <div class="qa-card qa-exercise-card" data-qa-section="exercise" style="${showSec('exercise')}">
+          <div class="qa-card-header">
+            <div class="qa-card-title-wrap">
+              <span class="qa-card-icon">🏃‍♀️</span>
+              <div>
+                <h4>Egzersiz & Hareket Kaydı</h4>
+                <p>${currentExercise ? `Kayıtlı: ${currentExercise.typeName} (${currentExercise.duration} dk • ~${currentExercise.calories || estCalories} kcal)` : 'Bugünkü antrenmanınızı veya yürüyüşünüzü kaydedin'}</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              ${currentExercise ? `
+                <button type="button" class="btn-qa-ex-del" id="btnQaDeleteExercise" title="Egzersizi Sil">🗑️ Sil</button>
+              ` : ''}
+              <button type="button" class="btn-qa-open-fitness" id="btnQaGoFitnessTab" title="Detaylı Egzersiz & Su Merkezini Aç">
+                Detaylı Ekran →
+              </button>
+            </div>
+          </div>
+
+          <!-- Egzersiz Türü Seçimi (Zengin Emojili) -->
+          <span class="qa-sub-label">1. Aktivite Türü Seçin:</span>
+          <div class="qa-ex-types-grid" id="qaExTypesGrid">
+            ${EXERCISE_TYPES.map(t => `
+              <button type="button" class="qa-ex-type-btn ${t.id === formExType ? 'selected' : ''}" data-type="${t.id}">
+                <span class="qet-emoji">${t.icon}</span>
+                <span class="qet-name">${t.name}</span>
+                <span class="qet-badge">${t.badge}</span>
+              </button>
+            `).join('')}
+          </div>
+
+          <!-- Süre Seçimi -->
+          <div class="qa-ex-row-split">
+            <div style="flex: 1;">
+              <span class="qa-sub-label">2. Süre (Dakika): <strong>⏱️ ${formExDuration} dk</strong></span>
+              <div class="qa-dur-chips" id="qaExDurChips">
+                ${[15, 20, 30, 45, 60, 90].map(d => `
+                  <button type="button" class="qa-dur-chip ${d === Number(formExDuration) ? 'selected' : ''}" data-dur="${d}">${d} dk</button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Yoğunluk & Hissiyat -->
+          <span class="qa-sub-label">3. Tempo / Yoğunluk:</span>
+          <div class="qa-intensity-row" id="qaExIntensityRow">
+            ${INTENSITY_LEVELS.map(lvl => `
+              <button type="button" class="qa-int-btn ${lvl.id === formExIntensity ? 'selected' : ''}" data-intensity="${lvl.id}">
+                <span>${lvl.icon}</span>
+                <strong>${lvl.name}</strong>
+              </button>
+            `).join('')}
+          </div>
+
+          <span class="qa-sub-label">4. Egzersiz Sonrası Nasıl Hissettiniz?</span>
+          <div class="qa-feel-row" id="qaExFeelRow">
+            ${FEELING_LEVELS.map(fl => `
+              <button type="button" class="qa-feel-chip ${fl.id === formExFeel ? 'selected' : ''}" data-feel="${fl.id}">
+                <span>${fl.icon}</span>
+                <span>${fl.name}</span>
+              </button>
+            `).join('')}
+          </div>
+
+          <!-- Döngü Uyumu & Kalori Önizlemesi -->
+          <div class="qa-ex-compat-banner" style="background: ${exComp.bg}; border-color: ${exComp.color}40;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
+              <strong style="font-size: 0.76rem; color: ${exComp.color};">${exComp.icon} ${exComp.title}</strong>
+              <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-main);">🔥 ~${estCalories} kcal</span>
+            </div>
+            <p style="font-size: 0.72rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${exComp.benefit}</p>
+          </div>
+
+          <button type="button" class="btn-primary-action qa-save-ex-btn" id="btnQaSaveExercise">
+            💪 ${currentExercise ? 'Egzersiz Kaydını Güncelle' : 'Egzersizi Kaydet'} (${selTypeObj.icon} ${selTypeObj.name} • ${formExDuration} dk)
+          </button>
+        </div>
+
+        <!-- 4. RUH HALİ, SEMPTOMLAR, AKINTI & NOT KARTI -->
+        <div class="qa-card qa-mood-card" data-qa-section="mood" style="${showSec('mood')}">
+          <div class="qa-card-header">
+            <div class="qa-card-title-wrap">
+              <span class="qa-card-icon">😊</span>
+              <div>
+                <h4>Ruh Hali, Semptomlar & Akıntı</h4>
+                <p>Dokunduğunuz her duygu ve belirti anında bu güne kaydedilir</p>
+              </div>
+            </div>
+            <span class="qa-status-pill pill-mood">
+              ${currentMoods.length + currentSymptoms.length} Seçim
+            </span>
+          </div>
+
+          <!-- Ruh Hali (21 Zengin Emoji) -->
+          <span class="qa-sub-label">✨ Ruh Hali & Duygu Durumu (${currentMoods.length} seçili):</span>
+          <div class="chips-grid qa-chips-grid" id="qaMoodChips">
+            ${MOOD_LIST.map(m => {
+              const active = currentMoods.includes(m.id);
+              return `
+                <button type="button" class="chip-item ${active ? 'chip-active' : ''}" data-id="${m.id}">
+                  <span class="chip-icon">${m.icon}</span>
+                  <span class="chip-text">${m.label}</span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Fiziksel Semptomlar (18 Zengin Emoji) -->
+          <span class="qa-sub-label" style="margin-top: 12px;">⚡ Fiziksel Semptomlar & Belirtiler (${currentSymptoms.length} seçili):</span>
+          <div class="chips-grid qa-chips-grid" id="qaSymptomChips">
+            ${SYMPTOM_LIST.map(s => {
+              const active = currentSymptoms.includes(s.id);
+              return `
+                <button type="button" class="chip-item ${active ? 'chip-active' : ''}" data-id="${s.id}">
+                  <span class="chip-icon">${s.icon}</span>
+                  <span class="chip-text">${s.label}</span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Vajinal Akıntı (6 Zengin Emoji) -->
+          <span class="qa-sub-label" style="margin-top: 12px;">💧 Vajinal Akıntı Gözlemi:</span>
+          <div class="chips-row qa-discharge-row" id="qaDischargeChips">
+            ${DISCHARGE_LIST.map(d => {
+              const active = currentDischarge === d.id;
+              return `
+                <button type="button" class="chip-pill ${active ? 'chip-active' : ''}" data-id="${d.id}">
+                  <span class="chip-pill-emoji">${d.icon}</span> ${d.label}
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Günlük Not -->
+          <span class="qa-sub-label" style="margin-top: 12px;">📝 Günlük Kişisel Not:</span>
+          <div class="qa-note-row">
+            <textarea id="qaNoteTextarea" rows="2" class="notes-textarea" placeholder="İlaç, uyku, beslenme veya kendinize özel bir not...">${currentNotes}</textarea>
+            <button type="button" class="btn-qa-save-note" id="btnQaSaveNote">💾 Notu Kaydet</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alt Kapatma & Kısayol Çubuğu -->
+      <div class="qa-footer-bar">
+        <span class="qa-autosave-hint">✨ Seçimleriniz otomatik kaydedilir</span>
+        <button type="button" class="btn-primary-action qa-done-btn" id="btnQaDoneClose">
+          ${Icons.check} Tamam
+        </button>
+      </div>
+    `;
+
+    this.bindQuickAddModalEvents(container, dateStr, {
+      isPeriod,
+      currentFlow,
+      currentWater,
+      currentExercise,
+      currentSymptoms,
+      currentMoods,
+      currentDischarge,
+      formExType,
+      formExDuration,
+      formExIntensity,
+      formExFeel,
+      formExNote
+    });
+  }
+
+  bindQuickAddModalEvents(container, dateStr, state) {
+    const resetExDraft = () => {
+      this._qaDraftExType = undefined;
+      this._qaDraftExDuration = undefined;
+      this._qaDraftExIntensity = undefined;
+      this._qaDraftExFeel = undefined;
+      this._qaDraftExNote = undefined;
+    };
+
+    // Tarih değiştirme yardımcı fonksiyonu
+    const changeDate = (newDateStr) => {
+      if (!newDateStr) return;
+      this.quickAddDate = newDateStr;
+      resetExDraft();
+      this.renderQuickAddModalContent();
+    };
+
+    const btnPrev = container.querySelector('#btnQaPrevDay');
+    const btnNext = container.querySelector('#btnQaNextDay');
+    const dateInput = container.querySelector('#qaDatePickerInput');
+    const btnToday = container.querySelector('#btnQaSetToday');
+    const btnYest = container.querySelector('#btnQaSetYesterday');
+
+    if (btnPrev) {
+      btnPrev.onclick = () => changeDate(CycleEngine.addDays(dateStr, -1));
+    }
+    if (btnNext) {
+      btnNext.onclick = () => changeDate(CycleEngine.addDays(dateStr, 1));
+    }
+    if (dateInput) {
+      dateInput.onchange = () => {
+        if (dateInput.value) changeDate(dateInput.value);
+      };
+    }
+    if (btnToday) {
+      btnToday.onclick = () => changeDate(CycleEngine.formatDateStr(new Date()));
+    }
+    if (btnYest) {
+      btnYest.onclick = () => {
+        const y = new Date();
+        y.setDate(y.getDate() - 1);
+        changeDate(CycleEngine.formatDateStr(y));
+      };
+    }
+
+    // Kategori sekmeleri
+    container.querySelectorAll('#qaCategoryTabs .qa-cat-btn').forEach(btn => {
+      btn.onclick = () => {
+        this.quickAddSection = btn.dataset.cat;
+        this.renderQuickAddModalContent();
+      };
+    });
+
+    // 1. Regl Başlat / Bitir & Akış Yoğunluğu
+    const btnTogglePeriod = container.querySelector('#btnQaTogglePeriod');
+    if (btnTogglePeriod) {
+      btnTogglePeriod.onclick = () => {
+        const nextPeriod = !state.isPeriod;
+        if (nextPeriod) {
+          const clusters = this.engine.getPeriodClusters();
+          const isNearCluster = clusters.some(c => {
+            const diffStart = CycleEngine.diffDays(dateStr, c.startDate);
+            const diffEnd = CycleEngine.diffDays(dateStr, c.endDate);
+            return (diffStart >= -1 && diffEnd <= 2);
+          });
+          if (isNearCluster) {
+            this.engine.togglePeriodDay(dateStr, true, state.currentFlow);
+          } else {
+            this.engine.logPeriodStart(dateStr, state.currentFlow);
+          }
+        } else {
+          this.engine.togglePeriodDay(dateStr, false);
+        }
+        this.engine.syncSettingsFromCalendarData();
+        this.refreshAll();
+        this.renderQuickAddModalContent();
+      };
+    }
+
+    container.querySelectorAll('.qa-flow-btn').forEach(btn => {
+      btn.onclick = () => {
+        const flow = btn.dataset.flow;
+        if (!state.isPeriod) {
+          const clusters = this.engine.getPeriodClusters();
+          const isNearCluster = clusters.some(c => {
+            const diffStart = CycleEngine.diffDays(dateStr, c.startDate);
+            const diffEnd = CycleEngine.diffDays(dateStr, c.endDate);
+            return (diffStart >= -1 && diffEnd <= 2);
+          });
+          if (isNearCluster) {
+            this.engine.togglePeriodDay(dateStr, true, flow);
+          } else {
+            this.engine.logPeriodStart(dateStr, flow);
+          }
+        } else {
+          this.engine.togglePeriodDay(dateStr, true, flow);
+        }
+        this.engine.syncSettingsFromCalendarData();
+        this.refreshAll();
+        this.renderQuickAddModalContent();
+      };
+    });
+
+    // 2. Su Tüketimi Butonları
+    container.querySelectorAll('.qa-water-btn').forEach(btn => {
+      btn.onclick = () => {
+        const delta = parseInt(btn.dataset.delta, 10) || 0;
+        this.storage.logWater(dateStr, delta);
+        this.refreshAll();
+        this.renderQuickAddModalContent();
+      };
+    });
+
+    const btnSetWater = container.querySelector('#btnQaSetExactWater');
+    const customWaterInp = container.querySelector('#qaCustomWaterInput');
+    if (btnSetWater && customWaterInp) {
+      btnSetWater.onclick = () => {
+        const val = Math.max(0, Math.min(8000, parseInt(customWaterInp.value, 10) || 0));
+        this.storage.setWater(dateStr, val);
+        this.refreshAll();
+        this.renderQuickAddModalContent();
+      };
+    }
+
+    const btnResetWater = container.querySelector('#btnQaResetWater');
+    if (btnResetWater) {
+      btnResetWater.onclick = () => {
+        this.storage.setWater(dateStr, 0);
+        this.refreshAll();
+        this.renderQuickAddModalContent();
+      };
+    }
+
+    // 3. Egzersiz Seçimleri & Kayıt
+    container.querySelectorAll('#qaExTypesGrid .qa-ex-type-btn').forEach(btn => {
+      btn.onclick = () => {
+        this._qaDraftExType = btn.dataset.type;
+        this.renderQuickAddModalContent();
+      };
+    });
+
+    container.querySelectorAll('#qaExDurChips .qa-dur-chip').forEach(btn => {
+      btn.onclick = () => {
+        this._qaDraftExDuration = parseInt(btn.dataset.dur, 10) || 30;
+        this.renderQuickAddModalContent();
+      };
+    });
+
+    container.querySelectorAll('#qaExIntensityRow .qa-int-btn').forEach(btn => {
+      btn.onclick = () => {
+        this._qaDraftExIntensity = btn.dataset.intensity;
+        this.renderQuickAddModalContent();
+      };
+    });
+
+    container.querySelectorAll('#qaExFeelRow .qa-feel-chip').forEach(btn => {
+      btn.onclick = () => {
+        this._qaDraftExFeel = btn.dataset.feel;
+        this.renderQuickAddModalContent();
+      };
+    });
+
+    const btnSaveEx = container.querySelector('#btnQaSaveExercise');
+    if (btnSaveEx) {
+      btnSaveEx.onclick = () => {
+        const status = this.engine.getDayStatus(dateStr);
+        const typeObj = EXERCISE_TYPES.find(t => t.id === state.formExType) || EXERCISE_TYPES[0];
+        const intObj = INTENSITY_LEVELS.find(i => i.id === state.formExIntensity) || INTENSITY_LEVELS[1];
+        const feelObj = FEELING_LEVELS.find(f => f.id === state.formExFeel) || FEELING_LEVELS[0];
+        const comp = FitnessComponent.analyzeExerciseCompatibility(status.phase, state.formExType, state.formExIntensity);
+        const estCal = Math.round((typeObj.calPerMin || 4.5) * state.formExDuration);
+
+        this.storage.logExercise(dateStr, {
+          type: typeObj.id,
+          typeName: `${typeObj.icon} ${typeObj.name}`,
+          duration: state.formExDuration,
+          intensity: intObj.id,
+          intensityName: `${intObj.icon} ${intObj.name}`,
+          feel: feelObj.id,
+          feelName: feelObj.name,
+          feelIcon: feelObj.icon,
+          calories: estCal,
+          cycleBenefit: comp.benefit,
+          note: state.formExNote || ''
+        });
+
+        resetExDraft();
+        this.refreshAll();
+        this.renderQuickAddModalContent();
+      };
+    }
+
+    const btnDelEx = container.querySelector('#btnQaDeleteExercise');
+    if (btnDelEx) {
+      btnDelEx.onclick = () => {
+        this.storage.deleteExercise(dateStr);
+        resetExDraft();
+        this.refreshAll();
+        this.renderQuickAddModalContent();
+      };
+    }
+
+    const btnGoFit = container.querySelector('#btnQaGoFitnessTab');
+    if (btnGoFit) {
+      btnGoFit.onclick = () => {
+        const overlay = document.getElementById('quickAddModalOverlay');
+        if (overlay) overlay.classList.remove('active');
+        this.switchTab('fitness');
+      };
+    }
+
+    // 4. Ruh Hali, Semptomlar, Akıntı ve Notlar
+    container.querySelectorAll('#qaMoodChips .chip-item').forEach(btn => {
+      btn.onclick = () => {
+        const id = btn.dataset.id;
+        const nextMoods = state.currentMoods.includes(id)
+          ? state.currentMoods.filter(m => m !== id)
+          : [...state.currentMoods, id];
+        this.storage.saveDayData(dateStr, {
+          moods: nextMoods,
+          mood: nextMoods[0] || null
+        });
+        this.refreshAll();
+        this.renderQuickAddModalContent();
+      };
+    });
+
+    container.querySelectorAll('#qaSymptomChips .chip-item').forEach(btn => {
+      btn.onclick = () => {
+        const id = btn.dataset.id;
+        const nextSyms = state.currentSymptoms.includes(id)
+          ? state.currentSymptoms.filter(s => s !== id)
+          : [...state.currentSymptoms, id];
+        this.storage.saveDayData(dateStr, {
+          symptoms: nextSyms
+        });
+        this.refreshAll();
+        this.renderQuickAddModalContent();
+      };
+    });
+
+    container.querySelectorAll('#qaDischargeChips .chip-pill').forEach(btn => {
+      btn.onclick = () => {
+        const id = btn.dataset.id;
+        const nextDis = state.currentDischarge === id ? null : id;
+        this.storage.saveDayData(dateStr, {
+          discharge: nextDis
+        });
+        this.refreshAll();
+        this.renderQuickAddModalContent();
+      };
+    });
+
+    const btnSaveNote = container.querySelector('#btnQaSaveNote');
+    const noteArea = container.querySelector('#qaNoteTextarea');
+    if (btnSaveNote && noteArea) {
+      btnSaveNote.onclick = () => {
+        this.storage.saveDayData(dateStr, {
+          notes: noteArea.value.trim()
+        });
+        btnSaveNote.textContent = '✅ Not Kaydedildi!';
+        this.refreshAll();
+        setTimeout(() => {
+          if (btnSaveNote) btnSaveNote.textContent = '💾 Notu Kaydet';
+        }, 1500);
+      };
+    }
+
+    const btnDone = container.querySelector('#btnQaDoneClose');
+    if (btnDone) {
+      btnDone.onclick = () => {
+        if (noteArea) {
+          this.storage.saveDayData(dateStr, { notes: noteArea.value.trim() });
+          this.refreshAll();
+        }
+        const overlay = document.getElementById('quickAddModalOverlay');
+        if (overlay) overlay.classList.remove('active');
+      };
+    }
   }
 
   // --- BİLDİRİM VE HATIRLATICI MERKEZİ İŞLEMLERİ ---
@@ -12136,6 +13994,10 @@ class DongumApp {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.addEventListener('message', (event) => {
         if (event.data && event.data.type === 'NAVIGATE_TAB') {
+          if (event.data.openQuickAdd) {
+            this.openQuickAddModal(event.data.quickSection || event.data.focus || 'all', event.data.openDay || null);
+            return;
+          }
           const tab = event.data.tab || 'home';
           this.switchTab(tab);
           if (event.data.openDay && tab === 'calendar') {
@@ -12156,9 +14018,16 @@ class DongumApp {
   checkNotificationUrlLaunch() {
     try {
       const urlParams = new URLSearchParams(window.location.search);
+      const quickAdd = urlParams.get('quickAdd');
       const tab = urlParams.get('tab');
       const openDay = urlParams.get('openDay');
       const focus = urlParams.get('focus');
+      if (quickAdd && this.isLoggedIn) {
+        setTimeout(() => {
+          this.openQuickAddModal(quickAdd, openDay || null);
+        }, 250);
+        return;
+      }
       if (tab) {
         this.switchTab(tab);
         if (openDay && tab === 'calendar') {
@@ -12403,7 +14272,7 @@ class DongumApp {
                   </div>
                   <h4 class="notif-alert-title">${a.title}</h4>
                   <p class="notif-alert-desc">${a.description}</p>
-                  <button type="button" class="notif-alert-action-btn" data-action="${a.actionType || 'navigate'}" data-tab="${a.actionTab || 'home'}">
+                  <button type="button" class="notif-alert-action-btn" data-action="${a.actionType || 'navigate'}" data-tab="${a.actionTab || 'home'}" data-focus="${a.actionFocus || ''}">
                     ${a.actionText || 'Görüntüle'} →
                   </button>
                 </div>
@@ -12496,6 +14365,7 @@ class DongumApp {
       btn.onclick = () => {
         const action = btn.dataset.action;
         const targetTab = btn.dataset.tab;
+        const focusSec = btn.dataset.focus;
         const overlay = document.getElementById('notificationModalOverlay');
 
         if (action === 'add_water_250') {
@@ -12503,11 +14373,15 @@ class DongumApp {
           const curWater = this.storage.getTodayWater(todayStr);
           this.storage.saveWaterIntake(todayStr, curWater + 250);
           this.notifManager.playWellnessChime();
+          this.notifManager.onDataUpdated();
           this.renderNotificationCenterContent();
           this.updateHeaderNotificationBadge();
           if (this.currentTab === 'fitness' || this.currentTab === 'home') {
             this.renderCurrentTab();
           }
+        } else if (action === 'open_quick_add') {
+          if (overlay) overlay.classList.remove('active');
+          this.openQuickAddModal(focusSec || 'all');
         } else {
           if (overlay) overlay.classList.remove('active');
           if (targetTab) {
@@ -13437,12 +15311,7 @@ class DongumApp {
 
     if (logTodayBtn) {
       logTodayBtn.onclick = () => {
-        this.switchTab('calendar');
-        setTimeout(() => {
-          if (this.calendarComp) {
-            this.calendarComp.goToDate(summary.todayStr);
-          }
-        }, 100);
+        this.openQuickAddModal('mood', summary.todayStr);
       };
     }
 
@@ -13456,19 +15325,19 @@ class DongumApp {
     if (btnWaterAdd250) {
       btnWaterAdd250.onclick = () => {
         this.storage.logWater(summary.todayStr, 250);
-        this.renderHomeTab(container);
+        this.refreshAll();
       };
     }
     if (btnWaterAdd500) {
       btnWaterAdd500.onclick = () => {
         this.storage.logWater(summary.todayStr, 500);
-        this.renderHomeTab(container);
+        this.refreshAll();
       };
     }
     if (btnWaterUndo) {
       btnWaterUndo.onclick = () => {
         this.storage.logWater(summary.todayStr, -250);
-        this.renderHomeTab(container);
+        this.refreshAll();
       };
     }
     if (btnGoWaterCenter) {
@@ -13920,6 +15789,42 @@ class DongumApp {
                 </label>
               </div>
             </div>
+
+            <!-- 8. Günlük Egzersiz & Hareket Hatırlatıcısı -->
+            <div class="notif-setting-item">
+              <div class="notif-setting-label">
+                <span class="notif-setting-title">🏃‍♀️ Günlük Egzersiz & Hareket Hatırlatıcısı</span>
+                <span class="notif-setting-desc">Döngü fazınıza uygun günlük esneme, yürüyüş veya antrenman hatırlatması</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="time" id="settingNotifExerciseTime" value="${nSettings.exerciseReminderTime || '18:00'}" class="form-input" style="padding: 4px 8px; font-size: 0.75rem; width: auto;">
+                <label class="switch-control">
+                  <input type="checkbox" id="settingNotifExercise" ${nSettings.exerciseReminder !== false ? 'checked' : ''}>
+                  <span class="switch-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 9. Gece Sessiz Saatler (Rahatsız Etme Modu) -->
+            <div class="notif-setting-item">
+              <div class="notif-setting-label">
+                <span class="notif-setting-title">🌙 Gece Sessiz Saatler (Rahatsız Etme)</span>
+                <span class="notif-setting-desc">Uyku saatlerinizde otomatik sesli veya titreşimli bildirim gönderilmez</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end;">
+                <select id="settingNotifQuietStart" class="form-input" style="padding: 4px 6px; font-size: 0.73rem; width: auto;" title="Başlangıç Saati">
+                  ${[21, 22, 23, 0, 1].map(h => `<option value="${h}" ${(nSettings.quietStartHour ?? 23) == h ? 'selected' : ''}>${String(h).padStart(2, '0')}:00</option>`).join('')}
+                </select>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">-</span>
+                <select id="settingNotifQuietEnd" class="form-input" style="padding: 4px 6px; font-size: 0.73rem; width: auto;" title="Bitiş Saati">
+                  ${[6, 7, 8, 9, 10].map(h => `<option value="${h}" ${(nSettings.quietEndHour ?? 8) == h ? 'selected' : ''}>${String(h).padStart(2, '0')}:00</option>`).join('')}
+                </select>
+                <label class="switch-control">
+                  <input type="checkbox" id="settingNotifQuietHours" ${nSettings.quietHoursEnabled !== false ? 'checked' : ''}>
+                  <span class="switch-slider"></span>
+                </label>
+              </div>
+            </div>
           </div>
 
           <button type="button" class="btn-save-settings" id="btnSaveNotificationSettings" style="margin-top: 14px; background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);">
@@ -14139,6 +16044,11 @@ class DongumApp {
         const dailyTime = container.querySelector('#settingNotifDailyTime').value || '20:30';
         const isWater = container.querySelector('#settingNotifWater').checked;
         const waterHours = parseFloat(container.querySelector('#settingNotifWaterHours').value) || 2;
+        const isExercise = container.querySelector('#settingNotifExercise')?.checked ?? true;
+        const exerciseTime = container.querySelector('#settingNotifExerciseTime')?.value || '18:00';
+        const isQuietHours = container.querySelector('#settingNotifQuietHours')?.checked ?? true;
+        const quietStart = parseInt(container.querySelector('#settingNotifQuietStart')?.value ?? '23', 10);
+        const quietEnd = parseInt(container.querySelector('#settingNotifQuietEnd')?.value ?? '8', 10);
 
         this.storage.updateSettings({
           notificationsEnabled: isMaster,
@@ -14154,14 +16064,19 @@ class DongumApp {
             dailyLogReminder: isDaily,
             dailyLogTime: dailyTime,
             waterReminder: isWater,
-            waterIntervalHours: waterHours
+            waterIntervalHours: waterHours,
+            exerciseReminder: isExercise,
+            exerciseReminderTime: exerciseTime,
+            quietHoursEnabled: isQuietHours,
+            quietStartHour: isNaN(quietStart) ? 23 : quietStart,
+            quietEndHour: isNaN(quietEnd) ? 8 : quietEnd
           }
         });
 
         this.notifManager.notifyListeners();
         await this.notifManager.registerBackgroundSync();
         await this.notifManager.syncStateToServiceWorker();
-        this.notifManager.evaluateSmartReminders();
+        await this.notifManager.evaluateSmartReminders();
         alert('Bildirim ve hatırlatıcı ayarlarınız kaydedildi, arka plan senkronizasyonu güncellendi!');
         this.renderSettingsTab(container);
         this.updateHeaderNotificationBadge();
@@ -14270,7 +16185,7 @@ class DongumApp {
     if (tagName) tagName.textContent = activeProfile.name;
     this.updateHeaderNotificationBadge();
     if (this.notifManager) {
-      this.notifManager.syncStateToServiceWorker();
+      this.notifManager.onDataUpdated();
     }
   }
 }
